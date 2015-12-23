@@ -1,0 +1,640 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- *** FILE AUTOMATICALLY CREATED: DO NOT EDIT, CHANGES WILL BE LOST *** --><meta http-equiv="Content-Style-Type" CONTENT="text/css">
+</head>
+<body style="background-color: white; font-family: arial, helvetica, sans-serif; font-size: 14px; padding-left: 10; width: 700; ">
+<a name="__top__"></a><table style="border-width: 0 width: 100% text-align: left; vertical-align: top; background: #00395a;">
+<tr><th style="margin: 3 3 3 10; background: #00395a; color: #ffffee; ">
+<h1 style="margin: 5 10 10 15; text-align: left;"> Input File Description </h1>
+<h2 style="margin: 5 10 10 15; text-align: left;"> Program: wfreq.x / West / Quantum Espresso</h2>
+</th></tr>
+<tr><td style="padding: 10 3 3 3; background: #ffffff; color: #222222; ">
+   <blockquote>
+<h3>TABLE OF CONTENTS</h3>
+<blockquote>
+<p><a href="#idp140586278484496">INTRODUCTION</a></p>
+<p><a href="#idp140586278485072">&amp;INPUT_WEST</a><blockquote>
+<a href="#idp140586278486320">qe_prefix</a> | <a href="#idp140586278488288">west_prefix</a> | <a href="#idp140586278490400">outdir</a>
+</blockquote></p>
+<p><a href="#idp140586278492800">&amp;WSTAT_CONTROL</a><blockquote>
+<a href="#idp140586278493296">wstat_calculation</a> | <a href="#idp140586278495696">n_pdep_eigen</a> | <a href="#idp140586278497776">n_pdep_times</a> | <a href="#idp140586278499888">n_pdep_maxiter</a> | <a href="#idp140586278502016">n_dfpt_maxiter</a> | <a href="#idp140586278504144">n_pdep_read_from_file</a> | <a href="#idp140586278506304">trev_pdep</a> | <a href="#idp140586278508448">tr2_dfpt</a> | <a href="#idp140586278510576">l_kinetic_only</a> | <a href="#idp140586278512736">l_minimize_exx_if_active</a>
+</blockquote></p>
+<p><a href="#idp140586278515056">&amp;WFREQ_CONTROL</a><blockquote>
+<a href="#idp140586278515552">wfreq_calculation</a> | <a href="#idp140586278518192">n_pdep_eigen_to_use</a> | <a href="#idp140586278520352">qp_bandrange</a> | <a href="#idp140586278522992">macropol_calculation</a> | <a href="#idp140586278525472">n_lanczos</a> | <a href="#idp140586278527568">n_imfreq</a> | <a href="#idp140586278529728">n_refreq</a> | <a href="#idp140586278531792">ecut_imfreq</a> | <a href="#idp140586278533936">ecut_refreq</a> | <a href="#idp140586278536064">wfreq_eta</a> | <a href="#idp140586278538176">n_secant_maxiter</a> | <a href="#idp140586278540320">trev_secant</a> | <a href="#idp140586278542464">l_enable_lanczos</a> | <a href="#idp140586278544624">o_restart_time</a>
+</blockquote></p>
+</blockquote>
+</blockquote>
+   <blockquote>
+<a name="idp140586278484496"><h3>INTRODUCTION</h3></a><blockquote><pre>
+Typical run:
+===============================================================================
+
+export MPI_TASKS=12
+export NIMAGE=2
+
+mpirun -n $MPI_TASKS wfreq.x -nimage $NIMAGE &lt; wfreq.in &gt; wfreq.out
+
+
+Structure of the input data (wfreq.in):
+===============================================================================
+
+&amp;INPUT_WEST
+  qe_prefix="pwscf"
+  west_prefix="west"
+  outdir="./"
+/
+&amp;WSTAT_CONTROL
+  wstat_calculation="S"
+  n_pdep_eigen=4
+/
+&amp;WFREQ_CONTROL
+  wfreq_calculation="XWGQ"
+  n_pdep_eigen_to_use=2
+  qp_bandrange(1)=1
+  qp_bandrange(2)=2
+  macropol_calculation="N"
+  n_lanczos=20
+  n_imfreq=10
+  n_refreq=10
+  ecut_imfreq=1.0
+  ecut_refreq=1.0
+/
+   </pre></blockquote>
+</blockquote>
+   <a name="idp140586278485072"><table border="0" width="100%" style="margin-bottom: 20; ">
+<tr><th bgcolor="#ddcba6"><h2 style="margin: 10 10 10 15; text-align: left;"> Namelist: INPUT_WEST</h2></th></tr>
+<tr><td style="text-align: left; background: #ffebc6; padding: 5 5 5 30; "><table style="border-color: #505087; border-style: solid; border-width: 0; margin-bottom: 10; table-layout: auto; width: 700; "><tbody><tr><td>
+      <a name="idp140586278486320"><a name="qe_prefix"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">qe_prefix</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">CHARACTER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 'pwscf'
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Prepended to the QuantumEspresso save folder.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278488288"><a name="west_prefix"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">west_prefix</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">CHARACTER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 'west'
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Prepended to the WEST save and restart folders.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278490400"><a name="outdir"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">outdir</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">CHARACTER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; ">
+value of the ESPRESSO_TMPDIR environment variable if set;
+current directory ('./') otherwise
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Input, temporary, output files are found in this directory
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+   </td></tr></tbody></table></td></tr>
+</table></a>
+   <a name="idp140586278492800"><table border="0" width="100%" style="margin-bottom: 20; ">
+<tr><th bgcolor="#ddcba6"><h2 style="margin: 10 10 10 15; text-align: left;"> Namelist: WSTAT_CONTROL</h2></th></tr>
+<tr><td style="text-align: left; background: #ffebc6; padding: 5 5 5 30; "><table style="border-color: #505087; border-style: solid; border-width: 0; margin-bottom: 10; table-layout: auto; width: 700; "><tbody><tr><td>
+      <a name="idp140586278493296"><a name="wstat_calculation"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">wstat_calculation</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">CHARACTER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 'S'
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+'S' :  Start from scratch.
+
+'R' :  Restart from an interrupted run.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278495696"><a name="n_pdep_eigen"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_pdep_eigen</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> '4'
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Number of PDEP eigenpotentials.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278497776"><a name="n_pdep_times"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_pdep_times</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 4
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Maximum dimension of the search space = n_pdep_eigen * n_pdep_times.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278499888"><a name="n_pdep_maxiter"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_pdep_maxiter</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 100
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Maximum number of iterations in PDEP.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278502016"><a name="n_dfpt_maxiter"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_dfpt_maxiter</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 250
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Maximum number of iterations in DFPT.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278504144"><a name="n_pdep_read_from_file"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_pdep_read_from_file</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 0
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Number of PDEP eigenpotentials that can be read from file.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278506304"><a name="trev_pdep"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">trev_pdep</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 1.D-3
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Convergence threshold in the PDEP eigenvalues.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278508448"><a name="tr2_dfpt"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">tr2_dfpt</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 1.D-12
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Convergence threshold in DFPT.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278510576"><a name="l_kinetic_only"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">l_kinetic_only</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">LOGICAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> .FALSE.
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+If (.TRUE.) keeps only the kinetic term in the Hamiltonian.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278512736"><a name="l_minimize_exx_if_active"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">l_minimize_exx_if_active</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">LOGICAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> .FALSE.
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+If (.TRUE.) reduces as much as possible the exx term in the Hamiltonian.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+   </td></tr></tbody></table></td></tr>
+</table></a>
+   <a name="idp140586278515056"><table border="0" width="100%" style="margin-bottom: 20; ">
+<tr><th bgcolor="#ddcba6"><h2 style="margin: 10 10 10 15; text-align: left;"> Namelist: WFREQ_CONTROL</h2></th></tr>
+<tr><td style="text-align: left; background: #ffebc6; padding: 5 5 5 30; "><table style="border-color: #505087; border-style: solid; border-width: 0; margin-bottom: 10; table-layout: auto; width: 700; "><tbody><tr><td>
+      <a name="idp140586278515552"><a name="wfreq_calculation"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">wfreq_calculation</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">CHARACTER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 'XWGQ'
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+'XWGQ' :  Compute the QP corrections.
+
+'XwGQ' :  Compute the QP corrections, restart from an interrupted / just read W run.
+
+'XwgQ' :  Compute the QP corrections, restart from an interrupted / just read G run.
+
+'X'    :  Compute the HF corrections.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278518192"><a name="n_pdep_eigen_to_use"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_pdep_eigen_to_use</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 2
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Number of PDEP eigenvectors to use in Wfreq. They are read from previous Wstat run.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278520352"><a name="qp_bandrange"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th width="20%" style="white-space: nowrap; text-align: left; vertical-align: top; background: #ffff99; padding: 2 2 2 10; ">qp_bandrange(i), i=1,2</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 1,2
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Compute the QP corrections from band qp_bandrange(1) to band qp_bandrange(2).
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278522992"><a name="macropol_calculation"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">macropol_calculation</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">CHARACTER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 'N'
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+'N' :  None. Choice valid for isolated systems.
+
+'C' :  Include long-wavelength limit. Choice valid for condesed systems.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278525472"><a name="n_lanczos"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_lanczos</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 10
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Number of Lanczos chains.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278527568"><a name="n_imfreq"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_imfreq</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 10
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Number of frequecies used to sample the imaginary frequency axis in [0,ecut_imfreq].
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278529728"><a name="n_refreq"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_refreq</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 10
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Number of frequecies used to sample the real frequency axis in [-ecut_refreq,ecut_refreq].
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278531792"><a name="ecut_imfreq"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">ecut_imfreq</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 1.D0 Ry
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Cutoff for the imaginary frequencies.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278533936"><a name="ecut_refreq"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">ecut_refreq</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 1.D0 Ry
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> REQUIRED
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Cutoff for the real frequencies.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278536064"><a name="wfreq_eta"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">wfreq_eta</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 0.003675D0 Ry
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Pole shift.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278538176"><a name="n_secant_maxiter"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">n_secant_maxiter</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 7
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Maximum number of iterations in the secant solver.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278540320"><a name="trev_secant"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">trev_secant</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 0.003675D0 Ry
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+Convergence threshold for the secant solver.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278542464"><a name="l_enable_lanczos"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">l_enable_lanczos</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">LOGICAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> .TRUE.
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+IF (.FALSE.) Lanczos solvers are turned off.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+      <a name="idp140586278544624"><a name="o_restart_time"><table width="100%" style="border-color:   #b5b500; border-style: solid; border-width: 2; margin-bottom: 10; table-layout: auto; background-color: #FFFFFF;">
+<tr>
+<th align="left" valign="top" width="20%" style="background: #ffff99; padding: 2 2 2 10; ">o_restart_time</th>
+<td style="text-align: left; vertical-align: top; background: #ffffc3; padding: 2 2 2 5; ">REAL</td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Default:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> 0.D0 min
+         </td>
+</tr>
+<tr>
+<td style="text-align: right; vertical-align: top; background: #ffffc3; padding: 2 10 2 10; "><i>Status:</i></td>
+<td style="text-align: left;  vertical-align: top; background: #fff3d9; padding: 2 2 2 5; "> OPTIONAL
+         </td>
+</tr>
+<tr><td align="left" valign="top" colspan="2"><blockquote><pre>
+IF ( o_restart_time == 0 ) A checkpoint is written at every iteration of the W and G loops.
+IF ( o_restart_time &gt;  0 ) A checkpoint is written every o_restart_time minutes in the W and G loops.
+IF ( o_restart_time &lt;  0 ) A checkpoint is NEVER written in the W and G loops. Restart will not be possible.
+         </pre></blockquote></td></tr>
+</table>
+<div align="right">[<a href="#__top__">Back to Top</a>]</div></a></a>
+   </td></tr></tbody></table></td></tr>
+</table></a>
+</td></tr>
+</table>
+<blockquote><small>
+	    This file has been created by helpdoc utility.
+	  </small></blockquote>
+</body>
+</html>
