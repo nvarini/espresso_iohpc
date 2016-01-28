@@ -29,8 +29,8 @@ SUBROUTINE lr_dvpsi_eels (ik, dvpsi1, dvpsi2)
   USE wvfct,                 ONLY : npwx, nbnd
   USE io_global,             ONLY : stdout
   USE fft_base,              ONLY : dffts, dfftp
-  USE wvfct,                 ONLY : npw, igk, ecutwfc, g2kin
-  USE realus,                ONLY : npw_k, igk_k   
+  USE wvfct,                 ONLY : npw, igk, g2kin
+  USE gvecw,                 ONLY : gcutw
   USE qpoint,                ONLY : npwq, igkq, ikks, ikqs, nksq, xq 
   USE lr_variables,          ONLY : evc0, lr_periodic, q1, q2, q3
   USE eqv,                   ONLY : evq, dpsi 
@@ -40,7 +40,7 @@ SUBROUTINE lr_dvpsi_eels (ik, dvpsi1, dvpsi2)
   use klist,                 only : xk
   use gvect,                 only : ngm, g
   use cell_base,             only : tpiba2
-  USE control_ph,            ONLY : nbnd_occ
+  USE control_lr,            ONLY : nbnd_occ
   use lsda_mod,              only : current_spin
   USE io_files,              ONLY : iunigk, iunwfc, prefix, diropn
   use uspp,                  only : vkb, okvan
@@ -98,8 +98,8 @@ SUBROUTINE lr_dvpsi_eels (ik, dvpsi1, dvpsi2)
   ! Determination of npw, igk, and npwq, igkq;
   ! g2kin is used here as a work space.
   !
-  CALL gk_sort( xk(1,ikk), ngm, g, ( ecutwfc / tpiba2 ), npw,  igk,  g2kin )  
-  CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), npwq, igkq, g2kin )
+  CALL gk_sort( xk(1,ikk), ngm, g, gcutw, npw,  igk,  g2kin )  
+  CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
   !
   ! Read npw, igk, npwq, igkq.
   !

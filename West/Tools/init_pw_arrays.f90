@@ -38,6 +38,7 @@ SUBROUTINE init_pw_arrays(ncalbec)
   USE exx,                    ONLY : x_gamma_extrapolation,exxdiv_treatment,exx_grid_init,exx_div_check,&
                                      &deallocate_exx,exxinit,vexx
   USE westcom,                ONLY : iuwfc,lrwfc
+  USE gvecw,                  ONLY : gcutw
   !
   IMPLICIT NONE
   !
@@ -92,7 +93,7 @@ SUBROUTINE init_pw_arrays(ncalbec)
   CALL seqopn( iunigk, 'igk', 'UNFORMATTED', exst )
   REWIND( iunigk )
   DO ik = 1, nks
-     CALL gk_sort( xk(1,ik), ngm, g, ecutwfc / tpiba2, npw, igk, g2kin )
+     CALL gk_sort( xk(1,ik), ngm, g, gcutw, npw, igk, g2kin )
      IF ( nks > 1 ) WRITE( iunigk ) igk
   ENDDO
   !

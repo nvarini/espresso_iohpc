@@ -22,11 +22,12 @@ SUBROUTINE calc_exx2( sigma_exx, nb1, nb2 )
   USE scf,                  ONLY : rho, rho_core, rhog_core
   USE gvect,                ONLY : g,nl,gstart,ngm_g,ig_l2g,ngm
   USE gvecs,                ONLY : ngms
+  USE gvecw,                ONLY : gcutw
   USE cell_base,            ONLY : tpiba2,omega,tpiba,at,alat
   USE fft_base,             ONLY : dfftp,dffts
   USE fft_interfaces,       ONLY : fwfft, invfft
   USE constants,            ONLY : tpi,fpi,rytoev,e2
-  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,ecutwfc,nspin,current_k
+  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,nspin,current_k
   USE fft_at_gamma,         ONLY : DOUBLEBAND_INVFFT,SINGLEBAND_INVFFT,DOUBLEBAND_FWFFT,SINGLEBAND_FWFFT,smooth_fwfft
   USE fft_at_k,             ONLY : SINGLEBAND_INVFFT_k,SINGLEBAND_FWFFT_k
   USE wavefunctions_module, ONLY : evc,psic,psic_nc
@@ -97,7 +98,7 @@ SUBROUTINE calc_exx2( sigma_exx, nb1, nb2 )
         peso = 1._DP
      ENDIF
      !
-     CALL gk_sort(xk(1,iks),ngm,g,ecutwfc/tpiba2,npw,igk,g2kin)
+     CALL gk_sort(xk(1,iks),ngm,g,gcutw,npw,igk,g2kin)
      g2kin=g2kin*tpiba2
      !
      ! reads unperturbed wavefuctions psi_k in G_space, for all bands

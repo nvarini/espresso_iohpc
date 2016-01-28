@@ -111,8 +111,8 @@ SUBROUTINE c_bands( iter )
      ! ... iterative diagonalization of the next scf iteration
      ! ... and for rho calculation
      !
-     IF ( nks > 1 .OR. lelfield ) &
-          CALL save_buffer ( evc, nwordwfc, iunwfc, ik )
+     !IF ( nks > 1 .OR. lelfield ) &
+     !     CALL save_buffer( evc, nwordwfc, iunwfc, ik )
      !
      ! ... beware: with pools, if the number of k-points on different
      ! ... pools differs, make sure that all processors are still in

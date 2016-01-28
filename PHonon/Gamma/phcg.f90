@@ -488,14 +488,15 @@ SUBROUTINE newscf
   USE gvecs, ONLY: doublegrid
   USE wvfct, ONLY: btype
   USE klist, ONLY: nkstot
-  USE wvfct, ONLY: nbnd, nbndx, qcutz
+  USE wvfct, ONLY: nbnd, nbndx
   USE noncollin_module, ONLY: report
   USE symm_base,     ONLY : nsym
   USE io_files,      ONLY : iunigk, iunwfc, input_drho, output_drho
   USE ldaU,          ONLY : lda_plus_u
   USE control_flags, ONLY : restart, io_level, lscf, iprint, &
-                            pot_order, wfc_order, david, max_cg_iter, &
+                            david, max_cg_iter, &
                             isolve, tr2, ethr, mixing_beta, nmix, niter
+  USE extrapolation, ONLY : extrapolate_charge
   !
   IMPLICIT NONE
   INTEGER :: iter
@@ -511,10 +512,7 @@ SUBROUTINE newscf
   lda_plus_u=.false.
   doublegrid=.false.
   lmovecell=.false.
-  qcutz=0.0d0
   iprint=10000
-  pot_order=0
-  wfc_order=0
   input_drho=' '
   output_drho=' '
   starting_wfc='file'

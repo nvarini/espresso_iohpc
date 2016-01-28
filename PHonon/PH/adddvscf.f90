@@ -25,9 +25,12 @@ subroutine adddvscf (ipert, ik)
   USE wvfct,      ONLY : nbnd, npwx
   USE noncollin_module, ONLY : noncolin, npol
 ! modules from phcom
+  USE phus,       ONLY : becp1
+
+  USE lrus,       ONLY : int3, int3_nc
   USE qpoint,     ONLY : npwq, ikks
-  USE phus,       ONLY : int3, int3_nc, becp1
   USE eqv,        ONLY : dvpsi
+
   implicit none
   !
   !   The dummy variables
@@ -79,12 +82,12 @@ subroutine adddvscf (ipert, ik)
                              do js=1,npol
                                 ijs=ijs+1
                                 sum_nc(is)=sum_nc(is)+               &
-                                     int3_nc(ih,jh,ipert,na,ijs)*    &
+                                     int3_nc(ih,jh,na,ijs,ipert)*    &
                                      becp1(ik)%nc(jkb, js, ibnd)
                              enddo
                           enddo
                        ELSE
-                          sum = sum + int3 (ih, jh, ipert, na, current_spin)*&
+                          sum = sum + int3 (ih, jh, na, current_spin, ipert)*&
                                    becp1(ik)%k(jkb, ibnd)
                        END IF
                     enddo

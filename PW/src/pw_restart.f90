@@ -121,8 +121,7 @@ MODULE pw_restart
       USE basis,                ONLY : natomwfc
       USE gvecs,                ONLY : ngms_g, dual
       USE fft_base,             ONLY : dffts
-      USE wvfct,                ONLY : npw, npwx, g2kin, et, wg, &
-                                       igk, nbnd, ecutwfc
+      USE wvfct,                ONLY : npw, npwx, et, wg, igk, nbnd
       USE ener,                 ONLY : ef, ef_up, ef_dw
       USE fixed_occ,            ONLY : tfixed_occ, f_inp
       USE ldaU,                 ONLY : lda_plus_u, lda_plus_u_kind, U_projection, &
@@ -278,8 +277,8 @@ MODULE pw_restart
       USE basis,                ONLY : natomwfc
       USE gvecs,                ONLY : ngms_g, dual
       USE fft_base,             ONLY : dffts
-      USE wvfct,                ONLY : npw, npwx, g2kin, et, wg, &
-                                       igk, nbnd, ecutwfc
+      USE wvfct,                ONLY : npw, npwx, et, wg, igk, nbnd
+      USE gvecw,                ONLY : ecutwfc
       USE ener,                 ONLY : ef, ef_up, ef_dw
       USE fixed_occ,            ONLY : tfixed_occ, f_inp
       USE ldaU,                 ONLY : lda_plus_u, lda_plus_u_kind, U_projection, &
@@ -1395,7 +1394,8 @@ MODULE pw_restart
       USE noncollin_module, ONLY : noncolin
       USE ktetra,           ONLY : ntetra
       USE klist,            ONLY : nkstot, nelec
-      USE wvfct,            ONLY : nbnd, npwx, ecutwfc
+      USE wvfct,            ONLY : nbnd, npwx
+      USE gvecw,            ONLY : ecutwfc
       USE control_flags,    ONLY : gamma_only
       USE mp_pools,         ONLY : kunit
       USE mp_global,        ONLY : nproc_file, nproc_pool_file, &
@@ -1871,9 +1871,10 @@ MODULE pw_restart
       !
       USE gvect,           ONLY : ngm_g, ecutrho
       USE gvecs,           ONLY : ngms_g, dual
+      USE gvecw,           ONLY : ecutwfc
       USE fft_base,        ONLY : dfftp
       USE fft_base,        ONLY : dffts
-      USE wvfct,           ONLY : npwx, g2kin, ecutwfc
+      USE wvfct,           ONLY : npwx
       USE control_flags,   ONLY : gamma_only
       !
       IMPLICIT NONE
@@ -2418,7 +2419,8 @@ MODULE pw_restart
       USE cell_base,            ONLY : tpiba2
       USE lsda_mod,             ONLY : nspin, isk
       USE klist,                ONLY : nkstot, wk, nks, xk, ngk
-      USE wvfct,                ONLY : npw, npwx, g2kin, et, wg, nbnd, ecutwfc
+      USE wvfct,                ONLY : npw, npwx, et, wg, nbnd
+      USE gvecw,                ONLY : ecutwfc
       USE wavefunctions_module, ONLY : evc
       USE io_files,             ONLY : nwordwfc, iunwfc
       USE buffers,              ONLY : save_buffer
@@ -2443,6 +2445,7 @@ MODULE pw_restart
       INTEGER, ALLOCATABLE :: ngk_g(:)
       INTEGER, ALLOCATABLE :: igk_l2g(:,:), igk_l2g_kdip(:,:)
       LOGICAL              :: opnd
+      REAL(DP),ALLOCATABLE :: gk(:)
       REAL(DP)             :: scalef
 
       !
@@ -2458,19 +2461,6 @@ MODULE pw_restart
          IF ( .NOT. opnd ) CALL errore( 'read_wavefunctions', &
                     & 'wavefunctions unit (iunwfc) is not opened', 1 )
       END IF
-      !
-      IF ( ionode ) THEN
-         !
-         !CALL iotk_open_read( iunpun+1, FILE = TRIM( dirname ) // '/' // &
-         !                   & TRIM( xmlpun ), IERR = ierr )
-         !
-         !PRINT*,TRIM( dirname ) // '/' // &
-         !                   & TRIM( xmlpun )
-      END IF
-      !
-      !CALL mp_bcast( ierr, ionode_id, intra_image_comm )
-      !
-      !IF ( ierr > 0 ) RETURN
       !
       IF ( nkstot > 0 ) THEN
          !
@@ -2518,7 +2508,7 @@ MODULE pw_restart
       ALLOCATE ( igk_l2g( npwx, nks ) )
       igk_l2g = 0
       !
-      ALLOCATE( kisort( npwx ) )
+      ALLOCATE( kisort( npwx ), gk(npwx) )
       !
       DO ik = 1, nks
          !
@@ -2526,7 +2516,7 @@ MODULE pw_restart
          npw    = npwx
          !
          CALL gk_sort( xk(1,ik+iks-1), ngm, g, &
-                       ecutwfc/tpiba2, npw, kisort(1), g2kin )
+                       ecutwfc/tpiba2, npw, kisort(1), gk )
          !
          CALL gk_l2gmap( ngm, ig_l2g(1), npw, kisort(1), igk_l2g(1,ik) )
          !
@@ -2534,7 +2524,7 @@ MODULE pw_restart
          !
       END DO
       !
-      DEALLOCATE( kisort )
+      DEALLOCATE( gk, kisort )
       !
       ! ... compute the global number of G+k vectors for each k point
       !

@@ -4,7 +4,8 @@ include ../../make.sys
 
 # location of needed modules
 MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules \
-          $(MOD_FLAG)../../PW/src $(MOD_FLAG).
+          $(MOD_FLAG)../../FFTXlib $(MOD_FLAG)../../PW/src \
+          $(MOD_FLAG).
 IFLAGS=
 
 LIBOBJS        = ../../flib/ptools.a ../../flib/flib.a ../../clib/clib.a ../../iotk/src/libiotk.a
@@ -13,7 +14,7 @@ COULOMB_KERNEL_OBJS = \
 store_sqvc.o 
 
 PWOBJS = ../../PW/src/libpw.a
-QEMODS = ../../Modules/libqemod.a
+QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a
 
 TLDEPS= bindir mods libs pw
 

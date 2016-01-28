@@ -44,7 +44,9 @@ CONTAINS
     ! ... Intel compilers v .ge.8 allocate a lot of stack space
     ! ... Stack limit is often small, thus causing SIGSEGV and crash
     !
+#ifdef __INTEL_COMPILER
     CALL remove_stack_limit ( )
+#endif
     !
     ! ... use ".FALSE." to disable all clocks except the total cpu time clock
     ! ... use ".TRUE."  to enable clocks
@@ -223,7 +225,7 @@ CONTAINS
      WRITE(stdout, "(5x, '                N         =         I      X      P      X      B      X      Z')") 
      WRITE(stdout, "(5x, '                ^                   ^             ^             ^             ^')") 
      WRITE(stdout, "(5x, '                |                   |             |             |             |')") 
-     WRITE(stdout, "(5x, '              #tsk                  |             |             |             |')") 
+     WRITE(stdout, "(5x, '              #rnk                  |             |             |             |')") 
      WRITE(stdout, "(5x, '                                 #image           |             |             |')") 
      WRITE(stdout, "(5x, '                                                #pool           |             |')") 
      WRITE(stdout, "(5x, '                                                              #bgrp           |')") 
@@ -234,10 +236,10 @@ CONTAINS
      WRITE(stdout, "(5x, '**OPENMP** Parallelization Status')")
      WRITE(stdout, "(5x, '#thr/rnk               = ',i12)") nth
      CALL io_push_bar()
-     WRITE(stdout, "(5x, '#cores = (rnk) * (thr) = ',i12)") ncores
+     WRITE(stdout, "(5x, '#prc = (rnk) * (thr) = ',i12)") ncores
      CALL io_push_bar()
 #else
-     WRITE(stdout, "(5x, '#cores = ',i12)") ncores
+     WRITE(stdout, "(5x, '#prc = ',i12)") ncores
      CALL io_push_bar()
 #endif
      !

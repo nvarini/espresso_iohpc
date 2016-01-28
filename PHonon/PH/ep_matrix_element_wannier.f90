@@ -19,22 +19,21 @@ SUBROUTINE ep_matrix_element_wannier()
   USE fft_base, ONLY : dfftp, dffts
   USE noncollin_module, ONLY : nspin_mag, noncolin
   USE dynmat, ONLY : dyn, w2
-  USE qpoint, ONLY : xq, nksq, ikks
-  USE modes,  ONLY : npert, nirr
+  USE modes,  ONLY : npert, nirr, u
   USE control_ph, ONLY : trans
   USE units_ph, ONLY : iudyn, lrdrho, iudvscf
   USE io_global, ONLY : stdout
   USE mp_pools,  ONLY : me_pool, root_pool
-  USE modes, ONLY : u
   USE klist, ONLY : xk
   USE wvfct, ONLY : npwx
   USE el_phon, ONLY: elph_mat, kpq, g_kpq, igqg, xk_gamma
-  USE phus,       ONLY : int3, int3_nc, int3_paw
   USE uspp,                 ONLY: okvan
   USE paw_variables, ONLY : okpaw
   USE uspp_param, ONLY : nhm
   USE lsda_mod, ONLY : nspin
 
+  USE lrus,   ONLY : int3, int3_nc, int3_paw
+  USE qpoint, ONLY : xq, nksq, ikks
   !
   IMPLICIT NONE
   !
@@ -94,9 +93,9 @@ SUBROUTINE ep_matrix_element_wannier()
   DO irr = 1, nirr
      ALLOCATE (dvscfin (dfftp%nnr, nspin_mag , npert(irr)) )
      IF (okvan) THEN
-        ALLOCATE (int3 ( nhm, nhm, npert(irr), nat, nspin_mag))
-        IF (okpaw) ALLOCATE (int3_paw (nhm, nhm, npert(irr), nat, nspin_mag))
-        IF (noncolin) ALLOCATE(int3_nc( nhm, nhm, npert(irr), nat, nspin))
+        ALLOCATE (int3 ( nhm, nhm, nat, nspin_mag, npert(irr)))
+        IF (okpaw) ALLOCATE (int3_paw (nhm, nhm, nat, nspin_mag, npert(irr)))
+        IF (noncolin) ALLOCATE(int3_nc( nhm, nhm, nat, nspin, npert(irr)))
      ENDIF
 
 !     if(ascii_dvscf) then
@@ -172,12 +171,14 @@ SUBROUTINE elphsum_wannier(q_index)
   USE mp_bands,  ONLY : intra_bgrp_comm
   USE io_global, ONLY : stdout,ionode
   USE io_files,  ONLY : prefix
-  USE qpoint, ONLY : xq, nksq, ikks, ikqs
   USE dynmat, ONLY : dyn, w2
-  USE modes, ONLY : u, gi, gimq, irgq, irotmq
-  USE control_ph, only : lgamma
+  USE modes, ONLY : u
   USE lsda_mod, only : isk,nspin, current_spin,lsda
   USE mp,        ONLY: mp_sum
+
+  USE lr_symm_base, ONLY : irotmq, irgq, gimq, gi
+  USE qpoint,     ONLY : xq, nksq, ikks, ikqs
+  USE control_lr, ONLY : lgamma
   !
   IMPLICIT NONE
   !
@@ -337,9 +338,7 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
            xk_gamma, npwq_refolded, lrwfcr
   USE modes, ONLY : u
   USE units_ph, ONLY : iubar, lrbar
-  USE eqv,      ONLY : dvpsi!, evq
-  USE qpoint,   ONLY : igkq, npwq, nksq, ikks, ikqs
-  USE control_ph, ONLY : trans, lgamma
+  USE control_ph, ONLY : trans
   USE mp_bands,  ONLY: intra_bgrp_comm
   USE mp_pools,  ONLY: me_pool, root_pool
   USE mp,        ONLY: mp_sum
@@ -347,6 +346,9 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
   USE io_global, ONLY : stdout
   USE gvecs, ONLY : nls
 
+  USE eqv,        ONLY : dvpsi!, evq
+  USE qpoint,     ONLY : igkq, npwq, nksq, ikks, ikqs
+  USE control_lr, ONLY : lgamma
 
   IMPLICIT NONE
   !
@@ -628,10 +630,11 @@ subroutine calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq, xk_ga
   USE kinds, ONLY : DP
   USE fft_base, ONLY : dffts
   USE fft_interfaces,        ONLY : fwfft, invfft
-  USE wvfct, ONLY: nbnd, npw, npwx,  g2kin, ecutwfc, nbnd
+  USE wvfct, ONLY: nbnd, npw, npwx,  g2kin, nbnd
   USE gvect, ONLY : ngm, g
   USE gvecs, ONLY : nls
-  USE cell_base, ONLY : bg, tpiba2
+  USE gvecw, ONLY : gcutw
+  USE cell_base, ONLY : bg
   USE qpoint, ONLY : nksq, npwq
    USE wavefunctions_module, ONLY : evc
 !  USE eqv,      ONLY : evq
@@ -670,13 +673,13 @@ subroutine calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq, xk_ga
   igkq_=0
 
 
-  call gk_sort (xk_gamma(1,ikqg), ngm, g_scra, ecutwfc / tpiba2, npw_, igk_, g2kin)
+  call gk_sort (xk_gamma(1,ikqg), ngm, g_scra, gcutw, npw_, igk_, g2kin)
 
   if(lread) then
      call read_wfc_rspace_and_fwfft( evq , ikqg , lrwfcr , iunwfcwann , npw_ , igk_ )
   endif
 
-  call gk_sort (xkqg, ngm, g_scra, ecutwfc / tpiba2, npwq_refolded, igkq_, g2kin)
+  call gk_sort (xkqg, ngm, g_scra, gcutw, npwq_refolded, igkq_, g2kin)
 
   phase(:) = CMPLX(0.d0,0.d0)
 

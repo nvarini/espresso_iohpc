@@ -10,10 +10,12 @@
 subroutine drhodvnl (ik, ikk, nper, nu_i0, wdyn, dbecq, dalpq)
   !-----------------------------------------------------------------------
   !
-  !  This routine compute the term of the dynamical matrix due to
-  !  the orthogonality constraint. Only the part which is due to
-  !  the nonlocal terms is computed here
-  !
+  !  This subroutine computes the electronic term 2 <dpsi|dv-e ds|psi> of 
+  !  the dynamical matrix. It can be used both for KB and for US 
+  !  pseudopotentials. All the nonlocal (and overlap matrix) terms
+  !  are computed here. The contribution of the local potential is not
+  !  computed here. This routine must be called for each k point and
+  !  accumulates in wdyn the contribution of each k point.
   !
   USE kinds,     ONLY : DP
   USE ions_base, ONLY : nat, ntyp => nsp, ityp
@@ -25,7 +27,9 @@ subroutine drhodvnl (ik, ikk, nper, nu_i0, wdyn, dbecq, dalpq)
   USE klist,     ONLY : wk
   USE lsda_mod,  ONLY : current_spin, nspin
   USE spin_orb,  ONLY : lspinorb
-  USE phus,      ONLY : int1, int1_nc, int2, int2_so, becp1, alphap
+  USE phus,      ONLY : int1, int1_nc, int2, int2_so, alphap
+
+  USE lrus,      ONLY : becp1
 
   USE mp_bands, ONLY: intra_bgrp_comm
   USE mp,        ONLY: mp_sum

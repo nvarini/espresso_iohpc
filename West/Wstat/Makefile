@@ -4,7 +4,7 @@ include ../../make.sys
 
 # location of needed modules
 MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules \
-          $(MOD_FLAG)../../PW/src \
+          $(MOD_FLAG)../../FFTXlib $(MOD_FLAG)../../PW/src \
           $(MOD_FLAG)../Modules \
           $(MOD_FLAG)../Tools \
           $(MOD_FLAG)../FFT_kernel \
@@ -27,7 +27,7 @@ davidson_diago.o \
 wstat.o
 
 PWOBJS = ../../PW/src/libpw.a 
-QEMODS = ../../Modules/libqemod.a
+QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a
 WESTLIBS = \
 ../IO_kernel/lib_io_kernel.a \
 ../DFPT_kernel/lib_dfpt_kernel.a \

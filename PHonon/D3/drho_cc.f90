@@ -26,6 +26,9 @@ subroutine drho_cc (iflag)
   use phcom
   use d3com
 
+  use qpoint,     ONLY : xq
+  use control_lr, ONLY : lgamma
+
   implicit none
   integer :: iflag
   real (DP) :: xq0 (3), scalef

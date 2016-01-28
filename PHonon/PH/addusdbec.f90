@@ -19,9 +19,10 @@ subroutine addusdbec (ik, wgt, psi, dbecsum)
   USE wvfct, only: npw, npwx, nbnd
   USE uspp, only: nkb, vkb, okvan, ijtoh
   USE uspp_param, only: upf, nh, nhm
-  USE phus,   ONLY : becp1
+
+  USE lrus,   ONLY : becp1
   USE qpoint, ONLY : npwq, ikks
-  USE control_ph, ONLY : nbnd_occ
+  USE control_lr, ONLY : nbnd_occ
   !
   USE mp_bands, ONLY : intra_bgrp_comm
   !

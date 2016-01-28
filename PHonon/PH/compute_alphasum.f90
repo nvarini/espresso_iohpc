@@ -28,10 +28,12 @@ subroutine compute_alphasum
   USE uspp, ONLY: okvan
   USE uspp_param, ONLY: upf, nh
   USE paw_variables, ONLY : okpaw
+  USE phus,       ONLY : alphasum, alphasum_nc, alphap
 
-  USE phus,       ONLY : alphasum, alphasum_nc, becp1, alphap
+  USE lrus,       ONLY : becp1
   USE qpoint,     ONLY : nksq, ikks, ikqs
-  USE control_ph, ONLY : nbnd_occ, rec_code_read
+  USE control_ph, ONLY : rec_code_read
+  USE control_lr, ONLY : nbnd_occ
 
   implicit none
 

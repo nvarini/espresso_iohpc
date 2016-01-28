@@ -18,6 +18,9 @@ subroutine dpsidpsidv
   use phcom
   use d3com
 
+  use qpoint,     ONLY : nksq, npwq
+  use control_lr, ONLY : lgamma
+
   implicit none
   integer :: ik, ikk, ikq, ibnd, jbnd, nu_i, nu_j, nu_z, nrec
   real (DP) :: wgauss, wga (nbnd), wgq (nbnd), w0gauss, w0g (nbnd), &

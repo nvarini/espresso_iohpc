@@ -20,6 +20,9 @@ program d3toten
   USE mp_global,     ONLY : mp_startup
   USE environment,   ONLY : environment_start
 
+  use qpoint,     ONLY : xq
+  use control_lr, ONLY : lgamma
+
   implicit none
   character(len=9) :: cdate, ctime, code = 'D3TOTEN'
   integer :: nu_i, nu_i0, irecv

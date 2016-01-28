@@ -2,3 +2,4 @@
 *.mod
 make.sys
 tempdir*
+*.svn

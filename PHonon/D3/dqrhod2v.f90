@@ -27,6 +27,9 @@ SUBROUTINE dqrhod2v (ipert, drhoscf)
   USE mp_global,            ONLY : my_pool_id
   USE mp_global,            ONLY : inter_pool_comm, intra_pool_comm
   USE mp,                   ONLY : mp_sum
+
+  use qpoint,     ONLY : xq, npwq, nksq, igkq
+  use control_lr, ONLY : lgamma
   !
   IMPLICIT NONE
   !

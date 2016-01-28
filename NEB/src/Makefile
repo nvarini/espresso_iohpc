@@ -5,13 +5,13 @@ include ../../make.sys
 # location of needed modules and included files (if any)
 MODFLAGS= $(MOD_FLAG)../../iotk/src \
 	  $(MOD_FLAG)../../FFTXlib \
+          $(MOD_FLAG)../../LAXlib \
 	  $(MOD_FLAG)../../Modules \
 	  $(MOD_FLAG)../../PW/src $(MOD_FLAG).
 IFLAGS=
 
 #location of needed libraries
-LIBOBJS= ../../iotk/src/libiotk.a ../../flib/flib.a \
-         ../../clib/clib.a ../../flib/ptools.a
+LIBOBJS= ../../iotk/src/libiotk.a ../../clib/clib.a
 
 NEBOBJS = \
 neb.o \
@@ -40,7 +40,7 @@ path_variables.o \
 set_defaults.o \
 stop_run_path.o 
 
-QEMODS=../../Modules/libqemod.a ../../FFTXlib/libqefft.a
+QEMODS=../../Modules/libqemod.a ../../FFTXlib/libqefft.a ../../LAXlib/libqela.a
 PWOBJS= ../../PW/src/libpw.a
 
 TLDEPS=bindir mods libs liblapack libblas pw
@@ -52,9 +52,9 @@ neb.x : $(NEBOBJS) libneb.a $(LIBOBJS) $(PWOBJS) $(QEMODS)
 	$(NEBOBJS) libneb.a $(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBS)
 	- ( cd ../../bin; ln -fs ../NEB/src/$@ . )
 
-path_interpolation.x : path_interpolation.o $(PWOBJS) $(QEMODS) $(LIBOBJS)
+path_interpolation.x : path_interpolation.o libneb.a $(PWOBJS) $(QEMODS) $(LIBOBJS)
 	$(LD) $(LDFLAGS) -o $@ \
-	path_interpolation.o $(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBS)
+	path_interpolation.o libneb.a $(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBS)
 	- ( cd ../../bin ; ln -fs ../NEB/src/$@ . )
 
 libneb.a : $(NEBLIBS)

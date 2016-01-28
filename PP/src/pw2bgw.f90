@@ -433,7 +433,9 @@ SUBROUTINE write_wfng ( output_file_name, real_or_complex, symm_type, &
   USE start_k, ONLY : nk1, nk2, nk3, k1, k2, k3
   USE symm_base, ONLY : s, ftau, nsym
   USE wavefunctions_module, ONLY : evc
-  USE wvfct, ONLY : npwx, nbnd, npw, et, wg, g2kin, ecutwfc, igk
+  USE wvfct, ONLY : npwx, nbnd, npw, et, wg, igk
+  USE gvecw, ONLY : ecutwfc
+  USE matrix_inversion
 #ifdef __MPI
   USE parallel_include, ONLY : MPI_DOUBLE_COMPLEX
 #endif
@@ -461,7 +463,7 @@ SUBROUTINE write_wfng ( output_file_name, real_or_complex, symm_type, &
   integer :: nd, ntran, nb, nk_l, nk_g, ns, ng_l, ng_g
   integer :: nkbl, nkl, nkr, ngg, npw_g, npwx_g
   integer :: local_pw, ipsour, igwx, ngkdist_g, ngkdist_l
-  real (DP) :: alat2, recvol, dr1, t1 ( 3 ), t2 ( 3 )
+  real (DP) :: alat2, recvol, t1 ( 3 ), t2 ( 3 )
   real (DP) :: r1 ( 3, 3 ), r2 ( 3, 3 ), adot ( 3, 3 )
   real (DP) :: bdot ( 3, 3 ), translation ( 3, 48 )
   integer, allocatable :: kmap ( : )
@@ -609,7 +611,7 @@ SUBROUTINE write_wfng ( output_file_name, real_or_complex, symm_type, &
         r1 ( k, j ) = dble ( s ( k, j, i ) )
       ENDDO
     ENDDO
-    CALL invmat ( 3, r1, r2, dr1 )
+    CALL invmat ( 3, r1, r2 )
     t1 ( 1 ) = dble ( ftau ( 1, i ) ) / dble ( dfftp%nr1 )
     t1 ( 2 ) = dble ( ftau ( 2, i ) ) / dble ( dfftp%nr2 )
     t1 ( 3 ) = dble ( ftau ( 3, i ) ) / dble ( dfftp%nr3 )
@@ -1233,6 +1235,7 @@ SUBROUTINE write_rhog ( output_file_name, real_or_complex, symm_type, &
   USE mp_pools, ONLY : intra_pool_comm
   USE scf, ONLY : rho
   USE symm_base, ONLY : s, ftau, nsym
+  USE matrix_inversion
 
   IMPLICIT NONE
 
@@ -1246,7 +1249,7 @@ SUBROUTINE write_rhog ( output_file_name, real_or_complex, symm_type, &
   integer :: unit, id, is, ig, i, j, k, ierr
   integer :: nd, ns, ng_l, ng_g
   integer :: ntran, cell_symmetry, nrecord
-  real (DP) :: alat2, recvol, dr1, t1 ( 3 ), t2 ( 3 )
+  real (DP) :: alat2, recvol, t1 ( 3 ), t2 ( 3 )
   real (DP) :: r1 ( 3, 3 ), r2 ( 3, 3 ), adot ( 3, 3 )
   real (DP) :: bdot ( 3, 3 ), translation ( 3, 48 )
   integer, allocatable :: g_g ( :, : )
@@ -1299,7 +1302,7 @@ SUBROUTINE write_rhog ( output_file_name, real_or_complex, symm_type, &
         r1 ( k, j ) = dble ( s ( k, j, i ) )
       ENDDO
     ENDDO
-    CALL invmat ( 3, r1, r2, dr1 )
+    CALL invmat ( 3, r1, r2 )
     t1 ( 1 ) = dble ( ftau ( 1, i ) ) / dble ( dfftp%nr1 )
     t1 ( 2 ) = dble ( ftau ( 2, i ) ) / dble ( dfftp%nr2 )
     t1 ( 3 ) = dble ( ftau ( 3, i ) ) / dble ( dfftp%nr3 )
@@ -1444,7 +1447,7 @@ SUBROUTINE calc_rhog (rhog_nvmin, rhog_nvmax)
   USE scf, ONLY : rho
   USE symme, ONLY : sym_rho, sym_rho_init
   USE wavefunctions_module, ONLY : evc, psic
-  USE wvfct, ONLY : npw, igk, wg, g2kin, ecutwfc
+  USE wvfct, ONLY : npw, igk, wg
 
   IMPLICIT NONE
 
@@ -1522,6 +1525,7 @@ SUBROUTINE write_vxcg ( output_file_name, real_or_complex, symm_type, &
   USE scf, ONLY : rho, rho_core, rhog_core
   USE symm_base, ONLY : s, ftau, nsym
   USE wavefunctions_module, ONLY : psic
+  USE matrix_inversion
 
   IMPLICIT NONE
 
@@ -1534,7 +1538,7 @@ SUBROUTINE write_vxcg ( output_file_name, real_or_complex, symm_type, &
   integer :: unit, id, is, ir, ig, i, j, k, ierr
   integer :: nd, ns, nr, ng_l, ng_g
   integer :: ntran, cell_symmetry, nrecord
-  real (DP) :: alat2, recvol, dr1, t1 ( 3 ), t2 ( 3 )
+  real (DP) :: alat2, recvol, t1 ( 3 ), t2 ( 3 )
   real (DP) :: r1 ( 3, 3 ), r2 ( 3, 3 ), adot ( 3, 3 )
   real (DP) :: bdot ( 3, 3 ), translation ( 3, 48 )
   integer, allocatable :: g_g ( :, : )
@@ -1589,7 +1593,7 @@ SUBROUTINE write_vxcg ( output_file_name, real_or_complex, symm_type, &
         r1 ( k, j ) = dble ( s ( k, j, i ) )
       ENDDO
     ENDDO
-    CALL invmat ( 3, r1, r2, dr1 )
+    CALL invmat ( 3, r1, r2 )
     t1 ( 1 ) = dble ( ftau ( 1, i ) ) / dble ( dfftp%nr1 )
     t1 ( 2 ) = dble ( ftau ( 2, i ) ) / dble ( dfftp%nr2 )
     t1 ( 3 ) = dble ( ftau ( 3, i ) ) / dble ( dfftp%nr3 )
@@ -1826,7 +1830,7 @@ SUBROUTINE write_vxc_r (output_file_name, diag_nmin, diag_nmax, &
     inter_pool_comm, npool
   USE scf, ONLY : rho, rho_core, rhog_core
   USE wavefunctions_module, ONLY : evc, psic
-  USE wvfct, ONLY : npw, nbnd, igk, g2kin, ecutwfc
+  USE wvfct, ONLY : npw, nbnd, igk
 
   IMPLICIT NONE
 
@@ -2019,7 +2023,7 @@ SUBROUTINE write_vxc_g (output_file_name, diag_nmin, diag_nmax, &
     inter_pool_comm, npool
   USE scf, ONLY : rho, rho_core, rhog_core
   USE wavefunctions_module, ONLY : evc, psic
-  USE wvfct, ONLY : npwx, npw, nbnd, igk, g2kin, ecutwfc
+  USE wvfct, ONLY : npwx, npw, nbnd, igk
 
   IMPLICIT NONE
 
@@ -2232,6 +2236,7 @@ SUBROUTINE write_vscg ( output_file_name, real_or_complex, symm_type )
   USE scf, ONLY : vltot, v
   USE symm_base, ONLY : s, ftau, nsym
   USE wavefunctions_module, ONLY : psic
+  USE matrix_inversion
 
   IMPLICIT NONE
 
@@ -2243,7 +2248,7 @@ SUBROUTINE write_vscg ( output_file_name, real_or_complex, symm_type )
   integer :: unit, id, is, ir, ig, i, j, k, ierr
   integer :: nd, ns, nr, ng_l, ng_g
   integer :: ntran, cell_symmetry, nrecord
-  real (DP) :: alat2, recvol, dr1, t1 ( 3 ), t2 ( 3 )
+  real (DP) :: alat2, recvol, t1 ( 3 ), t2 ( 3 )
   real (DP) :: r1 ( 3, 3 ), r2 ( 3, 3 ), adot ( 3, 3 )
   real (DP) :: bdot ( 3, 3 ), translation ( 3, 48 )
   integer, allocatable :: g_g ( :, : )
@@ -2300,7 +2305,7 @@ SUBROUTINE write_vscg ( output_file_name, real_or_complex, symm_type )
         r1 ( k, j ) = dble ( s ( k, j, i ) )
       ENDDO
     ENDDO
-    CALL invmat ( 3, r1, r2, dr1 )
+    CALL invmat ( 3, r1, r2 )
     t1 ( 1 ) = dble ( ftau ( 1, i ) ) / dble ( dfftp%nr1 )
     t1 ( 2 ) = dble ( ftau ( 2, i ) ) / dble ( dfftp%nr2 )
     t1 ( 3 ) = dble ( ftau ( 3, i ) ) / dble ( dfftp%nr3 )
@@ -2446,7 +2451,9 @@ SUBROUTINE write_vkbg (output_file_name, symm_type, wfng_kgrid, &
   USE symm_base, ONLY : s, ftau, nsym
   USE uspp, ONLY : nkb, vkb, deeq
   USE uspp_param, ONLY : nhm, nh
-  USE wvfct, ONLY : npwx, npw, g2kin, ecutwfc, igk
+  USE wvfct, ONLY : npwx, npw, igk
+  USE gvecw, ONLY : ecutwfc
+  USE matrix_inversion
 
   IMPLICIT NONE
 
@@ -2464,7 +2471,7 @@ SUBROUTINE write_vkbg (output_file_name, symm_type, wfng_kgrid, &
   integer :: i, j, k, ierr, ik, is, ig, ikb, iat, isp, ih, jh, &
     unit, nkbl, nkl, nkr, iks, ike, npw_g, npwx_g, ngg, ipsour, &
     igwx, local_pw, id, nd, ntran, cell_symmetry, nrecord
-  real (DP) :: alat2, recvol, dr1, t1 ( 3 ), t2 ( 3 )
+  real (DP) :: alat2, recvol, t1 ( 3 ), t2 ( 3 )
   real (DP) :: r1 ( 3, 3 ), r2 ( 3, 3 ), adot ( 3, 3 )
   real (DP) :: bdot ( 3, 3 ), translation ( 3, 48 )
   integer, allocatable :: kmap ( : )
@@ -2529,7 +2536,7 @@ SUBROUTINE write_vkbg (output_file_name, symm_type, wfng_kgrid, &
         r1 ( k, j ) = dble ( s ( k, j, i ) )
       ENDDO
     ENDDO
-    CALL invmat ( 3, r1, r2, dr1 )
+    CALL invmat ( 3, r1, r2 )
     t1 ( 1 ) = dble ( ftau ( 1, i ) ) / dble ( dfftp%nr1 )
     t1 ( 2 ) = dble ( ftau ( 2, i ) ) / dble ( dfftp%nr2 )
     t1 ( 3 ) = dble ( ftau ( 3, i ) ) / dble ( dfftp%nr3 )

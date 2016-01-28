@@ -18,6 +18,8 @@ subroutine dpsi_corr (evcq, psidvpsi_x, ik, ikq, nu)
   !
   USE kinds, only : DP
   use pwcom
+  use qpoint, ONLY: npwq
+  use control_lr, ONLY : nbnd_occ
   use phcom
   use d3com
 

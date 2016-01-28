@@ -1,5 +1,5 @@
 
-TODO (datafile & High throughput & reproducibility specific) - Oct 2012
+TODO (datafile & High throughput & reproducibility specific) - Jan 2016
 
 0) XML input: can it be improved?
 1) XML input in AIDA (what do we need to have these two working in harmony?)
@@ -35,10 +35,6 @@ TODO LIST - May 2014
 1.3 svn/packaging:
   1.3.1 automatic download for GWL
   1.3.2 run source-normalizer script dev-tools/src-normal
-  1.3.3 Files in flib/ use modules in Modules/, while files in Modules/
-        in turn call files in flib/. This kind of circular dependency
-        should be avoided. There isn't any good reason for the distinction
-        between 'modules' and 'libraries' anyway
 1.4 mailing lists:
   1.4.1 Send monthly reminder? possibly with netiquette
   1.4.2 move to forums?

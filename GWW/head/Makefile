@@ -9,12 +9,11 @@ IFLAGS=-I../../include
 
 # location of needed modules
 MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules \
-          $(MOD_FLAG)../../PHonon/PH $(MOD_FLAG)../../PW/src \
-	  $(MOD_FLAG)../../FFTXlib $(MOD_FLAG).
+          $(MOD_FLAG)../../PHonon/PH $(MOD_FLAG)../../LR_Modules $(MOD_FLAG)../../PW/src \
+	  $(MOD_FLAG)../../LAXlib $(MOD_FLAG)../../FFTXlib $(MOD_FLAG).
 
 #location of needed libraries
-LIBOBJS= ../../iotk/src/libiotk.a ../../flib/flib.a \
-         ../../clib/clib.a ../../flib/ptools.a 
+LIBOBJS= ../../iotk/src/libiotk.a ../../clib/clib.a
 
 HEADOBJS = \
 bcast_ph_input.o \
@@ -24,8 +23,8 @@ openfilq.o \
 phq_readin.o \
 solve_head.o 
 
-QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a
-LIBPWPH =  ../../PHonon/PH/libph.a ../../PW/src/libpw.a
+QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a ../../LAXlib/libqela.a
+LIBPWPH =  ../../PHonon/PH/libph.a ../..//LR_Modules/liblrmod.a ../../PW/src/libpw.a
 
 LIBMIN= ../minpack/minpacklib.a
 

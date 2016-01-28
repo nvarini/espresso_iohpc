@@ -110,52 +110,6 @@ RETURN
 END SUBROUTINE transform_int2_nc
 
 !----------------------------------------------------------------------------
-SUBROUTINE transform_int3_nc(int3,na,npert)
-!----------------------------------------------------------------------------
-!
-! This routine multiply int3 by the identity and the Pauli
-! matrices and saves it in int3_nc.
-!
-USE kinds,                ONLY : DP
-USE ions_base,            ONLY : nat, ityp
-USE uspp_param,           ONLY : nh, nhm
-USE noncollin_module,     ONLY : nspin_mag
-USE spin_orb,             ONLY : domag
-USE phus,                 ONLY : int3_nc
-!
-IMPLICIT NONE
-
-INTEGER :: na, npert
-COMPLEX(DP) :: int3(nhm,nhm,npert,nat,nspin_mag)
-!
-! ... local variables
-!
-INTEGER :: ih, jh, ipol, np
-
-np=ityp(na)
-DO ih = 1, nh(np)
-   DO jh = 1, nh(np)
-      DO ipol=1,npert
-         IF (domag) THEN
-            int3_nc(ih,jh,ipol,na,1)=int3(ih,jh,ipol,na,1)+int3(ih,jh,ipol,na,4)
-            int3_nc(ih,jh,ipol,na,2)=                                       &
-               int3(ih,jh,ipol,na,2) - (0.d0, 1.d0) * int3(ih,jh,ipol,na,3)
-            int3_nc(ih,jh,ipol,na,3)=                                       &
-               int3(ih,jh,ipol,na,2) + (0.d0, 1.d0) * int3(ih,jh,ipol,na,3)
-            int3_nc(ih,jh,ipol,na,4)=                                       &
-               int3(ih,jh,ipol,na,1) - int3(ih,jh,ipol,na,4)
-         ELSE
-            int3_nc(ih,jh,ipol,na,1)=int3(ih,jh,ipol,na,1)
-            int3_nc(ih,jh,ipol,na,4)=int3(ih,jh,ipol,na,1)
-         END IF
-      END DO
-   END DO
-END DO
-
-RETURN
-END SUBROUTINE transform_int3_nc
-
-!----------------------------------------------------------------------------
 SUBROUTINE transform_int4_nc(int4,na)
 !----------------------------------------------------------------------------
 !

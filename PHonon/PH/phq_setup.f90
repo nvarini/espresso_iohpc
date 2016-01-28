@@ -71,20 +71,16 @@ subroutine phq_setup
   USE noncollin_module, ONLY : noncolin, m_loc, angle1, angle2, ux, nspin_mag
   USE wvfct,         ONLY : nbnd, et
   USE nlcc_ph,       ONLY : drc, nlcc_any
-  USE eqv,           ONLY : dmuxc
   USE control_ph,    ONLY : rec_code, lgamma_gamma, search_sym, start_irr, &
                             last_irr, niter_ph, alpha_mix, all_done,  &
-                            trans, epsil, lgamma, recover, where_rec, alpha_pv,&
-                            nbnd_occ, flmixdpot, reduce_io, rec_code_read, &
+                            trans, epsil, recover, where_rec, &
+                            flmixdpot, reduce_io, rec_code_read, &
                             done_epsil, zeu, done_zeu, current_iq, u_from_file
   USE el_phon,       ONLY : elph, comp_elph, done_elph
   USE output,        ONLY : fildrho
-  USE modes,         ONLY : u, npertx, npert, gi, gimq, nirr, &
-                            t, tmq, irotmq, minus_q, invsymq, &
-                            nsymq, nmodes, rtau, num_rap_mode
+  USE modes,         ONLY : u, npertx, npert, nirr, t, tmq, nmodes, num_rap_mode
   USE dynmat,        ONLY : dyn, dyn_rec, dyn00
   USE efield_mod,    ONLY : epsilon, zstareu
-  USE qpoint,        ONLY : xq, xk_col
   USE partial,       ONLY : comp_irr, atomo, nat_todo, all_comp, &
                             done_irr
   USE gamma_gamma,   ONLY : has_equivalent, asr, nasr, n_diff_sites, &
@@ -100,6 +96,11 @@ subroutine phq_setup
   USE mp_pools,      ONLY : inter_pool_comm, npool
   !
   USE acfdtest,      ONLY : acfdt_is_active, acfdt_num_der
+
+  USE lr_symm_base, ONLY : gi, gimq, irotmq, minus_q, invsymq, nsymq, rtau
+  USE qpoint,       ONLY : xq, xk_col
+  USE eqv,          ONLY : dmuxc
+  USE control_lr,   ONLY : alpha_pv, nbnd_occ, lgamma
 
   implicit none
 

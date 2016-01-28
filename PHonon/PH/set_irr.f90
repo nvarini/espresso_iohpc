@@ -26,12 +26,11 @@ subroutine set_irr_new (xq, u, npert, nirr, eigen)
   USE ions_base, ONLY : nat, tau, ntyp => nsp, ityp, amass
   USE cell_base, ONLY : at, bg
   USE symm_base, ONLY : s, sr, ftau, invs, nsym, irt, t_rev
-  USE modes,     ONLY : nsymq, minus_q, irotmq, gi, gimq, num_rap_mode, &
-                        name_rap_mode, rtau
+  USE modes,     ONLY : num_rap_mode, name_rap_mode
   USE noncollin_module, ONLY : noncolin, nspin_mag
   USE spin_orb,  ONLY : domag
   USE constants, ONLY: tpi
-  USE control_ph, ONLY : lgamma, search_sym
+  USE control_ph, ONLY : search_sym
   USE control_flags, ONLY : iverbosity
   USE random_numbers, ONLY : randy
   USE rap_point_group, ONLY : name_rap
@@ -39,6 +38,9 @@ subroutine set_irr_new (xq, u, npert, nirr, eigen)
   use mp, only: mp_bcast
   use io_global, only : ionode_id
   use mp_images, only : intra_image_comm
+
+  USE lr_symm_base, ONLY : nsymq, minus_q, irotmq, gi, gimq, rtau
+  USE control_lr,   ONLY : lgamma
 
   implicit none
 !

@@ -25,13 +25,15 @@ SUBROUTINE lr_alloc_init()
   USE charg_resp,           ONLY : w_T, w_T_beta_store, w_T_gamma_store, &
                                  & w_T_zeta_store, w_T_npol,chi
   USE realus,               ONLY : igk_k, npw_k, tg_psic
-  USE control_ph,           ONLY : nbnd_occ
   USE noncollin_module,     ONLY : nspin_mag, npol, noncolin
-  USE eqv,                  ONLY : dmuxc, evq, dpsi, dvpsi
   USE wavefunctions_module, ONLY : evc
-  USE qpoint,               ONLY : igkq, nksq, eigqts
   USE becmod,               ONLY : allocate_bec_type, bec_type, becp
-  USE phus,                 ONLY : int3, int3_nc, becp1
+
+  USE lrus,       ONLY : int3, int3_nc, becp1
+  USE eqv,        ONLY : dmuxc, evq, dpsi, dvpsi
+  USE qpoint,     ONLY : igkq, nksq, eigqts
+  USE control_lr, ONLY : nbnd_occ
+
   !
   IMPLICIT NONE
   !
@@ -162,11 +164,11 @@ SUBROUTINE lr_alloc_init()
      !
      IF (okvan) THEN
         !
-        ALLOCATE (int3(nhm,nhm,1,nat,nspin_mag))
+        ALLOCATE (int3(nhm,nhm,nat,nspin_mag,1))
         int3 = (0.0d0, 0.0d0)
         !
         IF (noncolin) THEN
-           ALLOCATE (int3_nc(nhm,nhm,1,nat,nspin))
+           ALLOCATE (int3_nc(nhm,nhm,nat,nspin,1))
            int3_nc = (0.0d0, 0.0d0)
         ENDIF
         !

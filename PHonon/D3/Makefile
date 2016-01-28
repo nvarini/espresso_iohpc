@@ -4,10 +4,10 @@ include ../../make.sys
 
 # location of needed modules and included files (if any)
 MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules $(MOD_FLAG)../../FFTXlib \
-          $(MOD_FLAG)../../PW/src $(MOD_FLAG)../../PHonon/PH $(MOD_FLAG).
+          $(MOD_FLAG)../../LAXlib $(MOD_FLAG)../../PW/src $(MOD_FLAG)../../LR_Modules $(MOD_FLAG)../../PHonon/PH $(MOD_FLAG).
 IFLAGS=
 
-LIBOBJS        = ../../flib/ptools.a ../../flib/flib.a ../../clib/clib.a ../../iotk/src/libiotk.a
+LIBOBJS        = ../../clib/clib.a ../../iotk/src/libiotk.a
 
 D3OBJS = \
 allocate_d3.o \
@@ -66,14 +66,15 @@ write_igk.o \
 writed3dyn_5.o
 
 PHOBJS = ../../PHonon/PH/libph.a
+LRMODS = ../../LR_Modules/liblrmod.a
 PWOBJS = ../../PW/src/libpw.a
-QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a
+QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a ../../LAXlib/libqela.a
 
 all : tldeps d3.x
 
-d3.x : $(D3OBJS) $(PHOBJS) $(PWOBJS) $(QEMODS) $(LIBOBJS)
+d3.x : $(D3OBJS) $(PHOBJS) $(LRMODS) $(PWOBJS) $(QEMODS) $(LIBOBJS)
 	$(LD) $(LDFLAGS) -o d3.x $(D3OBJS) \
-		$(PHOBJS) $(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBS)
+		$(PHOBJS) $(LRMODS) $(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBS)
 	- ( cd ../../bin ; ln -fs ../PHonon/D3/d3.x . )
 
 tldeps :

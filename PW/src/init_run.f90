@@ -11,7 +11,7 @@ SUBROUTINE init_run()
   !
   USE klist,              ONLY : nkstot
   USE symme,              ONLY : sym_rho_init
-  USE wvfct,              ONLY : nbnd, et, wg, btype
+  USE wvfct,              ONLY : nbnd, et, wg, btype, npwx
   USE control_flags,      ONLY : lmd, gamma_only, smallmem, ts_vdw
   USE cell_base,          ONLY : at, bg, set_h_ainv
   USE cellmd,             ONLY : lmovecell
@@ -32,6 +32,12 @@ SUBROUTINE init_run()
   USE tsvdw_module,       ONLY : tsvdw_initialize
 #ifdef __IO_HPC
   USE io_hpc,             ONLY : initialize_io_hpc
+  USE mp_global,          ONLY : world_comm
+#endif
+#ifdef __HDF5
+  USE hdf5_pw
+  USE mp_world,           ONLY : nproc, mpime
+  USE wavefunctions_module,ONLY : evc
 #endif
   !
   IMPLICIT NONE
@@ -44,15 +50,13 @@ SUBROUTINE init_run()
   CALL pre_init()
 
   !initialize io system
-#if defined __IO_HPC
-  CALL initialize_io_hpc(1)
-#endif
  
 
   !
   ! ... allocate memory for G- and R-space fft arrays
   !
   CALL allocate_fft()
+
   !
   IF ( dft_is_hybrid() .AND. dffts%have_task_groups ) &
      CALL errore ('init_run', '-ntg option incompatible with EXX',1)
@@ -110,7 +114,21 @@ SUBROUTINE init_run()
   !
   CALL newd()
   !
+#if defined __HDF5
+  CALL initialize_io_hpc(1, world_comm)
   CALL wfcinit()
+#endif
+
+#if defined __HDF5
+  !CALL initialize_io_hpc(1, world_comm)
+  !CALL setup_file_property_hdf5(evc_hdf5, "rho.hdf5")
+  !CALL prepare_index_hdf5(npwx,off_npw,npw_g,evc_hdf5%comm,nproc)
+  !CALL set_index_hdf5(evc_hdf5,evc,off_npw,npw_g,2)
+  !CALL define_dataset_hdf5(evc_hdf5)
+  !CALL write_data_hdf5(evc_hdf5,evc)
+  !CALL read_data_hdf5(evc_hdf5,evc,mpime)
+#endif
+
   !
   IF(use_wannier) CALL wannier_init()
   !

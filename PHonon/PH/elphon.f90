@@ -20,12 +20,10 @@ SUBROUTINE elphon()
   USE fft_base, ONLY : dfftp, dffts
   USE noncollin_module, ONLY : nspin_mag, noncolin, m_loc
   USE lsda_mod, ONLY : nspin
-  USE phus,       ONLY : int3, int3_nc, int3_paw
   USE uspp,  ONLY: okvan
   USE paw_variables, ONLY : okpaw
   USE el_phon,  ONLY : done_elph
   USE dynmat, ONLY : dyn, w2
-  USE qpoint, ONLY : xq
   USE modes,  ONLY : npert, nirr, u
   USE uspp_param, ONLY : nhm
   USE control_ph, ONLY : trans, xmldyn
@@ -37,6 +35,9 @@ SUBROUTINE elphon()
   USE mp_bands,  ONLY : intra_bgrp_comm, me_bgrp, root_bgrp
   USE mp,        ONLY : mp_bcast
   USE io_global, ONLY: stdout
+
+  USE lrus,   ONLY : int3, int3_nc, int3_paw
+  USE qpoint, ONLY : xq
   !
   IMPLICIT NONE
   !
@@ -68,15 +69,15 @@ SUBROUTINE elphon()
      npe=npert(irr)
      ALLOCATE (dvscfin (dfftp%nnr, nspin_mag , npe) )
      IF (okvan) THEN
-        ALLOCATE (int3 ( nhm, nhm, npe, nat, nspin_mag))
-        IF (okpaw) ALLOCATE (int3_paw (nhm, nhm, npe, nat, nspin_mag))
-        IF (noncolin) ALLOCATE(int3_nc( nhm, nhm, npe, nat, nspin))
+        ALLOCATE (int3 ( nhm, nhm, nat, nspin_mag, npe))
+        IF (okpaw) ALLOCATE (int3_paw (nhm, nhm, nat, nspin_mag, npe))
+        IF (noncolin) ALLOCATE(int3_nc( nhm, nhm, nat, nspin, npe))
      ENDIF
      DO ipert = 1, npe
         CALL davcio_drho ( dvscfin(1,1,ipert),  lrdrho, iudvscf, &
                            imode0 + ipert,  -1 )
         IF (okpaw .AND. me_bgrp==0) &
-             CALL davcio( int3_paw(:,:,ipert,:,:), lint3paw, &
+             CALL davcio( int3_paw(:,:,:,:,ipert), lint3paw, &
                                           iuint3paw, imode0 + ipert, - 1 )
      END DO
      IF (okpaw) CALL mp_bcast(int3_paw, root_bgrp, intra_bgrp_comm)
@@ -273,14 +274,16 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
                       comp_elph, done_elph
   USE modes, ONLY : u
   USE units_ph, ONLY : iubar, lrbar, lrwfc, iuwfc
-  USE eqv,      ONLY : dvpsi, evq
-  USE qpoint,   ONLY : igkq, npwq, nksq, ikks, ikqs, nksqtot
-  USE control_ph, ONLY : trans, lgamma, current_iq
+  USE control_ph, ONLY : trans, current_iq
   USE ph_restart, ONLY : ph_writefile
   USE spin_orb,   ONLY : domag
   USE mp_bands,   ONLY: intra_bgrp_comm, ntask_groups
   USE mp_pools,   ONLY: npool
   USE mp,        ONLY: mp_sum
+
+  USE eqv,        ONLY : dvpsi, evq
+  USE qpoint,     ONLY : igkq, npwq, nksq, ikks, ikqs, nksqtot
+  USE control_lr, ONLY : lgamma
 
   IMPLICIT NONE
   !
@@ -467,17 +470,20 @@ SUBROUTINE elphsum ( )
   USE parameters,  ONLY : npk
   USE el_phon,     ONLY : el_ph_mat, done_elph, el_ph_nsigma, el_ph_ngauss, &
                           el_ph_sigma
-  USE qpoint,      ONLY : xq, nksq
-  USE modes,       ONLY : u, minus_q, nsymq, rtau, nirr
+  USE modes,       ONLY : u, nirr
   USE dynmat,      ONLY : dyn, w2
   USE io_global,   ONLY : stdout, ionode, ionode_id
   USE xml_io_base, ONLY : create_directory
   USE mp_pools,    ONLY : my_pool_id, npool, kunit
   USE mp_images,   ONLY : intra_image_comm
   USE mp,          ONLY : mp_bcast
-  USE control_ph,  ONLY : lgamma, tmp_dir_phq, xmldyn, current_iq
+  USE control_ph,  ONLY : tmp_dir_phq, xmldyn, current_iq
   USE save_ph,     ONLY : tmp_dir_save
   USE io_files,    ONLY : prefix, tmp_dir, seqopn
+  
+  USE lr_symm_base, ONLY : minus_q, nsymq, rtau
+  USE qpoint,       ONLY : xq, nksq
+  USE control_lr,   ONLY : lgamma
   !
   IMPLICIT NONE
   ! epsw = 20 cm^-1, in Ry
@@ -930,15 +936,17 @@ SUBROUTINE elphsum_simple
   USE el_phon, ONLY : el_ph_mat, el_ph_nsigma, el_ph_ngauss, el_ph_sigma
   USE mp_pools,  ONLY : inter_pool_comm, npool
   USE mp_images, ONLY : intra_image_comm
-  USE qpoint, ONLY : xq, nksq, ikks, ikqs
   USE output, ONLY : fildyn
   USE dynmat, ONLY : dyn, w2
-  USE modes, ONLY : u, rtau, nsymq, irotmq, minus_q, nirr
+  USE modes, ONLY : u, nirr
   USE control_ph, only : current_iq, qplot
   USE lsda_mod, only : isk
   USE el_phon,   ONLY : done_elph, gamma_disp
   USE io_global, ONLY : stdout, ionode, ionode_id
   USE mp,        ONLY: mp_sum, mp_bcast
+
+  USE lr_symm_base, ONLY : rtau, nsymq, irotmq, minus_q
+  USE qpoint, ONLY : xq, nksq, ikks, ikqs
   !
   IMPLICIT NONE
   REAL(DP), PARAMETER :: eps = 20_dp/ry_to_cmm1 ! eps = 20 cm^-1, in Ry

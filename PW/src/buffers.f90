@@ -24,6 +24,9 @@ MODULE buiol
   PUBLIC :: buiol_report_unit   ! (unit, mem?) report about unit status (on stdout)
   PUBLIC :: buiol_write_record  ! (unit, recl, nrec, DATA) write DATA(recl) in record nrec of unit
   PUBLIC :: buiol_read_record   ! (unit, recl, nrec, DATA) read DATA(recl) from record nrec of unit
+
+  
+
   !
   PRIVATE
   ! initial number of records in the buffer (each record will only be allocated on write!)
@@ -445,8 +448,12 @@ Module buffers
   ! QE interfaces to BUIOL module
   !
   PUBLIC :: open_buffer, get_buffer, save_buffer, close_buffer
-  !
+  PUBLIC :: save_buffer_hdf5
+
+
+
   PRIVATE
+  !
   INTEGER:: nunits = 0
   !
 contains
@@ -535,6 +542,17 @@ contains
     END IF
     !
   END SUBROUTINE save_buffer
+
+  SUBROUTINE save_buffer_hdf5(hdf5desc,data)
+    USE hdf5_pw, ONLY : HDF5_type, write_data_hdf5
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    complex(kind=DP), intent(inout) :: data(:,:)
+    
+    call write_data_hdf5(hdf5desc,data)
+   
+  END SUBROUTINE save_buffer_hdf5
+
   !
   !----------------------------------------------------------------------------
   SUBROUTINE get_buffer( vect, nword, unit, nrec )

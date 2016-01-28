@@ -24,9 +24,14 @@ subroutine d3_summary
   USE symm_base,   ONLY : s, sr, sname, ftau
   USE control_flags, ONLY : iverbosity
   USE fft_base, ONLY : dffts, dfftp
+  USE gvecw, ONLY : ecutwfc
   use pwcom
   use phcom
   use d3com
+
+  use lr_symm_base, ONLY : irotmq, minus_q, nsymq
+  use qpoint,       ONLY : xq
+  use control_lr,   ONLY : lgamma
 !
   implicit none
   integer :: i, l, nt, mu, nu, ipol, apol, na, isymq, isym, nsymtot, &

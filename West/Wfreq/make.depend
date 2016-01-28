@@ -2,7 +2,6 @@ calc_corr.o : ../../Modules/cell_base.o
 calc_corr.o : ../../Modules/constants.o
 calc_corr.o : ../../Modules/control_flags.o
 calc_corr.o : ../../Modules/fft_base.o
-calc_corr.o : ../../Modules/fft_interfaces.o
 calc_corr.o : ../../Modules/io_files.o
 calc_corr.o : ../../Modules/io_global.o
 calc_corr.o : ../../Modules/kind.o
@@ -25,7 +24,6 @@ calc_exx.o : ../../Modules/cell_base.o
 calc_exx.o : ../../Modules/constants.o
 calc_exx.o : ../../Modules/control_flags.o
 calc_exx.o : ../../Modules/fft_base.o
-calc_exx.o : ../../Modules/fft_interfaces.o
 calc_exx.o : ../../Modules/funct.o
 calc_exx.o : ../../Modules/io_global.o
 calc_exx.o : ../../Modules/kind.o
@@ -48,7 +46,6 @@ calc_vxc.o : ../../Modules/cell_base.o
 calc_vxc.o : ../../Modules/constants.o
 calc_vxc.o : ../../Modules/control_flags.o
 calc_vxc.o : ../../Modules/fft_base.o
-calc_vxc.o : ../../Modules/fft_interfaces.o
 calc_vxc.o : ../../Modules/io_global.o
 calc_vxc.o : ../../Modules/kind.o
 calc_vxc.o : ../../Modules/mp.o
@@ -68,7 +65,6 @@ calc_vxc.o : ../../West/Tools/io_push.o
 calc_vxc_n_exx.o : ../../Modules/cell_base.o
 calc_vxc_n_exx.o : ../../Modules/constants.o
 calc_vxc_n_exx.o : ../../Modules/fft_base.o
-calc_vxc_n_exx.o : ../../Modules/fft_interfaces.o
 calc_vxc_n_exx.o : ../../Modules/io_global.o
 calc_vxc_n_exx.o : ../../Modules/kind.o
 calc_vxc_n_exx.o : ../../Modules/mp.o
@@ -114,7 +110,6 @@ get_brak_hyper_parallel.o : ../../Modules/cell_base.o
 get_brak_hyper_parallel.o : ../../Modules/constants.o
 get_brak_hyper_parallel.o : ../../Modules/control_flags.o
 get_brak_hyper_parallel.o : ../../Modules/fft_base.o
-get_brak_hyper_parallel.o : ../../Modules/fft_interfaces.o
 get_brak_hyper_parallel.o : ../../Modules/io_global.o
 get_brak_hyper_parallel.o : ../../Modules/kind.o
 get_brak_hyper_parallel.o : ../../Modules/mp.o

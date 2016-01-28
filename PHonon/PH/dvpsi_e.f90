@@ -30,12 +30,13 @@ subroutine dvpsi_e (ik, ipol)
   USE uspp,            ONLY : okvan, nkb, vkb
   USE uspp_param,      ONLY : nh, nhm
   USE ramanm,          ONLY : eth_rps
-  USE eqv,             ONLY : dpsi, dvpsi, eprec
-  USE phus,            ONLY : becp1
-  USE qpoint,          ONLY : nksq, npwq
   USE units_ph,        ONLY : this_pcxpsi_is_on_file, lrcom, iucom, &
                               lrebar, iuebar
-  USE control_ph,      ONLY : nbnd_occ
+
+  USE lrus,            ONLY : becp1
+  USE qpoint,          ONLY : nksq, npwq
+  USE eqv,             ONLY : dpsi, dvpsi, eprec
+  USE control_lr,      ONLY : nbnd_occ
 
   implicit none
   !

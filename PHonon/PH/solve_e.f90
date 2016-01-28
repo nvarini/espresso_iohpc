@@ -43,21 +43,23 @@ subroutine solve_e
   USE paw_onecenter,         ONLY : paw_dpotential
   USE paw_symmetry,          ONLY : paw_desymmetrize
 
-  USE eqv,                   ONLY : dpsi, dvpsi, eprec
   USE units_ph,              ONLY : lrdwf, iudwf, lrwfc, iuwfc, lrdrho, &
                                     iudrho
   USE output,                ONLY : fildrho
   USE control_ph,            ONLY : ext_recover, rec_code, &
-                                    lnoloc, nbnd_occ, convt, tr2_ph, nmix_ph, &
+                                    lnoloc, convt, tr2_ph, nmix_ph, &
                                     alpha_mix, lgamma_gamma, niter_ph, &
-                                    lgamma, flmixdpot, rec_code_read
-  USE phus,                  ONLY : int3_paw
-  USE qpoint,                ONLY : npwq, nksq
+                                    flmixdpot, rec_code_read
   USE recover_mod,           ONLY : read_rec, write_rec
 
   USE mp_pools,              ONLY : inter_pool_comm
   USE mp_bands,              ONLY : intra_bgrp_comm, ntask_groups
   USE mp,                    ONLY : mp_sum
+
+  USE lrus,                  ONLY : int3_paw
+  USE qpoint,                ONLY : npwq, nksq
+  USE eqv,                   ONLY : dpsi, dvpsi, eprec
+  USE control_lr,            ONLY : nbnd_occ, lgamma
 
   implicit none
 

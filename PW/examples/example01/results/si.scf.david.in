@@ -5,7 +5,7 @@
     tstress = .true.
     tprnfor = .true.
     pseudo_dir = '/home/nvarini/espresso_hdf5/espresso/pseudo/',
-    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+    outdir='./tempdir/'
  /
  &system
     ibrav=  2, celldm(1) =10.20, nat=  2, ntyp= 1,

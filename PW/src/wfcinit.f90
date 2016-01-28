@@ -23,7 +23,7 @@ SUBROUTINE wfcinit()
   USE ldaU,                 ONLY : lda_plus_u, U_projection, wfcU
   USE lsda_mod,             ONLY : lsda, current_spin, isk
   USE io_files,             ONLY : nwordwfc, nwordwfcU, iunhub, iunwfc, iunigk
-  USE buffers,              ONLY : open_buffer, get_buffer, save_buffer
+  USE buffers,              ONLY : open_buffer, get_buffer, save_buffer, save_buffer_hdf5
   USE uspp,                 ONLY : nkb, vkb
   USE wavefunctions_module, ONLY : evc
   USE wvfct,                ONLY : nbnd, npw, current_k, igk
@@ -31,6 +31,10 @@ SUBROUTINE wfcinit()
   USE pw_restart,           ONLY : pw_readfile
   USE mp_bands,             ONLY : nbgrp, root_bgrp,inter_bgrp_comm
   USE mp,                   ONLY : mp_bcast
+#if defined __IO_HPC && __HDF5
+  USE buffers,              ONLY : save_buffer_hdf5
+  USE hdf5_pw,              ONLY : evc_hdf5
+#endif
   !
   IMPLICIT NONE
   !
@@ -159,7 +163,12 @@ SUBROUTINE wfcinit()
      ! ... write  starting wavefunctions to file
      !
      IF ( nks > 1 .OR. (io_level > 1) .OR. lelfield ) &
+#if defined __IO_HPC
+         CALL save_buffer_hdf5(evc_hdf5,evc)
+         CALL save_buffer( evc, nwordwfc, iunwfc, ik )
+#else
          CALL save_buffer ( evc, nwordwfc, iunwfc, ik )
+#endif
      !
   END DO
   !

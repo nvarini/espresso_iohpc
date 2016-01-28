@@ -27,6 +27,9 @@ SUBROUTINE d0rhod2v (ipert, drhoscf)
   USE d3com
   USE mp_global,             ONLY : my_pool_id, inter_pool_comm, intra_pool_comm
   USE mp,                    ONLY : mp_sum
+
+  USE qpoint,     ONLY : igkq, nksq, npwq
+  USE control_lr, ONLY : lgamma
   !
   IMPLICIT NONE
   !

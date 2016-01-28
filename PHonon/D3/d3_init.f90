@@ -21,6 +21,9 @@ SUBROUTINE d3_init
   USE symm_base,  ONLY : s, ftau
   USE nlcc_ph,    ONLY : nlcc_any, drc
 
+  USE control_lr, ONLY : lgamma
+  USE lr_symm_base, ONLY : irgq
+
   IMPLICIT NONE
 
   INTEGER :: nt, irr, irr1, ipert, imode0, errcode

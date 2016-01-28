@@ -25,6 +25,9 @@ subroutine incdrhoscf2 (drhoscf, weight, ik, dbecsum, mode, flag)
   USE uspp_param, ONLY: nhm
   use phcom
 
+  USE qpoint,     ONLY : npwq, igkq
+  USE control_lr, ONLY : lgamma
+
   implicit none
   integer :: ik
   ! input: the k point

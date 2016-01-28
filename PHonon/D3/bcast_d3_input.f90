@@ -24,6 +24,9 @@ subroutine bcast_d3_input
   use control_flags, only: iverbosity
   use run_info, only: title
 
+  use qpoint, ONLY: xq
+  use control_lr, ONLY : lgamma
+
   implicit none
   integer :: root = 0
   !

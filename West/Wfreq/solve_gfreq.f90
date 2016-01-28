@@ -19,10 +19,11 @@ SUBROUTINE solve_gfreq(l_read_restart)
   USE mp,                   ONLY : mp_bcast,mp_barrier,mp_sum
   USE io_global,            ONLY : stdout, ionode
   USE gvect,                ONLY : g,ngm,gstart
+  USE gvecw,                ONLY : gcutw
   USE cell_base,            ONLY : tpiba2,bg
   USE fft_base,             ONLY : dffts
   USE constants,            ONLY : tpi,fpi,e2
-  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,ecutwfc,nkstot,current_k
+  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,nkstot,current_k
   USE wavefunctions_module, ONLY : evc,psic,psic_nc
   USE io_files,             ONLY : tmp_dir,nwordwfc,iunwfc
   USE fft_at_gamma,         ONLY : DOUBLEBAND_INVFFT,SINGLEBAND_INVFFT,DOUBLEBAND_FWFFT,SINGLEBAND_FWFFT
@@ -114,7 +115,7 @@ SUBROUTINE solve_gfreq(l_read_restart)
   DO iks = 1, nks   ! KPOINT-SPIN
      IF(iks<bks%lastdone_ks) CYCLE
      !
-     CALL gk_sort(xk(1,iks),ngm,g,ecutwfc/tpiba2,npw,igk,g2kin)
+     CALL gk_sort(xk(1,iks),ngm,g,gcutw,npw,igk,g2kin)
      g2kin=g2kin*tpiba2
      !
      ! reads unperturbed wavefuctions psi_k in G_space, for all bands

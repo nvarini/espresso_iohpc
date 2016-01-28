@@ -20,9 +20,7 @@ SUBROUTINE run_nscf(do_band, iq)
   USE control_flags,   ONLY : restart
   USE check_stop,      ONLY : check_stop_now
   USE fft_base,        ONLY : dffts
-  USE modes,           ONLY : minus_q, nsymq, invsymq
   USE disp,            ONLY : lgamma_iq
-  USE qpoint,          ONLY : xq
   USE control_ph,      ONLY : reduce_io, recover, tmp_dir_phq, &
                               ext_restart, bands_computed, newgrid, qplot, &
                               only_wfc
@@ -34,6 +32,9 @@ SUBROUTINE run_nscf(do_band, iq)
   USE scf,             ONLY : vrs
   USE mp_bands,        ONLY : ntask_groups
 
+  USE lr_symm_base,    ONLY : minus_q, nsymq, invsymq
+  USE qpoint,          ONLY : xq
+  USE el_phon,         ONLY : elph_mat
  !
   IMPLICIT NONE
   !
@@ -72,7 +73,7 @@ SUBROUTINE run_nscf(do_band, iq)
   restart = ext_restart
   conv_ions=.true.
   !
-  CALL setup_nscf ( newgrid, xq )
+  CALL setup_nscf ( newgrid, xq, elph_mat )
   CALL init_run()
 !!!!!!!!!!!!!!!!!!!!!!!! ACFDT TEST !!!!!!!!!!!!!!!!
   IF (acfdt_is_active) THEN

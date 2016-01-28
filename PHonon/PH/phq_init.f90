@@ -45,24 +45,28 @@ SUBROUTINE phq_init()
   USE atom,                 ONLY : msh, rgrid
   USE vlocal,               ONLY : strf
   USE spin_orb,             ONLY : lspinorb
-  USE wvfct,                ONLY : igk, g2kin, npwx, npw, nbnd, ecutwfc
+  USE wvfct,                ONLY : igk, g2kin, npwx, npw, nbnd
+  USE gvecw,                ONLY : gcutw
   USE wavefunctions_module, ONLY : evc
   USE noncollin_module,     ONLY : noncolin, npol
   USE uspp,                 ONLY : okvan, vkb
   USE uspp_param,           ONLY : upf
-  USE eqv,                  ONLY : vlocq, evq, eprec
-  USE phus,                 ONLY : becp1, alphap, dpqq, dpqq_so
+  USE phus,                 ONLY : alphap, dpqq, dpqq_so
   USE nlcc_ph,              ONLY : nlcc_any, drc
-  USE control_ph,           ONLY : trans, zue, epsil, lgamma, all_done, nbnd_occ
+  USE control_ph,           ONLY : trans, zue, epsil, all_done
   USE units_ph,             ONLY : lrwfc, iuwfc
-  USE qpoint,               ONLY : xq, igkq, npwq, nksq, eigqts, ikks, ikqs
 
   USE mp_bands,            ONLY : intra_bgrp_comm
   USE mp,                  ONLY : mp_sum
   USE acfdtest,            ONLY : acfdt_is_active, acfdt_num_der
   USE el_phon,             ONLY : elph_mat, iunwfcwann, npwq_refolded, &
-                           kpq,g_kpq,igqg,xk_gamma, lrwfcr
+                                  kpq,g_kpq,igqg,xk_gamma, lrwfcr
   USE wannier_gw,           ONLY : l_head
+
+  USE lrus,                 ONLY : becp1
+  USE qpoint,               ONLY : xq, igkq, npwq, nksq, eigqts, ikks, ikqs
+  USE eqv,                  ONLY : vlocq, evq, eprec
+  USE control_lr,           ONLY : nbnd_occ, lgamma
   !
   IMPLICIT NONE
   !
@@ -154,7 +158,7 @@ SUBROUTINE phq_init()
      !
      ! ... g2kin is used here as work space
      !
-     CALL gk_sort( xk(1,ikk), ngm, g, ( ecutwfc / tpiba2 ), npw, igk, g2kin )
+     CALL gk_sort( xk(1,ikk), ngm, g, gcutw, npw, igk, g2kin )
      !
      ! ... if there is only one k-point evc, evq, npw, igk stay in memory
      !
@@ -166,8 +170,7 @@ SUBROUTINE phq_init()
         !
      ELSE
         !
-        CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), &
-                      npwq, igkq, g2kin )
+        CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
         !
         IF ( nksq > 1 ) WRITE( iunigk ) npwq, igkq
         !

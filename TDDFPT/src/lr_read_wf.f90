@@ -18,7 +18,6 @@ SUBROUTINE lr_read_wf()
   USE kinds,                ONLY : dp
   USE io_global,            ONLY : stdout
   USE klist,                ONLY : nks, xk
-  USE cell_base,            ONLY : tpiba2
   USE gvect,                ONLY : ngm, g
   USE io_files,             ONLY : nwordwfc, iunwfc, prefix, diropn,&
                                  & tmp_dir, wfc_dir 
@@ -27,7 +26,7 @@ SUBROUTINE lr_read_wf()
                                  & becp1_c_virt, no_hxc, becp_1, becp1_c, &
                                  & test_case_no, size_evc, project,       &
                                  & lr_verbosity, lr_exx, davidson, eels
-  USE wvfct,                ONLY : npw, igk, nbnd, g2kin, npwx, ecutwfc
+  USE wvfct,                ONLY : npw, igk, nbnd, npwx
   USE control_flags,        ONLY : gamma_only,io_level
   USE gvecs,                ONLY : nls, nlsm
   USE fft_base,             ONLY : dffts
@@ -293,7 +292,7 @@ SUBROUTINE virt_read()
   !
   ! The modifications to read also the virtual orbitals.
   !
-  USE control_ph,            ONLY : nbnd_occ
+  USE control_lr,            ONLY : nbnd_occ
   USE becmod,                ONLY : allocate_bec_type, deallocate_bec_type
   !
   IMPLICIT NONE

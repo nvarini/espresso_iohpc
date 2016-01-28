@@ -29,6 +29,8 @@ subroutine gen_dpdvp
   USE mp_global, ONLY: intra_pool_comm
   USE mp,        ONLY: mp_sum
 
+  use qpoint,     ONLY : xq, igkq, nksq, npwq
+  use control_lr, ONLY : lgamma
 
   implicit none
 

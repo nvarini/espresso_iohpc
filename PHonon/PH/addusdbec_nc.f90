@@ -22,9 +22,10 @@ subroutine addusdbec_nc (ik, wgt, psi, dbecsum_nc)
   USE uspp, only: nkb, vkb, okvan
   USE noncollin_module, ONLY : noncolin, npol
   USE uspp_param, only: upf, nh, nhm
+
   USE qpoint,  ONLY : npwq, ikks
-  USE phus,    ONLY : becp1
-  USE control_ph, ONLY : nbnd_occ
+  USE lrus,    ONLY : becp1
+  USE control_lr, ONLY : nbnd_occ
   !
   USE mp_bands, ONLY : intra_bgrp_comm
   !

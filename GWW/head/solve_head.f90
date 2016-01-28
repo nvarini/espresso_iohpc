@@ -41,6 +41,9 @@ subroutine solve_head
   USE buffers,              ONLY : get_buffer
   USE constants,            ONLY : rytoev
 
+  use qpoint,                ONLY : npwq, nksq
+  use control_lr,            ONLY : nbnd_occ, lgamma
+
   implicit none
 
   INTEGER, EXTERNAL :: find_free_unit

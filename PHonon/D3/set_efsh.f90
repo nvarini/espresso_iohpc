@@ -20,6 +20,10 @@ subroutine set_efsh (drhoscf, imode0, irr, npe)
   use d3com
   USE mp_global,  ONLY : inter_pool_comm, intra_pool_comm
   USE mp,         ONLY : mp_sum
+
+  use qpoint,     ONLY : nksq
+  use control_lr, ONLY : lgamma
+
   implicit none
   integer :: npe, imode0, irr
   ! input: the number of perturbation

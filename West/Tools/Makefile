@@ -4,7 +4,7 @@ include ../../make.sys
 
 # location of needed modules
 MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules \
-          $(MOD_FLAG)../../PW/src \
+          $(MOD_FLAG)../../FFTXlib $(MOD_FLAG)../../PW/src \
           $(MOD_FLAG)../Modules \
           $(MOD_FLAG).
 IFLAGS=
@@ -30,7 +30,7 @@ west_environment.o \
 bar.o  
 
 PWOBJS = ../../PW/src/libpw.a
-QEMODS = ../../Modules/libqemod.a
+QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a
 
 TLDEPS= bindir mods libs pw
 

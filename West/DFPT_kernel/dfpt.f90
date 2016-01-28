@@ -19,6 +19,7 @@ SUBROUTINE dfpt (m,dvg,dng)
   USE gvect,                 ONLY : nl,gstart,ig_l2g
   USE wavefunctions_module,  ONLY : evc,psic
   USE gvecs,                 ONLY : ngms
+  USE gvecw,                 ONLY : gcutw
   USE mp,                    ONLY : mp_sum,mp_barrier,mp_bcast
   USE mp_global,             ONLY : inter_image_comm,inter_pool_comm,my_image_id
   USE fft_at_gamma,          ONLY : DOUBLEBAND_INVFFT,SINGLEBAND_INVFFT,DOUBLEBAND_FWFFT,SINGLEBAND_FWFFT
@@ -26,7 +27,7 @@ SUBROUTINE dfpt (m,dvg,dng)
   USE buffers,               ONLY : get_buffer
   USE noncollin_module,      ONLY : noncolin,npol
   USE bar,                   ONLY : bar_type,start_bar_type,update_bar_type,stop_bar_type
-  USE pwcom,                 ONLY : current_spin,wk,nks,nelup,neldw,isk,ecutwfc,g,igk,ngm,tpiba2,xk,omega,npw,npwx,lsda,nkstot,&
+  USE pwcom,                 ONLY : current_spin,wk,nks,nelup,neldw,isk,g,igk,ngm,tpiba2,xk,omega,npw,npwx,lsda,nkstot,&
                                   & current_k
   USE control_flags,         ONLY : gamma_only, io_level
   USE io_files,              ONLY : tmp_dir, nwordwfc, iunwfc, diropn
@@ -75,7 +76,7 @@ SUBROUTINE dfpt (m,dvg,dng)
   !
   DO iks = 1, nks  ! KPOINT-SPIN LOOP
      !
-     CALL gk_sort(xk(1,iks),ngm,g,ecutwfc/tpiba2,npw,igk,g2kin)
+     CALL gk_sort(xk(1,iks),ngm,g,gcutw,npw,igk,g2kin)
      g2kin=g2kin*tpiba2
      !
      ! reads unperturbed wavefuctions psi_k in G_space, for all bands

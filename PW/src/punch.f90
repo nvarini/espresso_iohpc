@@ -36,8 +36,8 @@ SUBROUTINE punch( what )
   ! ... if wavefunctions are stored in "distributed" format,
   ! ... save here wavefunctions to file if never saved before
   !
-  IF ( .NOT. twfcollect .AND. nks == 1 ) &
-              CALL davcio ( evc, 2*nwordwfc, iunwfc, nks, 1 )
+  !IF ( .NOT. twfcollect .AND. nks == 1 ) &
+  !            CALL davcio ( evc, 2*nwordwfc, iunwfc, nks, 1 )
   iunpun = 4
   !
   CALL pw_writefile( TRIM( what ) )

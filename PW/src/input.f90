@@ -137,8 +137,9 @@ SUBROUTINE iosys()
   !
   USE relax,         ONLY : epse, epsf, epsp, starting_scf_threshold
   !
+  USE extrapolation, ONLY : pot_order, wfc_order
   USE control_flags, ONLY : isolve, max_cg_iter, david, tr2, imix, gamma_only,&
-                            nmix, iverbosity, niter, pot_order, wfc_order, &
+                            nmix, iverbosity, niter, &
                             remove_rigid_rot_ => remove_rigid_rot, &
                             diago_full_acc_   => diago_full_acc, &
                             tolp_             => tolp, &
@@ -157,8 +158,8 @@ SUBROUTINE iosys()
                             smallmem
   USE control_flags, ONLY: scf_must_converge_ => scf_must_converge
   !
-  USE wvfct,         ONLY : nbnd_ => nbnd, &
-                            ecfixed_ => ecfixed, &
+  USE wvfct,         ONLY : nbnd_ => nbnd
+  USE gvecw,         ONLY : ecfixed_ => ecfixed, &
                             qcutz_   => qcutz, &
                             q2sigma_ => q2sigma
   !
@@ -1547,7 +1548,7 @@ SUBROUTINE set_cutoff ( ecutwfc_in, ecutrho_in, ecutwfc_pp, ecutrho_pp )
   USE kinds, ONLY : dp
   USE gvecs, ONLY : dual
   USE gvect, ONLY : ecutrho
-  USE wvfct, ONLY : ecutwfc
+  USE gvecw, ONLY : ecutwfc
   !
   IMPLICIT NONE
   REAL(dp), INTENT(INOUT) :: ecutwfc_in, ecutrho_in

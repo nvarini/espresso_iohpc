@@ -34,10 +34,14 @@ SUBROUTINE run_pwscf ( exit_status )
   USE force_mod,        ONLY : lforce, lstres, sigma, force
   USE check_stop,       ONLY : check_stop_init, check_stop_now
   USE mp_images,        ONLY : intra_image_comm
+  USE extrapolation,    ONLY : update_file, update_pot
   USE qmmm,             ONLY : qmmm_initialization, qmmm_shutdown, &
                                qmmm_update_positions, qmmm_update_forces
 #if defined __IO_HPC
   USE io_hpc,           ONLY : finalize_io_hpc
+#endif
+#if defined __HDF5
+  USE hdf5_pw
 #endif
   !
   IMPLICIT NONE
@@ -138,8 +142,11 @@ SUBROUTINE run_pwscf ( exit_status )
      IF ( lmd .OR. lbfgs ) THEN
         !
         if (fix_volume) CALL impose_deviatoric_stress(sigma)
-        !
         if (fix_area)  CALL  impose_deviatoric_stress_2d(sigma)
+        !
+        ! ... save data needed for potential and wavefunction extrapolation
+        !
+        CALL update_file ( )
         !
         ! ... ionic step (for molecular dynamics or optimization)
         !
@@ -186,11 +193,15 @@ SUBROUTINE run_pwscf ( exit_status )
   ! ... save final data file
   !
   CALL punch('all')
+
   !
   CALL qmmm_shutdown()
   !
 
 #if defined __IO_HPC
+#if defined __HDF5
+  !CALL close_fileandprop_hdf5(evc_hdf5)
+#endif
   CALL finalize_io_hpc(1)
 #endif
 

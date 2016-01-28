@@ -9,42 +9,49 @@
 include make.sys
 
 default :
-	@echo 'to install, type at the shell prompt:'
-	@echo '  ./configure'
-	@echo '  make target'
-	@echo 'where target is one of the following:'
+	@echo 'to install Quantum ESPRESSO, type at the shell prompt:'
+	@echo '  ./configure [--prefix=]'
+	@echo '  make [-j] target'
+	@echo ' '
+	@echo 'where target identifies one or multiple CORE PACKAGES:'
 	@echo '  pw           basic code for scf, structure optimization, MD'
-	@echo '  ph           phonon code, Gamma-only version and third-order derivatives'
+	@echo '  ph           phonon code, Gamma-only and third-order derivatives'
 	@echo '  pwcond       ballistic conductance'
 	@echo '  neb          code for Nudged Elastic Band method'
 	@echo '  pp           postprocessing programs'
+	@echo '  pwall        same as "make pw ph pp pwcond neb"'
 	@echo '  cp           CP code: CP MD with ultrasoft pseudopotentials'
+	@echo '  tddfpt       time dependent dft code'
+	@echo '  gwl          GW with Lanczos chains'
 	@echo '  ld1          utilities for pseudopotential generation'
 	@echo '  upf          utilities for pseudopotential conversion'
-	@echo '  tddfpt       time dependent dft code'
-	@echo '  gui          Graphical User Interface '
-	@echo '  gwl          GW with Lanczos chains '
-	@echo '  xspectra     X-ray core-hole spectroscopy calculations '
-	@echo '  pwall        same as "make pw ph pp pwcond neb"'
-	@echo '  all          same as "make pwall cp ld1 upf tddfpt gwl"'
+	@echo '  xspectra     X-ray core-hole spectroscopy calculations'
+	@echo '  couple       Library interface for coupling to external codes'
+	@if test -d GUI/; then \
+		echo '  gui          Graphical User Interface'; fi
+	@echo '  test-suite   Run semi-automated test-suite for regression testing'
+	@echo '  all          same as "make pwall cp ld1 upf tddfpt"'
+	@echo ' '
+	@echo 'where target identifies one or multiple THIRD-PARTIES PACKAGES:'
 	@echo '  gipaw        NMR and EPR spectra'
 	@echo '  w90          Maximally localised Wannier Functions'
 	@echo '  want         Quantum Transport with Wannier functions'
 	@echo '  west         Many-body perturbation corrections Without Empty STates'
+#	@echo '  SaX          Standard GW-BSE with plane waves'
 	@echo '  yambo        electronic excitations with plane waves'
 	@echo '  yambo-devel  yambo devel version'
 	@echo '  plumed       Metadynamics plugin for pw or cp'
 	@echo '  epw          Electron-Phonon Coupling with wannier functions'
 	@echo '  gpu          Download the latest QE-GPU package'
-	@echo '  couple       Library interface for coupling to external codes'
-	@echo '  test-suite   Run semi-automated test-suite for regression testing'
-	@echo '  clean        remove executables and objects'
-	@echo '  veryclean    revert distribution to the original status'
-	@echo '  tar          create a tarball of the source tree'
-	@if test -d GUI/; then \
-	 echo '  tar-gui      create a standalone PWgui tarball from the GUI sources'; fi
+	@echo ' '
+	@echo 'where target is one of the following suite operation:'
 	@echo '  doc          build documentation'
 	@echo '  links        create links to all executables in bin/'
+	@echo '  tar          create a tarball of the source tree'
+	@echo '  tar-gui      create a standalone PWgui tarball from the GUI sources'
+	@echo '  clean        remove executables and objects'
+	@echo '  veryclean    remove files produced by "configure" as well'
+	@echo '  distclean    revert distribution to the original status'
 
 ###########################################################
 # Main targets
@@ -55,35 +62,39 @@ default :
 # If "|| exit 1" is not present, the error code from make in subdirectories
 # is not returned and make goes on even if compilation has failed
 
-pw : bindir libfft mods liblapack libblas libs libiotk 
+pw : bindir libfft libla mods liblapack libblas libs libiotk 
 	if test -d PW ; then \
 	( cd PW ; $(MAKE) TLDEPS= all || exit 1) ; fi
 
-pw-lib : bindir libfft mods liblapack libblas libs libiotk
+pw-lib : bindir libfft libla mods liblapack libblas libs libiotk
 	if test -d PW ; then \
 	( cd PW ; $(MAKE) TLDEPS= pw-lib || exit 1) ; fi
 
-cp : bindir libfft mods liblapack libblas libs libiotk
+lr-lib : bindir libfft libla mods liblapack libblas libs libiotk
+	if test -d LR_Modules ; then \
+	( cd LR_Modules ; $(MAKE) TLDEPS= all || exit 1) ; fi
+
+cp : bindir libfft libla mods liblapack libblas libs libiotk
 	if test -d CPV ; then \
 	( cd CPV ; $(MAKE) TLDEPS= all || exit 1) ; fi
 
-ph : bindir libfft mods libs pw
+ph : bindir libfft libla mods libs pw 
 	( cd install ; $(MAKE) -f plugins_makefile phonon || exit 1 )
 
-neb : bindir libfft mods libs pw
+neb : bindir libfft libla mods libs pw
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
-tddfpt : bindir libfft mods libs pw ph
+tddfpt : bindir libfft libla mods libs pw ph
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
-pp : bindir libfft mods libs pw
+pp : bindir libfft libla mods libs pw
 	if test -d PP ; then \
 	( cd PP ; $(MAKE) TLDEPS= all || exit 1 ) ; fi
 
-pwcond : bindir libfft mods libs pw pp
+pwcond : bindir libfft libla mods libs pw pp
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
-acfdt : bindir libfft mods libs pw ph
+acfdt : bindir libfft libla mods libs pw ph
 	if test -d ACFDT ; then \
 	( cd ACFDT ; $(MAKE) TLDEPS= all || exit 1 ) ; fi
 
@@ -98,10 +109,10 @@ gwl : ph
 gipaw : pw
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
-ld1 : bindir liblapack libblas libfft mods libs
+ld1 : bindir liblapack libblas libfft libla mods libs
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
-upf : libfft mods libs liblapack libblas
+upf : libfft libla mods libs liblapack libblas
 	if test -d upftools ; then \
 	( cd upftools ; $(MAKE) TLDEPS= all || exit 1 ) ; fi
 
@@ -128,15 +139,20 @@ all   : pwall cp ld1 upf tddfpt gwl xspectra
 # compile modules, libraries, directory for binaries, etc
 ###########################################################
 
+libla : touch-dummy libelpa
+	( cd LAXlib ; $(MAKE) TLDEPS= all || exit 1 )
+
 libfft : touch-dummy
 	( cd FFTXlib ; $(MAKE) TLDEPS= all || exit 1 )
 
-mods : libiotk libelpa libfft
+mods : libiotk libla libfft
 	( cd Modules ; $(MAKE) TLDEPS= all || exit 1 )
 
 libs : mods
 	( cd clib ; $(MAKE) TLDEPS= all || exit 1 )
-	( cd flib ; $(MAKE) TLDEPS= $(FLIB_TARGETS) || exit 1 )
+
+lrmods :
+	( cd LR_Modules ; $(MAKE) TLDEPS=lr-lib || exit 1 )
 
 bindir :
 	test -d bin || mkdir bin
@@ -171,8 +187,12 @@ w90: bindir libblas liblapack
 want : touch-dummy
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
+SaX : touch-dummy
+	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
+
 yambo: touch-dummy
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
+
 yambo-devel: touch-dummy
 	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
@@ -203,7 +223,8 @@ touch-dummy :
 inst : 
 	( for exe in */*/*.x */bin/* ; do \
 	   file=`basename $$exe`; if test "$(INSTALLDIR)" != ""; then \
-		if test ! -L $(PWD)/$$exe; then ln -fs $(PWD)/$$exe $(INSTALLDIR)/qe_$$file ; fi ; \
+		if test ! -L $(PWD)/$$exe; then \
+			ln -fs $(PWD)/$$exe $(INSTALLDIR)/qe_$$file ; fi ; \
 		fi ; \
 	done )
 
@@ -214,11 +235,14 @@ links : bindir
 	for exe in ../*/*/*.x ../*/bin/* ; do \
 	    if test ! -L $$exe ; then ln -fs $$exe . ; fi \
 	done ; \
-	[ -f ../WANT/wannier/dos.x ] &&  ln -fs ../WANT/wannier/dos.x ../bin/dos_want.x ; \
-	[ -f ../PP/src/dos.x ] &&  ln -fs ../PP/src/dos.x ../bin/dos.x ; \
-	[ -f ../WANT/wannier/bands.x ] &&  ln -fs ../WANT/wannier/bands.x ../bin/bands_want.x ; \
+	[ -f ../WANT/wannier/dos.x ] && \
+		ln -fs ../WANT/wannier/dos.x ../bin/dos_want.x ; \
+	[ -f ../PP/src/dos.x ] &&  \
+		ln -fs ../PP/src/dos.x ../bin/dos.x ; \
+	[ -f ../WANT/wannier/bands.x ] && \
+		ln -fs ../WANT/wannier/bands.x ../bin/bands_want.x ; \
 	[ -f ../PP/src/dos.x ] &&  ln -fs ../PP/src/bands.x ../bin/bands.x ; \
-	[ -f ../W90/wannier90.x ] &&  ln -fs ../W90/wannier90.x ../bin/wannier90.x ; \
+	[ -f ../W90/wannier90.x ] &&  ln -fs ../W90/wannier90.x ../bin/wannier90.x ;\
 	)
 
 #########################################################
@@ -228,12 +252,13 @@ links : bindir
 
 install : touch-dummy
 	if test -d bin ; then \
-	mkdir -p $(PREFIX) ; for x in `find . -name *.x -type f` ; do cp $$x $(PREFIX)/ ; done ; \
+	mkdir -p $(PREFIX) ; for x in `find . -name *.x -type f` ; do \
+		cp $$x $(PREFIX)/ ; done ; \
 	fi
 
 #########################################################
 # Run test-suite for numerical regression testing
-# NB: assumtion is that reference outputs have been 
+# NB: it is assumed that reference outputs have been 
 #     already computed once (usualy during release)
 #########################################################
 
@@ -248,9 +273,9 @@ test-suite: pw cp touch-dummy
 clean : doc_clean
 	touch make.sys 
 	for dir in \
-		CPV FFTXlib Modules PP PW \
-		ACFDT COUPLE GWW XSpectra \
-		clib flib pwtools upftools \
+		CPV LAXlib FFTXlib Modules PP PW \
+		NEB ACFDT COUPLE GWW XSpectra \
+		atomic clib flib pwtools upftools \
 		dev-tools extlibs Environ TDDFPT \
 	; do \
 	    if test -d $$dir ; then \
@@ -264,8 +289,8 @@ clean : doc_clean
 	- cd PW/tests; /bin/rm -rf CRASH *.out *.out? ; cd -
 	- cd CPV/tests; /bin/rm -rf CRASH *.out *.out? 
 
-# remove configuration files too
-distclean veryclean : clean
+# remove files produced by "configure" as well
+veryclean : clean
 	- @(cd install ; $(MAKE) -f plugins_makefile veryclean)
 	- @(cd install ; $(MAKE) -f extlibs_makefile veryclean)
 	- rm -rf install/patch-plumed
@@ -277,6 +302,10 @@ distclean veryclean : clean
 	- cd include; ./clean.sh ; cd -
 	- rm -f espresso.tar.gz
 	- rm -rf make.sys
+
+# remove everything not in the original distribution 
+distclean : veryclean
+	( cd install ; $(MAKE) -f plugins_makefile $@ || exit 1 )
 
 tar :
 	@if test -f espresso.tar.gz ; then /bin/rm espresso.tar.gz ; fi
@@ -319,7 +348,7 @@ doc_clean :
 	( if test -f $$dir/Makefile ; then \
 	( cd $$dir; $(MAKE) TLDEPS= clean ) ; fi ) ;  done
 
-depend:
+depend: libiotk mods
 	@echo 'Checking dependencies...'
 	- ( if test -x install/makedeps.sh ; then install/makedeps.sh ; fi)
 

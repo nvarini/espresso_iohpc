@@ -125,9 +125,9 @@ SUBROUTINE lr_apply_s_eels()
    USE lr_variables,    ONLY : lr_periodic
    USE qpoint,          ONLY : nksq, npwq, igkq, ikks, ikqs
    USE gvect,           ONLY : ngm, g
-   USE wvfct,           ONLY : g2kin, ecutwfc
-   USE cell_base,       ONLY : tpiba2
-   USE control_ph,      ONLY : nbnd_occ
+   USE wvfct,           ONLY : g2kin
+   USE gvecw,           ONLY : gcutw
+   USE control_lr,      ONLY : nbnd_occ
 
    IMPLICIT NONE
    !
@@ -145,7 +145,7 @@ SUBROUTINE lr_apply_s_eels()
       !
       ! Determination of npwq, igkq; g2kin is used here as a workspace.
       !
-      CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), npwq, igkq, g2kin )
+      CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
       !
       ! Calculate beta-functions vkb at point k+q
       !

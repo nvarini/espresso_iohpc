@@ -33,13 +33,13 @@ SUBROUTINE sm1_psi(recalculate, ik, lda, n, m, psi, spsi)
   USE control_flags,    ONLY : gamma_only
   USE uspp,             ONLY : okvan, vkb, nkb, qq
   USE uspp_param,       ONLY : nh, upf
-  USE wvfct,            ONLY : igk, g2kin
   USE ions_base,        ONLY : ityp,nat,ntyp=>nsp
   USE mp,               ONLY : mp_sum
   USE mp_global,        ONLY : inter_pool_comm, intra_bgrp_comm
   USE lr_variables,     ONLY : lr_verbosity, eels, LR_iteration,itermax
   USE io_global,        ONLY : stdout
   USE noncollin_module, ONLY : noncolin, npol
+  USE matrix_inversion
   !
   IMPLICIT NONE
   !
@@ -188,7 +188,7 @@ CONTAINS
        !
        ! Invert matrix: (1 + q*B)^{-1}
        !
-       CALL dinv_matrix(ps,nkb)
+       CALL invmat( nkb, ps )
        !
        BB_(:,:) = 0.d0
        !
@@ -355,7 +355,7 @@ CONTAINS
           !
           ! Invert matrix: (1 + q*B)^{-1}
           !
-          CALL zinv_matrix(ps,nkb)
+          CALL invmat( nkb, ps )
           ! 
           ! Now let's use BB_ as a work space (in order to save the memory).
           !
@@ -445,8 +445,8 @@ SUBROUTINE sm1_psi_eels_k()
     USE qpoint,            ONLY : npwq, igkq, ikks, ikqs, nksq
     use lr_variables,      only : lr_periodic
     use gvect,             only : ngm, g
-    use wvfct,             only : g2kin, ecutwfc
-    use cell_base,         only : tpiba2
+    use wvfct,             only : g2kin
+    use gvecw,             only : gcutw
     !
     IMPLICIT NONE
     !
@@ -496,7 +496,7 @@ SUBROUTINE sm1_psi_eels_k()
           !
           ! Determination of npwq, igkq; g2kin is used here as a workspace.
           !
-          CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), npwq, igkq, g2kin )
+          CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
           !
           ! Calculate beta-functions vkb for a given k+q point.
           !
@@ -553,7 +553,7 @@ SUBROUTINE sm1_psi_eels_k()
           !
           ! Invert matrix: (1 + q*B)^{-1}
           ! 
-          CALL zinv_matrix(ps,nkb)
+          CALL invmat( nkb, ps )
           !
           ! Now let's use BB_ as a work space (in order to save the memory).
           !
@@ -608,7 +608,7 @@ SUBROUTINE sm1_psi_eels_k()
     !
     ! Determination of npwq, igkq; g2kin is used here as a workspace.
     !
-    CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), npwq, igkq, g2kin )
+    CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
     !
     ! Calculate beta-functions vkb for a given k+q point.
     !
@@ -662,8 +662,8 @@ SUBROUTINE sm1_psi_eels_nc()
     USE qpoint,            ONLY : npwq, igkq, ikks, ikqs, nksq
     USE lr_variables,      ONLY : lr_periodic
     USE gvect,             ONLY : ngm, g
-    USE wvfct,             ONLY : g2kin, ecutwfc
-    USE cell_base,         ONLY : tpiba2
+    USE wvfct,             ONLY : g2kin
+    USE gvecw,             ONLY : gcutw
     USE uspp,              ONLY : qq_so
     USE spin_orb,          ONLY : lspinorb
     !
@@ -724,7 +724,7 @@ SUBROUTINE sm1_psi_eels_nc()
           !
           ! Determination of npwq, igkq; g2kin is used here as a workspace.
           !
-          CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), npwq, igkq, g2kin )
+          CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
           !
           ! Calculate beta-functions vkb for a given k+q point.
           !
@@ -803,10 +803,10 @@ SUBROUTINE sm1_psi_eels_nc()
           !
           IF (lspinorb) THEN
              DO ipol=1,4
-                CALL zinv_matrix(ps(1,1,ipol),nkb)  
+                CALL invmat( nkb, ps(:,:,ipol) )  
              ENDDO
           ELSE
-             CALL zinv_matrix(ps(1,1,1),nkb)
+             CALL invmat ( nkb, ps(:,:,1) )
           ENDIF
           !
           ! Finally, let us calculate lambda_nm = -(1+q*B)^{-1} * q
@@ -869,7 +869,7 @@ SUBROUTINE sm1_psi_eels_nc()
     !
     ! Determination of npwq, igkq; g2kin is used here as a workspace.
     !
-    CALL gk_sort( xk(1,ikq), ngm, g, ( ecutwfc / tpiba2 ), npwq, igkq, g2kin )
+    CALL gk_sort( xk(1,ikq), ngm, g, gcutw, npwq, igkq, g2kin )
     !
     ! Calculate beta-functions vkb for a given k+q point.
     !
@@ -925,101 +925,3 @@ SUBROUTINE sm1_psi_eels_nc()
 END SUBROUTINE sm1_psi_eels_nc
 
 END SUBROUTINE sm1_psi
-
-SUBROUTINE dinv_matrix(M,N)
-  !-----------------------------------------------------------------------
-  !
-  ! This subroutine inverts a real matrix M with the dimension NxN.
-  ! See also flib/invmat.f90
-  !
-  USE kinds,      ONLY : DP
-  !
-  IMPLICIT NONE
-  !
-  INTEGER :: N                              !  matrix dimension
-  REAL(kind=dp), DIMENSION(0:N-1,0:N-1) :: M ! matrix to be inverted
-  REAL(kind=dp), DIMENSION(:), ALLOCATABLE :: work
-  INTEGER, DIMENSION(:), ALLOCATABLE :: ipiv
-  INTEGER :: i,lwork,info
-  INTEGER, SAVE :: lworkfact
-  !
-  data lworkfact /64/
-  !
-  lwork = lworkfact*N
-  !
-  ALLOCATE(ipiv(0:N-1))
-  ALLOCATE(work(1:lwork))
-  !
-  ! Factorize matrix M
-  !
-  CALL dgetrf( N, N, M, N, ipiv, info )
-  !
-  IF (info/=0) THEN
-     CALL errore('dinv_matrix','error in dgetrf',info)
-  ENDIF
-  !
-  ! Invert matrix
-  !
-  CALL dgetri( N, M, N, ipiv, work, lwork, info )
-  !
-  IF (info/=0) THEN
-     CALL errore('dinv_matrix','error in dgetri',info)
-  ELSE
-     lworkfact = int(work(1)/N)
-  ENDIF
-  !
-  DEALLOCATE(work)
-  DEALLOCATE(ipiv)
-  !
-  RETURN
-  !
-END SUBROUTINE dinv_matrix
-
-SUBROUTINE zinv_matrix(M,N)
-  !-----------------------------------------------------------------------
-  !
-  ! This subroutine inverts a complex matrix M with the dimension NxN.
-  ! See also flib/invmat_complex.f90
-  ! 
-  USE kinds,      ONLY : DP
-  !
-  IMPLICIT NONE
-  !
-  INTEGER :: N                                  !  matrix dimension
-  COMPLEX(kind=dp), DIMENSION(0:N-1,0:N-1) :: M !  matrix to be inverted
-  COMPLEX(kind=dp), DIMENSION(:), ALLOCATABLE :: work
-  INTEGER, DIMENSION(:), ALLOCATABLE :: ipiv
-  INTEGER :: i,lwork,info
-  INTEGER, SAVE :: lworkfact
-  !
-  data lworkfact /64/
-  !
-  lwork = lworkfact*N
-  !
-  ALLOCATE(ipiv(0:N-1))
-  ALLOCATE(work(1:lwork))
-  !
-  ! Factorize matrix M
-  !
-  CALL zgetrf( N, N, M, N, ipiv, info )
-  !
-  IF (info/=0) THEN
-     CALL errore('zinv_matrix','error in zgetrf',info)
-  ENDIF
-  !
-  ! Invert matrix
-  !
-  CALL zgetri( N, M, N, ipiv, work, lwork, info )
-  !
-  IF (info/=0) THEN
-     CALL errore('zinv_matrix','error in zgetri',info)
-  ELSE
-     lworkfact = int(work(1)/N)
-  ENDIF
-  !
-  DEALLOCATE(work)
-  DEALLOCATE(ipiv)
-  !
-  RETURN
-  !
-END SUBROUTINE zinv_matrix

@@ -16,22 +16,13 @@ MODULE modes
   !
   SAVE
   !
-  INTEGER :: irgq(48), nsymq=0, irotmq, nirr, nmodes
-  ! selects the operations of the small group
-  ! the number of symmetry of the small group
-  ! selects the symmetry sending q <-> -q+G
+ INTEGER :: nirr, nmodes
   ! number of irreducible representations contained in the dynamical matrix
   ! number of modes
-  ! number of crystal sym.ops. for q=0
   INTEGER, ALLOCATABLE, TARGET :: npert(:) !3 * nat )
   ! the number of perturbations per IR
   INTEGER :: npertx
   ! max number of perturbations per IR
-  REAL (DP), ALLOCATABLE :: rtau(:,:,:) !3, 48, nat)
-  ! coordinates of direct translations
-  REAL (DP) :: gi(3,48), gimq(3)
-  ! the possible G associated to each symmetry
-  ! the G associated to the symmetry q<->-q+G
   COMPLEX (DP), POINTER :: &
        u(:,:),                     &!  3 * nat, 3 * nat),
        t(:,:,:,:),                 &! npertx, npertx, 48,3 * nat),
@@ -40,9 +31,6 @@ MODULE modes
   ! the mode for deltarho
   ! the symmetry in the base of the pattern
   ! the symmetry q<->-q in the base of the pa
-  LOGICAL :: &
-       minus_q,  &    !  if .TRUE. there is the symmetry sending q<->-q
-       invsymq        !  if .TRUE. the small group of q has inversion
 
   CHARACTER(15), ALLOCATABLE :: name_rap_mode(:) ! symmetry type of each mode
   INTEGER, ALLOCATABLE :: num_rap_mode(:)  ! number of the representation for
@@ -86,55 +74,6 @@ MODULE dynmat
 END MODULE dynmat
 !
 !
-MODULE qpoint
-  USE kinds, ONLY :  DP
-  USE parameters, ONLY : npk
-  !
-  ! ... The q point
-  !
-  SAVE
-  !
-  INTEGER, POINTER :: igkq(:)     ! npwx)
-  ! correspondence k+q+G <-> G
-  INTEGER :: nksq, npwq, nksqtot
-  ! the real number of k points
-  ! the number of plane waves for q
-  ! the total number of q points 
-  INTEGER, ALLOCATABLE :: ikks(:), ikqs(:)
-  ! the index of k point in the list of k
-  ! the index of k+q point in the list of k
-  REAL (DP) :: xq(3)
-  ! the coordinates of the q point
-  COMPLEX (DP), ALLOCATABLE :: eigqts(:) ! nat)
-  ! the phases associated to the q
-  REAL (DP), ALLOCATABLE :: xk_col(:,:)
-  !
-END MODULE qpoint
-!
-!
-MODULE eqv
-  USE kinds, ONLY :  DP
-  !
-  ! ... The wavefunctions at point k+q
-  !
-  SAVE
-  !
-  COMPLEX (DP), POINTER :: evq(:,:)
-  !
-  ! ... The variable describing the linear response problem
-  !
-  COMPLEX (DP), ALLOCATABLE :: dvpsi(:,:), dpsi(:,:), drhoscfs (:,:,:)
-  ! the product of dV psi
-  ! the change of the wavefunctions
-  REAL (DP), ALLOCATABLE :: dmuxc(:,:,:)        ! nrxx, nspin, nspin),
-  REAL (DP), ALLOCATABLE, TARGET :: vlocq(:,:)  ! ngm, ntyp)
-  ! the derivative of the xc potential
-  ! the local potential at q+G
-  REAL (DP), ALLOCATABLE :: eprec(:,:) ! needed for preconditioning
-  !
-END MODULE eqv
-!
-!
 MODULE efield_mod
   USE kinds, ONLY :  DP
   !
@@ -173,35 +112,6 @@ MODULE nlcc_ph
 END MODULE nlcc_ph
 !
 !
-MODULE gc_ph
-  USE kinds, ONLY :  DP
-  !
-  ! ... The variables needed for gradient corrected calculations
-  !
-  SAVE
-  !
-  REAL (DP), ALLOCATABLE :: &
-       grho(:,:,:),              &! 3, nrxx, nspin),
-       gmag(:,:,:),              &! 3, nrxx, nspin),
-       vsgga(:),                 &! nrxx
-       segni(:),                 &! nrxx
-       dvxc_rr(:,:,:),           &! nrxx, nspin, nspin), &
-       dvxc_sr(:,:,:),           &! nrxx, nspin, nspin),
-       dvxc_ss(:,:,:),           &! nrxx, nspin, nspin), &
-       dvxc_s(:,:,:)              ! nrxx, nspin, nspin)
-  !
-  ! in the noncollinear case gmag contains the gradient of the magnetization
-  ! grho the gradient of rho+ and of rho-, the eigenvalues of the spin density
-  ! vsgga= 0.5* (V_up-V_down) to be used in the calculation of the change
-  ! of the exchange and correlation magnetic field.
-  ! gradient of the unpert. density
-  !
-  ! derivatives of the E_xc functiona
-  ! r=rho and s=|grad(rho)|
-  !
-END MODULE gc_ph
-!
-!
 MODULE phus
   USE kinds, ONLY :  DP
   USE becmod, ONLY : bec_type
@@ -220,25 +130,19 @@ MODULE phus
   COMPLEX (DP), ALLOCATABLE :: &
        int1(:,:,:,:,:),     &! nhm, nhm, 3, nat, nspin),&
        int2(:,:,:,:,:),     &! nhm, nhm, 3,nat, nat),&
-       int3(:,:,:,:,:),     &! nhm, nhm, npert, nat, nspin),&
-       int3_paw(:,:,:,:,:), &! nhm, nhm, npert, nat, nspin),&
        int4(:,:,:,:,:),     &! nhm*(nhm+1)/2, 3, 3, nat, nspin),&
        int5(:,:,:,:,:),     &! nhm*(nhm+1)/2, 3, 3, nat, nat),&
        int1_nc(:,:,:,:,:),     &! nhm, nhm, 3, nat, nspin),&
        int2_so(:,:,:,:,:,:),   &! nhm, nhm, 3, nat,nat,nspin),&
-       int3_nc(:,:,:,:,:),     &! nhm, nhm, npert, nat, nspin),&
        int4_nc(:,:,:,:,:,:),   &! nhm, nhm, 3, 3, nat, nspin),&
        int5_so(:,:,:,:,:,:,:), &! nhm*(nhm+1)/2, 3, 3, nat, nat, nspin),&
 !
 !  These variables contains the five integrals defined in PRB 64, 35118 (2001)
 !  int1 -> \int V_eff d/du (Q) d^3r
 !  int2 -> \int d/du (V_loc) Q d^3r
-!  int3 -> \int d\du (V_Hxc) Q d^3r
+!  int3 -> \int d\du (V_Hxc) Q d^3r .... generalized to Delta V_Hxc and move to lr_us in LR_Modules
 !  int4 -> \int V_eff d^2/dudu (Q) d^3r
 !  int5 -> \int d/du (V_loc) d/du (Q) d^3r
-!
-!  int3_paw contains d/du (D^1-\tilde D^1)
-!
 !
        becsum_nc(:,:,:,:),     &! nhm*(nhm+1)/2,nat,npol,npol)
        becsumort(:,:,:,:),     &! nhm*(nhm+1)/2,nat,nspin,3*nat)
@@ -249,11 +153,6 @@ MODULE phus
 !  besumort contains alphasum+\sum_i <\psi_i | \beta_n><\beta_m| \delta \psi_i >
 !  dpqq_so dipole moment of each Q multiplied by the fcoef factors
 !
-  type (bec_type),  ALLOCATABLE, TARGET :: &
-       becp1(:)              ! (nksq); (nkbtot, nbnd)
-  !
-  ! becp1 contains < beta_n | \psi_i >
-  !
   type (bec_type),  ALLOCATABLE, TARGET :: &
        alphap(:,:)           ! nkbtot, nbnd, 3, nksq)
   !
@@ -305,22 +204,19 @@ MODULE control_ph
   INTEGER, PARAMETER :: maxter = 100 ! maximum number of iterations
   INTEGER :: niter_ph,      & ! maximum number of iterations (read from input)
              nmix_ph,       & ! mixing type
-             nbnd_occ(npk), & ! occupated bands in metals
              start_irr,     & ! initial representation
              last_irr,      & ! last representation of this run
              current_iq,    & ! current q point
              start_q, last_q  ! initial q in the list, last_q in the list
   REAL(DP) :: tr2_ph  ! threshold for phonon calculation
   REAL(DP) :: alpha_mix(maxter), & ! the mixing parameter
-              time_now,          & ! CPU time up to now
-              alpha_pv             ! the alpha value for shifting the bands
+              time_now             ! CPU time up to now
   CHARACTER(LEN=10)  :: where_rec='no_recover'! where the ph run recovered
   CHARACTER(LEN=12) :: electron_phonon
   CHARACTER(LEN=256) :: flmixdpot, tmp_dir_ph, tmp_dir_phq
   INTEGER :: rec_code=-1000,    &! code for recover
              rec_code_read=-1000 ! code for recover. Not changed during the run
-  LOGICAL :: lgamma,      &! if .TRUE. this is a q=0 computation
-             lgamma_gamma,&! if .TRUE. this is a q=0 computation with k=0 only
+  LOGICAL :: lgamma_gamma,&! if .TRUE. this is a q=0 computation with k=0 only
              convt,       &! if .TRUE. the phonon has converged
              epsil,       &! if .TRUE. computes dielec. const and eff. charges
              done_epsil=.FALSE.,  &! .TRUE. when diel. constant is available
@@ -488,11 +384,9 @@ END MODULE grid_irr_iq
 MODULE phcom
   USE modes
   USE dynmat
-  USE qpoint
   USE eqv
   USE efield_mod
   USE nlcc_ph
-  USE gc_ph
   USE phus
   USE partial
   USE control_ph

@@ -20,6 +20,8 @@ subroutine ch_psi_all2 (n, h, ah, e, ik, m)
   USE mp_global, ONLY: intra_pool_comm
   USE mp,        ONLY: mp_sum
 
+  use control_lr, ONLY : alpha_pv, lgamma
+
   implicit none
   integer :: n, m, ik
   ! input: the dimension of h
