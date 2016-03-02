@@ -107,7 +107,7 @@ MODULE pw_restart
       USE gvect,                ONLY : ig_l2g
       USE ions_base,            ONLY : nsp, ityp, atm, nat, tau, if_pos
       USE noncollin_module,     ONLY : noncolin, npol
-      USE io_files,             ONLY : nwordwfc, iunwfc, iunigk, psfile
+      USE io_files,             ONLY : nwordwfc, iunwfc, psfile
       USE buffers,              ONLY : get_buffer
       USE wavefunctions_module, ONLY : evc
       USE klist,                ONLY : nks, nkstot, xk, ngk, wk, qnorm, &
@@ -263,10 +263,10 @@ MODULE pw_restart
       USE gvect,                ONLY : ig_l2g
       USE ions_base,            ONLY : nsp, ityp, atm, nat, tau, if_pos
       USE noncollin_module,     ONLY : noncolin, npol
-      USE io_files,             ONLY : nwordwfc, iunwfc, iunigk, psfile
+      USE io_files,             ONLY : nwordwfc, iunwfc, psfile
       USE buffers,              ONLY : get_buffer
       USE wavefunctions_module, ONLY : evc
-      USE klist,                ONLY : nks, nkstot, xk, ngk, wk, qnorm, &
+      USE klist,                ONLY : nks, nkstot, xk, ngk, igk_k, wk, qnorm,&
                                        lgauss, ngauss, degauss, nelec, &
                                        two_fermi_energies, nelup, neldw
       USE start_k,              ONLY : nk1, nk2, nk3, k1, k2, k3, &
@@ -277,14 +277,14 @@ MODULE pw_restart
       USE basis,                ONLY : natomwfc
       USE gvecs,                ONLY : ngms_g, dual
       USE fft_base,             ONLY : dffts
-      USE wvfct,                ONLY : npw, npwx, et, wg, igk, nbnd
+      USE wvfct,                ONLY : npw, npwx, et, wg, nbnd
       USE gvecw,                ONLY : ecutwfc
       USE ener,                 ONLY : ef, ef_up, ef_dw
       USE fixed_occ,            ONLY : tfixed_occ, f_inp
       USE ldaU,                 ONLY : lda_plus_u, lda_plus_u_kind, U_projection, &
                                        Hubbard_lmax, Hubbard_l, Hubbard_U, Hubbard_J, &
                                        Hubbard_alpha, Hubbard_J0, Hubbard_beta
-      USE spin_orb,             ONLY : lspinorb, domag
+      USE spin_orb,             ONLY : lspinorb, domag, lforcet
       USE symm_base,            ONLY : nrot, nsym, invsym, s, ft, irt, &
                                        t_rev, sname, time_reversal, no_t_rev
       USE lsda_mod,             ONLY : nspin, isk, lsda, starting_magnetization
@@ -315,6 +315,11 @@ MODULE pw_restart
                                        esm_a, esm_bc
       USE london_module,        ONLY : scal6, lon_rcut
       USE tsvdw_module,         ONLY : vdw_isolated
+#if defined __IO_HPC && __HDF5
+      USE io_hpc,               ONLY : prepare_for_writing
+      USE hdf5_qe,              ONLY : evc_hdf5_write
+      USE mp_world,             ONLY : mpime
+#endif
       
       !
       IMPLICIT NONE
@@ -336,8 +341,10 @@ MODULE pw_restart
       CASE( "all" )
          !
          ! ... do not overwrite the scf charge density with a non-scf one
+         ! ... (except in the 'force theorem' calculation of MAE where the
+         ! ...  charge density differs from the one read from disk)
          !
-         lrho  = lscf
+         lrho  = lscf .OR. lforcet
          lwfc  = twfcollect
          !
       CASE( "config" )
@@ -361,6 +368,7 @@ MODULE pw_restart
          !
       END IF
       !
+  
       CALL mp_bcast( ierr, ionode_id, intra_image_comm )
       !
       CALL errore( 'pw_writefile ', &
@@ -453,18 +461,11 @@ MODULE pw_restart
       ! ... k+G vectors
       !
       ALLOCATE ( igk_l2g( npwx, nks ) )
-      !
       igk_l2g = 0
       !
-      IF ( nks > 1 ) REWIND( iunigk )
-      !
       DO ik = 1, nks
-         !
          npw = ngk (ik)
-         IF ( nks > 1 ) READ( iunigk ) igk
-         !
-         CALL gk_l2gmap( ngm, ig_l2g(1), npw, igk(1), igk_l2g(1,ik) )
-         !
+         CALL gk_l2gmap( ngm, ig_l2g(1), npw, igk_k(1,ik), igk_l2g(1,ik) )
       END DO
       !
       ! ... compute the global number of G+k vectors for each k point
@@ -713,6 +714,7 @@ MODULE pw_restart
          END IF
          !
          IF ( lwfc ) THEN
+
             !
             IF ( .NOT. smallmem ) CALL write_gk( iunout, ik, filename )
             !
@@ -746,10 +748,9 @@ MODULE pw_restart
 ! ... CHARGE-DENSITY FILES
 !-------------------------------------------------------------------------------
       !
-      ! ... do not overwrite the scf charge density with a non-scf one
       ! ... also writes rho%ns if lda+U and rho%bec if PAW
       !
-      IF ( lscf ) CALL write_rho( rho, nspin )
+      IF ( lrho ) CALL write_rho( rho, nspin )
 !-------------------------------------------------------------------------------
 ! ... END RESTART SECTIONS
 !-------------------------------------------------------------------------------
@@ -946,6 +947,7 @@ MODULE pw_restart
                 !
                 IF ( ionode ) THEN
                    !
+
                    filename = qexml_wfc_filename( ".", 'evc', ik, DIR=lkpoint_dir )
                    !
                    CALL iotk_link( iunpun, "WFC", filename, &
@@ -992,7 +994,6 @@ MODULE pw_restart
                             lsymm, lrho, lefield, ldim, &
                             lef, lexx, lesm
       !
-      LOGICAL            :: need_qexml
       INTEGER            :: tmp
       !
       ierr = 0
@@ -1006,10 +1007,7 @@ MODULE pw_restart
       CALL errore( 'pw_readfile', &
                    'no free units to read wavefunctions', ierr )
       !
-      need_qexml = .FALSE.
-      !
       lheader = .NOT. qexml_version_init
-      IF (lheader) need_qexml = .TRUE.
       !
       ldim    = .FALSE.
       lcell   = .FALSE.
@@ -1033,34 +1031,25 @@ MODULE pw_restart
       CASE( 'header' )
          !
          lheader = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'dim' )
          !
          ldim = .TRUE.
          lbz  = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'pseudo' )
          !
          lions = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'config' )
          !
          lcell = .TRUE.
          lions = .TRUE.
-         need_qexml = .TRUE.
-         !
-      CASE( 'rho' )
-         !
-         lrho  = .TRUE.
          !
       CASE( 'wave' )
          !
          lpw   = .TRUE.
          lwfc  = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'nowavenobs' )
          !
@@ -1074,8 +1063,7 @@ MODULE pw_restart
          lbz     = .TRUE.
          lsymm   = .TRUE.
          lefield = .TRUE.
-         need_qexml = .TRUE.
-
+         !
       CASE( 'nowave' )
          !
          lcell   = .TRUE.
@@ -1089,7 +1077,6 @@ MODULE pw_restart
          lbs     = .TRUE.
          lsymm   = .TRUE.
          lefield = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'all' )
          !
@@ -1106,7 +1093,6 @@ MODULE pw_restart
          lsymm   = .TRUE.
          lefield = .TRUE.
          lrho    = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'reset' )
          !
@@ -1126,24 +1112,25 @@ MODULE pw_restart
       CASE( 'ef' )
          !
          lef        = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'exx' )
          !
          lexx       = .TRUE.
-         need_qexml = .TRUE.
          !
       CASE( 'esm' )
          !
          lesm       = .TRUE.
-         need_qexml = .TRUE.
+         !
+      CASE DEFAULT
+         !
+         CALL errore( 'pw_readfile', 'unknown case '//TRIM(what), 1 )
          !
       END SELECT
       !
       IF ( .NOT. lheader .AND. .NOT. qexml_version_init) &
          CALL errore( 'pw_readfile', 'qexml version not set', 71 )
       !
-      IF (  ionode .AND. need_qexml ) THEN
+      IF (  ionode ) THEN
          !
          CALL qexml_init( iunpun )
          CALL qexml_openfile( TRIM( dirname ) // '/' // TRIM( xmlpun ), &
@@ -1285,6 +1272,7 @@ MODULE pw_restart
          END IF
          !
       END IF
+
       IF ( lrho ) THEN
          !
          ! ... to read the charge-density we use the routine from io_rho_xml 
@@ -1293,6 +1281,7 @@ MODULE pw_restart
          CALL read_rho( rho, nspin )
          !
       END IF
+
       IF ( lef ) THEN
          !
          CALL read_ef( ierr )
@@ -1321,7 +1310,7 @@ MODULE pw_restart
          !
       END IF
       !
-      IF (ionode .AND. need_qexml) THEN
+      IF (ionode) THEN
          !
          CALL qexml_closefile( 'read', IERR=ierr)
          !
@@ -1333,15 +1322,20 @@ MODULE pw_restart
          GOTO 100
       END IF
       !
+
       RETURN
       !
       ! uncomment to continue execution after an error occurs
-      ! 100 IF (ionode .AND. need_qexml) THEN
+      ! 100 IF (ionode) THEN
       !        CALL qexml_closefile( 'read', IERR=tmp)
       !     ENDIF
       !     RETURN
       ! comment to continue execution after an error occurs
+
+
 100   CALL errore('pw_readfile',TRIM(errmsg),ierr)
+
+
       !
     END SUBROUTINE pw_readfile
     !
@@ -2431,6 +2425,8 @@ MODULE pw_restart
                                        intra_pool_comm, inter_pool_comm
       USE mp_bands,             ONLY : me_bgrp, nbgrp, root_bgrp, &
                                        intra_bgrp_comm
+      USE mp_world,             ONLY : mpime
+
       !
       IMPLICIT NONE
       !
@@ -2454,6 +2450,7 @@ MODULE pw_restart
       !
       ierr = 0
       !
+      
       IF ( iunwfc > 0 ) THEN
          !
          INQUIRE( UNIT = iunwfc, OPENED = opnd )

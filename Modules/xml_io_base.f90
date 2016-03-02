@@ -794,6 +794,12 @@ MODULE xml_io_base
       USE mp_wave,    ONLY : mergewf
       USE mp,         ONLY : mp_get, mp_size, mp_rank, mp_sum
       USE control_flags,     ONLY : lwfnscf, lwfpbe0nscf  ! Lingzhu Kong
+#if defined __IO_HPC && __HDF5
+      USE hdf5_qe,    ONLY : evc_hdf5, read_data_hdf5, write_data_hdf5, &
+                             prepare_for_writing, evc_hdf5_write,  &
+                             setup_file_property_hdf5, extend_dataset_hdf5
+      USE mp_world,   ONLY : mpime
+#endif
       !
       IMPLICIT NONE
       !
@@ -843,8 +849,9 @@ MODULE xml_io_base
       !
       IF ( ionode ) THEN
          !
+
+         CALL prepare_for_writing(evc_hdf5_write,evc_hdf5_write%comm,igwx*2,filename)
          CALL iotk_open_write( iuni, FILE = TRIM( filename ), ROOT="WFC", BINARY = .TRUE. )
-         !
          CALL iotk_write_attr( attr, "ngw",          ngw, FIRST = .TRUE. )
          CALL iotk_write_attr( attr, "igwx",         igwx )
          CALL iotk_write_attr( attr, "gamma_only",   gamma_only )
@@ -893,8 +900,19 @@ MODULE xml_io_base
             !
          END IF
          !
-         IF ( ionode ) &
+         IF ( ionode ) THEN
+#if defined __IO_HPC && __HDF5
+            IF(j>1)THEN
+              CALL extend_dataset_hdf5(evc_hdf5_write,wtmp(1:igwx),igwx,2,.true.)
+            ENDIF 
+            CALL write_data_hdf5(evc_hdf5_write,wtmp(1:igwx),.false.,j)
+ 
+            !CALL iotk_write_dat( iuni, "evc" // iotk_index( j ), wtmp(1:igwx) )
+            !if(j.eq.2)call errore('','',1)
+#else
             CALL iotk_write_dat( iuni, "evc" // iotk_index( j ), wtmp(1:igwx) )
+#endif
+         ENDIF
          ! Next 3 lines : Lingzhu Kong
          IF ( ( index(filename,'evc0') > 0 ) .and. (lwfnscf .or. lwfpbe0nscf) ) THEN
             IF ( ionode ) write(60)wtmp(1:igwx) 
@@ -906,7 +924,6 @@ MODULE xml_io_base
           IF ( ionode ) close(60)   !Lingzhu Kong
           write(*,*)'done writing evc0'
       ENDIF
-
       IF ( ionode ) CALL iotk_close_write( iuni )
       !
       DEALLOCATE( wtmp )
@@ -925,6 +942,12 @@ MODULE xml_io_base
       !
       USE mp_wave,   ONLY : splitwf
       USE mp,        ONLY : mp_put, mp_size, mp_rank, mp_sum
+
+#if defined __IO_HPC && __HDF5
+      USE mp_world,  ONLY : mpime
+      USE hdf5_qe,   ONLY : evc_hdf5_write, extend_dataset_hdf5, &
+                            read_data_hdf5, prepare_for_reading
+#endif
       !
       IMPLICIT NONE
       !
@@ -1018,6 +1041,9 @@ MODULE xml_io_base
       CALL mp_bcast( scalef, io_in_parent, parent_group_comm )
       !
       ALLOCATE( wtmp( MAX( igwx_, igwx ) ) )
+#if defined __IO_HPC && __HDF5
+      CALL prepare_for_reading(evc_hdf5_write,evc_hdf5_write%comm,igwx*2,filename)
+#endif
       !
       DO j = 1, nbnd
          !
@@ -1025,8 +1051,18 @@ MODULE xml_io_base
             !
             IF ( ionode ) THEN 
                !
+#if defined __IO_HPC && __HDF5
+            IF(j>1)THEN
+              CALL extend_dataset_hdf5(evc_hdf5_write,wtmp(1:igwx),igwx,2,.false.)
+            ENDIF 
+            CALL read_data_hdf5(evc_hdf5_write,wtmp(1:igwx),.false.)
+             !  CALL iotk_scan_dat( iuni, &
+             !                      "evc" // iotk_index( j ), wtmp(1:igwx_) )
+#else
                CALL iotk_scan_dat( iuni, &
                                    "evc" // iotk_index( j ), wtmp(1:igwx_) )
+#endif
+ 
                !
                IF ( igwx > igwx_ ) wtmp((igwx_+1):igwx) = 0.0_DP
                ! ===========================================================

@@ -23,7 +23,7 @@ SUBROUTINE solve_hf()
   USE mp_world,             ONLY : nproc,mpime,root,world_comm
   USE mp,                   ONLY : mp_bcast,mp_barrier
   USE io_global,            ONLY : stdout, ionode
-  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,ecutwfc,current_k
+  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,current_k
   USE wavefunctions_module, ONLY : evc,psic,psic_nc
   USE io_files,             ONLY : tmp_dir
   USE pdep_io,              ONLY : pdep_read_G_and_distribute 

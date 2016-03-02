@@ -20,7 +20,7 @@ SUBROUTINE exx_go()
   USE exx,                    ONLY : x_gamma_extrapolation,exxdiv_treatment,exx_grid_init,exx_div_check,exx_divergence,&
                                      &deallocate_exx,exxinit,vexx,exx_restart,erfc_scrlen,exxdiv,exxalfa,gau_scrlen,&
                                      &exxdiv_treatment, ecutfock
-  USE pwcom,                  ONLY : ecutwfc
+  USE gvecw,                  ONLY : ecutwfc
   USE wvfct,                  ONLY : nbnd, npwx
   USE noncollin_module,       ONLY : npol
   USE io_files,               ONLY : nwordwfc, iunwfc, tmp_dir, wfc_dir

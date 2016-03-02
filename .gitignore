@@ -3,3 +3,5 @@
 make.sys
 tempdir*
 *.svn
+*.x
+*.a

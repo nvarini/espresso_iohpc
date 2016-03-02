@@ -27,6 +27,15 @@ SUBROUTINE read_file()
   USE ldaU,                 ONLY : lda_plus_u, U_projection
   USE pw_restart,           ONLY : pw_readfile
   USE control_flags,        ONLY : io_level
+  USE mp_world,             ONLY : mpime
+  USE wavefunctions_module, ONLY : evc
+#ifdef __HDF5
+  USE hdf5_qe,            ONLY : evc_hdf5, evc_hdf5_write
+  USE mp_world,           ONLY : nproc, mpime, world_comm
+  USE wavefunctions_module,ONLY : evc
+  USE io_hpc,             ONLY : initialize_io_hpc
+#endif
+
   !
   IMPLICIT NONE 
   INTEGER :: ierr
@@ -38,6 +47,10 @@ SUBROUTINE read_file()
      'Reading data from directory:', TRIM( tmp_dir ) // TRIM( prefix ) // '.save'
   !
   CALL read_xml_file ( )
+#if defined __HDF5
+  CALL initialize_io_hpc(1, world_comm, evc,.false.)
+#endif
+
   !
   ! ... Open unit iunwfc, for Kohn-Sham orbitals - we assume that wfcs
   ! ... have been written to tmp_dir, not to a different directory!
@@ -120,6 +133,7 @@ SUBROUTINE read_xml_file_internal(withbs)
   USE io_files,             ONLY : tmp_dir, prefix, iunpun, nwordwfc, iunwfc
   USE noncollin_module,     ONLY : noncolin, npol, nspin_lsda, nspin_mag, nspin_gga
   USE pw_restart,           ONLY : pw_readfile
+  USE io_rho_xml,           ONLY : read_rho
   USE read_pseudo_mod,      ONLY : readpp
   USE xml_io_base,          ONLY : pp_check_file
   USE uspp,                 ONLY : becsum
@@ -301,7 +315,7 @@ SUBROUTINE read_xml_file_internal(withbs)
   !
   ! ... read the charge density
   !
-  CALL pw_readfile( 'rho', ierr )
+  CALL read_rho( rho, nspin )
   !
   ! ... re-calculate the local part of the pseudopotential vltot
   ! ... and the core correction charge (if any) - This is done here

@@ -31,7 +31,9 @@ MODULE klist
   REAL(DP) :: &
        qnorm= 0.0_dp      ! |q|, used in phonon+US calculations only
   INTEGER, ALLOCATABLE :: &
-       ngk(:)              ! number of plane waves for each k point
+       igk_k(:,:),&       ! The g<->k correspondance for each k point
+       ngk(:)             ! number of plane waves for each k point
+  !
   INTEGER :: &
        nks,               &! number of k points in this pool
        nkstot,            &! total number of k points
@@ -362,10 +364,11 @@ MODULE spin_orb
   SAVE
 
   LOGICAL :: &
-      lspinorb,  &       ! if .TRUE. this is a spin-orbit calculation
-      starting_spin_angle, & ! if .TRUE. the initial wavefunctions are 
-                             ! spin-angle functions. 
-      domag              ! if .TRUE. magnetization is computed
+      lspinorb,            &  ! if .TRUE. this is a spin-orbit calculation
+      lforcet,             &  ! if .TRUE. apply Force Theorem to calculate MAE 
+      starting_spin_angle, &  ! if .TRUE. the initial wavefunctions are 
+                              ! spin-angle functions. 
+      domag                   ! if .TRUE. magnetization is computed
 
 
   COMPLEX (DP) :: rot_ylm(2*lmaxx+1,2*lmaxx+1)  ! transform real

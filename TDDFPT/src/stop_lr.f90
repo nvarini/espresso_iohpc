@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2015 Quantum ESPRESSO group
+! Copyright (C) 2001-2016 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -17,17 +17,16 @@ SUBROUTINE stop_lr( full_run  )
   USE lr_variables,         ONLY : n_ipol, LR_polarization, beta_store,          &
                                  & gamma_store, zeta_store, norm0, code1,code2,  &
                                  & lr_verbosity, itermax, bgz_suffix,            &
-                                   eels, lr_periodic, q1, q2, q3              
-  USE io_global,            ONLY : ionode
-  USE io_files,             ONLY : tmp_dir, prefix
-  USE io_global,            ONLY : stdout
+                                   eels, q1, q2, q3              
+  USE io_global,            ONLY : ionode, stdout
+  USE io_files,             ONLY : tmp_dir, prefix, iunwfc
   USE environment,          ONLY : environment_end
   USE lsda_mod,             ONLY : nspin
   USE noncollin_module,     ONLY : noncolin
   USE ions_base,            ONLY : nat, ityp, atm, ntyp => nsp, tau
   USE cell_base,            ONLY : celldm, at, bg, alat, omega
-  USE units_ph,             ONLY : iuwfc
   USE klist,                ONLY : nelec
+  USE buffers,              ONLY : close_buffer
 #ifdef __ENVIRON
   USE plugin_flags,         ONLY : use_environ
   USE solvent_tddfpt,       ONLY : solvent_clean_tddfpt
@@ -170,11 +169,7 @@ SUBROUTINE stop_lr( full_run  )
   !
   ! EELS: Close the file where it read the wavefunctions at k and k+q.
   !
-  IF (eels .AND. .NOT. lr_periodic) THEN
-     CLOSE( UNIT = iuwfc, STATUS = 'KEEP' )
-  ENDIF
-  !
-  !CLOSE( UNIT = iunigk, STATUS = 'KEEP' )
+  IF (eels) CALL close_buffer(iunwfc, 'keep')
   !
   STOP
   !

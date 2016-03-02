@@ -450,12 +450,15 @@ projwfc.o : ../../Modules/control_flags.o
 projwfc.o : ../../Modules/environment.o
 projwfc.o : ../../Modules/fft_base.o
 projwfc.o : ../../Modules/gvecw.o
+projwfc.o : ../../Modules/hdf5_qe.o
 projwfc.o : ../../Modules/io_files.o
 projwfc.o : ../../Modules/io_global.o
+projwfc.o : ../../Modules/io_hpc.o
 projwfc.o : ../../Modules/ions_base.o
 projwfc.o : ../../Modules/kind.o
 projwfc.o : ../../Modules/mp.o
 projwfc.o : ../../Modules/mp_global.o
+projwfc.o : ../../Modules/mp_pools.o
 projwfc.o : ../../Modules/mp_world.o
 projwfc.o : ../../Modules/noncol.o
 projwfc.o : ../../Modules/paw_variables.o

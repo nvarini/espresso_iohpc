@@ -25,7 +25,7 @@ SUBROUTINE store_sqvc(sqvc_tmp,numg,singularity_removal_mode,div)
  USE mp,               ONLY : mp_sum
  USE mp_global,        ONLY : intra_bgrp_comm
  USE mp_world,         ONLY : mpime
- USE pwcom,            ONLY : ecutwfc
+ USE gvecw,            ONLY : ecutwfc
  USE control_flags,    ONLY : gamma_only
  USE random_numbers,       ONLY : randy
  !

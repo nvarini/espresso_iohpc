@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2015 Quantum ESPRESSO group
+! Copyright (C) 2001-2016 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -25,7 +25,7 @@ SUBROUTINE bcast_lr_input
   USE mp_world,            ONLY: world_comm
   USE exx,                 ONLY: ecutfock
   USE qpoint,              ONLY: xq
-  USE control_ph,          ONLY: lrpa
+  USE control_lr,          ONLY: lrpa
 
   IMPLICIT NONE
   !
@@ -70,11 +70,8 @@ SUBROUTINE bcast_lr_input
   call mp_bcast (q2, ionode_id, world_comm )
   call mp_bcast (q3, ionode_id, world_comm )
   call mp_bcast (xq, ionode_id, world_comm )
-  call mp_bcast (lr_periodic, ionode_id, world_comm )
   call mp_bcast (approximation, ionode_id, world_comm ) 
   call mp_bcast (lrpa, ionode_id, world_comm ) 
-  call mp_bcast (clfe, ionode_id, world_comm ) 
-  !call mp_bcast (eps, ionode_id, world_comm ) 
 
   ! for lr_dav
   CALL mp_bcast (davidson, ionode_id, world_comm )

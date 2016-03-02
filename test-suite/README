@@ -1,0 +1,59 @@
+# Copyright (C) 2001-2020 Quantum ESPRESSO Foundation
+# Maintainer: Filippo Spiga (filippo.spiga@quantum-espresso.org)
+
+TEST-SUITE  v1.0.0
+------------------
+
+You can run make with several options:
+
+A) Run all PW and CP tests and show a final report
+
+$ make
+
+
+B) Run only PW tests and show a final report
+
+$ make run-tests-pw 
+
+
+C) Run only CP tests and show a final report
+
+$ make run-tests-cp
+
+D) Run the test that is in a single directory and show a final report
+
+$ make run-custom-test testdir=name_of_directory
+
+For example, the following runs only the tests in the pw_spinorbit directory
+$ make run-custom-test testdir=pw_spinorbit
+
+E) After computing all tests, it also run a comparison-only steps and redirect
+   the output to a file called "out.`date +%Y%m%d_%H%M%S`" (python buffers both
+   stdout and stderr)
+
+$ make compare
+
+
+F) Regenerate all benchmark reference files
+
+$ make create_reference
+
+
+G) Clean all test files create so far and leave only benchmark reference
+
+$ make clean
+
+
+
+REFERENCE OUTPUTS
+-----------------
+
+All reference outputs for PWscf and CP v5.3.0 are computed using GCC 4.9.2. The
+following configure options have been used:
+./configure --disable-openmp --disable-parallel \
+    --with-internal-blas --with-internal-lapack
+
+KNOWN ISSUES
+------------
+pw_vdw/vdw-ts.in fails with ifort v.12.0.2.137 unless Modules/tsvdw.f90 is compiled with -O0
+

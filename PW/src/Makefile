@@ -103,7 +103,6 @@ h_epsi_her_set.o \
 h_1psi.o \
 h_psi.o \
 h_psi_meta.o \
-hdf5_pw.o \
 hinit0.o \
 hinit1.o \
 init_ns.o \
@@ -115,7 +114,6 @@ init_at_1.o \
 init_vloc.o \
 input.o \
 interpolate.o \
-io_hpc.o \
 io_rho_xml.o \
 irrek.o \
 iweights.o \

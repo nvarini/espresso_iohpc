@@ -35,7 +35,7 @@ SUBROUTINE init_run()
   USE mp_global,          ONLY : world_comm
 #endif
 #ifdef __HDF5
-  USE hdf5_pw
+  USE hdf5_qe
   USE mp_world,           ONLY : nproc, mpime
   USE wavefunctions_module,ONLY : evc
 #endif
@@ -115,7 +115,7 @@ SUBROUTINE init_run()
   CALL newd()
   !
 #if defined __HDF5
-  CALL initialize_io_hpc(1, world_comm)
+  CALL initialize_io_hpc(1, world_comm, evc,.true.)
   CALL wfcinit()
 #endif
 

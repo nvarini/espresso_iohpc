@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2015 Quantum ESPRESSO group
+! Copyright (C) 2001-2016 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -17,7 +17,7 @@ SUBROUTINE lr_read_wf()
   !
   USE kinds,                ONLY : dp
   USE io_global,            ONLY : stdout
-  USE klist,                ONLY : nks, xk
+  USE klist,                ONLY : nks, xk, ngk, igk_k
   USE gvect,                ONLY : ngm, g
   USE io_files,             ONLY : nwordwfc, iunwfc, prefix, diropn,&
                                  & tmp_dir, wfc_dir 
@@ -37,9 +37,7 @@ SUBROUTINE lr_read_wf()
                                  & initialisation_level,&
                                  & fwfft_orbital_gamma, calbec_rs_gamma,&
                                  & add_vuspsir_gamma, v_loc_psir,&
-                                 & s_psir_gamma, real_space_debug, &
-                                 & igk_k,npw_k  
-  USE buffers,              ONLY : get_buffer
+                                 & s_psir_gamma, real_space_debug
   USE exx,                  ONLY : exx_grid_init, exx_div_check, exx_restart
   USE funct,                ONLY : dft_is_hybrid
   USE lr_exx_kernel,        ONLY : lr_exx_revc0_init, lr_exx_alloc
@@ -105,9 +103,7 @@ SUBROUTINE normal_read()
   !
   ! The usual way of reading wavefunctions
   !
-  USE lr_variables,             ONLY : check_all_bands_gamma, &
-                                     & check_density_gamma,   &
-                                     & check_vector_gamma, tg_revc0
+  USE lr_variables,             ONLY : tg_revc0
   USE wavefunctions_module,     ONLY : psic
   USE realus,                   ONLY : tg_psic
   USE mp_global,                ONLY : me_bgrp
@@ -191,9 +187,9 @@ SUBROUTINE normal_read()
            !
         ELSE
            !
-           CALL calbec(npw_k(1),vkb,evc0(:,:,1),becp_1)
+           CALL calbec(ngk(1),vkb,evc0(:,:,1),becp_1)
            becp%r = becp_1
-           CALL s_psi(npwx, npw_k(1), nbnd, evc0(:,:,1), sevc0(:,:,1))
+           CALL s_psi(npwx, ngk(1), nbnd, evc0(:,:,1), sevc0(:,:,1))
            !
         ENDIF
         ! 
@@ -203,10 +199,10 @@ SUBROUTINE normal_read()
         !
         DO ik = 1, nks
            !
-           CALL init_us_2(npw_k(ik),igk_k(1,ik),xk(1,ik),vkb)
-           CALL calbec(npw_k(ik),vkb,evc0(:,:,ik),becp1_c(:,:,ik))
+           CALL init_us_2(ngk(ik),igk_k(1,ik),xk(1,ik),vkb)
+           CALL calbec(ngk(ik),vkb,evc0(:,:,ik),becp1_c(:,:,ik))
            becp%k = becp1_c(:,:,ik)
-           CALL s_psi (npwx, npw_k(ik), nbnd, evc0(:,:,ik), sevc0(:,:,ik)) 
+           CALL s_psi (npwx, ngk(ik), nbnd, evc0(:,:,ik), sevc0(:,:,ik)) 
            !
         ENDDO
         !
@@ -262,7 +258,7 @@ SUBROUTINE normal_read()
      !
      DO ik = 1, nks
         DO ibnd = 1, nbnd
-           DO ig = 1, npw_k(ik)
+           DO ig = 1, ngk(ik)
                !
                revc0(nls(igk_k(ig,ik)),ibnd,ik) = evc0(ig,ibnd,ik)
                !
@@ -404,9 +400,9 @@ SUBROUTINE virt_read()
            ENDDO
            !
         ELSE
-           CALL calbec(npw_k(1),vkb,evc_all(:,:,1),becp1_all)
+           CALL calbec(ngk(1),vkb,evc_all(:,:,1),becp1_all)
            becp%r=becp1_all
-           CALL s_psi(npwx, npw_k(1), nbnd, evc_all(:,:,1), sevc_all(:,:,1))
+           CALL s_psi(npwx, ngk(1), nbnd, evc_all(:,:,1), sevc_all(:,:,1))
         ENDIF
         !
      ELSE
@@ -415,10 +411,10 @@ SUBROUTINE virt_read()
         !
         DO ik = 1, nks
            !
-           CALL init_us_2(npw_k(ik),igk_k(1,ik),xk(1,ik),vkb)
-           CALL calbec(npw_k(ik),vkb,evc_all(:,:,ik),becp1_c_all(:,:,ik),nbnd)
+           CALL init_us_2(ngk(ik),igk_k(1,ik),xk(1,ik),vkb)
+           CALL calbec(ngk(ik),vkb,evc_all(:,:,ik),becp1_c_all(:,:,ik),nbnd)
            becp%k=becp1_c_all(:,:,ik)
-           CALL s_psi (npwx, npw_k(ik), nbnd, evc_all(:,:,ik), sevc_all(:,:,ik))
+           CALL s_psi (npwx, ngk(ik), nbnd, evc_all(:,:,ik), sevc_all(:,:,ik))
            !     
         ENDDO
         !
@@ -448,7 +444,7 @@ SUBROUTINE virt_read()
      !
      DO ibnd=1,nbnd,2
         IF (ibnd<nbnd) THEN
-           DO ig=1,npw_k(1)
+           DO ig=1,ngk(1)
               !
               revc_all(nls(igk_k(ig,1)),ibnd,1) = evc_all(ig,ibnd,1)&
                                     &+(0.0d0,1.0d0)*evc_all(ig,ibnd+1,1)
@@ -458,7 +454,7 @@ SUBROUTINE virt_read()
               !
            ENDDO
         ELSE
-           DO ig=1,npw_k(1)
+           DO ig=1,ngk(1)
               !
               revc_all(nls(igk_k(ig,1)),ibnd,1) = evc_all(ig,ibnd,1)
               revc_all(nlsm(igk_k(ig,1)),ibnd,1) = CONJG(evc_all(ig,ibnd,1))
@@ -476,7 +472,7 @@ SUBROUTINE virt_read()
      !
      DO ik=1,nks
         DO ibnd=1,nbnd
-           DO ig=1,npw_k(ik)
+           DO ig=1,ngk(ik)
               !
               revc_all(nls(igk_k(ig,ik)),ibnd,ik) = evc_all(ig,ibnd,ik)
               !

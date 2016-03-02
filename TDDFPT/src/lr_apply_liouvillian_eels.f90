@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2015 Quantum ESPRESSO group
+! Copyright (C) 2001-2016 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -10,7 +10,7 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
   !------------------------------------------------------------------------------
   !
   ! This subroutine applies the linear response operator to response wavefunctions.
-  ! (H - E)*psi(k+q) + V_HXC(q)*psi0(k)
+  ! (H - E)*psi(k+q) + P_c V_HXC(q)*psi0(k)
   !
   ! Inspired by PH/solve_linter.f90
   !
@@ -26,22 +26,19 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
   USE io_global,            ONLY : stdout
   USE kinds,                ONLY : dp
   USE klist,                ONLY : nks, xk
-  USE lr_variables,         ONLY : evc0, no_hxc, lr_periodic
+  USE lr_variables,         ONLY : evc0, no_hxc
   USE lsda_mod,             ONLY : nspin, current_spin
   USE wvfct,                ONLY : nbnd, npwx, g2kin, et, npw, igk
   USE gvecw,                ONLY : gcutw
   USE io_global,            ONLY : stdout
   USE uspp,                 ONLY : vkb
-  USE io_files,             ONLY : iunigk
+  USE io_files,             ONLY : iunigk, iunwfc, nwordwfc
   USE wavefunctions_module, ONLY : evc, psic, psic_nc
-  USE units_ph,             ONLY : lrwfc, iuwfc
   USE noncollin_module,     ONLY : noncolin, npol, nspin_mag
   USE uspp,                 ONLY : okvan
-  USE nlcc_ph,              ONLY : nlcc_any
-  USE iso_c_binding,        ONLY : c_int
   USE mp_bands,             ONLY : ntask_groups, me_bgrp
   USE spin_orb,             ONLY : domag
-
+  USE buffers,              ONLY : get_buffer
   USE qpoint,               ONLY : npwq, igkq, ikks, ikqs, nksq
   USE eqv,                  ONLY : evq, dpsi, dvpsi
   USE control_lr,           ONLY : nbnd_occ
@@ -62,7 +59,6 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
                             & tg_psic(:,:), tg_dvrssc(:,:)
   ! Task groups: wfct in R-space
   ! Task groups: HXC potential
-  INTEGER(kind=c_int) :: kilobytes
   INTEGER, ALLOCATABLE :: ibuf(:)
   !
   CALL start_clock('lr_apply')
@@ -94,12 +90,6 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
      !
   ENDIF
   !
-  ! Memory usage
-  !
-  !CALL memstat( kilobytes )
-  !IF ( kilobytes > 0 ) WRITE(stdout,'(5X,"lr_apply_liouvillian_eels, & 
-  !         & per-process dynamical memory:",f7.1,"Mb")' ) kilobytes/1000.0
-  !
   IF (no_hxc) THEN
      interaction1 = .false.
   ELSE
@@ -116,7 +106,8 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
   !
   IF ( interaction1 ) THEN
      ! 
-     ! Calculation of the charge density response, and symmetrization of it.
+     ! Calculation of the response charge density 
+     ! and its symmetrization.
      !
      !if (.not. allocated(psic)) allocate(psic(dfftp%nnr))   
      !
@@ -128,13 +119,10 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
      !
      !if (allocated(psic)) deallocate(psic) 
      !
-     ! Calculation of the HXC potential
-     ! input:  the change of the charge density (dvrsc)
-     ! output: the change of the HXC potential  (dvrsc)
-     ! Note: check the implementation of the non-linear core correction.
+     ! Calculation of the response HXC potential
+     ! from the response charge density.
      !
-     !CALL dv_of_drho(0, dvrsc, .false.)
-     CALL lr_dv_of_drho_eels(dvrsc)
+     CALL dv_of_drho (dvrsc, .false.)
      !
      ! Interpolation of the HXC potential from the thick mesh 
      ! to a smoother mesh (if doublegrid=.true.)
@@ -154,13 +142,8 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
   ! 
   DO ik = 1, nksq
      !
-     IF (lr_periodic) THEN
-        ikk = ik
-        ikq = ik
-     ELSE
-        ikk = ikks(ik)
-        ikq = ikqs(ik)
-     ENDIF
+     ikk = ikks(ik)
+     ikq = ikqs(ik)
      !
      ! Determination of npw, igk, and npwq, igkq;
      ! g2kin is used here as a workspace.
@@ -183,14 +166,9 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
      !
      ! Read unperturbed wavefuctions psi(k) and psi(k+q)
      !
-     IF (lr_periodic) THEN
-        evc(:,:) = evc0(:,:,ik)
-        evq(:,:) = evc0(:,:,ik)
-     ELSE
-        IF (nksq > 1) THEN 
-           CALL davcio (evc, lrwfc, iuwfc, ikk, - 1)
-           CALL davcio (evq, lrwfc, iuwfc, ikq, - 1)
-        ENDIF
+     IF (nksq > 1) THEN 
+        CALL get_buffer (evc, nwordwfc, iunwfc, ikk)
+        CALL get_buffer (evq, nwordwfc, iunwfc, ikq)
      ENDIF
      !
      dpsi(:,:)  = (0.d0,0.d0)
@@ -373,7 +351,8 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
         IF (noncolin) THEN
            DO ibnd = 1, nbnd_occ(ikk)
               DO ig = 1, npwq
-                 sevc1_new(ig+npwx,ibnd,ik) = sevc1_new(ig+npwx,ibnd,ik) + dvpsi(ig+npwx,ibnd)
+                 sevc1_new(ig+npwx,ibnd,ik) = sevc1_new(ig+npwx,ibnd,ik) &
+                                                   & + dvpsi(ig+npwx,ibnd)
               ENDDO
            ENDDO
         ENDIF
@@ -384,7 +363,8 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
      !    evc1_new = S^{-1} * sevc1_new
      !    If not ultrasoft: evc1_new = sevc1_new
      !
-     CALL sm1_psi(.FALSE.,ik, npwx, npwq, nbnd_occ(ikk), sevc1_new(1,1,ik), evc1_new(1,1,ik))
+     CALL lr_sm1_psiq (.FALSE., ik, npwx, npwq, igkq, nbnd_occ(ikk), &
+                         & sevc1_new(1,1,ik), evc1_new(1,1,ik))
      !
   ENDDO ! loop on ik
   !
@@ -409,173 +389,5 @@ SUBROUTINE lr_apply_liouvillian_eels ( evc1, evc1_new, sevc1_new, interaction )
   CALL stop_clock('lr_apply')
   !
   RETURN
-  !
-CONTAINS
-
-!-------------------------------------------------------------------------
-SUBROUTINE lr_dv_of_drho_eels (dvscf)
-  !-----------------------------------------------------------------------
-  !
-  ! This subroutine computes the change of the self consistent potential
-  ! (Hartree and XC) due to the perturbation.
-  ! Inspired by PH/dv_of_drho.f90
-  !
-  ! Written by I. Timrov, Feb 2015
-  !
-  USE kinds,             ONLY : DP
-  USE constants,         ONLY : e2, fpi
-  USE fft_base,          ONLY : dfftp
-  USE fft_interfaces,    ONLY : fwfft, invfft
-  USE gvect,             ONLY : nl, ngm, g, nlm
-  USE cell_base,         ONLY : alat, tpiba2, omega
-  USE noncollin_module,  ONLY : nspin_lsda, nspin_mag, nspin_gga
-  USE funct,             ONLY : dft_is_gradient
-  USE scf,               ONLY : rho, rho_core
-  USE nlcc_ph,           ONLY : nlcc_any
-  USE control_ph,        ONLY : lrpa
-  USE control_flags,     ONLY : gamma_only
-  USE lr_variables,      ONLY : clfe  !eps
-
-  USE gc_lr,             ONLY : grho, dvxc_rr,  dvxc_sr,  dvxc_ss, dvxc_s
-  USE eqv,               ONLY : dmuxc
-  USE qpoint,            ONLY : xq
-
-  IMPLICIT NONE
-
-  COMPLEX(DP), INTENT(inout):: dvscf(dfftp%nnr, nspin_mag)
-  ! input:  the change of the charge density
-  ! output: the change of the HXC potential
-  INTEGER :: ir, is, is1, ig, ngm_, gstart
-  ! counter on r vectors
-  ! counter on spin polarizations
-  ! counter on g vectors
-  ! numver of G vectors to be considered
-  ! initial starting G vector
-  REAL(DP) :: qg2, fac
-  ! the modulus of (q+G)^2
-  ! the structure factor
-
-  complex(DP), allocatable :: dvaux(:,:), drhoc(:)
-  !  the change of the core charge
-  complex(DP), allocatable :: dvhart(:,:) 
-  complex(DP), allocatable :: dvaux_mt(:), rgtot(:)
-  ! auxiliary array for Martyna-Tuckerman correction in TDDFPT
-  ! total response density  
-  real(DP) :: eh_corr
-  ! Correction to response Hartree energy due to Martyna-Tuckerman correction 
-  ! (only TDDFT). Not used.
-
-  CALL start_clock ('lr_dv_of_drho_eels')
-  !
-  ALLOCATE (dvaux(dfftp%nnr,nspin_mag))
-  dvaux(:,:) = (0.d0, 0.d0)
-  !
-  ! 1) The exchange-correlation contribution is computed in real space.
-  !
-  IF (lrpa) goto 111
-  !
-  DO is = 1, nspin_mag
-     DO is1 = 1, nspin_mag
-        DO ir = 1, dfftp%nnr
-           dvaux(ir,is) = dvaux(ir,is) + dmuxc(ir,is,is1) * dvscf(ir,is1)
-        ENDDO
-     ENDDO
-  ENDDO
-  !
-  ! Add a gradient correction to XC.
-  ! If nlcc=.true. we need to add here its contribution.
-  ! grho contains the core charge.
-  !
-  fac = 1.d0 / DBLE (nspin_lsda)
-  !
-  IF (nlcc_any) THEN
-     DO is = 1, nspin_lsda
-        rho%of_r(:, is) = rho%of_r(:, is) + fac * rho_core (:)
-     ENDDO
-  ENDIF
-  !
-  IF (dft_is_gradient()) CALL dgradcorr &
-       (rho%of_r, grho, dvxc_rr, dvxc_sr, dvxc_ss, dvxc_s, xq, &
-       dvscf, dfftp%nnr, nspin_mag, nspin_gga, nl, ngm, g, alat, dvaux)
-  !
-  IF (nlcc_any) THEN
-     DO is = 1, nspin_lsda
-        rho%of_r(:, is) = rho%of_r(:, is) - fac * rho_core (:)
-     ENDDO
-  ENDIF
-  !
-111 CONTINUE
-  !
-  ! Copy the total (up+down) delta rho in dvscf(*,1) and go to G-space
-  !
-  IF (nspin_mag == 2) THEN
-     dvscf(:,1) = dvscf(:,1) + dvscf(:,2)
-  ENDIF
-  !
-  CALL fwfft ('Dense', dvscf(:,1), dfftp)
-  !
-  ! 2) The Hartree contribution is computed in reciprocal space.
-  !
-  ! An extension to gamma_ionly case can be done from PH/dv_of_drho.f90
-  !
-  IF (gamma_only)  CALL errore( 'lr_dv_of_drho_eels', 'gamma_only is not supported', 1 )  
-  !
-  !IF (eps) THEN
-  !   ! No G=0 term
-  !   gstart = 2 
-  !ELSE
-  !   ! With G=0 term
-  !   gstart = 1
-  !ENDIF 
-  !
-  gstart = 1
-  !
-  IF (clfe) THEN
-     ! All G vectors are considered
-     ngm_ = ngm
-  ELSE
-     ! Only G=0 is considered
-     ngm_ = 1
-  ENDIF
-  !
-  !IF (eps .AND. .NOT.clfe) CALL errore( 'lr_dv_of_drho_eels', &
-  !             & 'No Hartree term, because eps=.true. and clfe=.false.', 1 )
-  ! 
-  DO is = 1, nspin_lsda
-     !
-     ! FFT from R-space to G-space.
-     !
-     CALL fwfft ('Dense', dvaux (:, is), dfftp)
-     ! 
-     DO ig = gstart, ngm_
-        !
-        qg2 = (g(1,ig)+xq(1))**2 + (g(2,ig)+xq(2))**2 + (g(3,ig)+xq(3))**2
-        !
-        ! Hartree term: 4*pi*e2/|q+G|^2 * n'(G)
-        !  
-        IF (qg2 > 1.d-8) THEN
-             dvaux(nl(ig),is) = dvaux(nl(ig),is) + &
-                                e2 * fpi * dvscf(nl(ig),1) / (tpiba2 * qg2)
-        ENDIF
-        !
-     ENDDO
-     !
-     ! back-FFT from G-space to R-space
-     !
-     CALL invfft ('Dense', dvaux (:, is), dfftp)
-     !
-  ENDDO
-  !
-  ! At the end the two contributes are added
-  !  
-  dvscf (:,:) = dvaux (:,:)
-  !
-  DEALLOCATE(dvaux)
-  !
-  CALL stop_clock ('lr_dv_of_drho_eels')
-  !
-  RETURN
-  !
-END SUBROUTINE lr_dv_of_drho_eels
   !
 END SUBROUTINE lr_apply_liouvillian_eels

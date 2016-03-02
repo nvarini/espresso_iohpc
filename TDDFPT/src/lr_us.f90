@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2015 Quantum ESPRESSO group
+! Copyright (C) 2001-2016 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -23,7 +23,7 @@ SUBROUTINE lr_apply_s(vect, svect)
     USE io_global,          ONLY : stdout
     USE uspp,               ONLY : okvan, vkb, nkb
     USE wvfct,              ONLY : npwx, npw, nbnd
-    USE klist,              ONLY : nks,xk
+    USE klist,              ONLY : nks, xk, ngk, igk_k
     USE becmod,             ONLY : becp, calbec
     USE noncollin_module,   ONLY : npol
     USE lr_variables,       ONLY : eels, lr_verbosity
@@ -70,10 +70,9 @@ SUBROUTINE lr_apply_s_optical()
     ! Optical case
     !
     USE control_flags,    ONLY : gamma_only
-    USE realus,           ONLY : real_space, invfft_orbital_gamma,             &
+    USE realus,           ONLY : real_space, invfft_orbital_gamma,           &
                                & fwfft_orbital_gamma, calbec_rs_gamma,       &
-                               & v_loc_psir, igk_k,npw_k, real_space_debug, &
-                               & s_psir_gamma
+                               & v_loc_psir, real_space_debug, s_psir_gamma
     !
     IMPLICIT NONE   
     !
@@ -105,9 +104,9 @@ SUBROUTINE lr_apply_s_optical()
        !
        DO ik = 1, nksq
           !
-          CALL init_us_2(npw_k(ik),igk_k(1,ik),xk(1,ik),vkb)
-          CALL calbec(npw_k(ik),vkb,vect(:,:,ik),becp)
-          CALL s_psi(npwx,npw_k(ik),nbnd,vect(1,1,ik),svect(1,1,ik))
+          CALL init_us_2(ngk(ik),igk_k(1,ik),xk(1,ik),vkb)
+          CALL calbec(ngk(ik),vkb,vect(:,:,ik),becp)
+          CALL s_psi(npwx,ngk(ik),nbnd,vect(1,1,ik),svect(1,1,ik))
           !
        ENDDO
        !
@@ -122,7 +121,6 @@ SUBROUTINE lr_apply_s_eels()
    ! EELS
    ! Written by I. Timrov (2013)
    !
-   USE lr_variables,    ONLY : lr_periodic
    USE qpoint,          ONLY : nksq, npwq, igkq, ikks, ikqs
    USE gvect,           ONLY : ngm, g
    USE wvfct,           ONLY : g2kin
@@ -135,13 +133,8 @@ SUBROUTINE lr_apply_s_eels()
    !
    DO ik = 1, nksq
       !
-      IF (lr_periodic) THEN
-          ikk = ik
-          ikq = ik
-      ELSE
-          ikk = ikks(ik)
-          ikq = ikqs(ik)
-      ENDIF
+      ikk = ikks(ik)
+      ikq = ikqs(ik)
       !
       ! Determination of npwq, igkq; g2kin is used here as a workspace.
       !

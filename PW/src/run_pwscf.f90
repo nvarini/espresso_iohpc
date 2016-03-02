@@ -41,7 +41,7 @@ SUBROUTINE run_pwscf ( exit_status )
   USE io_hpc,           ONLY : finalize_io_hpc
 #endif
 #if defined __HDF5
-  USE hdf5_pw
+  USE hdf5_qe
 #endif
   !
   IMPLICIT NONE

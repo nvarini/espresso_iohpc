@@ -133,6 +133,7 @@ invmat.o : kind.o
 io_files.o : io_global.o
 io_files.o : kind.o
 io_files.o : parameters.o
+io_hpc.o : hdf5_qe.o
 ions_base.o : cell_base.o
 ions_base.o : constants.o
 ions_base.o : io_global.o
@@ -437,6 +438,7 @@ xml_io_base.o : mp_images.o
 xml_io_base.o : mp_wave.o
 xml_io_base.o : parser.o
 xml_io_base.o : wrappers.o
+xml_io_base.o : hdf5_qe.o
 ylmr2.o : constants.o
 ylmr2.o : kind.o
 zdotc_wrapper.o : kind.o

@@ -146,7 +146,6 @@ bp_c_phase.o : ../../Modules/becmod.o
 bp_c_phase.o : ../../Modules/cell_base.o
 bp_c_phase.o : ../../Modules/constants.o
 bp_c_phase.o : ../../Modules/fft_base.o
-bp_c_phase.o : ../../Modules/gvecw.o
 bp_c_phase.o : ../../Modules/io_files.o
 bp_c_phase.o : ../../Modules/io_global.o
 bp_c_phase.o : ../../Modules/ions_base.o
@@ -180,7 +179,7 @@ bp_qvan3.o : pwcom.o
 bp_strings.o : ../../Modules/kind.o
 buffers.o : ../../Modules/io_files.o
 buffers.o : ../../Modules/kind.o
-buffers.o : hdf5_pw.o
+buffers.o : ../../Modules/hdf5_qe.o
 c_bands.o : ../../Modules/becmod.o
 c_bands.o : ../../Modules/check_stop.o
 c_bands.o : ../../Modules/control_flags.o
@@ -205,7 +204,6 @@ c_phase_field.o : ../../Modules/becmod.o
 c_phase_field.o : ../../Modules/cell_base.o
 c_phase_field.o : ../../Modules/constants.o
 c_phase_field.o : ../../Modules/fft_base.o
-c_phase_field.o : ../../Modules/gvecw.o
 c_phase_field.o : ../../Modules/io_files.o
 c_phase_field.o : ../../Modules/io_global.o
 c_phase_field.o : ../../Modules/ions_base.o
@@ -486,7 +484,6 @@ fcp.o : ../../Modules/cell_base.o
 fcp.o : ../../Modules/constants.o
 fcp.o : ../../Modules/control_flags.o
 fcp.o : ../../Modules/fcp_variables.o
-fcp.o : ../../Modules/input_parameters.o
 fcp.o : ../../Modules/io_files.o
 fcp.o : ../../Modules/io_global.o
 fcp.o : ../../Modules/ions_base.o
@@ -596,7 +593,6 @@ forces_bp_efield.o : ../../Modules/cell_base.o
 forces_bp_efield.o : ../../Modules/clocks.o
 forces_bp_efield.o : ../../Modules/constants.o
 forces_bp_efield.o : ../../Modules/fft_base.o
-forces_bp_efield.o : ../../Modules/gvecw.o
 forces_bp_efield.o : ../../Modules/io_files.o
 forces_bp_efield.o : ../../Modules/io_global.o
 forces_bp_efield.o : ../../Modules/ions_base.o
@@ -714,7 +710,6 @@ h_epsi_her_set.o : ../../Modules/becmod.o
 h_epsi_her_set.o : ../../Modules/cell_base.o
 h_epsi_her_set.o : ../../Modules/constants.o
 h_epsi_her_set.o : ../../Modules/fft_base.o
-h_epsi_her_set.o : ../../Modules/gvecw.o
 h_epsi_her_set.o : ../../Modules/io_files.o
 h_epsi_her_set.o : ../../Modules/ions_base.o
 h_epsi_her_set.o : ../../Modules/kind.o
@@ -753,14 +748,13 @@ h_psi_meta.o : ../../Modules/recvec.o
 h_psi_meta.o : ../../Modules/wavefunctions.o
 h_psi_meta.o : pwcom.o
 h_psi_meta.o : scf_mod.o
-hdf5_pw.o : ../../Modules/kind.o
 hinit0.o : ../../Modules/cell_base.o
 hinit0.o : ../../Modules/control_flags.o
 hinit0.o : ../../Modules/fft_base.o
 hinit0.o : ../../Modules/gvecw.o
-hinit0.o : ../../Modules/io_files.o
 hinit0.o : ../../Modules/io_global.o
 hinit0.o : ../../Modules/ions_base.o
+hinit0.o : ../../Modules/kind.o
 hinit0.o : ../../Modules/recvec.o
 hinit0.o : atomic_wfc_mod.o
 hinit0.o : ldaU.o
@@ -816,7 +810,7 @@ init_run.o : ../../Modules/recvec_subs.o
 init_run.o : ../../Modules/tsvdw.o
 init_run.o : ../../Modules/uspp.o
 init_run.o : ../../Modules/wannier_new.o
-init_run.o : io_hpc.o
+init_run.o : ../../Modules/io_hpc.o
 init_run.o : bp_mod.o
 init_run.o : dynamics_module.o
 init_run.o : esm.o
@@ -902,7 +896,6 @@ interpolate.o : ../../Modules/control_flags.o
 interpolate.o : ../../Modules/fft_base.o
 interpolate.o : ../../Modules/kind.o
 interpolate.o : ../../Modules/recvec.o
-io_hpc.o : hdf5_pw.o
 io_rho_xml.o : ../../Modules/fft_base.o
 io_rho_xml.o : ../../Modules/funct.o
 io_rho_xml.o : ../../Modules/io_files.o
@@ -1105,7 +1098,6 @@ orbm_kubo.o : ../../Modules/becmod.o
 orbm_kubo.o : ../../Modules/cell_base.o
 orbm_kubo.o : ../../Modules/constants.o
 orbm_kubo.o : ../../Modules/fft_base.o
-orbm_kubo.o : ../../Modules/gvecw.o
 orbm_kubo.o : ../../Modules/io_files.o
 orbm_kubo.o : ../../Modules/io_global.o
 orbm_kubo.o : ../../Modules/kind.o
@@ -1297,7 +1289,6 @@ potinit.o : io_rho_xml.o
 potinit.o : ldaU.o
 potinit.o : paw_init.o
 potinit.o : paw_onecenter.o
-potinit.o : pw_restart.o
 potinit.o : pwcom.o
 potinit.o : scf_mod.o
 print_clock_pw.o : ../../Modules/control_flags.o
@@ -1314,6 +1305,7 @@ print_ks_energies.o : ../../Modules/io_global.o
 print_ks_energies.o : ../../Modules/kind.o
 print_ks_energies.o : ../../Modules/mp.o
 print_ks_energies.o : ../../Modules/mp_bands.o
+print_ks_energies.o : ../../Modules/mp_pools.o
 print_ks_energies.o : pwcom.o
 punch.o : ../../Modules/control_flags.o
 punch.o : ../../Modules/io_files.o
@@ -1460,6 +1452,7 @@ read_file.o : ../../Modules/wavefunctions.o
 read_file.o : ../../Modules/xml_io_base.o
 read_file.o : buffers.o
 read_file.o : esm.o
+read_file.o : io_rho_xml.o
 read_file.o : ldaU.o
 read_file.o : newd.o
 read_file.o : paw_init.o
@@ -1479,7 +1472,6 @@ realus.o : ../../Modules/constants.o
 realus.o : ../../Modules/control_flags.o
 realus.o : ../../Modules/fft_base.o
 realus.o : ../../Modules/funct.o
-realus.o : ../../Modules/gvecw.o
 realus.o : ../../Modules/io_global.o
 realus.o : ../../Modules/ions_base.o
 realus.o : ../../Modules/kind.o
@@ -1573,6 +1565,7 @@ save_in_electrons.o : ../../Modules/io_global.o
 save_in_electrons.o : ../../Modules/kind.o
 save_in_electrons.o : pwcom.o
 scale_h.o : ../../Modules/cell_base.o
+scale_h.o : ../../Modules/constants.o
 scale_h.o : ../../Modules/control_flags.o
 scale_h.o : ../../Modules/funct.o
 scale_h.o : ../../Modules/input_parameters.o

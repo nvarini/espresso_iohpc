@@ -12,7 +12,7 @@
 SUBROUTINE do_setup
   !-----------------------------------------------------------------------
   !
-  USE pwcom,                  ONLY : ecutwfc,npw,nbnd,nkstot,nspin,nelec,nelup,neldw,et,wk,wg,lspinorb,domag,lsda, &
+  USE pwcom,                  ONLY : npw,nbnd,nkstot,nspin,nelec,nelup,neldw,et,wk,wg,lspinorb,domag,lsda, &
                                      isk,nks,two_fermi_energies
   USE fixed_occ,              ONLY : tfixed_occ,f_inp
   USE kinds,                  ONLY : DP
@@ -27,6 +27,7 @@ SUBROUTINE do_setup
   USE fft_base,               ONLY : dfftp,dffts
   USE gvecs,                  ONLY : ngms_g, ngms
   USE gvect,                  ONLY : ngm_g, ngm
+  USE gvecw,                  ONLY : ecutwfc
   USE io_push
   !
   IMPLICIT NONE

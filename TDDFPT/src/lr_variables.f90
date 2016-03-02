@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2015 Quantum ESPRESSO group
+! Copyright (C) 2001-2016 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -27,26 +27,8 @@ MODULE lr_variables
   INTEGER :: size_evc
   CHARACTER (len=24) :: bgz_suffix
   !
-  !------------------------------------------------------------------------!
-  ! Variables for TD-HF using Dario Rocca's BSE routines.
-  !------------------------------------------------------------------------!
-  !
   LOGICAL :: lr_exx
-  REAL(kind=dp), ALLOCATABLE :: xkk_m(:,:), xkk_p(:,:), weight_kk(:)
-  REAL(kind=dp) :: exxdiv
-  REAL(kind=dp) :: ecutfock_
-  !  REAL(kind=dp), ALLOCATABLE :: revc_int(:,:)
-  !  COMPLEX(kind=dp), ALLOCATABLE :: revc_int_c(:,:,:)
-  !
-  INTEGER, ALLOCATABLE :: &
-           igkk_kk_m(:,:),&
-           npw_kk_m(:),   &
-           ind_kk_m(:,:), &
-           igkk_kk_p(:,:),&
-           npw_kk_p(:),   &
-           ind_kk_p(:,:)
   REAL(kind=dp) :: scissor
-  CHARACTER(len=200) :: eig_dir
   !
   !------------------------------------------------------------------------!
   ! Variables for EELS
@@ -55,12 +37,8 @@ MODULE lr_variables
   LOGICAL :: eels=.false.      ! If .true. then EELS calculation is activated
   REAL(kind=dp) :: q1,q2,q3    ! Components of the q-vector in units of 2*pi/a
                                ! in Cartesian coordinates
-  LOGICAL :: lr_periodic       ! If .true. the perturbation is periodic (q=G)
   CHARACTER(len=30) :: approximation ! Level of approximation in TDDFPT  
-  LOGICAL :: clfe              ! Crystal Local Field Effects (CLFE) are used 
-                               ! if clfe=.true.
-  !LOGICAL :: eps               ! If eps=.true. one computes the dielectric
-  !                             ! function (not the inverse) for a fixed q
+  CHARACTER(LEN=256) :: tmp_dir_lr   ! Name of a temporary directory 
   !
   !------------------------------------------------------------------------!
   !
@@ -165,170 +143,4 @@ MODULE lr_variables
   INTEGER :: plot_type          ! dumps rho as: 1=xyzd 2=xsf 3=cube
   INTEGER :: sum_rule           ! currently supported sum rules : -2 for alpha(w->0)
   !
-  ! I. Timrov's comment: It is not a proper place for debugging subroutines
-  !
-  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  !! Debugging subroutines
-  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  
-CONTAINS
-
-SUBROUTINE check_vector_gamma (x)
-   !----------------------------------------------------------------------------
-   ! Checks the inner product for a given vector, and its imaginary and real component
-   ! input: evc
-   ! output : screen output
-   !
-   USE mp_global,            ONLY : inter_pool_comm, intra_bgrp_comm
-   USE mp,                   ONLY : mp_sum
-   USE realus,               ONLY : npw_k
-   USE gvect,                ONLY : gstart
-   USE io_global,            ONLY : stdout
-   !
-   IMPLICIT NONE
-   !input/output
-   COMPLEX(kind=dp),INTENT(in)  :: x(:)
-   !
-   ! local variables
-   !
-   REAL(kind=dp) :: temp_gamma
-   REAL(kind=dp), EXTERNAL :: DDOT
-   !
-   temp_gamma = 2.D0*DDOT(2*npw_k(1),x(:),1,x(:),1)
-   !    
-   IF (gstart==2) temp_gamma = temp_gamma - dble(x(1))*dble(x(1))
-   ! 
-#ifdef __MPI
-   CALL mp_sum(temp_gamma, intra_bgrp_comm)
-#endif
-   !    
-   WRITE(stdout,'("<x> = ",E15.8)') temp_gamma
-   !
-   RETURN
-   !  
-END SUBROUTINE check_vector_gamma
-
-SUBROUTINE check_vector_f (x)
-   !-----------------------------------------------------------------------
-   !
-   ! Checks the inner product for a given vector, and its imaginary and real component
-   ! input: evc
-   ! output: screen output
-   ! 
-   USE mp_global,            ONLY : inter_pool_comm, intra_bgrp_comm
-   USE mp,                   ONLY : mp_sum
-   USE realus,               ONLY : npw_k
-   USE gvect,                ONLY : gstart
-   USE io_global,            ONLY : stdout
-   !
-   IMPLICIT NONE
-   !input/output
-   COMPLEX(kind=dp),INTENT(in)  :: x(:)
-   !
-   ! local variables
-   !
-   COMPLEX(kind=dp) :: temp_f
-   COMPLEX(kind=dp), EXTERNAL :: ZDOTC
-   !
-   temp_f = ZDOTC(npw_k(1),x(:),1,x(:),1)
-   !
-#ifdef __MPI
-   CALL mp_sum(temp_f, intra_bgrp_comm)
-#endif
-   !
-   WRITE(stdout,'("<x> = ",2E15.8,1X)') temp_f
-   !
-   RETURN
-   ! 
-END SUBROUTINE check_vector_f
-
-SUBROUTINE check_all_bands_gamma (x,sx,nbnd1,nbnd2)
-  !----------------------------------------------------------------------
-  !
-  ! Checks all bands of given KS states for orthoganilty
-  ! input: evc and sevc
-  ! output : screen output
-  ! 
-  USE mp_global,            ONLY : inter_pool_comm, intra_bgrp_comm
-  USE mp,                   ONLY : mp_sum
-  USE realus,               ONLY : npw_k
-  USE io_global,            ONLY : stdout
-  USE gvect,                ONLY : gstart
-  !
-  IMPLICIT NONE
-  !input/output
-  INTEGER, INTENT(in) :: nbnd1,nbnd2 !Total number of bands for x and sx
-  COMPLEX(kind=dp),INTENT(in) :: x(:,:), sx(:,:)
-  !
-  ! local variables
-  !
-  INTEGER :: ibnd, jbnd
-  REAL(kind=dp) :: temp_gamma
-  REAL(kind=dp), EXTERNAL :: DDOT
-  !
-  DO ibnd=1,nbnd1
-     DO jbnd=ibnd,nbnd2
-        !
-        temp_gamma = 2.D0*DDOT(2*npw_k(1),x(:,ibnd),1,sx(:,jbnd),1)
-        !
-        IF (gstart==2) temp_gamma = temp_gamma - dble(x(1,ibnd))*dble(sx(1,jbnd))
-        !
-#ifdef __MPI
-        CALL mp_sum(temp_gamma, intra_bgrp_comm)
-#endif
-        !
-        WRITE(stdout,'("<x,",I02,"|S|x,",I02,"> =",E15.8)') ibnd,jbnd,temp_gamma
-     ENDDO
-  ENDDO
-  !
-  RETURN
-  !
-END SUBROUTINE check_all_bands_gamma
-
-SUBROUTINE check_density_gamma (rx,nbnd)
-  !---------------------------------------------------------------------------------
-  !
-  ! Checks the contirbution of a given function transformed into real space
-  ! input: revc
-  ! output : screen output
-  !
-  USE mp_global,            ONLY : inter_pool_comm, intra_bgrp_comm
-  USE mp,                   ONLY : mp_sum
-  USE realus,               ONLY : npw_k
-  USE wvfct,                ONLY : wg
-  USE fft_base,             ONLY : dfftp
-  USE io_global,            ONLY : stdout
-  USE cell_base,            ONLY : omega
-  !
-  IMPLICIT NONE
-  !input/output
-  INTEGER, INTENT(in)          :: nbnd !Total number of bands for x and sx
-  COMPLEX(kind=dp),INTENT(in)  :: rx(:,:)
-  ! 
-  ! local variables
-  !
-  INTEGER :: ibnd
-  REAL(kind=dp) :: temp_gamma,w1,w2
-  !
-  DO ibnd=1,nbnd,2
-     w1 = wg(ibnd,1)/omega
-     !
-     IF (ibnd<nbnd) THEN
-        w2 = wg(ibnd+1,1)/omega
-     ELSE
-        w2 = w1
-     ENDIF
-     temp_gamma = sum(w1*dble(rx(1:dfftp%nnr,ibnd))*dble(rx(1:dfftp%nnr,ibnd))&
-                + w2*aimag(rx(1:dfftp%nnr,ibnd))*aimag(rx(1:dfftp%nnr,ibnd)))
-#ifdef __MPI
-     CALL mp_sum(temp_gamma, intra_bgrp_comm)
-#endif
-     WRITE(stdout,'("Contribution of bands ",I02," and ",I02," to total density",E15.8)') ibnd,ibnd+1,temp_gamma
-     !    
-  ENDDO
-  !
-  RETURN
-  !
-END SUBROUTINE check_density_gamma
-
 END MODULE lr_variables

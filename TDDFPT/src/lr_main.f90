@@ -52,10 +52,6 @@ PROGRAM lr_main
   USE plugin_flags,          ONLY : use_environ
   USE environ_info,          ONLY : environ_summary
 #endif
-
-  !Debugging
-  USE lr_variables,          ONLY : check_all_bands_gamma, check_density_gamma, &
-                                  & check_vector_gamma
   !
   IMPLICIT NONE
   !
@@ -236,7 +232,7 @@ PROGRAM lr_main
         !
         LR_iteration = iteration
         !
-        WRITE(stdout,'(/5x,"Lanczos iteration:",1x,i6,3x"Pol:",i1,i8)') LR_iteration, ip
+        WRITE(stdout,'(/5x,"Lanczos iteration:",1x,i6,3x,"Pol:",i1,i8)') LR_iteration, ip
         !
         CALL one_lanczos_step()
         !

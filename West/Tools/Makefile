@@ -3,13 +3,13 @@
 include ../../make.sys
 
 # location of needed modules
-MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules \
+MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules $(MOD_FLAG)../../LAXlib \
           $(MOD_FLAG)../../FFTXlib $(MOD_FLAG)../../PW/src \
           $(MOD_FLAG)../Modules \
           $(MOD_FLAG).
 IFLAGS=
 
-LIBOBJS        = ../../flib/ptools.a ../../flib/flib.a ../../clib/clib.a ../../iotk/src/libiotk.a
+LIBOBJS        = ../../clib/clib.a ../../iotk/src/libiotk.a
 
 TOOLS_OBJS = \
 exx_go.o \
@@ -30,7 +30,7 @@ west_environment.o \
 bar.o  
 
 PWOBJS = ../../PW/src/libpw.a
-QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a
+QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a ../../LAXlib/libqela.a
 
 TLDEPS= bindir mods libs pw
 

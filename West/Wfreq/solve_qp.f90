@@ -23,7 +23,7 @@ SUBROUTINE solve_qp()
   USE mp_world,             ONLY : mpime,root
   USE mp,                   ONLY : mp_barrier,mp_sum
   USE io_global,            ONLY : stdout, ionode
-  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,ecutwfc,current_k
+  USE pwcom,                ONLY : npw,npwx,et,nks,current_spin,isk,xk,nbnd,lsda,igk,g2kin,current_k
   USE io_push,              ONLY : io_push_title,io_push_bar
   USE constants,            ONLY : rytoev
   USE west_io,              ONLY : serial_table_output

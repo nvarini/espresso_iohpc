@@ -195,6 +195,7 @@ subroutine diropn (unit, extension, recl, exst, tmp_dir_)
   ! real*8 words times DIRECT_IO_FACTOR (may depend on the compiler)
   !
   USE kinds
+  USE mp_world, ONLY : mpime
   implicit none
   !
   !    first the input variables
