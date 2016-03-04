@@ -4,7 +4,7 @@ module hdf5_qe
   USE io_global, ONLY : ionode
 
 
-  TYPE HDF5_type_2d
+  TYPE HDF5_type
    INTEGER(HID_T) :: file_id       ! File identifier 
    INTEGER(HID_T) :: dset_id       ! Dataset identifier 
    INTEGER(HID_T) :: filespace     ! Dataspace identifier in file 
@@ -18,9 +18,9 @@ module hdf5_qe
    INTEGER          :: comm
    INTEGER(HSIZE_T), DIMENSION(1:2) :: maxdims
    INTEGER(HSIZE_T), DIMENSION(1:2) :: chunk_dim
-  END TYPE HDF5_type_2d
+  END TYPE HDF5_type
 
-  TYPE(HDF5_type_2d), save :: evc_hdf5, evc_hdf5_write
+  TYPE(HDF5_type), save :: evc_hdf5, evc_hdf5_write
   INTEGER, save ::  off_npw, npw_g
 
   INTERFACE write_data_hdf5
@@ -65,7 +65,7 @@ module hdf5_qe
    use parallel_include
    use mp_world,  only : mpime
    implicit none
-   type(HDF5_type_2d), intent(inout) :: hdf5desc 
+   type(HDF5_type), intent(inout) :: hdf5desc 
    character(len=*), intent(inout) :: filename
    logical,  intent(in) :: hyperslab, write
    integer(HID_T) :: plist_id
@@ -94,7 +94,7 @@ module hdf5_qe
   subroutine define_dataset_hdf5(hdf5desc, hyperslab)
     USE mp_world,             ONLY : mpime
    implicit none
-   type(HDF5_type_2d), intent(inout) :: hdf5desc
+   type(HDF5_type), intent(inout) :: hdf5desc
    logical, intent(in) :: hyperslab
    integer :: error
 
@@ -133,7 +133,7 @@ module hdf5_qe
     USE mp_world, only : mpime
     implicit none
     COMPLEX(DP), intent(in) :: var(:,:) 
-    type(HDF5_type_2d), intent(inout) :: hdf5desc
+    type(HDF5_type), intent(inout) :: hdf5desc
     INTEGER, intent(in)  ::  extend,tsize
     integer :: error
     
@@ -157,7 +157,7 @@ module hdf5_qe
     USE mp_world, only : mpime
     implicit none
     COMPLEX(DP), intent(in) :: var(:) 
-    type(HDF5_type_2d), intent(inout) :: hdf5desc
+    type(HDF5_type), intent(inout) :: hdf5desc
     INTEGER, intent(in)  ::  extend,tsize
     logical, intent(in)  :: write
     integer :: error
@@ -183,7 +183,7 @@ module hdf5_qe
    USE ISO_C_BINDING
    USE mp_world, ONLY : mpime
    implicit none
-   type(HDF5_type_2d), intent(inout) :: hdf5desc
+   type(HDF5_type), intent(inout) :: hdf5desc
    complex(kind=dp), intent(inout) :: data(:,:)
    logical, intent(in) :: hyperslab
    integer, intent(in), optional :: niter
@@ -224,7 +224,7 @@ module hdf5_qe
    USE ISO_C_BINDING
    USE mp_world, ONLY : mpime
    implicit none
-   type(HDF5_type_2d), intent(inout) :: hdf5desc
+   type(HDF5_type), intent(inout) :: hdf5desc
    complex(kind=dp), intent(inout) :: data(:)
    logical, intent(in) :: hyperslab
    integer, intent(in), optional :: niter
@@ -262,7 +262,7 @@ module hdf5_qe
 
 
   subroutine  read_data_hdf5_2d(hdf5desc, data, hyperslab)
-   type(HDF5_type_2d), intent(inout) :: hdf5desc
+   type(HDF5_type), intent(inout) :: hdf5desc
    complex(kind=dp), intent(inout) :: data(:,:)
    logical, intent(in) :: hyperslab
    integer :: error
@@ -289,7 +289,7 @@ module hdf5_qe
   end subroutine read_data_hdf5_2d
 
   subroutine  read_data_hdf5_1d(hdf5desc, data, hyperslab)
-   type(HDF5_type_2d), intent(inout) :: hdf5desc
+   type(HDF5_type), intent(inout) :: hdf5desc
    complex(kind=dp), intent(inout) :: data(:)
    logical, intent(in) :: hyperslab
    integer :: error
@@ -319,7 +319,7 @@ module hdf5_qe
 
   subroutine close_fileandprop_hdf5(hdf5desc)
    implicit none
-   type(HDF5_type_2d), intent(inout) :: hdf5desc
+   type(HDF5_type), intent(inout) :: hdf5desc
    integer error
    ! Close dataspaces.
    !
@@ -362,7 +362,7 @@ module hdf5_qe
     USE kinds, only : DP
     implicit none
     COMPLEX(DP), intent(in) :: var(:,:) 
-    type(HDF5_type_2d), intent(inout) :: hdf5desc
+    type(HDF5_type), intent(inout) :: hdf5desc
     INTEGER, intent(in)  :: offset, nglobal,tsize
     
     hdf5desc%counts(1)   = size(var(:,1))*tsize
@@ -379,7 +379,7 @@ module hdf5_qe
     USE kinds, only : DP
     implicit none
     COMPLEX(DP), intent(in) :: var(:) 
-    type(HDF5_type_2d), intent(inout) :: hdf5desc
+    type(HDF5_type), intent(inout) :: hdf5desc
     INTEGER, intent(in)  :: offset, nglobal,tsize
     
     hdf5desc%counts(1)   = size(var)*tsize
@@ -392,7 +392,7 @@ module hdf5_qe
   subroutine prepare_for_writing(hdf5desc,comm,chunk_dim,filename_input)
     USE mp_world,             ONLY : mpime
     implicit none
-    type(HDF5_type_2d), intent(inout) :: hdf5desc
+    type(HDF5_type), intent(inout) :: hdf5desc
     character(len=*), intent(in):: filename_input
     integer, intent(in) :: comm, chunk_dim
     character(len=256) filename
@@ -406,10 +406,6 @@ module hdf5_qe
 
     filename = trim(filename_input) //".wfchdf5"
     CALL setup_file_property_hdf5(hdf5desc,filename ,.false.,.true.)
-    !call errore('','',1)
-    !CALL prepare_index_hdf5(npwx,off_npw,npw_g,hdf5desc%comm,nproc)
-    !CALL set_index_hdf5(evc_hdf5,evc,off_npw,npw_g,2)
-    !evc_hdf5%size(1) = npwx*2
     hdf5desc%offset(1) = 0
     hdf5desc%counts(1) = chunk_dim
     hdf5desc%size(1) = chunk_dim
@@ -420,7 +416,7 @@ module hdf5_qe
   subroutine prepare_for_reading(hdf5desc,comm,chunk_dim,filename_input)
     USE mp_world,             ONLY : mpime
     implicit none
-    type(HDF5_type_2d), intent(inout) :: hdf5desc
+    type(HDF5_type), intent(inout) :: hdf5desc
     character(len=*), intent(in):: filename_input
     integer, intent(in) :: comm, chunk_dim
     character(len=256) filename
@@ -434,14 +430,9 @@ module hdf5_qe
 
     filename = trim(filename_input) //".wfchdf5"
     CALL setup_file_property_hdf5(hdf5desc,filename ,.false.,.false.)
-    !CALL prepare_index_hdf5(npwx,off_npw,npw_g,hdf5desc%comm,nproc)
-    !CALL set_index_hdf5(evc_hdf5,evc,off_npw,npw_g,2)
-    !evc_hdf5%size(1) = npwx*2
     hdf5desc%offset(1) = 0
     hdf5desc%counts(1) = chunk_dim
     hdf5desc%size(1) = chunk_dim
-    !CALL define_dataset_hdf5(hdf5desc,.false.)
-    !call errore('','',1)
 
   end subroutine prepare_for_reading
 

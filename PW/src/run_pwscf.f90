@@ -199,9 +199,6 @@ SUBROUTINE run_pwscf ( exit_status )
   !
 
 #if defined __IO_HPC
-#if defined __HDF5
-  !CALL close_fileandprop_hdf5(evc_hdf5)
-#endif
   CALL finalize_io_hpc(1)
 #endif
 

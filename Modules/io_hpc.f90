@@ -25,11 +25,7 @@ module io_hpc
    
     if(which.eq.1)then
       call initialize_hdf5()
-      evc_hdf5%dsetname="evc"
-      evc_hdf5%comm=comm
-      evc_hdf5%rank =2 
-      evc_hdf5%chunk_dim=(/npwx,nbnd/)
-
+      call initialize_hdf5_array(evc_hdf5,comm,npwx,nbnd)
       !filename=trim(wfc_dir) //TRIM(prefix) //".wfchdf5"//trim(mpimestring)
       filename=trim(tmp_dir) //TRIM(prefix) //".wfchdf5"//trim(mpimestring)
       if(write.eq..true.)then
@@ -39,12 +35,7 @@ module io_hpc
       endif
       CALL prepare_index_hdf5(npwx,off_npw,npw_g,evc_hdf5%comm,nproc)
       CALL set_index_hdf5(evc_hdf5,data,off_npw,npw_g,2)
-      evc_hdf5%size(1) = npwx*2
-      evc_hdf5%size(2) = nbnd
-      evc_hdf5%offset(1) = 0
-      evc_hdf5%offset(2) = 0
       if(write.eq..true.)CALL define_dataset_hdf5(evc_hdf5,.false.)
-      !call errore('','',2)
     else
     endif
   end subroutine initialize_io_hpc
@@ -60,7 +51,22 @@ module io_hpc
     endif
   
   end subroutine finalize_io_hpc  
-
+   
+  subroutine initialize_hdf5_array(hdf5desc,comm,n1,n2)
+  
+    implicit none
+    integer, intent(in) :: n1, n2, comm
+    type(HDF5_type) hdf5desc
+    hdf5desc%dsetname="evc"
+    hdf5desc%comm=comm
+    hdf5desc%rank =2 
+    hdf5desc%chunk_dim=(/n1,n2/)
+    hdf5desc%size(1) = n1*2
+    hdf5desc%size(2) = n2
+    hdf5desc%offset(1) = 0
+    hdf5desc%offset(2) = 0
+   
+  end subroutine initialize_hdf5_array
   
 end module io_hpc
 

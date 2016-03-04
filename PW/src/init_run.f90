@@ -114,20 +114,11 @@ SUBROUTINE init_run()
   !
   CALL newd()
   !
-#if defined __HDF5
+#if defined __HDF5 && __IO_HPC
   CALL initialize_io_hpc(1, world_comm, evc,.true.)
+#endif
   CALL wfcinit()
-#endif
 
-#if defined __HDF5
-  !CALL initialize_io_hpc(1, world_comm)
-  !CALL setup_file_property_hdf5(evc_hdf5, "rho.hdf5")
-  !CALL prepare_index_hdf5(npwx,off_npw,npw_g,evc_hdf5%comm,nproc)
-  !CALL set_index_hdf5(evc_hdf5,evc,off_npw,npw_g,2)
-  !CALL define_dataset_hdf5(evc_hdf5)
-  !CALL write_data_hdf5(evc_hdf5,evc)
-  !CALL read_data_hdf5(evc_hdf5,evc,mpime)
-#endif
 
   !
   IF(use_wannier) CALL wannier_init()

@@ -1,5 +1,5 @@
 
-     Program PROJWFC v.5.3.0 (svn rev. 12185M) starts on  2Mar2016 at 15:48:54 
+     Program PROJWFC v.5.3.0 (svn rev. 12188M) starts on  4Mar2016 at 11: 6:36 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -237,10 +237,10 @@ Lowdin Charges:
      Atom #   2: total charge =   3.9994, p =  2.8633, pz=  0.9544, px=  0.9544, py=  0.9544, 
      Spilling Parameter:   0.0001
  
-     PROJWFC      :     0.47s CPU         0.50s WALL
+     PROJWFC      :     0.49s CPU         0.51s WALL
 
  
-   This run was terminated on:  15:48:55   2Mar2016            
+   This run was terminated on:  11: 6:37   4Mar2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
