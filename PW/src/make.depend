@@ -810,7 +810,6 @@ init_run.o : ../../Modules/recvec_subs.o
 init_run.o : ../../Modules/tsvdw.o
 init_run.o : ../../Modules/uspp.o
 init_run.o : ../../Modules/wannier_new.o
-init_run.o : ../../Modules/io_hpc.o
 init_run.o : bp_mod.o
 init_run.o : dynamics_module.o
 init_run.o : esm.o

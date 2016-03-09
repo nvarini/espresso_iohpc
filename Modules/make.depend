@@ -133,7 +133,6 @@ invmat.o : kind.o
 io_files.o : io_global.o
 io_files.o : kind.o
 io_files.o : parameters.o
-io_hpc.o : hdf5_qe.o
 ions_base.o : cell_base.o
 ions_base.o : constants.o
 ions_base.o : io_global.o

@@ -29,13 +29,10 @@ SUBROUTINE read_file()
   USE control_flags,        ONLY : io_level
   USE mp_world,             ONLY : mpime
   USE wavefunctions_module, ONLY : evc
-#if defined __IO_HPC
+#if defined __HDF5
   USE mp_world,           ONLY : nproc, mpime, world_comm
   USE wavefunctions_module,ONLY : evc
-  USE io_hpc,             ONLY : initialize_io_hpc
-#endif
-#if defined __HDF5
-  USE hdf5_qe,            ONLY : evc_hdf5, evc_hdf5_write
+  USE hdf5_qe,            ONLY : evc_hdf5, evc_hdf5_write, initialize_io_hdf5
 #endif
 
 
@@ -50,8 +47,8 @@ SUBROUTINE read_file()
      'Reading data from directory:', TRIM( tmp_dir ) // TRIM( prefix ) // '.save'
   !
   CALL read_xml_file ( )
-#if defined __IO_HPC
-  CALL initialize_io_hpc(1, world_comm, evc,.false.)
+#if defined __HDF5
+  CALL initialize_io_hdf5( evc_hdf5,world_comm, evc,.false.)
 #endif
 
   !

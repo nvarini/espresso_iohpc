@@ -32,18 +32,19 @@ SUBROUTINE wfcinit()
   USE pw_restart,           ONLY : pw_readfile
   USE mp_bands,             ONLY : nbgrp, root_bgrp,inter_bgrp_comm
   USE mp,                   ONLY : mp_bcast
-#if defined __IO_HPC && __HDF5
+#if defined  __HDF5
+  USE hdf5
   USE buffers,              ONLY : save_buffer_hdf5
-  USE hdf5_qe,              ONLY : evc_hdf5, off_npw, npw_g, read_data_hdf5
-  USE hdf5_qe,              ONLY : prepare_index_hdf5, extend_dataset_hdf5
+  USE hdf5_qe,              ONLY : evc_hdf5, off_npw, npw_g, read_data_hdf5, evc_hdf5_write
+  USE hdf5_qe,              ONLY : prepare_index_hdf5,  write_final_data
+  USE hdf5_qe,              ONLY : prepare_for_writing_final
   USE io_files,             ONLY : wfc_dir
   USE mp_world, ONLY : nproc, mpime
-  USE io_hpc,               ONLY : finalize_io_hpc
 #endif
   !
   IMPLICIT NONE
   !
-  INTEGER :: ik, ierr
+  INTEGER :: ik, ierr, error
   LOGICAL :: exst, exst_mem, exst_file
   !
   !
@@ -139,6 +140,7 @@ SUBROUTINE wfcinit()
   !
   ! ... calculate and write all starting wavefunctions to file
   !
+  !CALL prepare_for_writing_final(evc_hdf5_write,evc_hdf5_write%comm,'pippo')
   DO ik = 1, nks
      !
      ! ... Hpsi initializations: PWs, k, spin, k+G indices, kinetic energy
@@ -165,11 +167,12 @@ SUBROUTINE wfcinit()
      ! ... write  starting wavefunctions to file
      !
      IF ( nks > 1 .OR. (io_level > 1) .OR. lelfield ) THEN
-#if defined __IO_HPC
-         if(ik>1) THEN
-             CALL extend_dataset_hdf5(evc_hdf5,evc,npwx,2)
-         endif
-         CALL save_buffer_hdf5(evc_hdf5,evc,.false.,ik)
+#if defined __HDF5
+         !if(ik>1) THEN
+         !    CALL extend_dataset_hdf5(evc_hdf5,evc,npwx,2)
+         !endif
+   CALL save_buffer_hdf5(evc_hdf5,evc,ik)
+   !      CALL write_final_data(evc_hdf5_write,ik,evc(:,1))
 
          CALL save_buffer( evc, nwordwfc, iunwfc, ik )
 #else
@@ -178,6 +181,9 @@ SUBROUTINE wfcinit()
     ENDIF
      !
   END DO
+    !call h5fclose_f(evc_hdf5_write%file_id,error)
+    !call errore('','',1)
+
 
   !
   CALL stop_clock( 'wfcinit' )

@@ -39,7 +39,6 @@ gvecw.o \
 hdf5_qe.o \
 input_parameters.o \
 invmat.o \
-io_hpc.o \
 io_files.o \
 io_global.o  \
 ions_base.o \

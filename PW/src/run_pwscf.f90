@@ -35,11 +35,11 @@ SUBROUTINE run_pwscf ( exit_status )
   USE check_stop,       ONLY : check_stop_init, check_stop_now
   USE mp_images,        ONLY : intra_image_comm
   USE extrapolation,    ONLY : update_file, update_pot
+  USE scf,              ONLY : rho
+  USE lsda_mod,         ONLY : nspin
+  USE fft_base,         ONLY : dfftp
   USE qmmm,             ONLY : qmmm_initialization, qmmm_shutdown, &
                                qmmm_update_positions, qmmm_update_forces
-#if defined __IO_HPC
-  USE io_hpc,           ONLY : finalize_io_hpc
-#endif
 #if defined __HDF5
   USE hdf5_qe
 #endif
@@ -137,7 +137,7 @@ SUBROUTINE run_pwscf ( exit_status )
      !
      ! ... send out forces to MM code in QM/MM run
      !
-     CALL qmmm_update_forces(force)
+     CALL qmmm_update_forces( force, rho%of_r, nspin, dfftp)
      !
      IF ( lmd .OR. lbfgs ) THEN
         !
@@ -198,8 +198,8 @@ SUBROUTINE run_pwscf ( exit_status )
   CALL qmmm_shutdown()
   !
 
-#if defined __IO_HPC
-  CALL finalize_io_hpc(1)
+#if defined __HDF5
+  CALL finalize_hdf5()
 #endif
 
   IF ( .NOT. conv_ions )  exit_status =  3

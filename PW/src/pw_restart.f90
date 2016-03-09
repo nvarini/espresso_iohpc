@@ -315,11 +315,6 @@ MODULE pw_restart
                                        esm_a, esm_bc
       USE london_module,        ONLY : scal6, lon_rcut
       USE tsvdw_module,         ONLY : vdw_isolated
-#if defined __IO_HPC && __HDF5
-      USE io_hpc,               ONLY : prepare_for_writing
-      USE hdf5_qe,              ONLY : evc_hdf5_write
-      USE mp_world,             ONLY : mpime
-#endif
       
       !
       IMPLICIT NONE

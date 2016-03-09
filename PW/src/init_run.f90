@@ -30,12 +30,9 @@ SUBROUTINE init_run()
   USE esm,                ONLY : do_comp_esm, esm_init
   USE mp_bands,           ONLY : intra_bgrp_comm
   USE tsvdw_module,       ONLY : tsvdw_initialize
-#ifdef __IO_HPC
-  USE io_hpc,             ONLY : initialize_io_hpc
-  USE mp_global,          ONLY : world_comm
-#endif
 #ifdef __HDF5
   USE hdf5_qe
+  USE mp_global,          ONLY : world_comm
   USE mp_world,           ONLY : nproc, mpime
   USE wavefunctions_module,ONLY : evc
 #endif
@@ -114,8 +111,8 @@ SUBROUTINE init_run()
   !
   CALL newd()
   !
-#if defined __HDF5 && __IO_HPC
-  CALL initialize_io_hpc(1, world_comm, evc,.true.)
+#if defined __HDF5
+  CALL initialize_io_hdf5( evc_hdf5,world_comm, evc,.true.)
 #endif
   CALL wfcinit()
 

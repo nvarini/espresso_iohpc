@@ -794,11 +794,13 @@ MODULE xml_io_base
       USE mp_wave,    ONLY : mergewf
       USE mp,         ONLY : mp_get, mp_size, mp_rank, mp_sum
       USE control_flags,     ONLY : lwfnscf, lwfpbe0nscf  ! Lingzhu Kong
-#if defined __IO_HPC && __HDF5
+#if defined  __HDF5
       USE hdf5_qe,    ONLY : evc_hdf5, read_data_hdf5, write_data_hdf5, &
-                             prepare_for_writing, evc_hdf5_write,  &
-                             setup_file_property_hdf5, extend_dataset_hdf5
+                              evc_hdf5_write,  &
+                             setup_file_property_hdf5, &
+                             write_final_data, prepare_for_writing_final
       USE mp_world,   ONLY : mpime
+      USE HDF5
 #endif
       !
       IMPLICIT NONE
@@ -819,7 +821,7 @@ MODULE xml_io_base
       !
       INTEGER                  :: j
       INTEGER                  :: iks, ike, ikt, igwx
-      INTEGER                  :: ngroup, ipsour
+      INTEGER                  :: ngroup, ipsour, error
       INTEGER,     ALLOCATABLE :: ipmask(:)
       INTEGER                  :: me_in_group, nproc_in_group, io_in_parent, nproc_in_parent, me_in_parent, my_group, io_group
       COMPLEX(DP), ALLOCATABLE :: wtmp(:)
@@ -849,8 +851,9 @@ MODULE xml_io_base
       !
       IF ( ionode ) THEN
          !
-
-         CALL prepare_for_writing(evc_hdf5_write,evc_hdf5_write%comm,igwx*2,filename)
+#if defined  __HDF5
+         CALL prepare_for_writing_final(evc_hdf5_write,evc_hdf5_write%comm,filename)
+#endif
          CALL iotk_open_write( iuni, FILE = TRIM( filename ), ROOT="WFC", BINARY = .TRUE. )
          CALL iotk_write_attr( attr, "ngw",          ngw, FIRST = .TRUE. )
          CALL iotk_write_attr( attr, "igwx",         igwx )
@@ -901,12 +904,9 @@ MODULE xml_io_base
          END IF
          !
          IF ( ionode ) THEN
-#if defined __IO_HPC && __HDF5
-            IF(j>1)THEN
-              CALL extend_dataset_hdf5(evc_hdf5_write,wtmp(1:igwx),igwx,2,.true.)
-            ENDIF 
-            CALL write_data_hdf5(evc_hdf5_write,wtmp(1:igwx),.false.,j)
- 
+#if defined  __HDF5
+            CALL write_final_data(evc_hdf5_write,j,wtmp(1:igwx))
+
             !CALL iotk_write_dat( iuni, "evc" // iotk_index( j ), wtmp(1:igwx) )
             !if(j.eq.2)call errore('','',1)
 #else
@@ -919,18 +919,24 @@ MODULE xml_io_base
          ENDIF
          !
       END DO
+!    call errore('','',1)
       ! Next 4 lines : Lingzhu Kong
       IF ( ( index(filename,'evc0') > 0 ) .and. (lwfnscf .or. lwfpbe0nscf) )THEN
           IF ( ionode ) close(60)   !Lingzhu Kong
           write(*,*)'done writing evc0'
       ENDIF
-      IF ( ionode ) CALL iotk_close_write( iuni )
+      IF ( ionode ) then
+#if defined __HDF5
+         CALL h5fclose_f(evc_hdf5_write%file_id,error)
+#endif
+         CALL iotk_close_write( iuni )
+      endif
       !
       DEALLOCATE( wtmp )
       DEALLOCATE( ipmask )
       !
       RETURN
-      !
+      
     END SUBROUTINE write_wfc
     !
     !------------------------------------------------------------------------
@@ -943,10 +949,11 @@ MODULE xml_io_base
       USE mp_wave,   ONLY : splitwf
       USE mp,        ONLY : mp_put, mp_size, mp_rank, mp_sum
 
-#if defined __IO_HPC && __HDF5
+#if defined  __HDF5
       USE mp_world,  ONLY : mpime
-      USE hdf5_qe,   ONLY : evc_hdf5_write, extend_dataset_hdf5, &
-                            read_data_hdf5, prepare_for_reading
+      USE hdf5_qe,   ONLY : evc_hdf5_write,  &
+                            read_data_hdf5,  &
+                            read_final_data, prepare_for_reading_final
 #endif
       !
       IMPLICIT NONE
@@ -1018,6 +1025,9 @@ MODULE xml_io_base
       !
       IF ( ionode ) THEN
           !
+#if defined  __HDF5
+          CALL prepare_for_reading_final(evc_hdf5_write,evc_hdf5_write%comm,filename)
+#endif
           CALL iotk_scan_empty( iuni, "INFO", attr )
           !
           CALL iotk_scan_attr( attr, "ngw",          ngw )
@@ -1041,9 +1051,6 @@ MODULE xml_io_base
       CALL mp_bcast( scalef, io_in_parent, parent_group_comm )
       !
       ALLOCATE( wtmp( MAX( igwx_, igwx ) ) )
-#if defined __IO_HPC && __HDF5
-      CALL prepare_for_reading(evc_hdf5_write,evc_hdf5_write%comm,igwx*2,filename)
-#endif
       !
       DO j = 1, nbnd
          !
@@ -1051,11 +1058,8 @@ MODULE xml_io_base
             !
             IF ( ionode ) THEN 
                !
-#if defined __IO_HPC && __HDF5
-            IF(j>1)THEN
-              CALL extend_dataset_hdf5(evc_hdf5_write,wtmp(1:igwx),igwx,2,.false.)
-            ENDIF 
-            CALL read_data_hdf5(evc_hdf5_write,wtmp(1:igwx),.false.)
+#if defined __HDF5
+          CALL read_final_data(evc_hdf5_write,j,wtmp(1:igwx))
              !  CALL iotk_scan_dat( iuni, &
              !                      "evc" // iotk_index( j ), wtmp(1:igwx_) )
 #else

@@ -593,15 +593,14 @@ contains
     !
   END SUBROUTINE save_buffer
 
-  SUBROUTINE save_buffer_hdf5(hdf5desc,data,hyperslab,niter)
+  SUBROUTINE save_buffer_hdf5(hdf5desc,data,niter)
     USE hdf5_qe, ONLY : HDF5_type, write_data_hdf5
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     complex(kind=DP), intent(inout) :: data(:,:)
-    logical, intent(in) :: hyperslab
     integer, intent(in) :: niter
     
-    call write_data_hdf5(hdf5desc,data,hyperslab,niter)
+    call write_data_hdf5(hdf5desc,data,niter)
    
   END SUBROUTINE save_buffer_hdf5
 

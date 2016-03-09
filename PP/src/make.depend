@@ -453,7 +453,6 @@ projwfc.o : ../../Modules/gvecw.o
 projwfc.o : ../../Modules/hdf5_qe.o
 projwfc.o : ../../Modules/io_files.o
 projwfc.o : ../../Modules/io_global.o
-projwfc.o : ../../Modules/io_hpc.o
 projwfc.o : ../../Modules/ions_base.o
 projwfc.o : ../../Modules/kind.o
 projwfc.o : ../../Modules/mp.o
