@@ -199,7 +199,7 @@ SUBROUTINE run_pwscf ( exit_status )
   !
 
 #if defined __HDF5
-  CALL finalize_hdf5()
+ ! CALL finalize_hdf5(evc_hdf5_write)
 #endif
 
   IF ( .NOT. conv_ions )  exit_status =  3

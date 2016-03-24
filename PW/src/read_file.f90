@@ -31,6 +31,7 @@ SUBROUTINE read_file()
   USE wavefunctions_module, ONLY : evc
 #if defined __HDF5
   USE mp_world,           ONLY : nproc, mpime, world_comm
+  USE mp_pools,           ONLY : intra_pool_comm
   USE wavefunctions_module,ONLY : evc
   USE hdf5_qe,            ONLY : evc_hdf5, evc_hdf5_write, initialize_io_hdf5
 #endif
@@ -48,7 +49,7 @@ SUBROUTINE read_file()
   !
   CALL read_xml_file ( )
 #if defined __HDF5
-  CALL initialize_io_hdf5( evc_hdf5,world_comm, evc,.false.)
+  CALL initialize_io_hdf5( evc_hdf5,intra_pool_comm, evc,.false.,0)
 #endif
 
   !

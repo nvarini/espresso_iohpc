@@ -800,6 +800,7 @@ MODULE xml_io_base
                              setup_file_property_hdf5, &
                              write_final_data, prepare_for_writing_final
       USE mp_world,   ONLY : mpime
+      USE mp_global,    ONLY : inter_pool_comm, world_comm
       USE HDF5
 #endif
       !
@@ -850,10 +851,10 @@ MODULE xml_io_base
                              ionode, root_in_group, intra_group_comm, inter_group_comm, parent_group_comm )
       !
       IF ( ionode ) THEN
-         !
 #if defined  __HDF5
-         CALL prepare_for_writing_final(evc_hdf5_write,evc_hdf5_write%comm,filename)
+      CALL prepare_for_writing_final(evc_hdf5_write,inter_pool_comm,filename,ik)
 #endif
+         !
          CALL iotk_open_write( iuni, FILE = TRIM( filename ), ROOT="WFC", BINARY = .TRUE. )
          CALL iotk_write_attr( attr, "ngw",          ngw, FIRST = .TRUE. )
          CALL iotk_write_attr( attr, "igwx",         igwx )
@@ -904,12 +905,11 @@ MODULE xml_io_base
          END IF
          !
          IF ( ionode ) THEN
-#if defined  __HDF5
-            CALL write_final_data(evc_hdf5_write,j,wtmp(1:igwx))
 
-            !CALL iotk_write_dat( iuni, "evc" // iotk_index( j ), wtmp(1:igwx) )
-            !if(j.eq.2)call errore('','',1)
-#else
+#if defined  __HDF5
+            CALL write_final_data(evc_hdf5_write,j,wtmp(1:igwx), ik)
+#endif
+#if !defined  __HDF5
             CALL iotk_write_dat( iuni, "evc" // iotk_index( j ), wtmp(1:igwx) )
 #endif
          ENDIF
@@ -928,6 +928,7 @@ MODULE xml_io_base
       IF ( ionode ) then
 #if defined __HDF5
          CALL h5fclose_f(evc_hdf5_write%file_id,error)
+        !if(ik.eq.10)call errore('','',200)
 #endif
          CALL iotk_close_write( iuni )
       endif
@@ -1026,7 +1027,7 @@ MODULE xml_io_base
       IF ( ionode ) THEN
           !
 #if defined  __HDF5
-          CALL prepare_for_reading_final(evc_hdf5_write,evc_hdf5_write%comm,filename)
+          CALL prepare_for_reading_final(evc_hdf5_write,evc_hdf5_write%comm,filename,ik)
 #endif
           CALL iotk_scan_empty( iuni, "INFO", attr )
           !
@@ -1059,7 +1060,7 @@ MODULE xml_io_base
             IF ( ionode ) THEN 
                !
 #if defined __HDF5
-          CALL read_final_data(evc_hdf5_write,j,wtmp(1:igwx))
+          CALL read_final_data(evc_hdf5_write,j,wtmp(1:igwx),ik)
              !  CALL iotk_scan_dat( iuni, &
              !                      "evc" // iotk_index( j ), wtmp(1:igwx_) )
 #else

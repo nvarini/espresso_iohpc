@@ -835,6 +835,7 @@ MODULE pw_restart
         SUBROUTINE write_this_wfc ( iun, ik )
           !--------------------------------------------------------------------
           !
+          USE mp_world,   ONLY : mpime
           IMPLICIT NONE
           !
           INTEGER, INTENT(IN) :: iun, ik
@@ -953,6 +954,7 @@ MODULE pw_restart
                    !
                 END IF
                 !
+                write(mpime+200,*) lkpoint_dir
                 CALL write_wfc( iunout, ik, nkstot, kunit, ispin, nspin, &
                                 evc, npw_g, gamma_only, nbnd,            &
                                 igk_l2g_kdip(:,ik-iks+1),                &

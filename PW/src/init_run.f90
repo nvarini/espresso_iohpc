@@ -112,7 +112,8 @@ SUBROUTINE init_run()
   CALL newd()
   !
 #if defined __HDF5
-  CALL initialize_io_hdf5( evc_hdf5,world_comm, evc,.true.)
+  CALL initialize_hdf5()
+  CALL initialize_io_hdf5(evc_hdf5,world_comm, evc,.true.,0)
 #endif
   CALL wfcinit()
 
