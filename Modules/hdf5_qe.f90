@@ -23,9 +23,20 @@ module hdf5_qe
   END TYPE HDF5_type
 
   TYPE(HDF5_type), save :: evc_hdf5, evc_hdf5_write
+  TYPE(HDF5_type), save :: rho_hdf5_write, eig_hdf5_write
+  TYPE(HDF5_type), save :: g_hdf5_write, gk_hdf5_write
+  
   INTEGER, save ::  off_npw, npw_g
 
 
+  INTERFACE add_attributes_hdf5
+    MODULE PROCEDURE add_attributes_hdf5_i, add_attributes_hdf5_r, &
+                     add_attributes_hdf5_c
+  END INTERFACE
+
+  INTERFACE read_attributes_hdf5
+    MODULE PROCEDURE read_attributes_hdf5_i, read_attributes_hdf5_r
+  END INTERFACE
 
 
   contains
@@ -56,8 +67,9 @@ module hdf5_qe
    integer, intent(in) ::  kpoint
    integer(HID_T) :: plist_id
    integer :: error, info
-   character*4 kstring
+   character*12 kstring
    write(kstring,'(I0)') kpoint
+   kstring='KPOINT'//kstring
 
 
    info = MPI_INFO_NULL
@@ -90,48 +102,68 @@ module hdf5_qe
   end subroutine setup_file_property_hdf5
 
 
-  subroutine define_dataset_hdf5_hyperslab(hdf5desc)
+  subroutine define_dataset_hdf5_hyperslab(hdf5desc, kpoint)
     USE mp_world,             ONLY : mpime
    implicit none
    type(HDF5_type), intent(inout) :: hdf5desc
-   integer :: error
+   integer,intent(in)             :: kpoint
+   integer                        :: error
+   character*12                   :: kstring  
+   write(kstring,'(I0)') kpoint
+   kstring=trim('KPOINT')//kstring
+   hdf5desc%dsetname = 'evc'
 
-     CALL h5screate_simple_f(hdf5desc%rank, hdf5desc%counts_g, hdf5desc%filespace, error) !define HDF5 dataset
-     CALL h5dcreate_f(hdf5desc%file_id, hdf5desc%dsetname, H5T_NATIVE_DOUBLE, hdf5desc%filespace, &
-                      hdf5desc%dset_id, error)
-     CALL h5sclose_f(hdf5desc%filespace, error)
+   CALL h5gcreate_f(hdf5desc%file_id, kstring, hdf5desc%group_id, error)
+   CALL h5screate_simple_f(hdf5desc%rank, hdf5desc%counts_g, hdf5desc%filespace, error) !define HDF5 dataset
+   CALL h5dcreate_f(hdf5desc%group_id, hdf5desc%dsetname, H5T_NATIVE_DOUBLE, hdf5desc%filespace, &
+                    hdf5desc%dset_id, error)
+   CALL h5sclose_f(hdf5desc%filespace, error)
 
-     CALL h5screate_simple_f(hdf5desc%rank, hdf5desc%counts, hdf5desc%memspace, error) 
-     CALL h5dget_space_f(hdf5desc%dset_id, hdf5desc%filespace, error)
-     CALL h5sselect_hyperslab_f(hdf5desc%filespace, H5S_SELECT_SET_F, hdf5desc%offset, hdf5desc%counts, error) ! create hyperslab to read from more than 1 proc
+   CALL h5dclose_f(hdf5desc%dset_id, error)
+   CALL h5gclose_f(hdf5desc%group_id, error)
+
    end subroutine define_dataset_hdf5_hyperslab
 
 
  
-  subroutine  write_data_hdf5(hdf5desc, data,  niter)
+  subroutine  write_data_hdf5(hdf5desc, data,  kpoint)
    USE kinds, ONLY : DP
    USE ISO_C_BINDING
    USE mp_world, ONLY : mpime
+
    implicit none
    type(HDF5_type), intent(inout) :: hdf5desc
    complex(kind=dp), intent(inout) :: data(:,:)
-   integer, intent(in), optional :: niter
+   integer, intent(in) :: kpoint
    !INTEGER, ALLOCATABLE :: data (:,:)  ! Data to write
    integer :: error 
    real(kind=dp)   :: tmp
    integer(HID_T)     :: complex_id, double_id
    integer(HSIZE_T)   :: double_size, complex_size
-   TYPE(C_PTR) :: f_ptr
-   
-   
+   TYPE(C_PTR)        :: f_ptr
+   character*12       :: kstring  
+   write(kstring,'(I0)') kpoint
+   kstring=trim('KPOINT')//kstring
 
-     CALL h5pcreate_f(H5P_DATASET_XFER_F, hdf5desc%plist_id, error)
-     CALL h5pset_dxpl_mpio_f(hdf5desc%plist_id, H5FD_MPIO_COLLECTIVE_F, error)
-    
-     f_ptr = C_LOC(data(1,1))
-     CALL h5dwrite_f(hdf5desc%dset_id, H5T_NATIVE_DOUBLE, f_ptr, error,&
-                    file_space_id = hdf5desc%filespace, mem_space_id = hdf5desc%memspace, &
-                    xfer_prp = hdf5desc%plist_id)
+   
+   
+   CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+   CALL h5dopen_f(hdf5desc%group_id, hdf5desc%dsetname, hdf5desc%dset_id, error)
+   CALL h5screate_simple_f(hdf5desc%rank, hdf5desc%counts, hdf5desc%memspace, error) 
+   CALL h5dget_space_f(hdf5desc%dset_id, hdf5desc%filespace, error)
+
+   CALL h5sselect_hyperslab_f(hdf5desc%filespace, H5S_SELECT_SET_F, hdf5desc%offset, hdf5desc%counts, error) ! create hyperslab to read from more than 1 proc
+
+   CALL h5pcreate_f(H5P_DATASET_XFER_F, hdf5desc%plist_id, error)
+   CALL h5pset_dxpl_mpio_f(hdf5desc%plist_id, H5FD_MPIO_COLLECTIVE_F, error)
+  
+   f_ptr = C_LOC(data(1,1))
+   CALL h5dwrite_f(hdf5desc%dset_id, H5T_NATIVE_DOUBLE, f_ptr, error,&
+                  file_space_id = hdf5desc%filespace, mem_space_id = hdf5desc%memspace, &
+                  xfer_prp = hdf5desc%plist_id)
+
+   CALL h5dclose_f(hdf5desc%dset_id, error)
+   CALL h5gclose_f(hdf5desc%group_id, error)
   end subroutine write_data_hdf5
 
 
@@ -139,16 +171,32 @@ module hdf5_qe
 
 
 
-  subroutine  read_data_hdf5(hdf5desc, data)
+  subroutine  read_data_hdf5(hdf5desc, data, kpoint)
    type(HDF5_type), intent(inout) :: hdf5desc
    complex(kind=dp), intent(inout) :: data(:,:)
+   integer,intent(in) :: kpoint
    integer :: error
    TYPE(C_PTR) :: f_ptr
+   character*12       :: kstring  
+   write(kstring,'(I0)') kpoint
+   kstring=trim('KPOINT')//kstring
 
-     f_ptr = C_LOC(data(1,1))
-     CALL H5dread_f(hdf5desc%dset_id, H5T_NATIVE_DOUBLE, f_ptr, error, &
-                     mem_space_id = hdf5desc%memspace, file_space_id = hdf5desc%filespace ,&
-                    xfer_prp = hdf5desc%plist_id)
+   CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+   CALL h5dopen_f(hdf5desc%group_id, hdf5desc%dsetname, hdf5desc%dset_id, error)
+   CALL h5dget_space_f(hdf5desc%dset_id, hdf5desc%filespace, error)
+
+   CALL h5sselect_hyperslab_f(hdf5desc%filespace, H5S_SELECT_SET_F, hdf5desc%offset, hdf5desc%counts, error)
+
+   CALL h5screate_simple_f(hdf5desc%rank, hdf5desc%counts, hdf5desc%memspace, error) 
+
+   f_ptr = C_LOC(data(1,1))
+   CALL H5dread_f(hdf5desc%dset_id, H5T_NATIVE_DOUBLE, f_ptr, error, &
+                  mem_space_id = hdf5desc%memspace, file_space_id = hdf5desc%filespace ,&
+                 xfer_prp = hdf5desc%plist_id)
+
+   CALL h5dclose_f(hdf5desc%dset_id, error)
+   CALL h5gclose_f(hdf5desc%group_id, error)
+
   end subroutine read_data_hdf5
 
   SUBROUTINE prepare_index_hdf5(sendm,recm,globalm,comm,nproc)
@@ -177,24 +225,31 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     character(len=*), intent(in):: filename_input
-    integer, intent(in) :: comm, kpoint
+    integer, intent(in) :: comm
+    integer,  intent(in), optional :: kpoint
     character(len=256) filename
     character*4 mpimestring
     integer :: ik, error
-    character*4 kstring
-    write(kstring,'(I0)') kpoint
-    
+    character*12 kstring
     
  
     hdf5desc%comm=comm
     !hdf5desc%filename = trim(filename_input) //".wfchdf5"
-    hdf5desc%filename=trim(tmp_dir) //"evc.hdf5"!//trim(mpimestring)
+    !hdf5desc%filename=trim(tmp_dir) //"evc.hdf5"!//trim(mpimestring)
+    hdf5desc%filename=filename_input
     
-    CALL setup_file_property_hdf5(hdf5desc,hdf5desc%filename ,.false.,.true.,kpoint)
+    if(present(kpoint)) then
+      write(kstring,'(I0)') kpoint
+      kstring=trim('KPOINT')//kstring
+      CALL setup_file_property_hdf5(hdf5desc,hdf5desc%filename ,.false.,.true.,kpoint)
     
-    if(kpoint>1) CALL h5fopen_f(hdf5desc%filename, H5F_ACC_RDWR_F, hdf5desc%file_id, error) ! create the file collectively
-    CALL h5gcreate_f(hdf5desc%file_id, kstring, hdf5desc%group_id, error)
-    CALL h5gclose_f(hdf5desc%group_id, error)
+      if(kpoint>1) CALL h5fopen_f(hdf5desc%filename, H5F_ACC_RDWR_F, hdf5desc%file_id, error) ! create the file collectively
+      
+      CALL h5gcreate_f(hdf5desc%file_id, kstring, hdf5desc%group_id, error)
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      CALL setup_file_property_hdf5(hdf5desc,hdf5desc%filename ,.false.,.true.,1)
+    endif
 
   end subroutine prepare_for_writing_final
 
@@ -206,7 +261,8 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     character(len=*), intent(in):: filename_input
-    integer, intent(in) :: comm,kpoint
+    integer, intent(in) :: comm
+    integer, intent(in), optional :: kpoint
     character(len=256) filename
     character*4 mpimestring
     integer :: ik
@@ -214,17 +270,119 @@ module hdf5_qe
     hdf5desc%comm=comm
     hdf5desc%rank =1 
     !filename = trim(filename_input) //".wfchdf5"
-    filename=trim(tmp_dir) //"evc.hdf5"!//trim(mpimestring)
-    write(mpime+100,*) filename
-    CALL setup_file_property_hdf5(hdf5desc,filename ,.false.,.false.,kpoint)
+    filename=filename_input
+    if(present(kpoint))then
+      CALL setup_file_property_hdf5(hdf5desc,filename ,.false.,.false.,kpoint)
+    else
+      CALL setup_file_property_hdf5(hdf5desc,filename ,.false.,.false.,1)
+    end if
 
   end subroutine prepare_for_reading_final
 
+  subroutine read_rho(hdf5desc,dsetname,var)
+    USE kinds, ONLY : DP
+    USE mp_world, ONLY : mpime
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in) :: dsetname
+    real(kind=DP), intent(in) :: var(:)
+    INTEGER(HID_T) :: dspace_id, dset_id, dtype_id     ! Dataspace identifier
+    integer :: error
+    INTEGER(HSIZE_T), DIMENSION(1) :: counts
+    character*12 dset_name
+    TYPE(C_PTR) :: f_ptr
+    write(dset_name,'(I0)') dsetname
+    dset_name='K'//dset_name
+    counts=size(var)
+    CALL h5dopen_f(hdf5desc%file_id, dset_name, dset_id, error)
+    CALL h5dget_type_f(dset_id, dtype_id, error)
+    f_ptr = C_LOC(var(1))
+    CALL h5dread_f(dset_id, dtype_id, f_ptr, error)
+    CALL h5dclose_f(dset_id, error)
+  end subroutine read_rho
+
+  subroutine write_rho(hdf5desc,dsetname,var)
+    USE kinds, ONLY : DP
+    USE mp_world, ONLY : mpime
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in) :: dsetname
+    real(kind=DP), intent(in) :: var(:)
+    INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
+    integer :: error
+    INTEGER(HSIZE_T), DIMENSION(1) :: counts
+    character*12 dset_name
+    TYPE(C_PTR) :: f_ptr
+    write(dset_name,'(I0)') dsetname
+    dset_name='K'//dset_name
+    counts=size(var)
+    CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+    CALL h5dcreate_f(hdf5desc%file_id, dset_name, H5T_NATIVE_DOUBLE, dspace_id, &
+                      dset_id, error)
+    f_ptr = C_LOC(var(1))
+    CALL h5dwrite_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
+    CALL h5dclose_f(dset_id, error)
+    CALL h5sclose_f(dspace_id, error)
+  end subroutine write_rho
+
+  subroutine write_eig(hdf5desc,var,kpoint)
+    USE kinds, ONLY : DP
+    USE mp_world, ONLY : mpime
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in) :: kpoint
+    real(kind=DP), intent(in) :: var(:)
+    INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
+    integer :: error
+    INTEGER(HSIZE_T), DIMENSION(1) :: counts
+    TYPE(C_PTR) :: f_ptr
+    character*12 kstring
+    write(kstring,'(I0)') kpoint
+    kstring='KPOINT'//kstring
+
+    counts=size(var)
+    CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+    CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+    CALL h5dcreate_f(hdf5desc%group_id, kstring, H5T_NATIVE_DOUBLE, dspace_id, &
+                      dset_id, error)
+    f_ptr = C_LOC(var(1))
+    CALL h5dwrite_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
+    CALL h5dclose_f(dset_id, error)
+    CALL h5sclose_f(dspace_id, error)
+    CALL h5gclose_f(hdf5desc%group_id, error)
+  end subroutine write_eig
+
+  subroutine read_eig(hdf5desc,var,kpoint)
+    USE kinds, ONLY : DP
+    USE mp_world, ONLY : mpime
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in) ::  kpoint
+    real(kind=DP), intent(inout) :: var(:)
+    INTEGER(HID_T) :: dtype_id, dset_id     ! Dataspace identifier
+    integer :: error
+    INTEGER(HSIZE_T), DIMENSION(1) :: counts
+    TYPE(C_PTR) :: f_ptr
+    character*12 kstring
+    character*100 errmsg
+
+    write(kstring,'(I0)') kpoint
+    kstring='KPOINT'//kstring
+
+    counts=size(var)
+    CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+    CALL h5dopen_f(hdf5desc%group_id, kstring, dset_id, error)
+    CALL h5dget_type_f(dset_id, dtype_id, error)
+    f_ptr = C_LOC(var(1))
+    !CALL h5dread_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
+    CALL h5dread_f(dset_id, dtype_id, f_ptr, error)
+    CALL h5dclose_f(dset_id, error)
+    CALL h5gclose_f(hdf5desc%group_id, error)
+  end subroutine read_eig
 
 
 
-
-  subroutine write_final_data(hdf5desc,dsetname,var,kpoint)
+  subroutine write_evc(hdf5desc,dsetname,var,kpoint)
     USE kinds, ONLY : DP
     USE mp_world, ONLY : mpime
     implicit none
@@ -234,12 +392,13 @@ module hdf5_qe
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
-    character*4 dset_name
+    character*12 dset_name
     TYPE(C_PTR) :: f_ptr
-    character*4 kstring
+    character*12 kstring
     write(kstring,'(I0)') kpoint
-
+    kstring='KPOINT'//kstring
     write(dset_name,'(I0)') dsetname
+    dset_name='BAND'//dset_name
     counts=size(var)*2  
     CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
     CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
@@ -250,39 +409,165 @@ module hdf5_qe
     CALL h5dclose_f(dset_id, error)
     CALL h5sclose_f(dspace_id, error)
     CALL h5gclose_f(hdf5desc%group_id, error)
-  end subroutine write_final_data
+  end subroutine write_evc
 
-  subroutine read_final_data(hdf5desc,dsetname,var,kpoint)
+  subroutine read_evc(hdf5desc,dsetname,var,kpoint)
     USE kinds, ONLY : DP
     USE mp_world, ONLY : mpime
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) :: dsetname, kpoint
     complex(kind=DP), intent(inout) :: var(:)
-    INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
+    INTEGER(HID_T) :: dtype_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
-    character*4 dset_name
+    character*12 dset_name
     TYPE(C_PTR) :: f_ptr
-    character*4 kstring
+    character*12 kstring
     character*100 errmsg
 
     write(dset_name,'(I0)') dsetname
     write(kstring,'(I0)') kpoint
+    kstring='KPOINT'//kstring
+    dset_name='BAND'//dset_name
 
-    write(mpime+200,*) dset_name, kstring
     counts=size(var)*2  
     CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
     if(error.ne.0) call errore('error in h5gopen_f','',error)
     CALL h5dopen_f(hdf5desc%group_id, dset_name, dset_id, error)
     if(error.ne.0) call errore('error in h5dopen_f','',error)
-    CALL h5dget_type_f(dset_id, dspace_id, error)
+    CALL h5dget_type_f(dset_id, dtype_id, error)
     f_ptr = C_LOC(var(1))
     !CALL h5dread_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
-    CALL h5dread_f(dset_id, dspace_id, f_ptr, error)
+    CALL h5dread_f(dset_id, dtype_id, f_ptr, error)
     CALL h5dclose_f(dset_id, error)
     CALL h5gclose_f(hdf5desc%group_id, error)
-  end subroutine read_final_data
+  end subroutine read_evc
+
+  subroutine write_g(hdf5desc,var,kpoint)
+    USE kinds, ONLY : DP
+    USE mp_world, ONLY : mpime
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in), optional :: kpoint
+    integer, intent(in) :: var(:,:)
+    INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
+    integer :: error
+    INTEGER(HSIZE_T), DIMENSION(1) :: counts
+    TYPE(C_PTR) :: f_ptr
+    character*12 kstring
+
+    if(present(kpoint))then
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+      counts=size(var)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+      CALL h5dcreate_f(hdf5desc%group_id, kstring, H5T_NATIVE_INTEGER, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(var(1,1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_INTEGER, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%file_id, 'gvec', H5T_NATIVE_INTEGER, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(var(1,1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_INTEGER, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+    endif
+  end subroutine write_g
+
+
+
+  subroutine write_gkhdf5(hdf5desc,xk,igwk,mill_g,kpoint)
+    USE kinds, ONLY : DP
+    USE mp_world, ONLY : mpime
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in), optional :: kpoint
+    real(kind=DP), intent(in) :: xk(:)
+    integer, intent(in) :: igwk(:), mill_g(:,:)
+    INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
+    integer :: error
+    INTEGER(HSIZE_T), DIMENSION(1) :: counts
+    TYPE(C_PTR) :: f_ptr
+    character*12 kstring
+
+    if(present(kpoint))then
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+
+      write(kstring,'(I0)') kpoint
+      kstring='xk'//kstring
+      counts=size(xk)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%group_id, kstring, H5T_NATIVE_DOUBLE, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(xk(1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+
+      write(kstring,'(I0)') kpoint
+      kstring='igwk'//kstring
+      counts=size(igwk)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%group_id, kstring, H5T_NATIVE_INTEGER, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(igwk(1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_INTEGER, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+
+      write(kstring,'(I0)') kpoint
+      kstring='mill_g'//kstring
+      counts=size(mill_g)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%group_id, kstring, H5T_NATIVE_INTEGER, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(mill_g(1,1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_INTEGER, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+
+
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      counts=size(xk)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%file_id, 'xk', H5T_NATIVE_DOUBLE, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(xk(1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+
+      counts=size(igwk)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%file_id, 'igwk', H5T_NATIVE_INTEGER, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(igwk(1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_INTEGER, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+
+      counts=size(mill_g)
+      CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
+      CALL h5dcreate_f(hdf5desc%group_id, 'mill_g', H5T_NATIVE_INTEGER, dspace_id, &
+                      dset_id, error)
+      f_ptr = C_LOC(mill_g(1,1))
+      CALL h5dwrite_f(dset_id, H5T_NATIVE_INTEGER, f_ptr, error)
+      CALL h5dclose_f(dset_id, error)
+      CALL h5sclose_f(dspace_id, error)
+
+    endif
+  end subroutine write_gkhdf5
+
 
   subroutine initialize_io_hdf5(hdf5desc,comm, data, write,kpoint)
     USE io_files, ONLY : wfc_dir, prefix, tmp_dir
@@ -311,7 +596,6 @@ module hdf5_qe
     endif
     CALL prepare_index_hdf5(npwx,off_npw,npw_g,hdf5desc%comm,nproc)
     CALL set_index_hdf5(hdf5desc,data,off_npw,npw_g,2)
-    if(write.eq..true.)CALL define_dataset_hdf5_hyperslab(hdf5desc)
 
   end subroutine initialize_io_hdf5
 
@@ -349,6 +633,232 @@ module hdf5_qe
   END SUBROUTINE set_index_hdf5
 
 
+  SUBROUTINE add_attributes_hdf5_i(hdf5desc, attr_data, attr_name, kpoint)
+    implicit none
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in) ::  attr_data
+    integer, intent(in),optional :: kpoint 
+    CHARACTER(LEN=*), intent(in) :: attr_name
+    character*12 kstring
+    integer :: error
+    INTEGER     ::   arank = 1                      ! Attribure rank
+    INTEGER(HID_T) :: aspace_id     ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: adims = (/1/) ! Attribute dimension
+    INTEGER(SIZE_T) :: attrlen    ! Length of the attribute string
+    INTEGER(HID_T) :: atype_id      ! Attribute Dataspace identifier
+    INTEGER(HID_T) :: attr_id      ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: data_dims
+  
+    data_dims(1) = 1 
+    
+    if(present(kpoint)) then
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+      CALL h5screate_simple_f(arank, adims, aspace_id, error)
+      CALL h5acreate_f(hdf5desc%group_id, attr_name, H5T_NATIVE_INTEGER, aspace_id, attr_id, error)
+      CALL h5awrite_f(attr_id, H5T_NATIVE_INTEGER, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      !
+      ! Terminate access to the data space.
+      !
+      CALL h5sclose_f(aspace_id, error)
+      !
+      ! End access to the dataset and release resources used by it.
+      !
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      CALL h5screate_simple_f(arank, adims, aspace_id, error)
+      CALL h5acreate_f(hdf5desc%file_id, attr_name, H5T_NATIVE_INTEGER, aspace_id, attr_id, error)
+      CALL h5awrite_f(attr_id, H5T_NATIVE_INTEGER, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      !
+      ! Terminate access to the data space.
+      !
+      CALL h5sclose_f(aspace_id, error)
+ 
+    endif
+    
+  END SUBROUTINE add_attributes_hdf5_i
+
+  SUBROUTINE add_attributes_hdf5_r(hdf5desc, attr_data, attr_name, kpoint)
+    implicit none
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in), optional :: kpoint
+    real(DP), intent(in) :: attr_data 
+    CHARACTER(LEN=*), intent(in) :: attr_name
+    character*12 kstring
+    integer :: error
+    INTEGER     ::   arank = 1                      ! Attribure rank
+    INTEGER(HID_T) :: aspace_id     ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: adims = (/1/) ! Attribute dimension
+    INTEGER(SIZE_T) :: attrlen    ! Length of the attribute string
+    INTEGER(HID_T) :: atype_id      ! Attribute Dataspace identifier
+    INTEGER(HID_T) :: attr_id      ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: data_dims
+  
+    data_dims(1) = 1 
+
+    if(present(kpoint)) then 
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+    
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+      CALL h5screate_simple_f(arank, adims, aspace_id, error)
+      CALL h5acreate_f(hdf5desc%group_id, attr_name, H5T_NATIVE_DOUBLE, aspace_id, attr_id, error)
+      CALL h5awrite_f(attr_id, H5T_NATIVE_DOUBLE, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      !
+      ! Terminate access to the data space.
+      !
+      CALL h5sclose_f(aspace_id, error)
+      !
+      ! End access to the dataset and release resources used by it.
+      !
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      CALL h5screate_simple_f(arank, adims, aspace_id, error)
+      CALL h5acreate_f(hdf5desc%file_id, attr_name, H5T_NATIVE_DOUBLE, aspace_id, attr_id, error)
+      CALL h5awrite_f(attr_id, H5T_NATIVE_DOUBLE, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      !
+      ! Terminate access to the data space.
+      !
+      CALL h5sclose_f(aspace_id, error)
+      !
+      ! End access to the dataset and release resources used by it.
+      !
+
+    endif
+    
+  END SUBROUTINE add_attributes_hdf5_r
+
+  SUBROUTINE add_attributes_hdf5_c(hdf5desc, attr_data, attr_name, kpoint)
+    USE mp_world, ONLY : mpime
+    implicit none
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in), optional :: kpoint
+    !LOGICAL, intent(in) :: attr_data 
+    CHARACTER(LEN=*), intent(in) :: attr_data
+    CHARACTER(LEN=*), intent(in) :: attr_name
+    character*100 kstring
+    integer :: error
+    INTEGER     ::   arank = 1                      ! Attribure rank
+    INTEGER(HID_T) :: aspace_id     ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: adims = (/1/) ! Attribute dimension
+    INTEGER(SIZE_T) :: attrlen    ! Length of the attribute string
+    INTEGER(HID_T) :: atype_id      ! Attribute Dataspace identifier
+    INTEGER(HID_T) :: attr_id      ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: data_dims
+  
+    !data_dims(1) = 1 
+    data_dims(1) = len(attr_name)
+    
+    if(present(kpoint)) then
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+      !write(attrdata,'(I0)') attr_data
+    
+      CALL h5tcopy_f(H5T_NATIVE_CHARACTER, atype_id, error)
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+      CALL h5screate_simple_f(arank, adims, aspace_id, error)
+      CALL h5acreate_f(hdf5desc%group_id, attr_name, H5T_NATIVE_CHARACTER, aspace_id, attr_id, error)
+      CALL h5awrite_f(attr_id, H5T_NATIVE_CHARACTER, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      !
+      ! Terminate access to the data space.
+      !
+      CALL h5sclose_f(aspace_id, error)
+      !
+      ! End access to the dataset and release resources used by it.
+      !
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      !write(attrdata,'(I0)') attr_data
+      CALL h5tcopy_f(H5T_NATIVE_CHARACTER, atype_id, error)
+      CALL h5screate_simple_f(arank, adims, aspace_id, error)
+      CALL h5acreate_f(hdf5desc%file_id, attr_name, H5T_NATIVE_CHARACTER, aspace_id, attr_id, error)
+      CALL h5awrite_f(attr_id, H5T_NATIVE_CHARACTER, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      !
+      ! Terminate access to the data space.
+      !
+      CALL h5sclose_f(aspace_id, error)
+    endif
+    
+  END SUBROUTINE add_attributes_hdf5_c
+
+
+  SUBROUTINE read_attributes_hdf5_i(hdf5desc, attr_data, attr_name, kpoint)
+    USE mp_world,  ONLY : mpime
+    implicit none
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in), optional  :: kpoint
+    integer, intent(out) ::  attr_data 
+    CHARACTER(LEN=*), intent(in) :: attr_name
+    character*12 kstring
+    integer :: error
+    INTEGER     ::   arank = 1                      ! Attribure rank
+    INTEGER(HID_T) :: aspace_id     ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: adims = (/1/) ! Attribute dimension
+    INTEGER(SIZE_T) :: attrlen    ! Length of the attribute string
+    INTEGER(HID_T) :: atype_id      ! Attribute Dataspace identifier
+    INTEGER(HID_T) :: attr_id      ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: data_dims
+  
+    data_dims(1) = 1 
+    attrlen = 1 
+    if(present(kpoint))then
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+      CALL h5aopen_name_f(hdf5desc%group_id,attr_name,attr_id,error)
+      CALL h5aread_f(attr_id, H5T_NATIVE_INTEGER, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      CALL h5gclose_f(hdf5desc%group_id, error)
+   else
+      CALL h5aopen_name_f(hdf5desc%file_id,attr_name,attr_id,error)
+      CALL h5aget_type_f(attr_id, atype_id, error)
+      CALL h5aread_f(attr_id, atype_id, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+   endif
+    
+  END SUBROUTINE read_attributes_hdf5_i
+
+  SUBROUTINE read_attributes_hdf5_r(hdf5desc, attr_data, attr_name, kpoint)
+    USE mp_world,  ONLY : mpime
+    implicit none
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer, intent(in), optional  :: kpoint
+    real(DP), intent(out) ::  attr_data 
+    CHARACTER(LEN=*), intent(in) :: attr_name
+    character*12 kstring
+    integer :: error
+    INTEGER     ::   arank = 1                      ! Attribure rank
+    INTEGER(HID_T) :: aspace_id     ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: adims = (/1/) ! Attribute dimension
+    INTEGER(SIZE_T) :: attrlen    ! Length of the attribute string
+    INTEGER(HID_T) :: atype_id      ! Attribute Dataspace identifier
+    INTEGER(HID_T) :: attr_id      ! Attribute Dataspace identifier
+    INTEGER(HSIZE_T), DIMENSION(1) :: data_dims
+  
+    data_dims(1) = 1 
+    attrlen = 1 
+    if(present(kpoint))then
+      write(kstring,'(I0)') kpoint
+      kstring='KPOINT'//kstring
+      CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+      CALL h5aopen_name_f(hdf5desc%group_id,attr_name,attr_id,error)
+      CALL h5aread_f(attr_id, H5T_NATIVE_DOUBLE, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+      CALL h5gclose_f(hdf5desc%group_id, error)
+    else
+      CALL h5aopen_name_f(hdf5desc%file_id,attr_name,attr_id,error)
+      CALL h5aread_f(attr_id, H5T_NATIVE_DOUBLE, attr_data, data_dims, error)
+      CALL h5aclose_f(attr_id, error)
+    endif
+    
+  END SUBROUTINE read_attributes_hdf5_r
 
 
 

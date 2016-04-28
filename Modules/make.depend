@@ -1,6 +1,5 @@
 atom.o : radial_grids.o
 atomic_number.o : kind.o
-autopilot.o : input_parameters.o
 autopilot.o : io_global.o
 autopilot.o : kind.o
 autopilot.o : mp.o
@@ -86,7 +85,6 @@ fd_gradient.o : kind.o
 fd_gradient.o : mp.o
 fd_gradient.o : mp_bands.o
 fft_base.o : ../FFTXlib/fft_types.o
-fft_base.o : kind.o
 fft_base.o : parallel_include.o
 fft_custom.o : ../FFTXlib/fft_support.o
 fft_custom.o : ../FFTXlib/fft_types.o
@@ -209,6 +207,10 @@ plugin_variables.o : kind.o
 plugin_variables.o : parameters.o
 pseudo_types.o : kind.o
 pseudo_types.o : radial_grids.o
+pw_dot.o : kind.o
+pw_dot.o : mp.o
+pw_dot.o : mp_global.o
+pw_dot.o : recvec.o
 qexml.o : ../iotk/src/iotk_module.o
 qexml.o : kind.o
 qexml.o : wrappers.o
@@ -438,6 +440,8 @@ xml_io_base.o : mp_images.o
 xml_io_base.o : mp_wave.o
 xml_io_base.o : parser.o
 xml_io_base.o : wrappers.o
+xsf.o : constants.o
+xsf.o : kind.o
 xml_io_base.o : hdf5_qe.o
 ylmr2.o : constants.o
 ylmr2.o : kind.o

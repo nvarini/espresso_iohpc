@@ -45,10 +45,10 @@ MODULE pw_restart
   USE constants, ONLY : e2, PI
 
 #ifdef __XSD
-  USE io_files,  ONLY : tmp_dir, prefix, iunpun, iunpun_xsd, xmlpun, xmlpun_schema, & 
+  USE io_files,  ONLY : tmp_dir, prefix, iunpun, iunpun_xsd, xmlpun, xmlpun_schema, &
                         delete_if_present, qexml_version, qexml_version_init, pseudo_dir
 #else
-  USE io_files,  ONLY : tmp_dir, prefix, iunpun, xmlpun, delete_if_present, &                        
+  USE io_files,  ONLY : tmp_dir, prefix, iunpun, xmlpun, delete_if_present, &
                         qexml_version, qexml_version_init, pseudo_dir
 #endif
 
@@ -158,6 +158,11 @@ MODULE pw_restart
                                        esm_a, esm_bc
       USE london_module,        ONLY : scal6, lon_rcut
       USE tsvdw_module,         ONLY : vdw_isolated
+#if defined __HDF5
+      USE hdf5_qe,              ONLY : evc_hdf5
+      USE buffers,              ONLY : get_buffer_hdf5
+#endif
+
       
       !
       IMPLICIT NONE
@@ -266,7 +271,7 @@ MODULE pw_restart
       USE io_files,             ONLY : nwordwfc, iunwfc, psfile
       USE buffers,              ONLY : get_buffer
       USE wavefunctions_module, ONLY : evc
-      USE klist,                ONLY : nks, nkstot, xk, ngk, igk_k, wk, qnorm,&
+      USE klist,                ONLY : nks, nkstot, xk, ngk, igk_k, wk, qnorm, &
                                        lgauss, ngauss, degauss, nelec, &
                                        two_fermi_energies, nelup, neldw
       USE start_k,              ONLY : nk1, nk2, nk3, k1, k2, k3, &
@@ -313,9 +318,14 @@ MODULE pw_restart
       USE martyna_tuckerman,    ONLY : do_comp_mt
       USE esm,                  ONLY : do_comp_esm, esm_nfit, esm_efield, esm_w, &
                                        esm_a, esm_bc
+      USE acfdt_ener,           ONLY : acfdt_in_pw 
       USE london_module,        ONLY : scal6, lon_rcut
       USE tsvdw_module,         ONLY : vdw_isolated
-      
+#if defined __HDF5
+      USE hdf5_qe,              ONLY : evc_hdf5
+      USE buffers,              ONLY : get_buffer_hdf5
+#endif
+
       !
       IMPLICIT NONE
       !
@@ -602,7 +612,8 @@ MODULE pw_restart
                         HUBBARD_J0 = Hubbard_J0, HUBBARD_BETA = Hubbard_beta, &
                         HUBBARD_ALPHA = Hubbard_alpha, &
                         INLC = inlc, VDW_TABLE_NAME = vdw_table_name, &
-                        PSEUDO_DIR = pseudo_dir, DIRNAME = dirname,   &
+                        PSEUDO_DIR = pseudo_dir, DIRNAME = dirname, &
+                        ACFDT_IN_PW = acfdt_in_pw, &
                         LLONDON = llondon, LONDON_S6 = scal6,         &
                         LONDON_RCUT = lon_rcut, LXDM = lxdm,          &
                         TS_VDW = ts_vdw, VDW_ISOLATED = vdw_isolated )
@@ -753,6 +764,10 @@ MODULE pw_restart
       DEALLOCATE( mill_g )
       DEALLOCATE( ngk_g )
       !
+      CALL mp_bcast( ierr, ionode_id, intra_image_comm )
+      !
+      CALL errore( 'pw_writefile ', 'cannot save history', ierr )
+      !
       RETURN
       !
       CONTAINS
@@ -761,13 +776,21 @@ MODULE pw_restart
         SUBROUTINE write_gk( iun, ik, filename )
           !--------------------------------------------------------------------
           !
+#if defined __HDF5
+          USE hdf5_qe,   ONLY :  prepare_for_writing_final, write_gkhdf5, &
+                                 gk_hdf5_write, h5fclose_f
+          USE io_files,  ONLY : tmp_dir
+          USE mp_world,  ONLY : mpime
+#endif
           IMPLICIT NONE
           !
           INTEGER,            INTENT(IN) :: iun, ik
           CHARACTER(LEN=256), INTENT(IN) :: filename
+          CHARACTER(LEN=256)  :: filename_hdf5
           !
           INTEGER, ALLOCATABLE :: igwk(:,:)
           INTEGER, ALLOCATABLE :: itmp(:)
+          INTEGER :: error
           !
           !
           ALLOCATE( igwk( npwx_g, nkstot ) )
@@ -809,6 +832,13 @@ MODULE pw_restart
           !
           IF ( ionode ) THEN
              !
+#if defined __HDF5
+             filename_hdf5=trim(tmp_dir) //"gk.hdf5"
+             CALL prepare_for_writing_final(gk_hdf5_write,inter_pool_comm,filename_hdf5,ik)
+             CALL write_gkhdf5(gk_hdf5_write,xk(:,ik),igwk(1:ngk_g(ik),ik), &
+                              mill_g(1:3,igwk(1:ngk_g(ik),ik)),ik)
+             CALL h5fclose_f(gk_hdf5_write%file_id,error)
+#else
              CALL iotk_open_write( iun, FILE = TRIM( filename ), &
                                    ROOT="GK-VECTORS", BINARY = .TRUE. )
              !
@@ -824,6 +854,8 @@ MODULE pw_restart
                                   COLUMNS = 3 )
              !
              CALL iotk_close_write( iun )
+
+#endif
              !
           END IF
           !
@@ -846,7 +878,11 @@ MODULE pw_restart
           ! ...                 read only if on this pool (iks <= ik <= ike )
           !
           IF ( ( nks > 1 ) .AND. ( ik >= iks ) .AND. ( ik <= ike ) ) THEN
+#if defined __HDF5
+              CALL get_buffer_hdf5(evc_hdf5,evc,ik)
+#else
               CALL get_buffer ( evc, nwordwfc, iunwfc, (ik-iks+1) )
+#endif
           END IF
           !
           IF ( nspin == 2 ) THEN
@@ -883,7 +919,11 @@ MODULE pw_restart
              !
              IF ( ( nks > 1 ) .AND. ( ik_eff >= iks ) .AND. ( ik_eff <= ike ) ) THEN
                 !
+#if defined __HDF5
+                CALL get_buffer_hdf5 (evc_hdf5,evc,ik)
+#else
                 CALL get_buffer ( evc, nwordwfc, iunwfc, (ik_eff-iks+1) )
+#endif
                 !
              END IF
              !
@@ -978,6 +1018,7 @@ MODULE pw_restart
       USE lsda_mod,      ONLY : nspin
       USE mp_bands,      ONLY : intra_bgrp_comm
       USE mp,            ONLY : mp_sum
+      USE mp_world,      ONLY : mpime
       !
       IMPLICIT NONE
       !
@@ -1127,6 +1168,7 @@ MODULE pw_restart
       IF ( .NOT. lheader .AND. .NOT. qexml_version_init) &
          CALL errore( 'pw_readfile', 'qexml version not set', 71 )
       !
+
       IF (  ionode ) THEN
          !
          CALL qexml_init( iunpun )
@@ -1242,6 +1284,7 @@ MODULE pw_restart
          END IF
          !
       END IF
+      !if(what.eq.trim('nowave')) call errore('','',900)
       IF ( lwfc ) THEN
          !
          CALL read_wavefunctions( dirname, ierr )
@@ -2043,6 +2086,7 @@ MODULE pw_restart
                             Hubbard_l, Hubbard_U, Hubbard_J, Hubbard_alpha, &
                             Hubbard_J0, Hubbard_beta, U_projection
       USE kernel_table, ONLY : vdw_table_name
+      USE acfdt_ener,   ONLY : acfdt_in_pw
       USE control_flags,ONLY : llondon, lxdm, ts_vdw
       USE london_module,ONLY : scal6, lon_rcut
       USE tsvdw_module, ONLY : vdw_isolated
@@ -2066,7 +2110,7 @@ MODULE pw_restart
          CALL qexml_read_xc( dft_name, lda_plus_u, lda_plus_u_kind, U_projection,&
                              Hubbard_lmax, Hubbard_l, nsp_, Hubbard_U, Hubbard_J, &
                              Hubbard_J0, Hubbard_alpha, Hubbard_beta, &
-                             inlc, vdw_table_name, llondon, scal6, &
+                             inlc, vdw_table_name,  acfdt_in_pw, llondon, scal6, &
                              lon_rcut, lxdm, ts_vdw, vdw_isolated, ierr )
          !
       END IF
@@ -2074,6 +2118,9 @@ MODULE pw_restart
       CALL mp_bcast( dft_name,   ionode_id, intra_image_comm )
       CALL mp_bcast( lda_plus_u, ionode_id, intra_image_comm )
       CALL mp_bcast( inlc, ionode_id, intra_image_comm )
+      CALL mp_bcast( llondon,    ionode_id, intra_image_comm )
+      CALL mp_bcast( lxdm,       ionode_id, intra_image_comm )
+      CALL mp_bcast( ts_vdw,     ionode_id, intra_image_comm )
       !
       IF ( lda_plus_u ) THEN
          !
@@ -2092,6 +2139,21 @@ MODULE pw_restart
       IF ( inlc == 1 .OR. inlc == 2 ) THEN
          CALL mp_bcast( vdw_table_name,  ionode_id, intra_image_comm )
       END IF
+      !
+      IF ( llondon ) THEN
+         CALL mp_bcast( scal6, ionode_id, intra_image_comm )
+         CALL mp_bcast( lon_rcut, ionode_id, intra_image_comm )
+      END IF
+      !
+      IF ( ts_vdw ) THEN
+         CALL mp_bcast( vdw_isolated, ionode_id, intra_image_comm )
+      END IF
+      !
+      ! SCF EXX/RPA
+      !
+      CALL mp_bcast( acfdt_in_pw, ionode_id, intra_image_comm )
+      !
+      IF (acfdt_in_pw) dft_name = 'NOX-NOC'
 
       ! discard any further attempt to set a different dft
       CALL enforce_input_dft( dft_name, nomsg )
@@ -2323,6 +2385,7 @@ MODULE pw_restart
       USE klist,    ONLY : nkstot, wk, nelec
       USE wvfct,    ONLY : et, wg, nbnd
       USE ener,     ONLY : ef, ef_up, ef_dw
+      USE mp_world, ONLY : mpime
       !
       IMPLICIT NONE
       !
@@ -2375,6 +2438,8 @@ MODULE pw_restart
          !
          CALL qexml_read_bands_pw( num_k_points, nbnd, nkstot, lsda, lkpoint_dir, filename , ISK=isk, ET=et, WG=wg , IERR=ierr)
          !
+         write(mpime+600,*) et
+         write(mpime+700,*) wg
          et(:,:) = et(:,:) * e2
          !
          FORALL( ik = 1:nkstot ) wg(:,ik) = wg(:,ik)*wk(ik)
@@ -2383,6 +2448,8 @@ MODULE pw_restart
       !
       CALL mp_bcast( ierr, ionode_id, intra_image_comm )
       !
+       
+      !call errore('','',1)
       IF ( ierr > 0 ) RETURN
       !
       CALL mp_bcast( nelec,    ionode_id, intra_image_comm )
@@ -2413,7 +2480,7 @@ MODULE pw_restart
       USE wvfct,                ONLY : npw, npwx, et, wg, nbnd
       USE gvecw,                ONLY : ecutwfc
       USE wavefunctions_module, ONLY : evc
-      USE io_files,             ONLY : nwordwfc, iunwfc
+      USE io_files,             ONLY : nwordwfc, iunwfc, tmp_dir
       USE buffers,              ONLY : save_buffer
       USE gvect,                ONLY : ngm, ngm_g, g, ig_l2g
       USE noncollin_module,     ONLY : noncolin, npol
@@ -2556,6 +2623,7 @@ MODULE pw_restart
       END DO
       !
       !
+
       IF ( ionode ) THEN
          !
          CALL iotk_scan_begin( iunpun, "EIGENVECTORS" )
@@ -2570,6 +2638,9 @@ MODULE pw_restart
          !
          IF ( ionode ) THEN
             !
+#if defined __HDF5
+
+#else
             CALL iotk_scan_begin( iunpun, "K-POINT" // TRIM( iotk_index( ik ) ) )
             !
             IF ( nspin == 2 .OR. noncolin ) THEN
@@ -2584,8 +2655,11 @@ MODULE pw_restart
                 !
             ENDIF
             !
+#endif
+
          END IF
          !
+#if !defined __HDF5
          CALL mp_bcast( twfcollect, ionode_id, intra_image_comm )
          !
          IF ( .NOT. twfcollect ) THEN
@@ -2600,6 +2674,7 @@ MODULE pw_restart
             EXIT k_points_loop
             !
          END IF
+#endif
          !
          IF ( nspin == 2 ) THEN
             !
@@ -2665,8 +2740,12 @@ MODULE pw_restart
                   !
                   IF ( ionode ) THEN
                      !
+#if defined __HDF5
+                     filename = trim(tmp_dir)//"evc.hdf5"
+#else
                      filename = TRIM( qexml_wfc_filename( dirname, 'evc', ik, ipol, &
                                          DIR=lkpoint_dir ) )
+#endif
                      !
                   END IF
                   !
@@ -2685,11 +2764,20 @@ MODULE pw_restart
                !
                IF ( ionode ) THEN
                   !
-                  filename = TRIM( qexml_wfc_filename( dirname, 'evc', ik, &
+#if defined __HDF5
+                     filename = trim(tmp_dir)//"evc.hdf5"
+#else
+                     filename = TRIM( qexml_wfc_filename( dirname, 'evc', ik, ipol, &
                                          DIR=lkpoint_dir ) )
+#endif
+
                   !
                END IF
                !
+               ! workaround for pot parallelization ( Viet Nguyen / SdG )
+               ! -pot parallelization uses mp_image communicators
+               ! note that ionode must be also reset in the similar way 
+               ! to image parallelization
                CALL read_wfc( iunout, ik, nkstot, kunit, ispin, nspin,         &
                               evc, npw_g, nbnd, igk_l2g_kdip(:,ik-iks+1),      &
                               ngk(ik-iks+1), filename, scalef, &
@@ -2709,11 +2797,13 @@ MODULE pw_restart
             !
          END IF
          !
+#if !defined __HDF5
          IF ( ionode ) THEN
             !
             CALL iotk_scan_end( iunpun, "K-POINT" // TRIM( iotk_index( ik ) ) )
             !
          END IF
+#endif
          !
       END DO k_points_loop
       !

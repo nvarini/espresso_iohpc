@@ -22,6 +22,9 @@ incdrhoscf.o \
 incdrhoscf_nc.o \
 dv_of_drho.o \
 dgradcorr.o \
+dnonloccorr.o \
+dv_vdW_DF.o \
+dv_rVV10.o \
 newdq.o \
 orthogonalize.o \
 setup_nscf.o \
@@ -52,6 +55,6 @@ tldeps :
 	( cd ../; $(MAKE) $(TLDEPS) || exit 1 ) ; fi
 
 clean :
-	- /bin/rm -f *.o *.a *.d *.i *~ *.F90 *.mod *.L
+	- /bin/rm -f *.o *.a *.d *.i *~ *_tmp.f90 *.mod *.L
 
 include make.depend

@@ -2,7 +2,7 @@
 
 #tempdir=$HOME/Downloads
 tempdir=/tmp
-version=5.3.0
+version=5.4.0
 
 # make sure there is no locale setting creating unneeded differences.
 LC_ALL=C
@@ -74,12 +74,14 @@ tar -czvf espresso-$version.tar.gz espresso-$version/archive \
                                    espresso-$version/PW \
                                    espresso-$version/README \
                                    espresso-$version/upftools
-#
+
+
 # Packages, ready for automatic unpacking
 
 cd espresso-$version
 tar -cvzf ../PWgui-$version.tar.gz    PWgui-$version
-tar -czvf ../PHonon-$version.tar.gz   PHonon PlotPhon QHA
+tar -czvf ../PHonon-$version.tar.gz   PHonon # PlotPhon QHA
+tar -czvf ../EPW-$version.tar.gz      EPW
 tar -czvf ../neb-$version.tar.gz      NEB
 tar -czvf ../pwcond-$version.tar.gz   PWCOND
 tar -czvf ../xspectra-$version.tar.gz XSpectra
@@ -88,6 +90,21 @@ tar -czvf ../GWW-$version.tar.gz      GWW
 tar -czvf ../tddfpt-$version.tar.gz   TDDFPT
 tar -czvf ../atomic-$version.tar.gz   atomic
 tar -czvf ../test-suite-$version.tar.gz test-suite
+tar -czvf ../EPW-$version.tar.gz EPW
+
+# Updating reference outputs on test-suite
+
+find . -name benchmark.out* > list-SVN.txt
+sed 's/SVN/$version/g' list-SVN.txt | grep -v svn  > list-$version.txt
+paste -d " " list-SVN.txt list-$version.txt > ./STUFF-TO-RENAME.txt
+IFS=$'\n'
+for x in `cat ./STUFF-TO-RENAME.txt `
+do
+file_src=`echo $x | awk '{ print $1}'`
+file_dst=`echo $x | awk '{ print $2}'`
+mv ${file_src} ${file_dst}
+done
+rm ./STUFF-TO-RENAME.txt ./list-SVN.txt ./list-$version.txt
 
 
 # Generating and uploading documentation

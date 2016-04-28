@@ -93,7 +93,6 @@ allocate_locpot.o : ../../Modules/fft_base.o
 allocate_locpot.o : ../../Modules/ions_base.o
 allocate_locpot.o : ../../Modules/recvec.o
 allocate_locpot.o : pwcom.o
-allocate_nlpot.o : ../../Modules/cell_base.o
 allocate_nlpot.o : ../../Modules/control_flags.o
 allocate_nlpot.o : ../../Modules/gvecw.o
 allocate_nlpot.o : ../../Modules/io_global.o
@@ -101,7 +100,6 @@ allocate_nlpot.o : ../../Modules/ions_base.o
 allocate_nlpot.o : ../../Modules/noncol.o
 allocate_nlpot.o : ../../Modules/recvec.o
 allocate_nlpot.o : ../../Modules/uspp.o
-allocate_nlpot.o : exx.o
 allocate_nlpot.o : ldaU.o
 allocate_nlpot.o : pwcom.o
 allocate_nlpot.o : scf_mod.o
@@ -577,6 +575,7 @@ forces.o : ../../Modules/ions_base.o
 forces.o : ../../Modules/kind.o
 forces.o : ../../Modules/mm_dispersion.o
 forces.o : ../../Modules/plugin_flags.o
+forces.o : ../../Modules/qmmm.o
 forces.o : ../../Modules/recvec.o
 forces.o : ../../Modules/tsvdw.o
 forces.o : ../../Modules/uspp.o
@@ -1327,7 +1326,9 @@ pw2casino.o : ../../Modules/kind.o
 pw2casino.o : ../../Modules/mp_bands.o
 pw2casino.o : ../../Modules/mp_images.o
 pw2casino.o : ../../Modules/mp_pools.o
+pw2casino.o : ../../Modules/noncol.o
 pw2casino.o : ../../Modules/plugin_flags.o
+pw2casino.o : pwcom.o
 pw2casino_write.o : ../../FFTXlib/fft_interfaces.o
 pw2casino_write.o : ../../Modules/becmod.o
 pw2casino_write.o : ../../Modules/cell_base.o
@@ -1384,6 +1385,7 @@ pw_restart.o : ../../Modules/version.o
 pw_restart.o : ../../Modules/wavefunctions.o
 pw_restart.o : ../../Modules/xml_io_base.o
 pw_restart.o : ../../iotk/src/iotk_module.o
+pw_restart.o : acfdt_in_pw.o
 pw_restart.o : atomic_wfc_mod.o
 pw_restart.o : buffers.o
 pw_restart.o : esm.o

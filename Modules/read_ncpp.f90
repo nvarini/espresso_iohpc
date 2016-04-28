@@ -26,7 +26,7 @@ subroutine read_ncpp (iunps, np, upf)
   real(DP), allocatable:: vnl(:,:)
   real(DP), parameter :: rcut = 10.d0, e2 = 2.d0
   real(DP), external :: qe_erf
-  integer :: nlc, nnl, lmax, lloc
+  integer :: nlc, nnl, lmax, lloc, ll(1) 
   integer :: nb, i, l, ir, ios=0
   logical :: bhstype,  numeric
   !
@@ -167,8 +167,10 @@ subroutine read_ncpp (iunps, np, upf)
      !
      ! bring analytic potentials into numerical form
      !
-     IF ( nlc == 2 .AND. nnl == 3 .AND. bhstype ) &
-          CALL bachel( alps(1,0), aps(1,0), 1, lmax )
+     IF ( nlc == 2 .AND. nnl == 3 .AND. bhstype ) THEN
+          ll(1) = lmax ! workaround for NAG compiler
+          CALL bachel( alps(1,0), aps(1,0), 1, ll )
+     END IF
      !
      do i = 1, nlc 
         do ir = 1, upf%kkbeta

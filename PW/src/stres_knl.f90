@@ -26,6 +26,10 @@ subroutine stres_knl (sigmanlc, sigmakin)
   USE mp_pools,             ONLY: inter_pool_comm
   USE mp_bands,             ONLY: intra_bgrp_comm
   USE mp,                   ONLY: mp_sum
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5
+  USE buffers,              ONLY : get_buffer_hdf5
+#endif
   implicit none
   real(DP) :: sigmanlc (3, 3), sigmakin (3, 3)
   real(DP), allocatable :: gk (:,:), kfac (:)
@@ -42,8 +46,13 @@ subroutine stres_knl (sigmanlc, sigmakin)
   kfac(:) = 1.d0
 
   do ik = 1, nks
-     if (nks > 1) &
+     if (nks > 1) then
+#if defined __HDF5
+        call get_buffer_hdf5 (evc_hdf5, evc, ik)
+#else
         call get_buffer (evc, nwordwfc, iunwfc, ik)
+#endif
+     endif
      npw = ngk(ik)
      do i = 1, npw
         gk (1, i) = (xk (1, ik) + g (1, igk_k(i,ik) ) ) * tpiba

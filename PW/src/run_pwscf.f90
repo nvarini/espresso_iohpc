@@ -98,6 +98,7 @@ SUBROUTINE run_pwscf ( exit_status )
      ELSE
         CALL electrons()
      END IF
+
      !
      ! ... code stopped by user or not converged
      !
@@ -130,10 +131,13 @@ SUBROUTINE run_pwscf ( exit_status )
      ! ... force calculation
      !
      IF ( lforce ) CALL forces()
+
      !
      ! ... stress calculation
      !
+
      IF ( lstres ) CALL stress ( sigma )
+
      !
      ! ... send out forces to MM code in QM/MM run
      !

@@ -33,6 +33,10 @@ SUBROUTINE force_us( forcenl )
   USE mp_pools,             ONLY : inter_pool_comm
   USE mp_bands,             ONLY : intra_bgrp_comm
   USE mp,                   ONLY : mp_sum, mp_get_comm_null
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5
+  USE buffers,              ONLY : get_buffer_hdf5
+#endif
   !
   IMPLICIT NONE
   !
@@ -63,7 +67,12 @@ SUBROUTINE force_us( forcenl )
      npw = ngk (ik)
 
      IF ( nks > 1 ) THEN
-        CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+#if defined __HDF5
+          CALL get_buffer_hdf5 ( evc_hdf5, evc, ik)
+#else
+          CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+#endif
+
         IF ( nkb > 0 ) &
              CALL init_us_2( npw, igk_k(1,ik), xk(1,ik), vkb )
      END IF
@@ -167,7 +176,7 @@ SUBROUTINE force_us( forcenl )
                 CALL DGEMM ('N','N', nh(nt), becp%nbnd_loc, nh(nt), &
                      1.0_dp, deeq(1,1,na,current_spin), nhm, &
                      becp%r(ijkb0+1,1), nkb, 1.0_dp, aux, nh(nt) )
-!$omp parallel do default(shared) private(ibnd_loc,ibnd,ih) reduction(+:forcenl)
+!$omp parallel do default(shared) private(ibnd_loc,ibnd,ih) reduction(-:forcenl)
                 DO ih = 1, nh(nt)
                    DO ibnd_loc = 1, becp%nbnd_loc
                       ibnd = ibnd_loc + becp%ibnd_begin - 1

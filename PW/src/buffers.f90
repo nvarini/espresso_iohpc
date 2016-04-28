@@ -495,7 +495,7 @@ Module buffers
   ! QE interfaces to BUIOL module
   !
   PUBLIC :: open_buffer, get_buffer, save_buffer, close_buffer
-  PUBLIC :: save_buffer_hdf5
+  PUBLIC :: save_buffer_hdf5, get_buffer_hdf5
 
 
 
@@ -593,16 +593,32 @@ contains
     !
   END SUBROUTINE save_buffer
 
-  SUBROUTINE save_buffer_hdf5(hdf5desc,data,niter)
-    USE hdf5_qe, ONLY : HDF5_type, write_data_hdf5
+  SUBROUTINE save_buffer_hdf5(hdf5desc,data,kpoint)
+    USE hdf5_qe, ONLY : HDF5_type, write_data_hdf5, &
+                        define_dataset_hdf5_hyperslab
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     complex(kind=DP), intent(inout) :: data(:,:)
-    integer, intent(in) :: niter
+    integer, intent(in) :: kpoint
     
-    call write_data_hdf5(hdf5desc,data,niter)
+    CALL define_dataset_hdf5_hyperslab(hdf5desc,kpoint)
+    call write_data_hdf5(hdf5desc,data,kpoint)
    
   END SUBROUTINE save_buffer_hdf5
+
+  SUBROUTINE get_buffer_hdf5(hdf5desc,data,kpoint)
+    USE hdf5_qe, ONLY : HDF5_type, read_data_hdf5
+    implicit none
+    type(HDF5_type), intent(inout) :: hdf5desc
+    complex(kind=DP), intent(inout) :: data(:,:)
+    integer, intent(in) :: kpoint
+    
+    call read_data_hdf5(hdf5desc,data,kpoint)
+   
+  END SUBROUTINE get_buffer_hdf5
+
+
+
 
   !
   !----------------------------------------------------------------------------

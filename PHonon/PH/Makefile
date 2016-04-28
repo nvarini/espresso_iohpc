@@ -46,6 +46,7 @@ compute_weight.o \
 deallocate_part.o \
 deallocate_phq.o \
 d2ionq.o \
+d2ionq_mm.o \
 davcio_drho.o \
 dfile_autoname.o \
 dfile_star.o \
@@ -254,7 +255,7 @@ libphaux.a : $(PHAUXOBJS)
 	$(RANLIB) $@
 
 clean :
-	- /bin/rm -f *.x *.o *.a *~ *.F90 *.d *.mod *.i *.L
+	- /bin/rm -f *.x *.o *.a *~ *_tmp.f90 *.d *.mod *.i *.L
 	- /bin/rm -rf ../../bin/ph.x ../../bin/dynmat.x ../../bin/matdyn.x \
 	../../bin/q2r.x ../../bin/q2trans.x ../../bin/q2trans_fd.x ../../bin/lambda.x ../../bin/fqha.x
 

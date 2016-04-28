@@ -44,6 +44,12 @@ SUBROUTINE sum_band()
   USE paw_variables,        ONLY : okpaw
   USE becmod,               ONLY : allocate_bec_type, deallocate_bec_type, &
                                    becp
+#if defined __HDF5       
+  USE buffers,              ONLY : get_buffer_hdf5
+  USE hdf5_qe,              ONLY : evc_hdf5
+#endif
+
+
   !
   IMPLICIT NONE
   !
@@ -280,8 +286,13 @@ SUBROUTINE sum_band()
           !
           npw = ngk(ik)
           !
-          IF ( nks > 1 ) &
-             CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+          IF ( nks > 1  ) THEN
+#if defined __HDF5
+            CALL get_buffer_hdf5 ( evc_hdf5, evc, ik)
+#else
+            CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+#endif
+          ENDIF
           !
           IF ( nkb > 0 ) &
              CALL init_us_2( npw, igk_k(1,ik), xk(1,ik), vkb )
@@ -543,8 +554,13 @@ SUBROUTINE sum_band()
           IF ( lsda ) current_spin = isk(ik)
           npw = ngk (ik)
           !
-          IF ( nks > 1 ) &
-             CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+          IF ( nks > 1  ) THEN
+#if defined __HDF5
+            CALL get_buffer_hdf5 ( evc_hdf5, evc, ik)
+#else
+            CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+#endif
+          ENDIF
           !
           IF ( nkb > 0 ) &
              CALL init_us_2( npw, igk_k(1,ik), xk(1,ik), vkb )

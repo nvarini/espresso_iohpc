@@ -7,9 +7,6 @@ MODFLAGS= $(MOD_FLAG)../../iotk/src $(MOD_FLAG)../../Modules \
           $(MOD_FLAG)../../FFTXlib $(MOD_FLAG)../../FFTXlib $(MOD_FLAG)../../PW/src $(MOD_FLAG).
 IFLAGS=
 
-PPOBJS = \
-../../PP/src/xsf.o
-
 PWCONDOBJS = \
 allocate_cond.o \
 bessj.o \
@@ -58,8 +55,8 @@ TLDEPS= bindir mods libs pw pp
 
 all : tldeps pwcond.x
 
-pwcond.x : $(PWCONDOBJS) $(PWOBJS) $(PPOBJS) $(QEMODS) $(LIBOBJS)
-	$(LD) $(LDFLAGS) -o pwcond.x $(PWCONDOBJS) $(PPOBJS) \
+pwcond.x : $(PWCONDOBJS) $(PWOBJS) $(QEMODS) $(LIBOBJS)
+	$(LD) $(LDFLAGS) -o pwcond.x $(PWCONDOBJS) \
 		$(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBS)
 	- ( cd ../../bin ; ln -fs ../PWCOND/src/pwcond.x . )
 
@@ -68,7 +65,7 @@ tldeps :
 	( cd ../.. ; $(MAKE) $(TLDEPS) || exit 1 ) ; fi
 
 clean :
-	- /bin/rm -f *.x *.o *~ *.F90 *.d *.mod *.i *.a *.L
+	- /bin/rm -f *.x *.o *~ *_tmp.f90 *.d *.mod *.i *.a *.L
 	- /bin/rm -f ../../bin/pwcond.x
 
 include make.depend

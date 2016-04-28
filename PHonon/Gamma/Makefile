@@ -31,20 +31,18 @@ generate_dynamical_matrix.o \
 generate_effective_charges.o \
 h_h.o \
 macro.o \
-pw_dot.o \
 phcg.o \
 rhod2vkb.o \
 solve_e.o \
 solve_ph.o \
-writedyn.o \
-zvscal.o
+writedyn.o 
 
 PWOBJS = ../../PW/src/libpw.a
 QEMODS = ../../Modules/libqemod.a ../../FFTXlib/libqefft.a ../../LAXlib/libqela.a
 
 TLDEPS= bindir mods libs pw
 
-all : tldeps phcg.x
+all : tldeps phcg.x libcg.a
 
 phcg.x : $(PWOBJS) $(CGOBJS) $(QEMODS) $(LIBOBJS)
 	$(LD) $(LDFLAGS) -o phcg.x \
@@ -55,7 +53,11 @@ tldeps :
 	( cd ../.. ; $(MAKE) $(TLDEPS) || exit 1 ) ; fi
 
 clean :
-	- /bin/rm -f *.x *.o *.d *.i *~ *.F90 *.mod *.L
+	- /bin/rm -f *.x *.o *.d *.i *~ *_tmp.f90 *.mod *.L
 	- /bin/rm -f ../../bin/phcg.x
+
+libcg.a : $(CGOBJS)
+	$(AR) $(ARFLAGS) $@ $?
+	$(RANLIB) $@
 
 include make.depend

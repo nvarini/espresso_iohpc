@@ -36,7 +36,7 @@ SUBROUTINE wfcinit()
   USE hdf5
   USE buffers,              ONLY : save_buffer_hdf5
   USE hdf5_qe,              ONLY : evc_hdf5, off_npw, npw_g, read_data_hdf5, evc_hdf5_write
-  USE hdf5_qe,              ONLY : prepare_index_hdf5,  write_final_data
+  USE hdf5_qe,              ONLY : prepare_index_hdf5
   USE hdf5_qe,              ONLY : prepare_for_writing_final
   USE io_files,             ONLY : wfc_dir
   USE mp_world, ONLY : nproc, mpime
@@ -45,7 +45,7 @@ SUBROUTINE wfcinit()
   IMPLICIT NONE
   !
   INTEGER :: ik, ierr, error
-  LOGICAL :: exst, exst_mem, exst_file
+  LOGICAL :: exst, exst_mem, exst_file, opnd_file
   !
   !
   CALL start_clock( 'wfcinit' )
@@ -89,9 +89,10 @@ SUBROUTINE wfcinit()
      ! ... order to avoid a useless buffer allocation) here
      !
      IF ( nks == 1 ) THEN
-         CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
+         inquire (unit = iunwfc, opened = opnd_file)
+         if (.not.opnd_file) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
          CALL davcio ( evc, 2*nwordwfc, iunwfc, nks, -1 )
-         CLOSE ( UNIT=iunwfc, STATUS='keep' )
+         if(.not.opnd_file) CLOSE ( UNIT=iunwfc, STATUS='keep' )
      END IF
      !
   END IF
@@ -172,9 +173,10 @@ SUBROUTINE wfcinit()
          !    CALL extend_dataset_hdf5(evc_hdf5,evc,npwx,2)
          !endif
    CALL save_buffer_hdf5(evc_hdf5,evc,ik)
+
    !      CALL write_final_data(evc_hdf5_write,ik,evc(:,1))
 
-         CALL save_buffer( evc, nwordwfc, iunwfc, ik )
+         !CALL save_buffer( evc, nwordwfc, iunwfc, ik )
 #else
          CALL save_buffer ( evc, nwordwfc, iunwfc, ik )
 #endif
@@ -182,7 +184,6 @@ SUBROUTINE wfcinit()
      !
   END DO
     !call h5fclose_f(evc_hdf5_write%file_id,error)
-    !call errore('','',1)
 
 
   !

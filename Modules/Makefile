@@ -66,6 +66,7 @@ plugin_flags.o \
 plugin_arguments.o \
 plugin_variables.o \
 pseudo_types.o \
+pw_dot.o \
 qexml.o \
 qexml_xsd.o \
 qmmm.o \
@@ -105,8 +106,10 @@ xc_vdW_DF.o \
 xc_rVV10.o \
 xml_input.o \
 xml_io_base.o \
+xsf.o \
 wypos.o \
-zdotc_wrapper.o 
+zdotc_wrapper.o  \
+zvscal.o 
 
 # list of subrooutines and functions (not modules) previously found in flib/
 
@@ -182,7 +185,7 @@ tldeps :
 
 
 clean :
-	- /bin/rm -f *.o *.a *.d *.i *~ *.F90 *.mod *.L version.f90
+	- /bin/rm -f *.o *.a *.d *.i *~ *_tmp.f90 *.mod *.L version.f90
 
 # .PHONY forces execution of a rule irrespective of the presence of an
 # updated file with the same name of the rule. In this way, the script 

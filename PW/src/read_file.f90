@@ -31,9 +31,9 @@ SUBROUTINE read_file()
   USE wavefunctions_module, ONLY : evc
 #if defined __HDF5
   USE mp_world,           ONLY : nproc, mpime, world_comm
-  USE mp_pools,           ONLY : intra_pool_comm
+  USE mp_pools,           ONLY : inter_pool_comm
   USE wavefunctions_module,ONLY : evc
-  USE hdf5_qe,            ONLY : evc_hdf5, evc_hdf5_write, initialize_io_hdf5
+  USE hdf5_qe
 #endif
 
 
@@ -47,9 +47,11 @@ SUBROUTINE read_file()
   IF ( ionode ) WRITE( stdout, '(/,5x,A,/,5x,A)') &
      'Reading data from directory:', TRIM( tmp_dir ) // TRIM( prefix ) // '.save'
   !
+
   CALL read_xml_file ( )
 #if defined __HDF5
-  CALL initialize_io_hdf5( evc_hdf5,intra_pool_comm, evc,.false.,0)
+  CALL initialize_hdf5()
+  CALL initialize_io_hdf5( evc_hdf5,inter_pool_comm, evc,.false.,0)
 #endif
 
   !
@@ -61,6 +63,7 @@ SUBROUTINE read_file()
   nwordwfc = nbnd*npwx*npol
   io_level = 1
   CALL open_buffer ( iunwfc, 'wfc', nwordwfc, io_level, exst )
+ 
   !
   ! ... Read orbitals, write them in 'distributed' form to iunwfc
   !
@@ -299,6 +302,7 @@ SUBROUTINE read_xml_file_internal(withbs)
   CALL gshells ( lmovecell ) 
   !
   ! ... allocate the potential and wavefunctions
+
   !
   CALL allocate_locpot()
   CALL allocate_nlpot()

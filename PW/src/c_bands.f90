@@ -31,6 +31,10 @@ SUBROUTINE c_bands( iter )
   USE mp_pools,             ONLY : npool, kunit, inter_pool_comm
   USE mp,                   ONLY : mp_sum
   USE check_stop,           ONLY : check_stop_now
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5
+  USE buffers,              ONLY : get_buffer_hdf5
+#endif
   !
   IMPLICIT NONE
   !
@@ -89,8 +93,13 @@ SUBROUTINE c_bands( iter )
      !
      ! ... read in wavefunctions from the previous iteration
      !
-     IF ( nks > 1 .OR. lelfield ) &
+     IF ( nks > 1 .OR. lelfield ) THEN
+#if defined __HDF5
+          CALL get_buffer_hdf5 ( evc_hdf5, evc, ik)
+#else
           CALL get_buffer ( evc, nwordwfc, iunwfc, ik )
+#endif
+     ENDIF
      !
      ! ... Needed for LDA+U
      !

@@ -539,6 +539,11 @@ MODULE xml_io_base
       ! ... on a single proc.
       !
       USE mp,        ONLY : mp_get, mp_sum, mp_rank, mp_size
+      USE mp_world,  ONLY : mpime
+#if defined __HDF5
+      USE hdf5_qe
+#endif
+      USE mp_pools,  ONLY : inter_pool_comm
       !
       IMPLICIT NONE
       !
@@ -553,6 +558,7 @@ MODULE xml_io_base
       !
       INTEGER               :: rhounit, ierr, i, j, k, kk, ldr, ip
       CHARACTER(LEN=256)    :: rho_file
+      CHARACTER(LEN=256)    :: rho_file_hdf5
       CHARACTER(LEN=10)     :: rho_extension
       REAL(DP), ALLOCATABLE :: rho_plane(:)
       INTEGER,  ALLOCATABLE :: kowner(:)
@@ -570,10 +576,19 @@ MODULE xml_io_base
       rhounit = find_free_unit ()
       !
       IF ( ionode ) THEN 
+#if defined  __HDF5
+      rho_file_hdf5 = TRIM( rho_file_base ) // '.hdf5'
+      CALL prepare_for_writing_final(rho_hdf5_write,inter_pool_comm,rho_file_hdf5)
+      CALL add_attributes_hdf5(rho_hdf5_write,nr1,"nr1")
+      CALL add_attributes_hdf5(rho_hdf5_write,nr2,"nr2")
+      CALL add_attributes_hdf5(rho_hdf5_write,nr3,"nr3")
+#else
          CALL iotk_open_write( rhounit, FILE = rho_file,  BINARY = rho_binary, IERR = ierr )
          CALL errore( 'write_rho_xml', 'cannot open ' // TRIM( rho_file ) // ' file for writing', ierr )
+#endif
       END IF 
       !
+#if !defined __HDF5
       IF ( ionode ) THEN
          !
          CALL iotk_write_begin( rhounit, "CHARGE-DENSITY" )
@@ -585,6 +600,7 @@ MODULE xml_io_base
          CALL iotk_write_empty( rhounit, "INFO", attr )
          !
       END IF
+#endif
       !
       ALLOCATE( rho_plane( nr1*nr2 ) )
       ALLOCATE( kowner( nr3 ) )
@@ -639,8 +655,13 @@ MODULE xml_io_base
          IF ( kowner(k) /= io_group .AND. my_group_id == io_group_id ) &
             CALL mp_get( rho_plane, rho_plane, me_group, io_group, kowner(k), k, intra_group_comm )
          !
-         IF ( ionode ) &
+         IF ( ionode ) THEN
+#if defined __HDF5
+            CALL write_rho(rho_hdf5_write,k,rho_plane)
+#else
             CALL iotk_write_dat( rhounit, "z" // iotk_index( k ), rho_plane )
+#endif
+         ENDIF
          !
       END DO
       !
@@ -648,10 +669,14 @@ MODULE xml_io_base
       DEALLOCATE( kowner )
       !
       IF ( ionode ) THEN
-         !
+#if defined __HDF5
+         CALL h5fclose_f(rho_hdf5_write%file_id,ierr)
+#else
+   !
          CALL iotk_write_end( rhounit, "CHARGE-DENSITY" )
          !
          CALL iotk_close_write( rhounit )
+#endif       
          !
       END IF
       !
@@ -671,6 +696,10 @@ MODULE xml_io_base
       USE mp_bands,  ONLY : intra_bgrp_comm
       USE mp_images, ONLY : intra_image_comm
       USE mp,        ONLY : mp_put, mp_sum, mp_rank, mp_size
+#if defined __HDF5
+      USE hdf5_qe
+      USE mp_pools, ONLY : inter_pool_comm
+#endif
       !
       IMPLICIT NONE
       !
@@ -683,8 +712,10 @@ MODULE xml_io_base
       !
       INTEGER               :: rhounit, ierr, i, j, k, kk, ldr, ip
       INTEGER               :: nr( 3 )
+      INTEGER               :: nr11
       INTEGER               :: me_group, nproc_group
       CHARACTER(LEN=256)    :: rho_file
+      CHARACTER(LEN=256)    :: rho_file_hdf5
       REAL(DP), ALLOCATABLE :: rho_plane(:)
       INTEGER,  ALLOCATABLE :: kowner(:)
       LOGICAL               :: exst
@@ -693,6 +724,7 @@ MODULE xml_io_base
       me_group     = mp_rank ( intra_bgrp_comm )
       nproc_group  = mp_size ( intra_bgrp_comm )
       !
+#if !defined __HDF5
       rhounit = find_free_unit ( )
       rho_file = TRIM( rho_file_base ) // ".dat"
       exst = check_file_exst( TRIM(rho_file) ) 
@@ -705,14 +737,24 @@ MODULE xml_io_base
       ENDIF
       !
       IF ( .NOT. exst ) CALL errore('read_rho_xml', 'searching for '//TRIM(rho_file), 10)
+#endif
       !
       IF ( ionode ) THEN
-         CALL iotk_open_read( rhounit, FILE = rho_file, IERR = ierr )
-         CALL errore( 'read_rho_xml', 'cannot open ' // TRIM( rho_file ) // ' file for reading', ierr )
+#if defined  __HDF5
+          rho_file_hdf5 = TRIM( rho_file_base ) // '.hdf5'
+          CALL prepare_for_reading_final(rho_hdf5_write,inter_pool_comm,rho_file_hdf5)
+          CALL read_attributes_hdf5(rho_hdf5_write,nr(1),"nr1")
+          CALL read_attributes_hdf5(rho_hdf5_write,nr(2),"nr2")
+          CALL read_attributes_hdf5(rho_hdf5_write,nr(3),"nr3")
+#else
+          CALL iotk_open_read( rhounit, FILE = rho_file, IERR = ierr )
+          CALL errore( 'read_rho_xml', 'cannot open ' // TRIM( rho_file ) // ' file for reading', ierr )
+#endif
       END IF
       !
       IF ( ionode ) THEN
          !
+#if !defined __HDF5
          CALL iotk_scan_begin( rhounit, "CHARGE-DENSITY" )
          !
          CALL iotk_scan_empty( rhounit, "INFO", attr )
@@ -720,6 +762,7 @@ MODULE xml_io_base
          CALL iotk_scan_attr( attr, "nr1", nr(1) )
          CALL iotk_scan_attr( attr, "nr2", nr(2) )
          CALL iotk_scan_attr( attr, "nr3", nr(3) )
+#endif
          !
          IF ( nr1 /= nr(1) .OR. nr2 /= nr(2) .OR. nr3 /= nr(3) ) &
             CALL errore( 'read_rho_xml', 'dimensions do not match', 1 )
@@ -746,8 +789,13 @@ MODULE xml_io_base
          !
          ! ... only ionode reads the charge planes
          !
-         IF ( ionode ) &
+         IF ( ionode ) THEN
+#if defined __HDF5
+            CALL  read_rho(rho_hdf5_write,k,rho_plane)
+#else
             CALL iotk_scan_dat( rhounit, "z" // iotk_index( k ), rho_plane )
+#endif
+         ENDIF
          !
          ! ... planes are sent to the destination processor
          !
@@ -771,9 +819,11 @@ MODULE xml_io_base
       !
       IF ( ionode ) THEN
          !
+#if !defined __HDF5
          CALL iotk_scan_end( rhounit, "CHARGE-DENSITY" )
          !
          CALL iotk_close_read( rhounit )
+#endif
          !
       END IF
       !
@@ -795,10 +845,11 @@ MODULE xml_io_base
       USE mp,         ONLY : mp_get, mp_size, mp_rank, mp_sum
       USE control_flags,     ONLY : lwfnscf, lwfpbe0nscf  ! Lingzhu Kong
 #if defined  __HDF5
-      USE hdf5_qe,    ONLY : evc_hdf5, read_data_hdf5, write_data_hdf5, &
-                              evc_hdf5_write,  &
-                             setup_file_property_hdf5, &
-                             write_final_data, prepare_for_writing_final
+      !USE hdf5_qe,    ONLY : evc_hdf5, read_data_hdf5, write_data_hdf5, &
+      !                        evc_hdf5_write,  &
+      !                       setup_file_property_hdf5, &
+      !                       write_final_data, prepare_for_writing_final, &
+      USE hdf5_qe                
       USE mp_world,   ONLY : mpime
       USE mp_global,    ONLY : inter_pool_comm, world_comm
       USE HDF5
@@ -825,6 +876,8 @@ MODULE xml_io_base
       INTEGER                  :: ngroup, ipsour, error
       INTEGER,     ALLOCATABLE :: ipmask(:)
       INTEGER                  :: me_in_group, nproc_in_group, io_in_parent, nproc_in_parent, me_in_parent, my_group, io_group
+      CHARACTER(LEN=256) :: filename_hdf5
+      CHARACTER          :: gammaonly
       COMPLEX(DP), ALLOCATABLE :: wtmp(:)
       !
       ngroup          = mp_size( inter_group_comm )
@@ -852,9 +905,20 @@ MODULE xml_io_base
       !
       IF ( ionode ) THEN
 #if defined  __HDF5
-      CALL prepare_for_writing_final(evc_hdf5_write,inter_pool_comm,filename,ik)
-#endif
+      filename_hdf5=trim(tmp_dir) //"evc.hdf5"
+      CALL prepare_for_writing_final(evc_hdf5_write,inter_pool_comm,filename_hdf5,ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,ngw,"ngw",ik)
+      write(gammaonly,'(I0)') gamma_only
+      CALL add_attributes_hdf5(evc_hdf5_write,gammaonly,"gamma_only",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,igwx,"igwx",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,nbnd,"nbnd",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,ik,"ik",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,nk,"nk",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,ispin,"ispin",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,nspin,"nspin",ik)
+      CALL add_attributes_hdf5(evc_hdf5_write,scalef,"scale_factor",ik)
          !
+#else
          CALL iotk_open_write( iuni, FILE = TRIM( filename ), ROOT="WFC", BINARY = .TRUE. )
          CALL iotk_write_attr( attr, "ngw",          ngw, FIRST = .TRUE. )
          CALL iotk_write_attr( attr, "igwx",         igwx )
@@ -867,6 +931,8 @@ MODULE xml_io_base
          CALL iotk_write_attr( attr, "scale_factor", scalef )
          !
          CALL iotk_write_empty( iuni, "INFO", attr )
+#endif
+
          !
       END IF
       !
@@ -907,9 +973,8 @@ MODULE xml_io_base
          IF ( ionode ) THEN
 
 #if defined  __HDF5
-            CALL write_final_data(evc_hdf5_write,j,wtmp(1:igwx), ik)
-#endif
-#if !defined  __HDF5
+            CALL write_evc(evc_hdf5_write,j,wtmp(1:igwx), ik)
+#else
             CALL iotk_write_dat( iuni, "evc" // iotk_index( j ), wtmp(1:igwx) )
 #endif
          ENDIF
@@ -928,9 +993,9 @@ MODULE xml_io_base
       IF ( ionode ) then
 #if defined __HDF5
          CALL h5fclose_f(evc_hdf5_write%file_id,error)
-        !if(ik.eq.10)call errore('','',200)
-#endif
+#else
          CALL iotk_close_write( iuni )
+#endif
       endif
       !
       DEALLOCATE( wtmp )
@@ -952,9 +1017,7 @@ MODULE xml_io_base
 
 #if defined  __HDF5
       USE mp_world,  ONLY : mpime
-      USE hdf5_qe,   ONLY : evc_hdf5_write,  &
-                            read_data_hdf5,  &
-                            read_final_data, prepare_for_reading_final
+      USE hdf5_qe
 #endif
       !
       IMPLICIT NONE
@@ -972,6 +1035,7 @@ MODULE xml_io_base
       INTEGER,            INTENT(IN)    :: root_in_group, intra_group_comm, inter_group_comm, parent_group_comm
       LOGICAL, OPTIONAL,  INTENT(IN)    :: flink
       !
+      CHARACTER(LEN=256) :: filename_hdf5
       INTEGER                  :: j
       COMPLEX(DP), ALLOCATABLE :: wtmp(:)
       INTEGER                  :: ierr
@@ -1015,6 +1079,7 @@ MODULE xml_io_base
       !
       ierr = 0
       !
+#if !defined __HDF5
       IF ( ionode .AND. .NOT. flink_ ) &
          CALL iotk_open_read( iuni, FILE = filename, &
                               BINARY = .TRUE., IERR = ierr )
@@ -1023,12 +1088,23 @@ MODULE xml_io_base
       !
       CALL errore( 'read_wfc ', &
                    'cannot open restart file for reading', ierr )
+#endif
       !
       IF ( ionode ) THEN
           !
 #if defined  __HDF5
-          CALL prepare_for_reading_final(evc_hdf5_write,evc_hdf5_write%comm,filename,ik)
-#endif
+          !filename_hdf5=trim(tmp_dir) //"evc.hdf5"
+          filename_hdf5=filename
+          CALL prepare_for_reading_final(evc_hdf5_write,evc_hdf5_write%comm,filename_hdf5,ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,ngw,"ngw",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,nbnd,"nbnd",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,ik_,"ik",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,nk_,"ik",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,ispin,"ispin",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,nspin,"nspin",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,igwx_,"igwx",ik)
+          CALL read_attributes_hdf5(evc_hdf5_write,scalef,"scale_factor",ik)
+#else
           CALL iotk_scan_empty( iuni, "INFO", attr )
           !
           CALL iotk_scan_attr( attr, "ngw",          ngw )
@@ -1040,6 +1116,8 @@ MODULE xml_io_base
           CALL iotk_scan_attr( attr, "igwx",         igwx_ )
           CALL iotk_scan_attr( attr, "scale_factor", scalef )
           !
+#endif
+
       END IF
       !
       CALL mp_bcast( ngw,    io_in_parent, parent_group_comm )
@@ -1060,14 +1138,14 @@ MODULE xml_io_base
             IF ( ionode ) THEN 
                !
 #if defined __HDF5
-          CALL read_final_data(evc_hdf5_write,j,wtmp(1:igwx),ik)
+          CALL read_evc(evc_hdf5_write,j,wtmp(1:igwx),ik)
              !  CALL iotk_scan_dat( iuni, &
              !                      "evc" // iotk_index( j ), wtmp(1:igwx_) )
 #else
                CALL iotk_scan_dat( iuni, &
                                    "evc" // iotk_index( j ), wtmp(1:igwx_) )
-#endif
  
+#endif
                !
                IF ( igwx > igwx_ ) wtmp((igwx_+1):igwx) = 0.0_DP
                ! ===========================================================
@@ -1106,7 +1184,9 @@ MODULE xml_io_base
          !
       END DO
       !
+#if !defined __HDF5
       IF ( ionode .AND. .NOT. flink_ ) CALL iotk_close_read( iuni )
+#endif
       !
       DEALLOCATE( wtmp )
       DEALLOCATE( ipmask )
