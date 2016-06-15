@@ -1,794 +1,247 @@
-atomic_number.f90:     call errore('atom_name','invalid atomic number',abs(atomic_number))
-atomic_number.f90:     call errore('atom_weight','invalid atomic number',abs(atomic_number))
-autopilot.f90:    ! This routine calls errore based upon the pilot property flag.
-autopilot.f90:    ! Either way errore will always issues a warning message.
-autopilot.f90:       ! if ierr < 0 errore writes the message but does not stop
-autopilot.f90:    CALL errore( calling_routine, message, ierr )
-autopilot.f90:       CALL errore( ' card_autopilot  ', ' two occurrences', 2 )
-becmod.f90:    IF ( npwx /= size (psi, 1) ) CALL errore ('calbec', 'size mismatch', 1)
-becmod.f90:    IF ( npwx < npw ) CALL errore ('calbec', 'size mismatch', 2)
-becmod.f90:      CALL errore ('calbec', 'size mismatch', 3)
-becmod.f90:    IF ( npwx /= size (psi, 1) ) CALL errore ('calbec', 'size mismatch', 1)
-becmod.f90:    IF ( npwx < npw ) CALL errore ('calbec', 'size mismatch', 2)
-becmod.f90:      CALL errore ('calbec', 'size mismatch', 3)
-becmod.f90:    IF ( 2*npwx /= size (psi, 1) ) CALL errore ('calbec', 'size mismatch', 1)
-becmod.f90:    IF ( npwx < npw ) CALL errore ('calbec', 'size mismatch', 2)
-becmod.f90:      CALL errore ('calbec', 'size mismatch', 3)
-becmod.f90:          CALL errore( ' allocate_bec_type ', ' cannot allocate bec%r ', ABS(ierr) )
-becmod.f90:          CALL errore( ' allocate_bec_type ', ' cannot allocate bec%nc ', ABS(ierr) )
-becmod.f90:          CALL errore( ' allocate_bec_type ', ' cannot allocate bec%k ', ABS(ierr) )
-becmod.f90:       CALL errore('becscal_nck','called in the wrong case',1)
-becmod.f90:       CALL errore('becscal_gamma','called in the wrong case',1)
-bfgs_module.f90:      if (nat*3 /= size (pos_in)) call errore('bfgs',' strange dimension',1)
-bfgs_module.f90:         if (abs(scnorm(step_old(:))-1._DP) > 1.d-10) call errore('bfgs', &
-bfgs_module.f90:         IF (dE0s > 0._DP ) CALL errore( 'bfgs', &
-bfgs_module.f90:         CALL errore( 'bfgs', 'NR step-length unreasonably short', 1 )
-bfgs_module.f90:         CALL errore( 'gdiis_step', 'error in Bunch-Kaufman inversion', info )
-bz_form.f90:   CALL errore('allocate_bz','Brillouin zone type not available',1)
-bz_form.f90:   CALL errore('init_bz','Brillouin zone type not available',1)
-bz_form.f90:CALL errore('find_letter_coordinate','Letter not recognized '//TRIM(letter),1)
-bz_form.f90:IF (ABS(info) > 0) CALL errore('find_intersection', &
-bz_form.f90:   CALL errore('find_bz_type','This ibrav is not supported',1)
-bz_form.f90:   CALL errore('find_bz_type','Wrong ibrav',1)
-bz_form.f90:   CALL errore('find_vertices','face not found',ivert)
-bz_form.f90:   CALL errore('inter_plane_line','The line and the plane are parallel',1)
-bz_form.f90:               IF (isub==0) CALL errore('find_n1n2_monoclinic','Problem with isub',1)
-bz_form.f90:IF (nfound /= 6) CALL errore('find_n1n2_monoclinic','Problem with nfound',1)
-bz_form.f90:      CALL errore('find_n1n2_monoclinic','Difficult monoclinic cell, &
-cell_base.f90:       CALL errore('cell_base_init', 'ibrav=0: must read cell parameters', 1)
-cell_base.f90:       CALL errore('cell_base_init', 'redundant data for cell parameters', 2)
-cell_base.f90:          IF( celldm( 1 ) /= 0.0_DP .OR. a /= 0.0_dp ) CALL errore &
-cell_base.f90:          IF( celldm( 1 ) /= 0.0_DP .OR. a /= 0.0_dp ) CALL errore &
-cell_base.f90:            CALL errore ('cell_base_init', &
-cell_base.f90:          CALL errore ('cell_base_init', &
-cell_base.f90:             (ABS(cosbc) > 1.0_dp) ) CALL errore ('cell_base_init',&
-cell_base.f90:        CALL errore( 'input', 'do not specify both celldm and a,b,c!', 1 )
-cell_base.f90:          CALL errore('ref_cell_base_init', 'ref_alat must be set to a positive value (in A.U.) in SYSTEM namelist', 1)
-cell_base.f90:      CALL errore(' cell_dyn_init',' wmass out of range ',0)
-cell_base.f90:              !CALL errore(' init_dofree ', &
-cell_base.f90:                CALL errore('cell_dofree', 'Isotropic expansion is only allowed for ibrav=1; i.e. for simple cubic', 1)
-cell_base.f90:              CALL errore(' init_dofree ',' unknown cell_dofree '//TRIM(cell_dofree), 1 )
-cell_base.f90:       CALL errore( ' movecell ',' cell mass is less than 0 ! ', 1 )
-cell_base.f90:      call errore( ' cell_alat ', ' alat has not been set ', 1 )
-check_stop.f90:          CALL errore( 'check_stop_now', 'check_stop not initialized', 1 )
-constraints_module.f90:               CALL errore( 'init_constraint', 'the target for constraint ' //&
-constraints_module.f90:            CALL errore( 'init_constraint', &
-constraints_module.f90:            CALL errore('set_torsional_angle','collinear atoms in torsional angle constraint', 1)
-constraints_module.f90:         CALL errore( 'check_constraint', &
-constraints_module.f90:            CALL errore( 'remove_constr_force', &
-constraints_module.f90:         CALL errore( 'remove_constr_force', &
-constraints_module.f90:            CALL errore( 'remove_constr_vec', &
-control_flags.f90:         CALL errore( ' control_flags ', ' TCP AND TNOSEP BOTH TRUE', 0 )
-control_flags.f90:         CALL errore( ' control_flags ', ' TCAP AND TNOSEP BOTH TRUE', 0 )
-control_flags.f90:         CALL errore( ' control_flags ', ' TCP AND TCAP BOTH TRUE', 0 )
-control_flags.f90:         CALL errore( ' control_flags ', &
-coulomb_vcut.f90:  IF ( ierr/=0 ) CALL errore(subname,'allocating cvut%corrected',ABS(ierr))
-coulomb_vcut.f90:  IF ( ierr/=0 ) CALL errore('vcut_destroy','deallocating vcut',ABS(ierr))
-coulomb_vcut.f90:     CALL errore(subname,'q vector out of the grid',10)
-coulomb_vcut.f90:         CALL errore(subname,'index out of bound', 10) 
-electrons_base.f90:         CALL errore(' electrons_base_initval ',' inconsistent n. of electrons ', 2 )
-electrons_base.f90:         CALL errore(' electrons_base_initval ',' nelec less than 1 ', 1 )
-electrons_base.f90:         CALL errore(' electrons_base_initval ',' nelec must be integer', 2 )
-electrons_base.f90:        CALL errore(' electrons_base_initval ',' nbnd out of range ', 1 )
-electrons_base.f90:        CALL errore( ' electrons_base_initval ', ' nspin out of range ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' Zero or negative occupation are not allowed ', 1 )
-electrons_base.f90:               CALL errore(' electrons_base_initval ',' wrong # of up and down spin', 1 )
-electrons_base.f90:!              CALL errore(' electrons_base_initval ', &
-electrons_base.f90:                 CALL errore(' electrons_base_initval ',' nelup+neldw .ne. nelec', 1 )
-electrons_base.f90:         CALL errore(' electrons_base_initval ',' occupation method not implemented', 1 )
-electrons_base.f90:        CALL errore(' electrons_base_initval ',' nupdwn(1) should be greater or equal nupdwn(2) ', 1 )
-electrons_base.f90:        CALL errore(' electrons_base_initval ',' inconsistent nbnd, should be .GE. than  nupdwn(1) ', 1 )
-electrons_base.f90:        CALL errore(' electrons_base_initval ',' inconsistent nbspx, should be .GE. than  nspin * nupdwn(1) ', 1 )
-electrons_base.f90:        CALL errore(' electrons_base_initval ',' too few states ',  1  )
-electrons_base.f90:        CALL errore(' electrons_base_initval ',' too many electrons ', 1 )
-electrons_base.f90:                 CALL errore(' set_nelup_neldw  ', &
-electrons_base.f90:        CALL errore( ' distribute_bands ', ' electrons_base_initval not yet called ', 1 )
-error_handler.f90:SUBROUTINE errore( calling_routine, message, ierr )
-error_handler.f90:END SUBROUTINE errore
-expint.f90:         CALL errore('expint','bad arguments', 1)
-expint.f90:         IF (i > maxit) CALL errore('expint','continued fraction failed',1)
-expint.f90:         IF (i > maxit) CALL errore('expint','series failed',1)
-fft_custom.f90:            CALL errore ('set_custom_grid', 'nr1 is unreasonably large', fc%nr1t)
-fft_custom.f90:       IF (.NOT.allowed (fc%nr1t) ) CALL errore ('set_custom_grid', &
-fft_custom.f90:            CALL errore ('set_custom_grid', 'nr2t is unreasonably large', fc%nr2t)
-fft_custom.f90:       IF (.NOT.allowed (fc%nr2t) ) CALL errore ('set_fft_dim', &
-fft_custom.f90:            CALL errore ('set_custom_grid', 'nr3 is unreasonably large', fc%nr3t)
-fft_custom.f90:       IF (.NOT.allowed (fc%nr3t) ) CALL errore ('set_custom_grid', &
-fft_custom.f90:                IF (fc%ngmt > fc%ngmt_g) CALL errore ('ggent', 'too many g-vectors', fc%ngmt)
-fft_custom.f90:         CALL errore ('ggent', 'g-vectors missing !', ABS(fc%ngmt - fc%ngmt_g))
-fft_custom.f90:       IF (fc%ngmt > ngmx) CALL errore ('ggent', 'too many g-vectors', fc%ngmt)
-fft_custom.f90:         CALL errore ('ggent', 'g-vectors missing !', ABS(fc%ngmt - ngmx))
-fft_custom.f90:            CALL errore('ggent','Mesh too small?',ng)
-fft_custom.f90:          CALL errore('index_minusg_custom','Mesh too small?',ng)
-find_free_unit.f90:    CALL errore( 'find_free_unit()', 'free unit not found ?!?', 1 )
-funct.f90:         call errore('set_dft_from_name', &
-funct.f90:       call errore('set_dft_from_name','functional not yet implemented',1)
-funct.f90:       call errore('set_dft_from_name','functional not yet implemented',1)
-funct.f90:       call errore('set_dft_from_name','functional not yet implemented',1)
-funct.f90:       call errore('set_dft_from_name','obsolete XC label, use VDW-DF-OBK8',1)
-funct.f90:       call errore('set_dft_from_name','obsolete XC label, use VDW-DF-OB86',1)
-funct.f90:       call errore('set_dft_from_name','obsolete XC label, use VDW-DF2-B86R',1)
-funct.f90:         call errore('set_dft_from_name','OPTX untested! please test',-igcx)
-funct.f90:           call errore('set_dft_from_name',trim(dftout)//': unrecognized dft',1)
-funct.f90:           call errore('set_dft_from_name',trim(dftout)//': strange dft, please check',inlc)
-funct.f90:       call errore('set_dft_from_name',' conflicting values for iexch',1)
-funct.f90:       call errore('set_dft_from_name',' conflicting values for icorr',1)
-funct.f90:       call errore('set_dft_from_name',' conflicting values for igcx',1)
-funct.f90:       call errore('set_dft_from_name',' conflicting values for igcc',1)
-funct.f90:       call errore('set_dft_from_name',' conflicting values for imeta',1)
-funct.f90:       call errore('set_dft_from_name',' conflicting values for inlc',1)
-funct.f90:           call errore ('set_dft', 'two conflicting matching values', 1)
-funct.f90:     if (dft == 'not set') call errore('enforce_input_dft','cannot fix unset dft',1)
-funct.f90:        call errore('start_exx','dft is not hybrid, wrong call',1)
-funct.f90:        call errore('stop_exx','dft is not hybrid, wrong call',1)
-funct.f90:         call errore('set_finite_size_volume', &
-funct.f90:         call errore('set_finite_size_volume', &
-funct.f90:        call errore('set_dft',' conflicting values for iexch',1)
-funct.f90:        call errore('set_dft',' conflicting values for icorr',1)
-funct.f90:        call errore('set_dft',' conflicting values for igcx',1)
-funct.f90:        call errore('set_dft',' conflicting values for igcc',1)
-funct.f90:        call errore('set_dft',' conflicting values for inlc',1)
-funct.f90:     if (.NOT. finite_size_cell_volume_set) call errore ('XC',&
-funct.f90:     if (.NOT. finite_size_cell_volume_set) call errore ('XC',&
-funct.f90:     call errore ('lsda_functional (xc_spin)', 'not implemented', icorr)
-funct.f90:     call errore ('lsda_functional (xc_spin_vec)', 'not implemented', icorr)
-funct.f90:     call errore ('gcx_spin', 'not implemented', igcx)
-funct.f90:     call errore ('gcx_spin_vec', 'not implemented', igcx)
-funct.f90:     call errore ('lsda_functionals (gcc_spin)', 'not implemented', igcc)
-funct.f90:        CALL errore( " gcc_spin_more ", " gradiet correction not implemented ", 1 )
-funct.f90:        call errore ('nlc','vdW-DF not available for noncollinear spin case',1)
-funct.f90:     call errore('v_xc_meta','wrong igcx and/or igcc',1)
-funct.f90:     call errore('v_xc_meta','wrong igcx and/or igcc',1)
-functionals.f90:  if (func_id==-1) call errore('pbex','case not implemented with libxc',iflag)
-functionals.f90:  if (iflag.eq.3)  call errore('pbec','case not implemented with libxc',iflag)
-generate_k_along_lines.f90:         IF (nkstot_ > nkstot) CALL errore ('generate_k_along_lines', &
-generate_k_along_lines.f90:      IF (nkstot_ > nkstot) CALL errore ('generate_k_along_lines', &
-generate_k_along_lines.f90:      IF (nkstot_ ==1 ) CALL errore ('generate_k_along_lines', &
-generate_k_along_lines.f90:      CALL errore ('generate_k_along_lines', 'wrong number of points',i)
-generate_k_along_lines.f90:IF (nkstot_ /= nkstot) CALL errore ('generate_k_along_lines', &
-generate_k_along_lines.f90:      IF (ijk > nkstot) CALL errore ('generate_k_in_plane', &
-gth.f90:    if (my_gth==0) call errore('mk_ffnl_gth', 'cannot map itype in some gtp param. set', itype)
-gth.f90:    if ( ll<0 .or. ll>3  ) call errore('mk_ffnl_gth', 'wrong l:', ll)
-gth.f90:    if ( iproj>nprj_max(ll) ) call errore('mk_ffnl_gth', 'projector exceeds max. n. of projectors', iproj)
-gth.f90:    if (my_gth==0) call errore('mk_dffnl_gth', 'cannot map itype in some gtp param. set', itype)
-gth.f90:    if ( ll<0 .or. ll>3  ) call errore('mk_dffnl_gth', 'wrong l:', ll)
-gth.f90:    if ( iproj>nprj_max(ll) ) call errore('mk_dffnl_gth', 'projector exceeds max. n. of projectors', iproj)
-gth.f90:  if (my_gth==0) call errore('vloc_gth', 'cannot map itype in some gth param. set', itype)
-gth.f90:! IF ( do_comp_esm ) call errore('vloc_gth', 'ESM not implemented', itype)
-gth.f90:  if (my_gth==0) call errore('dvloc_gth', 'cannot map itype in some gtp param. set', itype)
-gth.f90:  if (upf%zp <= 0._dp .or. upf%zp > 100 ) call errore ('readgth', 'Wrong zp ', np)
-gth.f90:  IF ( lmax-1 > lmaxx ) call errore ('readgth', 'strange lmax', lmax-1)
-gth.f90:     call errore ('readgth', 'pspxc cod. cannot be understood', abs (np) )
-gth.f90:400 call errore ('readgth', 'pseudo file is empty or wrong', abs (np) )
-hdf5_qe.f90:   INTEGER :: errore
-hdf5_qe.f90:   call mpi_scan(sendm,recm,1,MPI_INTEGER,MPI_SUM,comm,errore)
-hdf5_qe.f90:    call errore('','',1)
-hdf5_qe.f90:    call errore('','',1)
-inpfile.f90:     ! do not call "errore" here: it may hang in parallel execution
-invmat.f90:        IF (abs(da) < 1.d-10) CALL errore(' invmat ',' singular matrix ', 1)
-invmat.f90:  CALL errore ('invmat', 'error in DGETRF', abs (info) )
-invmat.f90:  CALL errore ('invmat', 'error in DGETRI', abs (info) )
-invmat.f90:        IF (abs(da) < 1.d-10) CALL errore(' invmat ',' singular matrix ', 1)
-invmat.f90:  CALL errore ('invmat', 'error in ZGETRF', abs (info) )
-invmat.f90:  CALL errore ('invmat', 'error in ZGETRI', abs (info) )
-io_files.f90:  if (unit < 0) call errore ('diropn', 'wrong unit', 1)
-io_files.f90:  if (opnd) call errore ('diropn', "can't open a connected unit", abs(unit))
-io_files.f90:  if (extension == ' ') call errore ('diropn','filename extension not given',2)
-io_files.f90:  if (unf_recl <= 0) call errore ('diropn', 'wrong record length', 3)
-io_files.f90:  if (ios /= 0) call errore ('diropn', 'error opening '//trim(tempfile), unit)
-io_files.f90:  if (unit < 1) call errore ('seqopn', 'wrong unit', 1)
-io_files.f90:  if (opnd) call errore ('seqopn', "can't open a connected unit", &
-io_files.f90:  if (extension.eq.' ') call errore ('seqopn','filename extension  not given',2)
-io_files.f90:  if (ios /= 0) call errore ('seqopn', 'error opening '//trim(tempfile), unit)
-io_files.f90:  IF ( unit  <= 0 ) CALL errore(  'davcio', 'wrong unit', 1 )
-io_files.f90:  IF ( nrec  <= 0 ) CALL errore(  'davcio', 'wrong record number', 2 )
-io_files.f90:  IF ( nword <= 0 ) CALL errore(  'davcio', 'wrong record length', 3 )
-io_files.f90:     CALL errore(  'davcio', 'unit is not opened', unit )
-io_files.f90:     IF ( ios /= 0 ) CALL errore( 'davcio', &
-io_files.f90:     IF ( ios /= 0 ) CALL errore( 'davcio', &
-ions_base.f90:          CALL errore(' sorttau ', ' wrong species index for positions ', ia )
-ions_base.f90:         CALL errore ('sort_atoms', 'some atomic species have no atoms',1)
-ions_base.f90:         CALL errore( 'ions_base_init ', 'nax out of range', 1 )
-ions_base.f90:         CALL errore( 'ions_base_init ', 'nsp out of range', 1 )
-ions_base.f90:         CALL errore( 'ions_base_init ', &
-ions_base.f90:         CALL errore( 'ions_base_init ','inconsistent nat and na ', 1 )
-ions_base.f90:            CALL errore( 'ions_base_init ', 'invalid rcmax', is )
-ions_base.f90:            CALL errore( 'ions_base_init',' tau_format = ' // &
-ions_base.f90:         CALL errore( 'ions_base_init ', 'invalid  mass', 1 ) 
-ions_base.f90:         CALL errore( ' ions_vel3 ', ' dt <= 0 ', 1 )
-ions_base.f90:         CALL errore( ' ions_vel3 ', ' dt <= 0 ', 1 )
-ions_base.f90:         call errore(' ions_cofmass ', ' total mass <= 0 ', 1 )
-ions_base.f90:      if( na(is) < 1 ) call errore(' ions_temp ', ' 0 number of atoms ', 1 )
-ions_base.f90:    if( omega < eps8 ) call errore(' ions_thermal_stress ', ' omega <= 0 ', 1 )
-ions_base.f90:      if( tempp < eps8 ) call errore(' ions_vrescal ', ' tempp <= 0 ', 1 )
-ions_base.f90:          CALL errore(' displacement ',' size of dis too small ', 1)
-kernel_table.f90:       if (.not. file_exists) call errore('read_kernel_table', & 
-latgen.f90:         call errore ('latgen', 'wrong at for ibrav=0', 1)
-latgen.f90:         call errore ('latgen', 'wrong at for ibrav=0', 2)
-latgen.f90:         call errore ('latgen', 'wrong at for ibrav=0', 3)
-latgen.f90:  if (celldm (1) <= 0.d0) call errore ('latgen', 'wrong celldm(1)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:          call errore ('latgen', 'wrong celldm(4)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', &
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', &
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (abs(celldm(4))>=1.d0) call errore ('latgen', 'wrong celldm(4)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)',-ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)',-ibrav)
-latgen.f90:     if (abs(celldm(5))>=1.d0) call errore ('latgen', 'wrong celldm(5)',-ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (abs(celldm(4))>=1.d0) call errore ('latgen', 'wrong celldm(4)', ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)',-ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)',-ibrav)
-latgen.f90:     if (abs(celldm(5))>=1.d0) call errore ('latgen', 'wrong celldm(5)',-ibrav)
-latgen.f90:     if (celldm (2) <= 0.d0) call errore ('latgen', 'wrong celldm(2)', ibrav)
-latgen.f90:     if (celldm (3) <= 0.d0) call errore ('latgen', 'wrong celldm(3)', ibrav)
-latgen.f90:     if (abs(celldm(4))>=1.d0) call errore ('latgen', 'wrong celldm(4)', ibrav)
-latgen.f90:     if (abs(celldm(5))>=1.d0) call errore ('latgen', 'wrong celldm(5)', ibrav)
-latgen.f90:     if (abs(celldm(6))>=1.d0) call errore ('latgen', 'wrong celldm(6)', ibrav)
-latgen.f90:     if (term < 0.d0) call errore &
-latgen.f90:     call errore('latgen',' nonexistent bravais lattice',ibrav)
-metagga.f90:  call errore('tb09','need libxc',1)
-mm_dispersion.f90:             CALL errore ( ' init_london ' ,&
-mm_dispersion.f90:             CALL errore ( ' init_london ' ,&
-more_functionals.f90:      if (nspin.ne.1) call errore('ggapw','spin not implemented',nspin)
-more_functionals.f90:         call errore ('dftname','unknown exch-corr functional',exfact)
-mp_bands.f90:    IF ( nbgrp < 1 .OR. nbgrp > parent_nproc ) CALL errore( 'mp_start_bands',&
-mp_bands.f90:    IF ( MOD( parent_nproc, nbgrp ) /= 0 ) CALL errore( 'mp_start_bands', &
-mp_base.f90:   IF( ierr /= 0 ) CALL errore( 'mp_synchronize ', ' error in mpi_barrier ', ierr )
-mp_base.f90:           IF( ierr /= 0 ) CALL errore( ' bcast_real ', ' error in mpi_bcast 1 ', ierr )
-mp_base.f90:              IF( ierr /= 0 ) CALL errore( ' bcast_real ', ' error in mpi_bcast 2 ', ierr )
-mp_base.f90:              IF( ierr /= 0 ) CALL errore( ' bcast_real ', ' error in mpi_bcast 3 ', ierr )
-mp_base.f90:           IF( ierr /= 0 ) CALL errore( ' bcast_integer ', ' error in mpi_bcast 1 ', ierr )
-mp_base.f90:              IF( ierr /= 0 ) CALL errore( ' bcast_integer ', ' error in mpi_bcast 2 ', ierr )
-mp_base.f90:              IF( ierr /= 0 ) CALL errore( ' bcast_integer ', ' error in mpi_bcast 3 ', ierr )
-mp_base.f90:           IF( ierr /= 0 ) CALL errore( ' bcast_logical ', ' error in mpi_bcast 1 ', ierr )
-mp_base.f90:              IF( ierr /= 0 ) CALL errore( ' bcast_logical ', ' error in mpi_bcast 2 ', ierr )
-mp_base.f90:              IF( ierr /= 0 ) CALL errore( ' bcast_logical ', ' error in mpi_bcast 3 ', ierr )
-mp_base.f90:     IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_reduce 1', info )
-mp_base.f90:     IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_allreduce 1', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real', 'error in mpi_allreduce 2', info )
-mp_base.f90:     IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_reduce 1', info )
-mp_base.f90:     IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_allreduce 1', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer', 'error in mpi_allreduce 2', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_real_to', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_real_to', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real_to', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real_to', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real_to', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_real_to', 'error in mpi_allreduce 2', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_integer_to', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'reduce_base_integer_to', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer_to', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer_to', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer_to', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'reduce_base_integer_to', 'error in mpi_allreduce 2', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_min_integer', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_min_integer', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_integer', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_integer', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_integer', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_integer', 'error in mpi_allreduce 2', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_max_integer', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_max_integer', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_integer', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_integer', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_integer', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_integer', 'error in mpi_allreduce 2', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_min_real', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_min_real', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_real', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_real', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_real', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_min_real', 'error in mpi_allreduce 2', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_max_real', 'error in mpi_comm_size', info )
-mp_base.f90:  IF( info /= 0 ) CALL errore( 'parallel_max_real', 'error in mpi_comm_rank', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_real', 'error in mpi_reduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_real', 'error in mpi_allreduce 1', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_real', 'error in mpi_reduce 2', info )
-mp_base.f90:        IF( info /= 0 ) CALL errore( 'parallel_max_real', 'error in mpi_allreduce 2', info )
-mp_diag.f90:         CALL errore( " init_ortho_group ", " wrong root task in ortho group ", ierr )
-mp_diag.f90:            CALL errore( " init_ortho_group ", " wrong task coordinates in ortho group ", ierr )
-mp_diag.f90:            CALL errore( " init_ortho_group ", " wrong rank assignment in ortho group ", ierr )
-mp_diag.f90:               CALL errore( ' init_ortho_group ', ' problem with SCALAPACK, wrong no. of task rows ', 1 )
-mp_diag.f90:               CALL errore( ' init_ortho_group ', ' problem with SCALAPACK, wrong no. of task columns ', 1 )
-mp_diag.f90:               CALL errore( ' init_ortho_group ', ' problem with SCALAPACK, wrong task row ID ', 1 )
-mp_diag.f90:               CALL errore( ' init_ortho_group ', ' problem with SCALAPACK, wrong task columns ID ', 1 )
-mp_images.f90:       CALL errore( 'mp_start_images', 'invalid number of images, out of range', 1 )
-mp_images.f90:       CALL errore( 'mp_start_images', 'n. of images must be divisor of nproc', 1 )
-mp_pools.f90:    IF ( npool < 1 .OR. npool > parent_nproc ) CALL errore( 'mp_start_pools',&
-mp_pools.f90:    IF ( MOD( parent_nproc, npool ) /= 0 ) CALL errore( 'mp_start_pools', &
-mp_wave.f90:        CALL errore(' mergewf ',' wrong size for pwt ',SIZE(pwt) )
-mp_wave.f90:      CALL errore(' MERGEWF ',' no communication protocol ',0)
-mp_wave.f90:        CALL errore(' splitwf ',' wrong size for pwt ',SIZE(pwt) )
-mp_wave.f90:      CALL errore(' SPLITWF ',' no communication protocol ',0)
-mp_wave.f90:        CALL errore(' mergeig ',' wrong size for igtot ',SIZE(igtot) )
-mp_wave.f90:      CALL errore(' mergeig ',' no communication protocol ',0)
-mp_wave.f90:        CALL errore(' splitig ',' wrong size for igtot ', SIZE(igtot) )
-mp_wave.f90:      CALL errore(' splitig ',' no communication protocol ',0)
-mp_wave.f90:      CALL errore(' pwscatter ',' no communication protocol ',0)
-mp_wave.f90:   IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_comm_rank ', ierr )
-mp_wave.f90:   IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_comm_size ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_barrier ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_alltoallv ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_barrier ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_alltoallv ', ierr )
-mp_wave.f90:   IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_comm_rank ', ierr )
-mp_wave.f90:   IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_comm_size ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_barrier ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_alltoallv ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_barrier ', ierr )
-mp_wave.f90:      IF( ierr /= 0 ) CALL errore( ' wf_redist ', ' mpi_alltoallv ', ierr )
-parser.f90:       CALL errore(' read_line ', ' input line too short ', MAX(LEN(line),1) )
-parser.f90:      CALL errore( ' field_compare ', &
-plot_io.f90:  if (filplot == ' ') call errore ('plot_io', 'filename missing', 1)
-plot_io.f90:  if (iflag == 0 ) call errore('plot_io',&
-plot_io.f90:100 call errore ('plot_io', 'opening file '//TRIM(filplot), abs (ios) )
-plot_io.f90:  if (filplot == ' ') call errore ('read_io_h', 'filename missing', 1)
-plot_io.f90:100 call errore ('plot_io', 'opening file '//TRIM(filplot), abs (ios) )
-qexml.f90:         call errore('qexml_kpoint_dirname','ik too large, increase format',1)
-qexml.f90:            CALL errore( 'write_xc', &
-qexml.f90:                 CALL errore( 'write_xc', ' variable vdw_table_name not present', 1 )
-qexml.f90:               CALL errore( 'write_xc', &
-qexml.f90:               CALL errore( 'write_xc', &
-qexml_xsd.f90:         call errore('qexml_kpoint_dirname','ik too large, increase format',1)
-qexml_xsd.f90:      IF (ierr /= 0) call errore(subname, 'error opening xml input file', ierr)
-qexml_xsd.f90:      CALL errore('qexml_closeschema', 'error closing xml input file', ierr)
-qexml_xsd.f90:      CALL errore(subname, 'error writing tag', ierr)
-qexml_xsd.f90:      CALL errore(TRIM(subname), 'error writing tag', ierr)
-qexml_xsd.f90:      CALL errore(TRIM(subname), 'error writing tag', ierr)
-qexml_xsd.f90:      CALL errore('cp_line_by_line@qexml_xsd', 'input xml file "' // & 
-qexml_xsd.f90:            CALL errore( 'write_xc', &
-qexml_xsd.f90:                 CALL errore( 'write_xc', ' variable vdw_table_name not present', 1 )
-qexml_xsd.f90:               CALL errore( 'write_xc', &
-qexml_xsd.f90:               CALL errore( 'write_xc', &
-radial_gradients.f90:  if (info.ne.0) call errore('pol_fit','problems with the linear system', &
-radial_grids.f90:         call errore('allocate_radial_grid', 'mesh>ndmx',1)
-radial_grids.f90:      if(mesh+1 > ndmx) call errore('do_mesh','ndmx is too small',1)
-radial_grids.f90:   if (grid%mesh < 0 ) call errore('check_mesh','grid%mesh < 0 ',1)
-radial_grids.f90:         call errore('check_mesh',' r2(i) is different ',i)
-radial_grids.f90:         call errore('check_mesh',' sqr(i) is different ',i)
-radial_grids.f90:         call errore('check_mesh',' rab(i) is different ',i)
-radial_grids.f90:  if (mesh.ne.grid%mesh) call errore('hartree',' grid dimension mismatch',1) 
-radial_grids.f90:  if (ierr.ne.0) call errore('hartree',' error allocating d or e',1)
-radial_grids.f90:  if (ierr.ne.0) call errore('hartree', 'error in lapack', ierr)
-random_numbers.f90:      IF( j > ntab .OR. j <  1 ) call errore('randy','j out of range',ABS(j)+1)
-read_cards.f90:         CALL errore('read_cards','card DIPOLE no longer existing',1)
-read_cards.f90:         CALL errore('read_cards','card ESR no longer existing',1)
-read_cards.f90:         CALL errore( ' card_atomic_species  ', ' two occurrences', 2 )
-read_cards.f90:         CALL errore( ' card_atomic_species ', ' nsp out of range ', ntyp )
-read_cards.f90:            CALL errore( ' card_atomic_species ', &
-read_cards.f90:               CALL errore( ' card_atomic_species ', &
-read_cards.f90:         CALL errore( 'card_atomic_positions', 'two occurrences', 2 )
-read_cards.f90:         CALL errore( 'card_atomic_positions', &
-read_cards.f90:         CALL errore( 'card_atomic_positions', 'nsp out of range', ntyp )
-read_cards.f90:         CALL errore( 'card_atomic_positions', 'nat out of range', nat )
-read_cards.f90:            CALL errore( 'read_cards ', &
-read_cards.f90:         IF ( tend ) CALL errore( 'read_cards', &
-read_cards.f90:               CALL errore('card_atomic_positions', error_msg, ierr)
-read_cards.f90:                  CALL errore('card_atomic_positions', error_msg, ierr)
-read_cards.f90:            CALL errore( 'read_cards', 'wrong number of columns ' // &
-read_cards.f90:            CALL errore('card_atomic_positions', error_msg, ierr)
-read_cards.f90:            CALL errore('card_atomic_positions', error_msg, ierr)
-read_cards.f90:            CALL errore('card_atomic_positions', error_msg, ierr)
-read_cards.f90:            CALL errore( 'read_cards', 'species '//trim(lb_pos)// &
-read_cards.f90:         CALL errore( ' card_atomic_forces ', ' two occurrences ', 2 )
-read_cards.f90:         CALL errore( ' card_atomic_forces ', &
-read_cards.f90:            CALL errore( ' iosys ', ' wrong entries in ATOMIC_FORCES ', ia )
-read_cards.f90:         CALL errore( ' card_kpoints ', ' two occurrences', 2 )
-read_cards.f90:               k3 < 0 .or. k3 > 1 ) CALL errore &
-read_cards.f90:         IF ( nk1 <= 0 .or. nk2 <= 0 .or. nk3 <= 0 ) CALL errore &
-read_cards.f90:            IF (nkstot /= 3) CALL errore ('card_kpoints', &
-read_cards.f90:10     CALL errore ('card_kpoints', ' end of file while reading ' &
-read_cards.f90:20     CALL errore ('card_kpoints', ' error while reading ' &
-read_cards.f90:         CALL errore( ' card_occupations ', ' two occurrences', 2 )
-read_cards.f90:            IF (tef) CALL errore('card_occupations',&
-read_cards.f90:               CALL errore('card_occupations',&
-read_cards.f90:         CALL errore( ' card_cell_parameters ', ' two occurrences', 2 )
-read_cards.f90:         CALL errore( ' card_reference_cell_parameters ', ' two occurrences', 2 )
-read_cards.f90:         CALL errore( ' card_ion_velocities ', ' two occurrences', 2 )
-read_cards.f90:         CALL errore( ' card_ion_velocities ', &
-read_cards.f90:               CALL errore( ' iosys ', &
-read_cards.f90:               CALL errore( ' iosys ', ' wrong LABEL in ION_VELOCITIES ', ia )
-read_cards.f90:      IF ( tconstr ) CALL errore( 'card_constraints', 'two occurrences', 2 )
-read_cards.f90:         CALL errore( 'card_constraints', 'too many fields', nfield )
-read_cards.f90:            CALL errore( 'card_constraints', &
-read_cards.f90:               CALL errore( 'card_constraints', 'type_coord, ' // &
-read_cards.f90:               CALL errore( 'card_constraints', &
-read_cards.f90:               CALL errore( 'card_constraints', &
-read_cards.f90:               CALL errore( 'card_constraints', &
-read_cards.f90:               CALL errore( 'card_constraints', &
-read_cards.f90:            CALL errore( 'card_constraints', 'unknown constraint ' // &
-read_cards.f90:         CALL errore( ' card_ksout ', ' two occurrences', 2 )
-read_cards.f90:            CALL errore( ' card_ksout ', ' wrong number of states ', 2 )
-read_cards.f90:         CALL errore( 'card_plot_wannier', 'two occurrences', 2 )
-read_cards.f90:            CALL errore( 'card_plot_wannier', 'too many wannier functions', 1 )
-read_cards.f90:                  CALL errore( 'card_plot_wannier', 'too many indices', 1 )
-read_cards.f90:         CALL errore( ' card_template ', ' two occurrences', 2 )
-read_cards.f90:            CALL errore( 'read_cards', &
-read_cards.f90:            CALL errore( 'read_cards', &
-read_cards.f90:         IF(iwan/=i) CALL errore( 'read_cards', 'wrong wannier order', iwan)
-read_cards.f90:               CALL errore( 'read_cards', &
-read_cards.f90:               CALL errore( 'read_cards', &
-read_cards.f90:                  CALL errore( 'read_cards', &
-read_cards.f90:                  CALL errore( 'read_cards', &
-read_cards.f90:               IF(iwan/=i) CALL errore( 'read_cards', 'wrong wannier order', iwan)
-read_cards.f90:                     CALL errore( 'read_cards', &
-read_cards.f90:                     CALL errore( 'read_cards', &
-read_input.f90:     IF ( ierr > 0 ) CALL errore('read_input', 'opening input file',ierr)
-read_namelists.f90:          CALL errore( sub_name, ' calculation '''// &
-read_namelists.f90:          CALL errore( sub_name,' ndr out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' ndw out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' nstep out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' iprint out of range ', 1 )
-read_namelists.f90:           CALL errore( sub_name,' isave out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' dt out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' max_seconds out of range ', 1 )
-read_namelists.f90:            CALL errore( sub_name,' ekin_conv_thr out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' etot_conv_thr out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name,' forc_conv_thr out of range ', 1 )
-read_namelists.f90:         CALL errore( sub_name, ' wrong table interval refg ', 1 )
-read_namelists.f90:         CALL errore( sub_name, ' wf_collect = .true. is not allowed with memory = small ', 1 )
-read_namelists.f90:          CALL errore( sub_name, ' memory '''// &
-read_namelists.f90:           CALL errore( ' iosys ', &
-read_namelists.f90:          CALL errore( sub_name ,' nat less than zero ', MAX( nat, 1) )
-read_namelists.f90:          CALL errore( sub_name ,' ntyp less than zero ', MAX( ntyp, 1) )
-read_namelists.f90:          CALL errore( sub_name , &
-read_namelists.f90:          CALL errore( sub_name ,' nspin out of range ', MAX(nspin, 1 ) )
-read_namelists.f90:          CALL errore( sub_name ,' ecutwfc out of range ',1)
-read_namelists.f90:          CALL errore( sub_name ,' ecutrho out of range ',1)
-read_namelists.f90:          CALL errore( sub_name ,' ecfixed out of range ',1)
-read_namelists.f90:          CALL errore( sub_name ,' qcutz out of range ',1)
-read_namelists.f90:          CALL errore( sub_name ,' q2sigma out of range ',1)
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:             CALL errore( sub_name, &
-read_namelists.f90:       IF( .NOT. allowed ) CALL errore(sub_name, &
-read_namelists.f90:          CALL errore(sub_name, ' invalid value for yukawa', 1 )
-read_namelists.f90:          CALL errore(sub_name, ' invalid value for ecutvcut', 1 )
-read_namelists.f90:          CALL errore(sub_name, ' x_gamma_extrapolation cannot be used with vcut', 1 )
-read_namelists.f90:          CALL errore( sub_name, ' electron_dynamics '''//&
-read_namelists.f90:          CALL errore( sub_name, ' emass less or equal 0 ',1)
-read_namelists.f90:          CALL errore( sub_name, ' emass_cutoff less or equal 0 ',1)
-read_namelists.f90:          CALL errore( sub_name, ' ortho_eps less or equal 0 ',1)
-read_namelists.f90:          CALL errore( sub_name, ' ortho_max less than 1 ',1)
-read_namelists.f90:          CALL errore( sub_name, ' fnosee less or equal 0 ',1)
-read_namelists.f90:          CALL errore( sub_name, ' ekincw less or equal 0 ',1)
-read_namelists.f90:          CALL errore( sub_name, ' occupation_constraints not yet implemented ',1)
-read_namelists.f90:          CALL errore( sub_name, ' ion_dynamics '''// &
-read_namelists.f90:          CALL errore( sub_name,' tempw out of range ',1)
-read_namelists.f90:          CALL errore( sub_name,' fnosep out of range ',1)
-read_namelists.f90:          CALL errore( sub_name,' ion_nstepe out of range ',1)
-read_namelists.f90:          CALL errore( sub_name,' ion_maxstep out of range ',1)
-read_namelists.f90:          CALL errore( sub_name, ' cell_dynamics '''// &
-read_namelists.f90:          CALL errore( sub_name,' wmass out of range ',1)
-read_namelists.f90:          CALL errore( sub_name,' cell_nstepe out of range ',1)
-read_namelists.f90:          CALL errore( sub_name, ' calwf out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name, ' wfsd out of range ', 1 )      !
-read_namelists.f90:          CALL errore( sub_name, ' nwan out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name, ' plot_wan_num out of range ', 1 )
-read_namelists.f90:          CALL errore( sub_name, ' plot_wan_spin out of range ', 1 )
-read_namelists.f90:                CALL errore( sub_name, ' calculation ' // &
-read_namelists.f90:                CALL errore( sub_name, ' calculation ' // &
-read_namelists.f90:                CALL errore( sub_name, ' calculation ' // &
-read_namelists.f90:             CALL errore( sub_name,' calculation '// &
-read_namelists.f90:          CALL errore( ' read_namelists ', ' unknown calling program ', 1 )
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_namelists.f90:          CALL errore( ' read_namelists ', &
-read_ncpp.f90:       call errore ('read_ncpp', 'Wrong nlc or nnl', np)
-read_ncpp.f90:  if (nlc*nnl < 0) call errore ('read_ncpp', 'nlc*nnl < 0 ? ', np)
-read_ncpp.f90:       call errore ('read_ncpp', 'Wrong zp ', np)
-read_ncpp.f90:       call errore ('read_ncpp', 'wrong lmax and/or lloc', np)
-read_ncpp.f90:          call errore ('read_ncpp', 'wrong pseudopotential coefficients', 1)
-read_ncpp.f90:        if (alpha_nlcc <= 0.d0) call errore('read_ncpp','alpha_nlcc=0',np)
-read_ncpp.f90:       call errore ('read_ncpp', 'wrong number of mesh points', np)
-read_ncpp.f90:       call errore ('read_ncpp', 'wrong no. of wfcts', np)
-read_ncpp.f90:          call errore ('read_ncpp', 'order of wavefunctions', 1)
-read_ncpp.f90:                      call errore ('read_ncpp', 'wrong lchi', np)
-read_ncpp.f90:          call errore ('read_ncpp', 'wrong oc', np)
-read_ncpp.f90:300 call errore ('read_ncpp', 'pseudo file is empty or wrong', abs (np) )
-read_pseudo.f90:        CALL errore('readpp', 'file '//TRIM(file_pseudo)//' not found',ABS(ios))
-read_pseudo.f90:           CALL errore( 'readpp','inconsistent DFT read from PP files', nt)
-read_pseudo.f90:   IF ( ANY(upf(1:ntyp)%tpawp) ) CALL errore ('readpp','PAW not implemented',1) 
-read_pseudo.f90:        CALL errore ('readpp', 'ultrasoft PPs must precede norm-conserving',nt)
-read_upf_v1.f90:300 call errore ('scan_begin', 'No '//string//' block', abs (ios) )  
-read_upf_v1.f90:300 call errore ('scan_end', &
-read_upf_v1.f90:     call errore ('read_pseudo_header', 'unknown pseudo type', 1)
-read_upf_v1.f90:!      CALL errore('read_pseudo_header', 'too many grid points', 1)
-read_upf_v1.f90:100  call errore ('read_pseudo_header', 'Reading pseudo file', 1 )
-read_upf_v1.f90:100 call errore ('read_pseudo_mesh', 'Reading pseudo file (R) for '//upf%psd,1)
-read_upf_v1.f90:101 call errore ('read_pseudo_mesh', 'Reading pseudo file (RAB) for '//upf%psd,2)  
-read_upf_v1.f90:100 call errore ('read_pseudo_nlcc', 'Reading pseudo file', 1)
-read_upf_v1.f90:100 call errore ('read_pseudo_local','Reading pseudo file', 1)
-read_upf_v1.f90:             call errore ('read_pseudo_nl','inconsistent angular momentum for Q_ij', 1)
-read_upf_v1.f90:100 call errore ('read_pseudo_nl', 'Reading pseudo file (BETA)', 1 )  
-read_upf_v1.f90:101 call errore ('read_pseudo_nl', 'Reading pseudo file (DIJ)',  2 )  
-read_upf_v1.f90:102 call errore ('read_pseudo_nl', 'Reading pseudo file (QIJ)',  3 )
-read_upf_v1.f90:103 call errore ('read_pseudo_nl', 'Reading pseudo file (RINNER)',4)
-read_upf_v1.f90:104 call errore ('read_pseudo_nl', 'Reading pseudo file (qqq)',  5 )
-read_upf_v1.f90:105 call errore ('read_pseudo_nl', 'Reading pseudo file (qfunc)',6 )
-read_upf_v1.f90:106 call errore ('read_pseudo_nl', 'Reading pseudo file (qfcoef)',7)
-read_upf_v1.f90:100 call errore ('read_pseudo_pswfc', 'Reading pseudo file', 1)
-read_upf_v1.f90:100 call errore ('read_pseudo_rhoatom','Reading pseudo file', 1)
-read_upf_v1.f90:100 call errore ('read_pseudo_addinfo','Reading pseudo file', 1)
-read_upf_v1.f90:     CALL errore ( 'read_pseudo_gipaw', 'UPF/GIPAW in unknown format', 1 )
-read_upf_v1.f90:100 CALL errore ( 'read_pseudo_gipaw', 'Reading pseudo file', 1 )
-read_upf_v1.f90:100 CALL errore ( 'read_pseudo_gipaw_core_orbitals', 'Reading pseudo file', 1 )
-read_upf_v1.f90:100 CALL errore ( 'read_pseudo_gipaw_local', 'Reading pseudo file', 1 )
-read_upf_v1.f90:100 CALL errore ( 'read_pseudo_gipaw_orbitals', 'Reading pseudo file', 1 )
-read_upf_v2.f90:         CALL errore('read_upf_v2','Cannot open UPF file.',1)
-read_upf_v2.f90:       CALL errore('read_upf_v2',&
-read_upf_v2.f90:      CALL errore('read_upf_v2', 'PAW requires a radial_grid_type.', 1)
-read_upf_v2.f90:        .not. upf%tpawp ) CALL errore('read_upf_v2',&
-read_upf_v2.f90:            call errore('read_upf_v2','String defining DFT is too long',len_buffer)
-read_upf_v2.f90:         CALL errore('read_upf_v2::paw',&
-read_uspp.f90:         call errore('readvan','routine called with wrong 1st argument', 1)
-read_uspp.f90:         call errore('readvan','routine called with wrong 2nd argument', 1)
-read_uspp.f90:         call errore('readvan','wrong file version read',1)
-read_uspp.f90:         call errore( 'readvan','wrong zmesh read', is )
-read_uspp.f90:         call errore('readvan','wrong atomic charge read', is )
-read_uspp.f90:         &     call errore('readvan','Wrong xc in pseudopotential',1)
-read_uspp.f90:         CALL errore( 'readvan ', 'META-GGA not implemented', 1 )
-read_uspp.f90:         call errore( 'readvan', 'wrong nchi read', upf%nwfc )
-read_uspp.f90:         call errore( 'readvan','wrong mesh', is )
-read_uspp.f90:       call errore('readvan','wrong keyps',keyps)
-read_uspp.f90:       call errore('readvan','keyps not implemented',keyps)
-read_uspp.f90:            call errore(' readvan', 'Wrong nang read', nang)
-read_uspp.f90:            call errore( 'readvan', 'wrong lloc read', is )
-read_uspp.f90:            call errore(' readvan', 'Wrong nqf read', upf%nqf)
-read_uspp.f90:            call errore( 'readvan', 'wrong ifqopt read', is )
-read_uspp.f90:               call errore('readvan','Wrong rinner read', is )
-read_uspp.f90:         call errore(' readvan', 'Wrong  nqlc read', upf%nqlc )
-read_uspp.f90:         call errore( 'readvan','nbeta wrong', is )
-read_uspp.f90:         call errore( 'readvan','kkbeta wrong or too large', is )
-read_uspp.f90:            call errore( 'readvan', 'lll wrong or too large ', is )
-read_uspp.f90:            call errore('readvan','unexpected or unimplemented case',1)
-read_uspp.f90:100 call errore('readvan','error reading pseudo file', abs(ios) )
-read_uspp.f90:               CALL errore ('fit_qrl', 'bad 2rd dimension for array qrl', 1)
-read_uspp.f90:100 call errore('readvan','error reading Q_L(r)', 1 )
-read_uspp.f90:         call errore('readrrkj','routine called with wrong 1st argument', 1)
-read_uspp.f90:         call errore('readrrkj','routine called with wrong 2nd argument', 1)
-read_uspp.f90:         call errore('readrrkj','wrong potential read',is)
-read_uspp.f90:         call errore('readrrkj', 'wrong mesh',is)
-read_uspp.f90:         call errore('readrrkj', 'wrong nbeta', is)
-read_uspp.f90:         call errore('readrrkj', 'wrong nchi', is)
-read_uspp.f90:         call errore(' readrrkj', 'Wrong  nqlc', upf%nqlc )
-read_uspp.f90:100 call errore('readrrkj','Reading pseudo file',abs(ios))
-read_xml_cards.f90:       CALL errore ( 'card_default', 'You want to initialize a card that does &
-read_xml_cards.f90:       CALL errore ( 'card_bcast', 'You want to broadcast a card that does &
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'read_xml_cell', 'error scanning begin of cell &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning type &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning begin &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading ibrav &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading alat &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading data inside &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning end of &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning begin &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading ibrav &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading data inside &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning end of &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning begin &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading units attribute &
-read_xml_cards.f90:                IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading alat&
-read_xml_cards.f90:                CALL errore( 'card_xml_cell', 'invalid units attribute', abs(ierr) )
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error reading data inside &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_cell', 'error scanning end of &
-read_xml_cards.f90:          CALL errore( 'card_xml_cell', 'type '//trim(option)//' in cell node does not exist', 1 )
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'read_xml_pw', 'error scanning end of cell &
-read_xml_cards.f90:       CALL errore( 'read_xml_pw', 'cell card not found', 1 )
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'read_xml_pw', 'error scanning begin of atomic_species &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:            CALL errore( 'card_xml_atomic_species', &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:             IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:             IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_species',  'error &
-read_xml_cards.f90:          IF  (.not. psfile_found ) CALL errore( 'card_xml_atomic_species', &
-read_xml_cards.f90:                CALL errore( ' card_xml_atomic_species ',  &
-read_xml_cards.f90:       IF (ierr/=0)  CALL errore( 'card_xml_atomic_species', 'error scanning end of &
-read_xml_cards.f90:       CALL errore( 'read_xml_pw', 'atomic_species  card not found', 1 )
-read_xml_cards.f90:      IF (ierr/=0)  CALL errore( 'card_xml_atomic_species', 'error reading name &
-read_xml_cards.f90:         IF (ierr/=0)  CALL errore( 'card_xml_atomic_species', 'error reading ns &
-read_xml_cards.f90:         IF (ierr/=0)  CALL errore( 'card_xml_atomic_species', 'error reading ispin &
-read_xml_cards.f90:         CALL errore( 'card_xml_atomic_species', 'property '&
-read_xml_cards.f90:      IF ( ierr /= 0 )  CALL errore( 'card_xml_atomic_species', 'error reading ' &
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_list', 'error scanning begin &
-read_xml_cards.f90:    IF ( .NOT. found) CALL errore( 'card_xml_atomic_list', 'card atomic_list not found', 1)
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_list', 'error reading units &
-read_xml_cards.f90:          CALL errore( 'card_xml_atom_lists',  &
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_list', 'error reading nat attribute &
-read_xml_cards.f90:       CALL errore( 'card_xml_atomic_list',  'nat out of range',  nat )
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_atomic_list', 'error scanning end of &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'read_image', 'error scanning begin of &
-read_xml_cards.f90:          IF (ia < nat) CALL errore( 'read_image', &
-read_xml_cards.f90:       IF ( ia > nat) CALL errore( 'read_image', &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'read_image', 'error reading &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'read_image', 'error reading position data of &
-read_xml_cards.f90:          IF ( ierr /= 0 ) CALL errore( 'read_al_image', 'error scanning begin of &
-read_xml_cards.f90:             IF ( ierr /= 0 ) CALL errore( 'read_al_image', 'error reading &
-read_xml_cards.f90:             IF ( ierr /= 0 ) CALL errore( 'read_al_image', 'error scanning end of &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'read_image', 'error scanning end of &
-read_xml_cards.f90:          IF ( ierr /= 0) CALL errore( 'read_image', &
-read_xml_cards.f90:          IF ( ierr /= 0) CALL errore( 'read_image', &
-read_xml_cards.f90:          IF ( ierr /= 0) CALL errore( 'read_image', &
-read_xml_cards.f90:          IF ( ( sp_pos( ia ) < 1 ) .or. ( sp_pos( ia ) > ntyp ) ) CALL errore( &
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'read_image', 'error scanning end of &
-read_xml_cards.f90:               CALL errore( 'read_image', 'no atom found in atomic_list for '&
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_kpoints', 'error reading type attribute &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_kpoints', 'error reading data inside mesh &
-read_xml_cards.f90:               k3 < 0 .or. k3 > 1 ) CALL errore &
-read_xml_cards.f90:       IF ( nk1 <= 0 .or. nk2 <= 0 .or. nk3 <= 0 ) CALL errore &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_kpoints', 'error scanning begin of mesh &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_kpoints', 'error reading attribute npoints of mesh &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_kpoints', 'error reading data inside mesh &
-read_xml_cards.f90:                IF ( nk > SIZE (xk,2)  ) CALL errore &
-read_xml_cards.f90:          IF ( nk /= SIZE (xk,2)  ) CALL errore &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_kpoints', 'error scanning end of mesh &
-read_xml_cards.f90:    IF (nbnd==0) CALL errore( 'card_xml_occupation', 'nbdn is not defined ', 1 )
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_occupations', 'error reading data inside &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_occupations', 'error reading data inside &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:          CALL errore( 'card_xml_constraints', 'unknown constraint ' // &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_constraints', &
-read_xml_cards.f90:10  CALL errore( 'card_xml_constraints', 'error reading data inside constraint node', i )
-read_xml_cards.f90:    IF ( ierr /= 0 ) CALL errore( 'card_xml_plot_wannier', 'error scanning begin of &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_plot_wannier', 'error scanning begin of &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_plot_wannier', 'error scanning end of &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_plot_wannier', 'error reading n1 attribute of &
-read_xml_cards.f90:       IF ( (ni < 1) .or. (ni > nwf) ) CALL errore( 'card_xml_plot_wannier', 'invalid value &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_plot_wannier', 'error reading data inside &
-read_xml_cards.f90:       IF ( ierr /= 0 ) CALL errore( 'card_xml_plot_wannier', 'error scanning end of &
-read_xml.f90:       CALL errore('read_xml', "xml input isn't implemented for "//prog//' program', 1)
-read_xml.f90:       IF ( .not. found ) CALL errore( 'read_xml_common', 'attribute calculation of root &
-read_xml.f90:       IF ( ierr /= 0 ) CALL errore( 'read_xml_common', 'error reading calculation &
-read_xml.f90:       IF ( ierr /= 0 ) CALL errore( 'read_xml_common', 'error reading prefix attribute &
-read_xml.f90:       IF ( ierr /= 0 ) CALL errore( 'read_xml_common', 'error reading title attribute &
-read_xml.f90:       IF ( ierr /= 0 ) CALL errore( 'read_xml_pw', 'error scanning begin &
-read_xml.f90:          IF ( ierr /= 0 ) CALL errore( 'read_xml_pw', 'error scanning end &
-read_xml.f90:          CALL errore('read_xml_pw',"card atomic_list is missing", 1 )
-read_xml.f90:          CALL errore('read_xml_pw', 'K_POINTS card was not found', 1)
-read_xml.f90:9   CALL errore('read_xml_pw', 'error reading begin tag of '//card//' card', ABS( ierr ) )
-read_xml.f90:10  CALL errore('read_xml_pw', 'error reading end tag of '//card//' card', ABS( ierr ) )
-read_xml.f90:9   CALL errore('read_xml_cp', 'error reading begin tag of '//card//' card', ABS( ierr ) )
-read_xml.f90:10  CALL errore('read_xml_cp', 'error reading end tag of '//card//' card', ABS( ierr ) )
-read_xml_fields.f90:       IF ( ierr /= 0 ) CALL errore ( 'read_xml_fields', 'error scanning begin of field &
-read_xml_fields.f90:       IF ( ierr /= 0 ) CALL errore ( 'read_xml_fields', 'error getting the name of field', &
-read_xml_fields.f90:          IF ( ierr /= 0 ) CALL errore ( 'read_xml_fields', 'error scanning begin of parameter &
-read_xml_fields.f90:          IF ( ierr /= 0 ) CALL errore ( 'read_xml_fields', 'error scanning the name of a PARAMETER &
-read_xml_fields.f90:          IF ( ierr /= 0 ) CALL errore ( 'read_xml_fields', 'error scanning end of '//name//' PARAMETER &
-read_xml_fields.f90:       IF (ierr /= 0) CALL errore( 'read_xml_fields', 'error scanning end of '//field//' field', 1)
-read_xml_fields.f90:          CALL errore( 'read_xml_fields', 'all the parameters exchange, exchange_grad_corr, &
-read_xml_fields.f90:       CALL errore( 'read_parameter', 'no parameter with name '//trim( name ), 1 )
-read_xml_fields.f90:       CALL errore( 'read_parameter', 'problem reading parameter '//trim( name ), 1 )
-recvec_subs.f90:      CALL errore ('ggen', ' wrong subroutine arguments, communicator is missing ', 1)
-recvec_subs.f90:      CALL errore ('ggen', ' wrong subroutine arguments, parameter no_global_sort is missing ', 1)
-recvec_subs.f90:               IF (ngm > ngm_max) CALL errore ('ggen 1', 'too many g-vectors', ngm)
-recvec_subs.f90:         CALL errore ('ggen', 'g-vectors missing !', abs(ngm - ngm_max))
-recvec_subs.f90:         CALL errore ('ggen', 'smooth g-vectors missing !', abs(ngms - ngms_max))
-recvec_subs.f90:      IF (ngm > ngm_save) CALL errore ('ggen 2', 'too many g-vectors', ngm)
-recvec_subs.f90:      CALL errore ('ggen', 'g-vectors (ngm) missing !', abs(ngm - ngm_save))
-recvec_subs.f90:      CALL errore ('ggen', 'g-vectors (ngms) missing !', abs(ngm - ngms_save))
-recvec_subs.f90:         CALL errore('ggen','Mesh too small?',ng)
-recvec_subs.f90:         CALL errore('index_minusg','Mesh too small?',ng)
-recvec_subs.f90:      IF (igl /= ngl) CALL errore ('gshells', 'igl <> ngl', ngl)
-remove_tot_torque.f90:     CALL errore( 'remove_tot_torque', &
-rgen.f90:              IF (nrm>mxr) CALL errore ('rgen', 'too many r-vectors', nrm)
-set_hubbard_l.f90:        CALL errore( 'set_hubbard_l', 'pseudopotential not yet inserted', 1 )
-set_signal.f90:     CALL errore("set_signal_USR1", "The association of signal USR1 failed!", 1)
-set_signal.f90:     CALL errore("set_TERMINATE_GRACEFULLY", "The association of signals INT or TERM failed!", 1)
-set_signal.f90:     CALL errore("set_signal", "The association of the signal failed!", 1)
-simpsn.f90:  IF ( mesh < 8 ) CALL errore ('simpson_cp90','few mesh points',8)
-sph_bes.f90:        call errore ('sph_bes', 'j_{-1}(0) ?!?', 1)
-sph_bes.f90:     if (abs (q * r (1) ) < eps14) call errore ('sph_bes', 'j_{-1}(0) ?!?',1)
-sph_bes.f90:     call errore ('sph_bes', 'not implemented', abs(l))
-sph_dbes.f90:     CALL errore( 'sph_dbes', ' L NOT PROGRAMMED, L= ',L )
-sph_dbes.f90:        call errore('sph_dbes','l < 0 not implemented', abs(l) )
-splinelib.f90:         CALL errore( 'dosplineint', &
-splinelib.f90:         CALL errore( 'dosplineint', &
-splinelib.f90:         CALL errore( 'dosplineint', &
-splinelib.f90:         CALL errore( 'dosplineint', &
-splinelib.f90:         CALL errore( 'dosplineint', &
-trimcheck.f90:    IF ( l == 0 ) CALL errore( 'trimcheck', ' input name empty', 1)
-trimcheck.f90:          CALL errore(  'trimcheck', ' input name too long', l )
-tsvdw.f90:    CALL errore('tsvdw','TS-vdW sR parameter only available for PBE and PBE0 functionals...',1)
-tsvdw.f90:    CALL errore('tsvdw','ERROR: num .NE. num1...',1)
-tsvdw.f90:  IF ( nspin < 1 .OR.  nspin > 2 ) CALL errore ('tsvdw','invalid nspin',1)
-tsvdw.f90:  CALL errore('tsvdw','Reference free atom parameters not available for requested atom type...',1)
-upf.f90:         CALL errore('read_upf',&
-upf.f90:   IF(ierr>0) CALL errore('read_upf', 'Cannot open file: '//TRIM(filename),1)
-uspp.f90:    if (lli < 0) call errore('aainit','lli not allowed',lli)
-uspp.f90:    if (lli*lli > nlx) call errore('aainit','nlx is too small ',lli*lli)
-uspp.f90:         call errore('aainit','ap leading dimension is too small',llx)
-uspp.f90:                     call errore('aainit','mx dimension too small', lpx(li,lj))
-w0gauss.f90:  if (n.gt.10 .or. n.lt.0) call errore('w0gauss','higher order smearing is untested and unstable',abs(n))
-wave_base.f90:        CALL errore(' hpsi_kp ', ' wrong sizes ', 1 )
-wave_base.f90:              CALL errore( ' wdot_gamma ', ' wrong dimension ', 1 )
-wave_base.f90:              CALL errore( ' dotp_gamma ', ' wrong dimension ', 1 )
-wave_base.f90:              CALL errore( ' dotp_gamma_n ', ' wrong dimension ', 1 )
-wave_base.f90:              CALL errore( ' dotp_kp ', ' wrong dimension ', 1 )
-wave_base.f90:              CALL errore( ' dotp_kp_n ', ' wrong dimension ', 1 )
-wave_base.f90:              CALL errore( ' dotp_kp_n ', ' wrong dimension ', 1 )
-write_upf_v2.f90:100   CALL errore('write_upf_v2::write_info', 'Writing pseudo file', 1)
-ws_base.f90:      IF (.NOT.ws%initialized) CALL errore &
-ws_base.f90:      IF (ws_weight == 0.0_DP) CALL errore ('ws_weight','unexpected error',1)
-wypos.f90:            CALL errore('wypos','group not recognized',1)
-wypos.f90:            CALL errore('wypos','position not available',1)
-xc_rVV10.f90:    !call errore('xc_rVV10','rVV10 functional not implemented for spin polarized runs', size(rho_valence,2)-1)
-xc_rVV10.f90:    if (nspin>2) call errore('xc_vdW_DF','vdW functional not implemented for nspin > 2', nspin)
-xc_rVV10.f90:      !call errore('stress_rVV10','vdW functional not implemented for spin polarized runs', size(rho_valence,2)-1)
-xc_rVV10.f90:      if (nspin>2) call errore('xc_vdW_DF','vdW functional not implemented for nspin > 2', nspin)
-xc_rVV10.f90:                  if (q_hi == q_low) call errore('stress_vdW_gradient','qhi == qlow',1)
-xc_rVV10.f90:     call errore('interpolate kernel', 'k value requested is out of range',1)
-xc_rVV10.f90:     call errore('interpolate kernel', 'k value requested is out of range',1)
-xc_rVV10.f90:     if (q_hi == q_low) call errore('get_potential','qhi == qlow',1)
-xc_rVV10.f90:     if (.not. present(N) ) call errore('gradient_coefficients', 'Number of neighbors for gradient must be specified',2)
-xc_rVV10.f90:        call errore('xc_vdW_DF', 'Order of numerical gradient not implemented', 2)
-xc_rVV10.f90:        call errore('get_3d_rho','Number of neighbors for numerical derivatives &
-xc_rVV10.f90:     call errore('invert_3x3_matrix','Matrix is close to singular',1)
-xc_vdW_DF.f90:  if ( vdW_type /= 1 .AND. vdW_type /= 2) call errore('xc_vdW_DF','E^nl_c not implemented',1)
-xc_vdW_DF.f90:  if ( vdW_type /= 1 .AND. vdW_type /= 2) call errore('xc_vdW_DF','E^nl_c not implemented',1)
-xc_vdW_DF.f90:     if (q_hi == q_low) call errore('get_potential','qhi == qlow',1)
-xc_vdW_DF.f90:     call errore('interpolate kernel', 'k value requested is out of range',1)
-xc_vdW_DF.f90:  if ( nspin>1 ) call errore('stress_vdW_DF','spin polarized vdW stress not implemented', nspin)
-xc_vdW_DF.f90:     if (q_hi == q_low) call errore('stress_vdW_gradient','qhi == qlow',1)
-xc_vdW_DF.f90:     call errore('interpolate kernel', 'k value requested is out of range',1)
-xml_io_base.f90:      CALL errore( 'create_directory', &
-xml_io_base.f90:      CALL errore( 'create_directory:', &
-xml_io_base.f90:      CALL errore( 'change_directory', &
-xml_io_base.f90:      CALL errore( 'pp_check_file', 'file ' // &
-xml_io_base.f90:      CALL errore( 'save_print_counter', &
-xml_io_base.f90:      CALL errore( 'set_kpoint_vars ', 'wrong size ngl', ierr )
-xml_io_base.f90:         CALL errore( 'write_rho_xml', 'cannot open ' // TRIM( rho_file ) // ' file for writing', ierr )
-xml_io_base.f90:      IF ( .NOT. exst ) CALL errore('read_rho_xml', 'searching for '//TRIM(rho_file), 10)
-xml_io_base.f90:         CALL errore( 'read_rho_xml', 'cannot open ' // TRIM( rho_file ) // ' file for reading', ierr )
-xml_io_base.f90:            CALL errore( 'read_rho_xml', 'dimensions do not match', 1 )
-xml_io_base.f90:            !if(j.eq.2)call errore('','',1)
-xml_io_base.f90:      CALL errore( 'read_wfc ', &
-xml_io_base.f90:      !call errore('','',1)
-ylmr2.f90:  call errore (' ylmr', 'l > 25 or wrong number of Ylm required',lmax2)
+autopilot.f90:! this program; if not, write to the 
+autopilot.f90:          IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
+autopilot.f90:             IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
+autopilot.f90:       IF( ionode ) write(*,*) 'ADD_RULE: POWER STEERING'
+autopilot.f90:          IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
+autopilot.f90:             IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line
+autopilot.f90:       IF( ionode ) write(*,*) ' AutoPilot: current n_rules', n_rules
+autopilot.f90:    !IF( ionode ) write(*,*) '  Number of rules: ', n_rules
+autopilot.f90:    IF( ionode ) write(*,'("   Reading rule: ",A20,A20)' ) var, value
+autopilot.f90:       !IF( ionode ) write(*,*) 'RULE_DT', rule_dt(event), 'EVENT', event
+autopilot.f90:       IF( ionode ) write(*,*) '  Autopilot: Rule Assignment Failure '
+autopilot.f90:       IF( ionode ) write(*,*) 'SLEEPING'
+autopilot.f90:       IF( ionode ) write(*,*) 'INPUT_LINE=', input_line
+autopilot.f90:       IF( ionode ) write(*,*) 'RUNNING'
+autopilot.f90:       IF( ionode ) write(*,*) 'INPUT_LINE=', input_line
+bfgs_module.f90:           write (*,'(3f15.10)') TRANSPOSE ( RESHAPE( grad(n-8:n), (/ 3, 3 /) ) )
+bfgs_module.f90:           write (*,*)
+bfgs_module.f90:           write (*,'(3f15.10)') TRANSPOSE(h)
+bfgs_module.f90:           write (*,*)
+bfgs_module.f90:           write (*,'(3f15.10)') MATMUL (TRANSPOSE( RESHAPE( grad(n-8:n), (/ 3, 3 /) ) ),&
+bfgs_module.f90:           write (*,*)
+bfgs_module.f90:           write (*,*) cell_error/cell_thr*0.5d0
+bfgs_module.f90:        if(info .ne. 0)write( stdout, '(/,5X,"WARNING: info=",i3," for Hessian")' )info
+bspline.f90:! - write to string instead of stdout
+bspline.f90:!   License along with this library; if not, write to the
+bspline.f90:     !!write(6,*) "subroutine dbsnak: "
+bspline.f90:     !!write(6,*) "eps = ",eps
+bspline.f90:     write(errmsg,*) "0 <= kxord <= nx is required: kxord,nx=", kxord, nx
+bspline.f90:     write(errmsg,*) 'no solution of linear equation system'
+bspline.f90:998 write(errmsg,*) "xknot(ix) <= xknot(ix+1) required: ix,xknot(ix),xknot(ix+1)=", &
+bspline.f90:        write(errmsg,*) "xknot(ix) <= xknot(ix+1) required: ix,xknot(ix),xknot(ix+1)=", &
+bspline.f90:     write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", x
+bspline.f90:        write(errmsg,*) "xknot(ix) <= xknot(ix+1) required: ix,xknot(ix),xknot(ix+1)=", &
+bspline.f90:     write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", x
+bspline.f90:        write(errmsg,*) "xknot(ix) <= xknot(ix+1) required: ix,xknot(ix),xknot(ix+1)=", &
+bspline.f90:       write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", xvec(ix)
+bspline.f90:     write(errmsg,*) "no solution of linear equation system"
+bspline.f90:998 write(errmsg,*) "i with knot(i) <= x/y < knot(i+1) required: knot(1),knot(n+k)=", &
+bspline.f90:        write(errmsg,*) "xknot(ix) <= xknot(ix+1) required: ix,xknot(ix),xknot(ix+1)=", &
+bspline.f90:     write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", x
+bspline.f90:        write(errmsg,*) "yknot(iy) <= yknot(iy+1) required: iy,yknot(iy),yknot(iy+1)=", &
+bspline.f90:     write(errmsg,*) "iy with yknot(iy) <= y < yknot(iy+1) required: y=", y
+bspline.f90:        write(errmsg,*) "xknot(ix) <= xknot(ix+1) required: ix,xknot(ix),xknot(ix+1)=", &
+bspline.f90:     write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", x
+bspline.f90:        write(errmsg,*) "yknot(iy) <= yknot(iy+1) required: iy,yknot(iy),yknot(iy+1)=", &
+bspline.f90:     write(errmsg,*) "iy with yknot(iy) <= y < yknot(iy+1) required: y=", y
+bspline.f90:        write(errmsg,*) "xknot(i) <= xknot(i+1) required: i,xknot(i),xknot(i+1)=", &
+bspline.f90:        write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", xvec(i)
+bspline.f90:        write(errmsg,*) "yknot(i) <= yknot(i+1) required: i,yknot(i),yknot(i+1)=", &
+bspline.f90:        write(errmsg,*) "iy with yknot(iy) <= y < yknot(iy+1) required: y=", yvec(i)
+bspline.f90:     write(errmsg,*) "no solution of linear equation system"
+bspline.f90:998 write(errmsg,*) "i with knot(i) <= x/y/z < knot(i+1) required: xyzknot(1),xyzknot(n+k)=", &
+bspline.f90:        write(errmsg,*) "zknot(iz) <= zknot(iz+1) required: iz,zknot(iz),zknot(iz+1)=", &
+bspline.f90:     write(errmsg,*) "iz with zknot(iz) <= z < zknot(iz+1) required: zknot(iz),z,zknot(iz+1)=", &
+bspline.f90:        write(errmsg,*) "zknot(iz) <= zknot(iz+1) required: iz,zknot(iz),zknot(iz+1)=", &
+bspline.f90:     write(errmsg,*) "iz with zknot(iz) <= z < zknot(iz+1) required: zknot(iz),z,zknot(iz+1)=", &
+bspline.f90:        write(errmsg,*) "xknot(i) <= xknot(i+1) required: i,xknot(i),xknot(i+1)=", &
+bspline.f90:        write(errmsg,*) "ix with xknot(ix) <= x < xknot(ix+1) required: x=", xvec(i)
+bspline.f90:        write(errmsg,*) "yknot(i) <= yknot(i+1) required: i,yknot(i),yknot(i+1)=", &
+bspline.f90:        write(errmsg,*) "iy with yknot(iy) <= y < yknot(iy+1) required: y=", yvec(i)
+bspline.f90:        write(errmsg,*) "zknot(i) <= zknot(i+1) required: i,zknot(i),zknot(i+1)=", &
+bspline.f90:        write(errmsg,*) "iz with zknot(iz) <= z < zknot(iz+1) required: z=", zvec(i)
+cell_base.f90:    !write(stdout,*) 'alat=',alat
+cell_base.f90:    !write(stdout,*) 'at=',at
+cell_base.f90:    !write(stdout,*) 'bg=',bg
+constraints_module.f90:            write(stdout,*)'torsional angle constraint #',ia,' contains collinear atoms'
+control_flags.f90:  LOGICAL :: trhow     = .FALSE. ! CP code, write rho to restart dir
+control_flags.f90:  LOGICAL :: tksw      = .FALSE. ! CP: write Kohn-Sham states to restart dir
+control_flags.f90:  INTEGER :: isave  = 0 ! write restart to ndr unit every isave step
+coulomb_vcut.f90:    write(0,*) "AHIA",sum((matmul(inv,a)-eye3)**2)
+coulomb_vcut.f90:    write(0,*) "A",a
+coulomb_vcut.f90:    write(0,*) "inv",inv
+coulomb_vcut.f90:    write(0,*)">>", matmul(inv,a)
+date_and_tim.f90:  write (cdate,'(i2,a3,i4)') date_time(3), months(date_time(2)), date_time(1)
+date_and_tim.f90:  write (ctime,'(i2,":",i2,":",i2)') date_time(5), date_time(6), date_time(7)
+error_handler.f90:  ! ... Whenever possible (IBM SP machines), we write to the standard
+error_handler.f90:  !  .. write the message to a file and close it before exiting
+error_handler.f90:    write(unit=*,fmt=*) "   Called by ", routine_chain%routine_name
+error_handler.f90:       write(unit=*,fmt=*) &
+error_handler.f90:       write(unit=*,fmt=*) " "
+error_handler.f90:       write(unit=*,fmt=*) " "
+error_handler.f90:       write(unit=*,fmt=*) &
+error_handler.f90:          write(unit=*,fmt=*) "   Fatal error in routine `", &
+error_handler.f90:          write(unit=*,fmt=*) "   Warning from routine `", &
+error_handler.f90:       write(unit=*,fmt=*) &
+funct.f90:       write (stdout,*) iexch, save_iexch
+funct.f90:       write (stdout,*) icorr, save_icorr
+funct.f90:       write (stdout,*) igcx, save_igcx
+funct.f90:       write (stdout,*) igcc, save_igcc
+funct.f90:       write (stdout,*) inlc, save_meta
+funct.f90:       write (stdout,*) inlc, save_inlc
+funct.f90:           ! write(*, '("matches",i2,2X,A,2X,A)') i, name(i), trim(dft)
+funct.f90:           write(*, '(2(2X,i2,2X,A))') i, trim(name(i)), &
+funct.f90:     write (stdout,'(/,5x,a)') "IMPORTANT: XC functional enforced from input :"
+funct.f90:     write (stdout,'(5x,a)') "Any further DFT definition will be discarded"
+funct.f90:     write (stdout,'(5x,a/)') "Please, verify this is what you really want"
+funct.f90:    write (stdout,'(/,5x,a)') "XC functional enforced to be EXXRPA"
+funct.f90:    write (stdout,'(5x,a)') "!!! Any further DFT definition will be discarded"
+funct.f90:    write (stdout,'(5x,a/)') "!!! Please, verify this is what you really want !"
+funct.f90:    write (stdout,'(/,5x,a)') "Only exx_fraction is set to 1.d0"
+funct.f90:    write (stdout,'(5x,a)') "XC functional still not changed"
+funct.f90:     write (stdout,'(5x,a,f6.2)') 'EXX fraction changed: ',exx_fraction
+funct.f90:     write (stdout,'(5x,a,f12.7)') 'EXX Screening parameter changed: ', &
+funct.f90:     write (stdout,'(5x,a,f12.7)') 'EXX Gau parameter changed: ', &
+funct.f90:        write (stdout,*) iexch, iexch_
+funct.f90:        write (stdout,*) icorr, icorr_
+funct.f90:        write (stdout,*) igcx, igcx_
+funct.f90:        write (stdout,*) igcc, igcc_
+funct.f90:        write (stdout,*) inlc, inlc_
+funct.f90:  write(longname,'(4a5)') exc(iexch),corr(icorr),gradx(igcx),gradc(igcc)
+functionals.f90:!        write(*,*) s, t1, t10, d1st1,d1rt1,d1rt10
+gth.f90:  ! write(6, '(2f10.5,2x,i8,t47,a)' )  znucl,upf%zp,pspdat,'znucl, zion, pspdat'
+gth.f90:  ! write(6, '(4i5,i10,f10.5,t47,a)' ) pspcod,pspxc,lmax,lloc,mmax,r2well,&
+gth.f90:  ! write(6, '(a,f12.7)' ) ' rloc=',rloc
+gth.f90:  ! write(6, '(a,i1,a,4f12.7)' ) ' cc(1:',nn,')=',(cc(jj),jj=1,nn)
+gth.f90:    !   write(6, '(a,i3,a,f12.7,2a,3f12.7,2a,12x,2f12.7,2a,24x,f12.7)' )&
+gth.f90:    !   write(6, '(a,3f12.7,2a,12x,2f12.7,2a,24x,f12.7)' )&
+hdf5_qe.f90:  subroutine setup_file_property_hdf5(hdf5desc ,filename, hyperslab, write, kpoint)
+hdf5_qe.f90:   logical,  intent(in) :: hyperslab, write
+hdf5_qe.f90:   write(kstring,'(I0)') kpoint
+hdf5_qe.f90:    if(write.eq..true.)then
+hdf5_qe.f90:   write(kstring,'(I0)') kpoint
+hdf5_qe.f90:   !INTEGER, ALLOCATABLE :: data (:,:)  ! Data to write
+hdf5_qe.f90:   write(kstring,'(I0)') kpoint
+hdf5_qe.f90:   write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:    write(dset_name,'(I0)') dsetname
+hdf5_qe.f90:    write(dset_name,'(I0)') dsetname
+hdf5_qe.f90:    write(kstring,'(I0)') kpoint
+hdf5_qe.f90:    write(kstring,'(I0)') kpoint
+hdf5_qe.f90:    write(kstring,'(I0)') kpoint
+hdf5_qe.f90:    write(dset_name,'(I0)') dsetname
+hdf5_qe.f90:    write(dset_name,'(I0)') dsetname
+hdf5_qe.f90:    write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:  subroutine initialize_io_hdf5(hdf5desc,comm, data, write,kpoint)
+hdf5_qe.f90:    logical, intent(in) :: write
+hdf5_qe.f90:    write(mpimestring,'(I0)') mpime
+hdf5_qe.f90:    if(write.eq..true.)then
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      !write(attrdata,'(I0)') attr_data
+hdf5_qe.f90:      !write(attrdata,'(I0)') attr_data
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+hdf5_qe.f90:      write(kstring,'(I0)') kpoint
+io_files.f90:  ! ... read/write nword words starting from the address specified by vect
+io_files.f90:    ! input: the unit where to read/write
+io_files.f90:    ! input: the record where to read/write
+io_files.f90:   ! input/output: the vector to read/write
+libxc.f90:!! along with this program; if not, write to the Free Software
+mp_base.f90:        write(*,*) 'BCAST_REAL IN'
+mp_base.f90:        write(*,*) 'BCAST_REAL OUT'
+mp_base.f90:        write(*,*) 'BCAST_INTEGER IN'
+mp_base.f90:        write(*,*) 'BCAST_INTEGER OUT'
+mp_base.f90:        write(*,*) 'BCAST_LOGICAL IN'
+mp_base.f90:        write(*,*) 'BCAST_LOGICAL OUT'
+mp_base.f90:  write(*,*) 'reduce_base_real IN'
+mp_base.f90:  write(*,*) 'reduce_base_real OUT'
+mp_base.f90:  write(*,*) 'reduce_base_real IN'
+mp_base.f90:  write(*,*) 'reduce_base_real OUT'
+mp_base.f90:  write(*,*) 'reduce_base_integer IN'
+mp_base.f90:  write(*,*) 'reduce_base_integer OUT'
+mp_base.f90:  write(*,*) 'reduce_base_integer IN'
+mp_base.f90:  write(*,*) 'reduce_base_integer OUT'
+mp_base.f90:  write(*,*) 'reduce_base_real_to IN'
+mp_base.f90:  write(*,*) 'reduce_base_real_to OUT'
+mp_base.f90:  write(*,*) 'reduce_base_integer_to IN'
+mp_base.f90:  write(*,*) 'reduce_base_integer_to OUT'
+mp_base.f90:  write(*,*) 'parallel_min_integer IN'
+mp_base.f90:  write(*,*) 'parallel_min_integer OUT'
+mp_base.f90:  write(*,*) 'parallel_max_integer IN'
+mp_base.f90:  write(*,*) 'parallel_max_integer OUT'
+mp_base.f90:  write(*,*) 'parallel_min_real IN'
+mp_base.f90:  write(*,*) 'parallel_min_real OUT'
+mp_base.f90:  write(*,*) 'parallel_max_real IN'
+mp_base.f90:  write(*,*) 'parallel_max_real OUT'
+open_close_input_file.f90:  ! ...  otherwise, but ensure first that all processors can read and write!
+plot_io.f90:  !     iflag >0 : write header and the quantity to be plotted ("plot")
+plot_io.f90:     write (iunplot, '(a)') title
+plot_io.f90:     write (iunplot, '(8i8)') nr1x, nr2x, nr3x, nr1, nr2, nr3, nat, ntyp
+plot_io.f90:     write (iunplot, '(i6,2x,6f16.8)') ibrav, celldm
+plot_io.f90:           write ( iunplot, * ) ( at(ipol,i),ipol=1,3 )
+plot_io.f90:     write (iunplot, '(3f20.10,i6)') gcutm, dual, ecut, plot_num
+plot_io.f90:     write (iunplot, '(i4,3x,a2,3x,f5.2)') &
+plot_io.f90:     write (iunplot, '(i4,3x,3f15.9,3x,i2)') (na, &
+plot_io.f90:     write (iunplot, '(5(1pe17.9))') (plot (ir) , ir = 1, nr1x * nr2x * nr3)
+plugin_arguments.f90:!       write(0,*) "plugin_name: ", trim(arg)
+plugin_arguments.f90:!  write(0,*) "use_plumed: ", use_plumed
+qexml.f90:  ! This module contains some common subroutines used to read and write
+qexml.f90:      CHARACTER(*),       INTENT(in)  :: action      ! ("read"|"write")
+qexml.f90:      CASE ( "write", "WRITE" )
+qexml.f90:      CHARACTER(*),  INTENT(in)  :: action      ! ("read"|"write")
+qexml.f90:      CASE ( "write", "WRITE" )
+qexml.f90:! ... write subroutines
+qexml.f90:      write(gammaonly,'(I0)') gamma_only
+qexml.f90:         ! ... write the G-vectors
+qexml.f90:      ! open the file to write
+qexml.f90:         ! write wfcs without any G-reordering
+qexsd.f90:  ! This module contains some common subroutines used to read and write
+qexsd.f90:         write(iun_out,"(a)") trim(str)
+qexsd.f90:! ... write subroutines
+qmmm.f90:    !write(stdout, *) "NEW Forces added to QM atoms (Ry / a.u.)"
+qmmm.f90:    !   write(stdout, '(I5, I5, f11.7, f11.7, f11.7, f11.7)') &
+qmmm.f90:    !write(stdout, *) "End of NEW forces added to QM atoms (Ry / a.u.)"
+qmmm.f90:    !write(stdout, *) "Forces added to MM atoms (Ry / a.u.)"
+qmmm.f90:    !   write(stdout, '(I5, f11.7, f11.7, f11.7)') &
+qmmm.f90:    !write(stdout, *) "End of forces added to MM atoms (Ry / a.u.)"
+radial_grids.f90:     write(6,100) k,nst
+read_uspp.f90:    write(upf%generated, &
+read_uspp.f90:    !    Here we write on output information on the pseudopotential 
+read_uspp.f90:          write(fmt,900) 2*nang-1, 40-8*(2*nang-2)
+read_uspp.f90:          write(fmt,900) 2*nang-1, 1
+read_uspp.f90:    write( upf%dft, "('INDEX:',4i1)") iexch,icorr,igcx,igcc
+tsvdw.f90:USE io_global,          ONLY: stdout             !print/write argument for standard output (to output file)
+wannier_gw.f90:      write(stdout,*) 'MAX_NGM:', max_ngm, ngm
+write_upf_v2.f90:    ! If included, write all-electron and pseudo wavefunctions
+write_upf_v2.f90:      INTEGER,INTENT(IN)          :: u    ! i/o unit: write to unit u
+write_upf_v2.f90:   ! Only write core orbitals in the PAW as GIPAW case
+xc_rVV10.f90:       if (ionode) write(*,'(/ / A /)') "     ----------------------------------------------------------------"
+xc_rVV10.f90:       if (ionode) write(*,'(A, F22.15 /)') "     Non-local correlation energy =         ", Ec_nl
+xc_rVV10.f90:       if (ionode) write(*,'(A /)') "     ----------------------------------------------------------------"
+xc_rVV10.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xc_rVV10.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xc_vdW_DF.f90:        write(stdout,'(/ / A)')       "     -----------------------------------------------"
+xc_vdW_DF.f90:        write(stdout,'(A, F15.8, A)') "     Non-local corr. energy    =  ", Ec_nl, " Ry"
+xc_vdW_DF.f90:        write(stdout,'(A /)')         "     -----------------------------------------------"
+xc_vdW_DF.f90:        write(stdout,'(/ / A)')       "     -----------------------------------------------"
+xc_vdW_DF.f90:        write(stdout,'(A, F15.8, A)') "     Non-local corr. energy    =  ", Ec_nl, " Ry"
+xc_vdW_DF.f90:        write(stdout,'(A /)')         "     -----------------------------------------------"
+xc_vdW_DF.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xc_vdW_DF.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xml_input.f90:         CALL qexml_openfile( filename, 'write', .FALSE., ierr )
+xml_input.f90:      IF ( ionode ) CALL qexml_closefile( 'write', IERR=ierr )
+xml_io_base.f90:  ! ... this module contains some common subroutines used to read and write
+xml_io_base.f90:      ! ... find the index of the group (pool) that will write rho
+xml_io_base.f90:         !  Only one subgroup write the charge density
+xml_io_base.f90:    ! ... methods to write and read wavefunctions
+xml_io_base.f90:      write(gammaonly,'(I0)') gamma_only
+xml_io_base.f90:            IF ( ionode ) write(60)wtmp(1:igwx) 
+xml_io_base.f90:          write(*,*)'done writing evc0'
+xml_io_base.f90:               !IF ( j .eq. 1)write(*,'(10f12.5)')(wtmp(i),i=1,igwx_)
+xsf.f90:!   in XSF format using the FFT mesh (i.e. fast write)

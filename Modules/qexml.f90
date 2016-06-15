@@ -1033,6 +1033,7 @@ CONTAINS
       USE hdf5_qe
       USE mp_pools,  ONLY : inter_pool_comm
       USE io_files,  ONLY : tmp_dir
+      USE mp_world,  ONLY : mpime
 #endif
       INTEGER,       INTENT(in) :: npwx, nr1, nr2, nr3, ngm, &
                                    nr1s, nr2s, nr3s, ngms, nr1b, nr2b, nr3b
@@ -1043,6 +1044,8 @@ CONTAINS
 #if defined __HDF5
       CHARACTER(LEN=256) :: filename_hdf5
       CHARACTER          :: gammaonly
+      !integer          :: gammaonly, ierr
+      integer           :: ierr
 #endif
       !
       !
@@ -1053,7 +1056,7 @@ CONTAINS
       CALL add_attributes_hdf5(g_hdf5_write,ecutwfc,"WFC_CUTOFF")
       CALL add_attributes_hdf5(g_hdf5_write,ecutrho,"RHO_CUTOFF")
       CALL add_attributes_hdf5(g_hdf5_write,npwx,"MAX_NUMBER_OF_GK-VECTORS")
-      write(gammaonly,'(I0)') gamma_only
+      write(gammaonly,'(I1)') gamma_only
       CALL add_attributes_hdf5(g_hdf5_write,gammaonly,"GAMMA_ONLY")
       CALL add_attributes_hdf5(g_hdf5_write,trim(cutoff_units),"UNITS_FOR_CUTOFF")
       CALL add_attributes_hdf5(g_hdf5_write,nr1,"nr1")
@@ -1130,6 +1133,9 @@ CONTAINS
       CALL iotk_write_empty( ounit, "SMALLBOX_FFT_GRID", ATTR = attr )
       !
       CALL iotk_write_end( ounit, "PLANE_WAVES" )
+#if defined __HDF5
+      CALL h5fclose_f(g_hdf5_write%file_id,ierr)
+#endif
       !
     END SUBROUTINE qexml_write_planewaves
     !
@@ -1149,7 +1155,6 @@ CONTAINS
       INTEGER        :: iunaux
       CHARACTER(256) :: filename
       CHARACTER(256) :: filename_hdf5
-      CHARACTER*1    :: gammaonly
 
       CALL iotk_free_unit( iunaux )
       filename = qexml_wfc_filename( datadir_out, 'gkvectors', ik )
@@ -1978,7 +1983,6 @@ CONTAINS
       IF (present(lkpoint_dir)) lkpoint_dir0=lkpoint_dir
       !
       !
-      write(mpime+450) filename
       IF (lkpoint_dir0) CALL iotk_open_write ( iuni, &
                            FILE = TRIM( filename ), BINARY = .FALSE. )
       !

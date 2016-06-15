@@ -1,5 +1,9 @@
 New in 6.0 version:
 
+  * New XML data file according to the XML Schema
+  * Non-collinear magnetism implemented in epsilon.x, code restructuring
+   (Andrea Ferretti, Tae-Yun Kim Cheol-Hwan Park)
+
 Fixed in 6.0 version:
 
   * TDDFPT, PWCOND, GWW: redirection to /dev/null broke Windows executable
@@ -7,11 +11,27 @@ Fixed in 6.0 version:
   * PDOS in the noncolinear case was broken by recent changes in indexing 
     (courtesy Mitsuaki Kawamura) (commit (12366)
   * Incorrect format (old version) of the dynamical matrix if ibrav=0 in PHCG
-    (commit (12367)
+    (commit 12367,12369) and incorrect format if more than 99 atoms
+    (commit 12393) (courtesy Shaofeng Wang)
+  * disk_io='high' crashing in MD runs (courtesy David Strubbe)
+    (commit 12388)
+  * Fix for NEB+hybrid functionals (courtesy Davide Colleoni)
+    (commit 12391)
+  * Incorrect Wyckoff site labels for group #138, origin_choice=2
+    (courtesy Marton Voros) (commit 12426)
 
 Incompatible changes in 6.0 version:
 
   * Support for AIX removed
+  * The hamiltonian h_psi no longer needs "npw" and "igk" to be initialized
+    via module "wvfct", but it needs "current_k" to be set to the index of
+    the current k-point
+  * k-point dependent variables npw, igk, and (in LR codes) npwq, igkq, 
+    become local and point to global variables "ngk" and "igk_k", via the
+    k-point index "ik" or, in LR codes, via "ikks" and "ikkq" indices.
+    The global variable are computed once, stored in memory, no I/O is done.
+  * "nbnd_occ" variable is now dynamically allocated
+  * Duplicated and confusing "outdir" variable removed from "io_files"
 
                                * * * * *
 

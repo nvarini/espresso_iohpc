@@ -1,0 +1,61 @@
+cdiaghg.f90:        write( 100, fmt="(A20,2D18.10)" ) ' e code = ', e( 1 ), e( n )
+cdiaghg.f90:        ! write( 100, fmt="(I5)" ) n
+cdiaghg.f90:              ! write( 100, fmt="(2I5,2D18.10)" ) i, j, tt( i, j )
+cdiaghg.f90:        write( 100, fmt="(A20,2D18.10)" ) ' e test = ', e( 1 ), e( n )
+cdiaghg.f90:        ! write( 100, * ) 'eigenvalues and eigenvectors'
+cdiaghg.f90:           ! write( 100, fmt="(1I5,1D18.10,A)" ) j, e( j )
+cdiaghg.f90:              ! write( 100, fmt="(2I5,2D18.10)" ) i, j, tt( i, j )
+esm.f90:  !write( *,'(5x,"alpha used in ewald term: ",f5.2 )')alpha
+esm.f90:     write( stdout, '(5x,"=== Smooth-ESM RSUM parameters (Energy) ===")')
+esm.f90:     write( stdout, '(5x,A,F10.2,A)') &
+esm.f90:     write( stdout, '(5x,A,F10.2,A)') &
+esm.f90:     write( stdout, '(5x,A,F10.2,A)') &
+esm.f90:     write( stdout, '(5x,"===========================================")')
+esm.f90:  !write(*,'(5X,A,F5.2)')'alpha used in esm ewald force :',alpha
+esm.f90:     write( stdout, '(5x,"=== Smooth-ESM RSUM parameters (Force) ===")')
+esm.f90:     write( stdout, '(5x,A,F10.2,A)') &
+esm.f90:     write( stdout, '(5x,A,F10.2,A)') &
+esm.f90:     write( stdout, '(5x,A,F10.2,A)') &
+esm.f90:     write( stdout, '(5x,"==========================================")')
+esm.f90:     write( UNIT = 4, FMT = 9050 )
+esm.f90:        write( UNIT = 4, FMT = 9051 ) work4(1:5,iz)
+exx.f90:                  write(*,*) ik,iq
+exx.f90:                  write(*,*) ikq,ikk,isym
+exx.f90:                  write(*,*) dxk(:)
+fcp.f90:         write( stdout,'(/,5X,"Upper bound for tot_charge:",F12.6)') &
+fcp.f90:         write( stdout,'(5X,"Original:",F12.6," Expected:",F12.6)') &
+fcp.f90:         write( stdout,'(5X,"Next tot_charge:",F12.6)') tot_charge
+generate_rVV10_kernel_table.f90:       !write(*) "Writing headers..."
+generate_rVV10_kernel_table.f90:       !write(*) "Writing phi proc ", 0
+generate_rVV10_kernel_table.f90:          !write(*) "Writing phi proc ", proc_i
+generate_rVV10_kernel_table.f90:       !write(*) "Writing d2phi_dk2 proc ", 0
+generate_rVV10_kernel_table.f90:          !write(*) "Writing d2phi_dk2 proc ", proc_i 
+init_q_aeps.f90:            write(*,*) '> QQ_AE matrix:'
+init_q_aeps.f90:               write(*,'(99F9.6)') qq_ae(nb,1:upf(nt)%nbeta,nt)
+init_q_aeps.f90:            write(*,*) "nbH=",nbH,", lH",lH
+init_q_aeps.f90:               write(*,*) "na, ityp, lH=",na,ityp(na),lH
+init_q_aeps.f90:               write(*,*) "nbH,lH,offset",nbH,lH,iwfc
+init_q_aeps.f90:                     if ( ionode .AND. iverbosity == 1 ) write(*,'(A,6I3,F9.6)') &
+init_q_aeps.f90:                        write(*,'(A,3I3,2F9.6)') "iwfc,jh,na,q_ae,qq_ae", &
+init_q_aeps.f90:                        write(*,'(A,3I3,2F9.6)') "iwfc,jh,na,q_ps,qq_ps", &
+init_q_aeps.f90:         write(*,*) ">>> atom ",na,", type ",nt
+init_q_aeps.f90:         write(*,*) "    q_ae matrix"
+init_q_aeps.f90:                  write(*,'(2I1,99F6.3)') l,m,q_ae(jwfc,:,na)
+init_q_aeps.f90:         write(*,*) "    q_ps matrix"
+init_q_aeps.f90:                  write(*,'(2I1,99F6.3)') l,m,q_ps(jwfc,:,na)
+init_us_2.f90:!   write(*,'(3i4,i5,3f10.5)') size(tab,1), size(tab,2), size(tab,3), size(vq), q_
+martyna_tuckerman.f90:!  write(*,*) "ewald correction   = ", wg_corr_ewald
+mix_rho.f90:    !   write(*,'(1e11.3)') e(:)
+mix_rho.f90:    !   write(*,*)
+mix_rho.f90:    !write(*,*) betamix(:,:)
+paw_init.f90:    !write(*,*) "paw --> directions",rad%nx," lmax:",rad%lmax
+paw_onecenter.f90:            !IF (present(energy)) write(*,*) 'H',i%a,i_what,sgn*energy
+paw_onecenter.f90:            !IF (present(energy)) write(*,*) 'X',i%a,i_what,sgn*energy
+paw_onecenter.f90:    !if(present(energy)) write(*,*) "gcxc -->", e_gcxc
+paw_onecenter.f90:            !write(*,'(99i4)') nb,mb,nmb
+paw_symmetry.f90:            write(*,*) is
+paw_symmetry.f90:            write(*,*) is
+paw_symmetry.f90:            write(*,*) is
+paw_symmetry.f90:            write(*,*) is
+paw_symmetry.f90:            write(*,*) is
+write_ns.f90:           if (nspin.ne.1) write( stdout,'("   spin ",i2)') is

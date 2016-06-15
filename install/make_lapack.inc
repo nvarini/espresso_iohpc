@@ -20,12 +20,12 @@ PLAT =
 #  selected.  Define LOADER and LOADOPTS to refer to the loader
 #  and desired load options for your machine.
 #
-FORTRAN  = ifort
-OPTS     = -O2 -assume byterecl -g -traceback -openmp
-DRVOPTS  = -O2 -assume byterecl -g -traceback -openmp
-NOOPT    = -O0 -assume byterecl -g -traceback
-LOADER   = mpiifort
-LOADOPTS = -static-intel  -openmp
+FORTRAN  = gfortran
+OPTS     = -O3 -g
+DRVOPTS  = -O3 -g
+NOOPT    = -O0 -g
+LOADER   = mpif90
+LOADOPTS =  -g -pthread
 #
 # Timer for the SECOND and DSECND routines
 #
@@ -52,7 +52,7 @@ RANLIB   = ranlib
 #  The target's machine-specific, optimized BLAS library should be
 #  used whenever possible.
 #
-BLASLIB      =   -lmkl_intel_lp64  -lmkl_intel_thread -lmkl_core
+BLASLIB      =   -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
 #
 #  Location of the extended-precision BLAS (XBLAS) Fortran library
 #  used for building and testing extended-precision routines.  The

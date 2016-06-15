@@ -26,7 +26,7 @@ module hdf5_qe
   TYPE(HDF5_type), save :: rho_hdf5_write, eig_hdf5_write
   TYPE(HDF5_type), save :: g_hdf5_write, gk_hdf5_write
   
-  INTEGER, save ::  off_npw, npw_g
+  INTEGER, save ::  off_npw, npw_g, idone_debug
 
 
   INTERFACE add_attributes_hdf5
@@ -77,10 +77,15 @@ module hdf5_qe
 
 
    if(hyperslab .eq. .true. ) then
-     CALL h5pcreate_f(H5P_FILE_ACCESS_F, hdf5desc%plist_id, error) ! Properties for file creation
-     CALL h5pset_fapl_mpio_f(hdf5desc%plist_id, hdf5desc%comm, info, error) ! Stores MPI IO communicator information to the file access property list
-     CALL h5fcreate_f(filename, H5F_ACC_TRUNC_F, hdf5desc%file_id, error, access_prp = hdf5desc%plist_id) ! create the file collectively
-     CALL h5pclose_f(hdf5desc%plist_id, error)
+
+        CALL h5pcreate_f(H5P_FILE_ACCESS_F, hdf5desc%plist_id, error) ! Properties for file creation
+        CALL h5pset_fapl_mpio_f(hdf5desc%plist_id, hdf5desc%comm, info, error) ! Stores MPI IO communicator information to the file access property list
+        if(kpoint.eq.1)then
+          CALL h5fcreate_f(filename, H5F_ACC_TRUNC_F, hdf5desc%file_id, error, access_prp = hdf5desc%plist_id) ! create the file collectively
+        else
+          CALL h5fopen_f(filename, H5F_ACC_RDWR_F, hdf5desc%file_id, error, access_prp = hdf5desc%plist_id) ! create the file collectively
+        endif
+        CALL h5pclose_f(hdf5desc%plist_id, error)
    else
 
     if(write.eq..true.)then
@@ -234,8 +239,6 @@ module hdf5_qe
     
  
     hdf5desc%comm=comm
-    !hdf5desc%filename = trim(filename_input) //".wfchdf5"
-    !hdf5desc%filename=trim(tmp_dir) //"evc.hdf5"!//trim(mpimestring)
     hdf5desc%filename=filename_input
     
     if(present(kpoint)) then
@@ -583,7 +586,7 @@ module hdf5_qe
     character(len=80) :: filename
     character*4 mpimestring
     integer :: npwx, nbnd
-    write(mpimestring,'(I0)') mpime
+    !write(mpimestring,'(I0)') mpime
     npwx=size(data(:,1))
     nbnd=size(data(1,:))
     

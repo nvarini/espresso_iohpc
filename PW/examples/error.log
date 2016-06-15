@@ -1,0 +1,796 @@
+
+run_all_examples: starting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example01 : starting
+
+This example shows how to use pw.x to calculate the total energy and
+the band structure of four simple systems: Si, Al, Cu, Ni.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Si... done
+  running the band-structure calculation for Si... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Al... done
+  running the band-structure calculation for Al... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu... done
+  running the band-structure calculation for Cu... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Ni... done
+  running the band-structure calculation for Ni... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si... done
+  running the band-structure calculation for Si... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Al... done
+  running the band-structure calculation for Al... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu... done
+  running the band-structure calculation for Cu... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Ni... done
+  running the band-structure calculation for Ni... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example01 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example02 : starting
+
+This example shows how to use pw.x to compute the equilibrium geometry
+of a simple molecule, CO, and of an Al (001) slab.
+In the latter case the relaxation is performed in two ways:
+1) using the quasi-Newton BFGS algorithm
+2) using a damped dynamics algorithm.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the geometry relaxation for CO...forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F03D58A1317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               00000000004091F2  run_pwscf_                168  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F03D40B5F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 66
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example03 : starting
+
+This example shows how to use pw.x to perform molecular dynamics for
+2- and 8-atom cells of Si starting with compressed bonds along (111).
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the MD calculation for Si in a 2 atom cell. G-point... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the MD calculation for Si in a 8 atom cell. G-point... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the MD calculation for Si in a 2 atom cell. G3X-points... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example03: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example04 : starting
+
+This example shows how to calculate the polarization via Berry Phase
+in PbTiO3 (contributed by the Vanderbilt Group in Rutgers University).
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running self-consistent calculation in PbTiO3... done
+  running Berry Phase calculation for PbTiO3... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example04: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example05 : starting
+
+This example shows how to calculate the total energy of an isolated
+atom in a supercell with fixed occupations.
+Three examples: LDA energy of Al, sigma-GGA energy of O,
+and sigma-GGA energy of Ni in two configurations
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running self-consistent calculation for Al atom... done
+  running calculation for O atom... done
+  running calculation for O atom, Gamma-only...forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F1365BC4317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F13643D8F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 66
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example06 : starting
+
+This example shows how to use pw.x to calculate the total energy and
+the band structure of four simple systems in the non-collinear case:
+Fe, Cu, Ni, O.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Fe... done
+  running band structure calculation for Fe... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf calculation for Fe with penalty functional... done
+  running the scf calculation for Fe with constrained angle... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Fe with constrained magnetization... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu... done
+  running the band-structure calculation for Cu... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu with cg diagonalization... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Ni... done
+  running the band-structure calculation for Ni... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf calculation with relax for oxygen molecule... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example06: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example07 : starting
+
+This example shows how to use pw.x to calculate the total energy
+and the band structure of fcc-Pt with a fully relativistic 
+pseudo-potential including spin-orbit coupling.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Pt with spin-orbit coupling... done
+  running the non-scf calculation for Pt with spin-orbit coupling... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example07: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example08 : starting
+
+This example shows how to use pw.x to calculate the total energy of FeO
+using LDA+U approximation. Read file README for more details
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist...
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running scf for FeO in LDA ... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf for FeO in LDA+U using standard ns initial matrices... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf for FeO in LDA+U using user-defined ns initial matrices... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example08 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example09 : starting
+
+This example shows how to use pw.x to perform SCF
+simulation of C4H6 with TPSS metaGGA Exc.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the pw.x SCF calculation...forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FEFA5C02317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FEFA4416F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 66
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example10 : starting
+
+This example shows how to use pw.x to perform electronic structure
+calculations in the presence of a finite homogeneous electric field 
+described through the modern theory of the polarization. The example
+shows how to calculate high-frequency dielectric constant of bulk Silicon
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the PW calculation for bulk Si E_field=0.0  a.u. ... done
+  running the PW calculation for bulk Si E_field=0.001  a.u. ... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example10 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example11 : starting
+
+This example tests pw.x with PAW in the noncollinear, spin-orbit case.
+It calculates the band structure of ferromagnetic bcc-Fe.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Fe with PAW spin-orbit... done
+  running the band calculation for Fe with PAW and spin-orbit... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example11: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example12 : starting
+
+This example tests pw.x with USPS and DFT+U in the noncollinear, spin-orbit case.
+It calculates the band structure of ferromagnetic bcc-Fe.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Fe with USPS and DFT+U with spin-orbit... done
+  running the band calculation for Fe with USPP and DFT+U and spin-orbit... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example12: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/VCSexample : starting
+
+This example shows how to use pw.x to relax a 2-atom cell of As
+at 2 different pressures, 0 kbar and 500 kbar. At those pressures
+As relax to different structures, sc and A7.
+Two strategies are used: Wentzcovitch damped dynamics and bfgs.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the VCS-MD calculation for As at 0 kbar.  done
+  running the VCS-MD calculation for As at 500 kbar.  done
+  running the bfgs vc-relax calculation for As at 0 kbar.  done
+  running the bfgs vc-relax calculation for As at 500 kbar.  done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/VCSexample : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example : starting
+
+This example shows how to use pw.x to calculate the total energy
+of silicon and of a few small molecules using hybrid functionals.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+
+  running PBE0 calculation for Si with nq=1,2,4 
+  running the scf calculation for Si with nq = 1 ... done
+!    total energy              =     -15.90468197 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 2 ... done
+!    total energy              =     -15.84995846 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 4 ... done
+!    total energy              =     -15.83808622 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+  running HSE calculation for Si with nq=1,2,4 
+  running the scf calculation for Si with nq = 1 ... done
+!    total energy              =     -15.89595287 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 2 ... done
+!    total energy              =     -15.84137495 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 4 ... done
+!    total energy              =     -15.83318481 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+  running Gau-PBE calculation for Si with nq=1,2,4 
+  running the scf calculation for Si with nq = 1 ... done
+!    total energy              =     -16.01135564 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 2 ... done
+!    total energy              =     -15.85964289 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 4 ... done
+!    total energy              =     -15.85220259 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+  running now a few molecules with Gamma sampling ...
+  pseudo directory changed to:      /home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example/Pseudo
+
+  Exchange and correlation is:  pbe0 ...
+  running oxygen atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F04B5D34317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F04B4548F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running carbon atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F2A6A7F6317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F2A6900AF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running nitrogen atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F8C71030317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F8C6F844F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running n2 molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F8F6AA0E317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F8F69222F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running co molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FF3A9036317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FF3A784AF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running o2 molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F7B2B383317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F7B29B97F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+N2 :  -221.043
+O2 :  -121.856
+CO :  -253.242
+
+  Exchange and correlation is:  hse ...
+  running oxygen atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F2E2E1CC317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F2E2C9E0F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running carbon atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F4CB9E37317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F4CB864BF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running nitrogen atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F8EC441B317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F8EC2C2FF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running n2 molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F108FD1A317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F108E52EF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running co molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FB121BBF317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FB1203D3F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running o2 molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F3263D61317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F3262575F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+N2 :  -220.508
+O2 :  -121.74
+CO :  -253.169
+
+  Exchange and correlation is:  gaupbe ...
+  running oxygen atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F404594C317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F4044160F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running carbon atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F6AB3410317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F6AB1C24F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running nitrogen atom..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F05A1BB2317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F05A03C6F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running n2 molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FEB60876317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FEB5F08AF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running co molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F6CB31A4317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F6CB19B8F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running o2 molecule..forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007F29D71C2317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007F29D59D6F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+ done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+N2 :  -220.332
+O2 :  -120.538
+CO :  -252.053
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/vdwDF_example : starting
+
+This example shows how to use pw.x with vdw-DF functional. In the
+first part a cell relaxation of graphite will be calculated and
+then the energy of two water molecules far apart will be computed.
+Optionally, at the end, you can see how to set up a force relaxation
+of an Argon dimer, not activated by default in the distribution.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+ done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the graphite cell relaxation... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for water molecules...forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FA472092317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FA4708A6F45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 66
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/ESM_example : starting
+
+This example shows how to use ESM to calculate H2O and Al(001)
+using the three available sets of boundary conditions.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the calculation for H2O without ESM...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/cluster_example : starting
+
+This example shows how to use pw.x to calculate propeties of 
+isolated systems decoupling periodic images by using 
+Martyna-Tuckerman approach with truncated coulomb interaction.
+
+Three simple systems are considered:
+1) a N atom. 
+2) a NH4+ ion.
+3) a water molecule.
+
+The calculations are performed in a SC cell of dimension 16 bohr
+It is possible to explore convergence of the results w.r.t. box size
+by editing the script and addind/modifying the variable called BOX_SIZE_LIST
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running tests for a box size =  16 bohr 
+
+  running scf calculation for N atom...forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FF19473B317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FF192F4FF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 66
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/vdwDF_example : starting
+
+This example shows how to use pw.x with vdw-DF functional. In the
+first part a cell relaxation of graphite will be calculated and
+then the energy of two water molecules far apart will be computed.
+Optionally, at the end, you can see how to set up a force relaxation
+of an Argon dimer, not activated by default in the distribution.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+ done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the graphite cell relaxation... done
+  running the graphite cell relaxation... done
+  running the graphite cell relaxation... done
+  running the scf calculation for water molecules...forrtl: severe (66): output statement overflows record, unit -5, file Internal Formatted Write
+Image              PC                Routine            Line        Source             
+libhdf5_fortran.s  00007FE6B1EF7317  Unknown               Unknown  Unknown
+pw.x               0000000000C295F4  Unknown               Unknown  Unknown
+pw.x               0000000000C278EA  Unknown               Unknown  Unknown
+pw.x               000000000084ABB4  qexml_module_mp_q        1059  qexml.f90
+pw.x               00000000005F3A4B  pw_restart_mp_pw_         783  pw_restart.f90
+pw.x               00000000005F2641  punch_                     51  punch.f90
+pw.x               0000000000409162  run_pwscf_                213  run_pwscf.f90
+pw.x               0000000000408EC5  MAIN__                     30  pwscf.f90
+pw.x               0000000000408E3E  Unknown               Unknown  Unknown
+libc.so.6          00007FE6B070BF45  Unknown               Unknown  Unknown
+pw.x               0000000000408D49  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 66
+Aborting
+
+run_all_examples: done

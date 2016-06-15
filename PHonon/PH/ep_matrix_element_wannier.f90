@@ -25,7 +25,6 @@ SUBROUTINE ep_matrix_element_wannier()
   USE io_global, ONLY : stdout
   USE mp_pools,  ONLY : me_pool, root_pool
   USE klist, ONLY : xk
-  USE wvfct, ONLY : npwx
   USE el_phon, ONLY: elph_mat, kpq, g_kpq, igqg, xk_gamma
   USE uspp,                 ONLY: okvan
   USE paw_variables, ONLY : okpaw
@@ -179,9 +178,11 @@ SUBROUTINE elphsum_wannier(q_index)
   USE lr_symm_base, ONLY : irotmq, irgq, gimq, gi
   USE qpoint,     ONLY : xq, nksq, ikks, ikqs
   USE control_lr, ONLY : lgamma
+  USE noncollin_module, ONLY : noncolin
   !
   IMPLICIT NONE
   !
+  LOGICAL :: lborn
   INTEGER :: q_index
   !
   !
@@ -209,7 +210,7 @@ SUBROUTINE elphsum_wannier(q_index)
   write(filelph,'(A5,f9.6,A1,f9.6,A1,f9.6)') 'elph.',xq(1),'.',xq(2),'.',xq(3)
   file_elphmat=trim(adjustl(prefix))//'_elph.mat.q_'// TRIM( int_to_char( q_index ) )
 
-  
+  lborn=.false.
   ! parallel case: only first node writes
   IF ( .not.ionode ) THEN
      iuelphmat = 0
@@ -227,6 +228,7 @@ SUBROUTINE elphsum_wannier(q_index)
      xk_dummy(:)=xq(:)
      call cryst_to_cart(1,xk_dummy,at,-1)
      WRITE (iuelphmat) xk_dummy
+     WRITE (iuelphmat) noncolin, nspin, lborn
      WRITE (iuelphmat) nelec
      WRITE (iuelphmat) elph_nbnd_min,elph_nbnd_max,nbnd
      WRITE (iuelphmat) nmodes, nksq, nat, ntyp
@@ -327,12 +329,12 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
   USE kinds, ONLY : DP
   USE fft_base, ONLY : dffts
   USE wavefunctions_module,  ONLY: evc
-  USE io_files, ONLY: iunigk, prefix, diropn
-  USE klist, ONLY: xk
+  USE io_files, ONLY: prefix, diropn
+  USE klist, ONLY: xk, ngk, igk_k
   USE lsda_mod, ONLY: lsda, current_spin, isk
   USE noncollin_module, ONLY : noncolin, npol, nspin_mag
   USE buffers, ONLY : get_buffer
-  USE wvfct, ONLY: nbnd, npw, npwx, igk
+  USE wvfct, ONLY: nbnd, npwx
   USE uspp, ONLY : vkb
   USE el_phon, ONLY : el_ph_mat, iunwfcwann, igqg, kpq, g_kpq, &
            xk_gamma, npwq_refolded, lrwfcr
@@ -347,7 +349,7 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
   USE gvecs, ONLY : nls
 
   USE eqv,        ONLY : dvpsi!, evq
-  USE qpoint,     ONLY : igkq, npwq, nksq, ikks, ikqs
+  USE qpoint,     ONLY : nksq, ikks, ikqs
   USE control_lr, ONLY : lgamma
 
   IMPLICIT NONE
@@ -359,6 +361,7 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
 
   ! LOCAL variables
   logical :: exst
+  INTEGER :: npw, npwq
   INTEGER :: nrec, ik, ikk, ikq, ikqg,ipert, mode, ibnd, jbnd, ir, ig, &
        ios
 
@@ -379,37 +382,22 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
   !
   !  Start the loops over the k-points
   !
-  IF (nksq.GT.1) REWIND (unit = iunigk)
-
   
   DO ik = 1, nksq
-     
-     IF (nksq.GT.1) THEN
-        READ (iunigk, err = 100, iostat = ios) npw, igk
-100     CALL errore ('elphel_refolded', 'reading igk', ABS (ios) )
-     ENDIF
      !
      !  ik = counter of k-points with vector k
      !  ikk= index of k-point with vector k
      !  ikq= index of k-point with vector k+q
      !       k and k+q are alternated if q!=0, are the same if q=0
      !
-     IF (lgamma) npwq = npw
      ikk = ikks(ik)
      ikq = ikqs(ik)
      ikqg = kpq(ik)
-
-
+     npw = ngk(ikk)
+     npwq= ngk(ikq)
      IF (lsda) current_spin = isk (ikk)
-     IF (.NOT.lgamma.AND.nksq.GT.1) THEN
-        READ (iunigk, err = 200, iostat = ios) npwq, igkq
-200     CALL errore ('elphel_refolded', 'reading igkq', ABS (ios) )
-     ENDIF
-
-     
-
      !
-     CALL init_us_2 (npwq, igkq, xk (1, ikq), vkb)
+     CALL init_us_2 (npwq, igk_k(1,ikq), xk (1, ikq), vkb)
      !
      ! read unperturbed wavefuctions psi(k) and psi(k+q)
      !
@@ -434,7 +422,7 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
 !     ENDIF
      !
 
-     call read_wfc_rspace_and_fwfft( evc , ik , lrwfcr , iunwfcwann , npw , igk )
+     call read_wfc_rspace_and_fwfft( evc , ik , lrwfcr , iunwfcwann , npw , igk_k(1,ikk) )
 
 
      call calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq,xk_gamma, evq, .true.)
@@ -457,9 +445,9 @@ SUBROUTINE elphel_refolded (npe, imode0, dvscfins)
         !
 
         DO ibnd = 1, nbnd
-           CALL cft_wave (evc(1, ibnd), aux1, +1)
+           CALL cft_wave (ik, evc(1, ibnd), aux1, +1)
            CALL apply_dpot(dffts%nnr, aux1, dvscfins(1,1,ipert), current_spin)
-           CALL cft_wave (dvpsi(1, ibnd), aux1, -1)
+           CALL cft_wave (ik, dvpsi(1, ibnd), aux1, -1)
         END DO
         CALL adddvscf (ipert, ik)
         !
@@ -629,16 +617,15 @@ end subroutine get_equivalent_kpq
 subroutine calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq, xk_gamma, evq, lread)
   USE kinds, ONLY : DP
   USE fft_base, ONLY : dffts
-  USE fft_interfaces,        ONLY : fwfft, invfft
-  USE wvfct, ONLY: nbnd, npw, npwx,  g2kin, nbnd
+  USE fft_interfaces,  ONLY : fwfft, invfft
+  USE wvfct, ONLY: nbnd, npwx
   USE gvect, ONLY : ngm, g
   USE gvecs, ONLY : nls
   USE gvecw, ONLY : gcutw
   USE cell_base, ONLY : bg
-  USE qpoint, ONLY : nksq, npwq
-   USE wavefunctions_module, ONLY : evc
-!  USE eqv,      ONLY : evq
-  USE noncollin_module,     ONLY : npol
+  USE qpoint, ONLY : nksq
+  USE wavefunctions_module, ONLY : evc
+  USE noncollin_module,     ONLY : npol, noncolin
   USE el_phon, ONLY:iunwfcwann, lrwfcr
 
   IMPLICIT NONE
@@ -653,10 +640,11 @@ subroutine calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq, xk_ga
   INTEGER :: npw_, m,i
   INTEGER, allocatable :: igk_(:), igkq_(:)
   REAL(DP) :: xkqg(3), g_(3), g_scra(3,ngm)
+  REAL(DP), ALLOCATABLE :: gk(:)
   COMPLEX (DP), allocatable :: psi_scratch(:)
   complex(DP), allocatable :: phase(:)
 
-  allocate(igk_(npwx), igkq_(npwx))
+  allocate(igk_(npwx), igkq_(npwx), gk(npwx) )
   allocate (psi_scratch ( dffts%nnr) )
   allocate (phase(dffts%nnr))
   FLUSH (6)
@@ -673,13 +661,13 @@ subroutine calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq, xk_ga
   igkq_=0
 
 
-  call gk_sort (xk_gamma(1,ikqg), ngm, g_scra, gcutw, npw_, igk_, g2kin)
+  call gk_sort (xk_gamma(1,ikqg), ngm, g_scra, gcutw, npw_, igk_, gk)
 
   if(lread) then
      call read_wfc_rspace_and_fwfft( evq , ikqg , lrwfcr , iunwfcwann , npw_ , igk_ )
   endif
 
-  call gk_sort (xkqg, ngm, g_scra, gcutw, npwq_refolded, igkq_, g2kin)
+  call gk_sort (xkqg, ngm, g_scra, gcutw, npwq_refolded, igkq_, gk)
 
   phase(:) = CMPLX(0.d0,0.d0)
 
@@ -707,11 +695,25 @@ subroutine calculate_and_apply_phase(ik, ikqg, igqg, npwq_refolded, g_kpq, xk_ga
      evq(1:npwq_refolded,m) = psi_scratch(nls (igkq_(1:npwq_refolded) ) )
   enddo
 
-
+  if(noncolin) then
+     do m=1,nbnd
+        psi_scratch = (0.d0, 0.d0)
+        psi_scratch(nls (igk_ (1:npw_) ) ) = evq (npwx+1:npwx+npw_, m)
+        !       psi_scratch(nls (igk_ (1:npw) ) ) = evq (1:npw, m)
+        CALL invfft ('Wave', psi_scratch, dffts)
+        !     call cft3s (psic, nr1s, nr2s, nr3s, nrx1s, nrx2s, nrx3s, +2)
+        psi_scratch(1:dffts%nnr) = psi_scratch(1:dffts%nnr) * phase(1:dffts%nnr)
+        !     call cft3s (psic, nr1s, nr2s, nr3s, nrx1s, nrx2s, nrx3s, -2)
+        CALL fwfft ('Wave', psi_scratch, dffts)
+        !       evq(npwx+1:npwx+npwq_refolded,m) = psi_scratch(nls (igkq_(1:npwq_refolded) ) )
+        evq((npwx+1):(npwx+npwq_refolded),m) = psi_scratch(nls (igkq_(1:npwq_refolded) ) )
+     enddo
+  endif
+ 
   deallocate(psi_scratch)
   DEALLOCATE(phase)
-  deallocate(igk_, igkq_)
-
+  deallocate(gk, igk_, igkq_)
+  
   return
 end subroutine calculate_and_apply_phase
   
@@ -723,6 +725,10 @@ SUBROUTINE readmat_findq (iudyn, ibrav, celldm, nat, ntyp, ityp, omega, &
   !
   USE kinds, ONLY : DP
   USE constants, ONLY : amu_ry
+  USE control_ph, ONLY : xmldyn
+  USE output, ONLY : fildyn
+  USE io_dyn_mat,  ONLY : read_dyn_mat_param, read_dyn_mat_header, &
+                             read_dyn_mat, read_dyn_mat_tail
   IMPLICIT NONE
   ! Input
   INTEGER :: iudyn, ibrav, nat, ntyp, ityp (nat)
@@ -735,7 +741,18 @@ SUBROUTINE readmat_findq (iudyn, ibrav, celldm, nat, ntyp, ityp, omega, &
   INTEGER :: ntyp_, nat_, ibrav_, ityp_
   REAL(DP) :: celldm_ (6), amass_, tau_ (3), q_ (3)
   ! local
+  INTEGER :: nspin_mag, nqs
+  REAL(DP) :: at(3,3)
+  REAL(DP) :: bg(3,3)
+  REAL(DP) :: m_loc(3,nat)
+  INTEGER :: ityp__ (nat)
+  REAL(DP) :: amass__ (ntyp)
+  INTEGER :: iq
+  REAL(DP) :: xq(3)
+  COMPLEX(DP) :: u(3*nat,3*nat)
   REAL(DP) :: dynr (2, 3, nat, 3, nat), err_q(3)
+  COMPLEX(DP) :: dynr_c(3,3,nat,nat)
+
   CHARACTER(len=80) :: line
   CHARACTER(len=3)  :: atm
   INTEGER :: nt, na, nb, naa, nbb, nu, mu, i, j
@@ -743,28 +760,70 @@ SUBROUTINE readmat_findq (iudyn, ibrav, celldm, nat, ntyp, ityp, omega, &
   
   !
   !
-  REWIND (iudyn)
-  READ (iudyn, '(a)') line
-  READ (iudyn, '(a)') line
-  READ (iudyn, * ) ntyp_, nat_, ibrav_, celldm_
-  IF ( ntyp.NE.ntyp_ .OR. nat.NE.nat_ .OR.ibrav_.NE.ibrav .OR. &
-       ABS ( celldm_ (1) - celldm (1) ) > 1.0d-5) &
+   IF(xmldyn) THEN
+      CALL read_dyn_mat_param(fildyn, ntyp_, nat_ )
+      CALL read_dyn_mat_header(ntyp_, nat_, ibrav_, nspin_mag,  &
+               celldm_, at, bg, omega, atm, amass__, tau_, ityp__, m_loc, &
+               nqs )
+      IF ( ntyp.NE.ntyp_ .OR. nat.NE.nat_ .OR.ibrav_.NE.ibrav .OR. &
+           ABS ( celldm_ (1) - celldm (1) ) > 1.0d-5) &
+              CALL errore ('readmat', 'inconsistent data a', 1)
+      DO nt = 1, ntyp
+         IF ( ABS (amass__ (nt) - amass (nt) ) > 1.0d-5) &
+            CALL errore ( 'readmat', 'inconsistent data  b', 1 + nt)
+      ENDDO
+      DO na = 1, nat
+         IF (ityp__ (na).NE.ityp (na) ) CALL errore ('readmat', &
+              'inconsistent data c',  na)
+      ENDDO
+
+  ELSE
+     REWIND (iudyn)
+     READ (iudyn, '(a)') line
+     READ (iudyn, '(a)') line
+     READ (iudyn, * ) ntyp_, nat_, ibrav_, celldm_
+     IF ( ntyp.NE.ntyp_ .OR. nat.NE.nat_ .OR.ibrav_.NE.ibrav .OR. &
+          ABS ( celldm_ (1) - celldm (1) ) > 1.0d-5) &
           CALL errore ('readmat', 'inconsistent data', 1)
-  DO nt = 1, ntyp
-     READ (iudyn, * ) i, atm, amass_
-     IF ( nt.NE.i .OR. ABS (amass_ - amu_ry*amass (nt) ) > 1.0d-5) &
-        CALL errore ( 'readmat', 'inconsistent data', 1 + nt)
-  ENDDO
-  DO na = 1, nat
-     READ (iudyn, * ) i, ityp_, tau_
-     IF (na.NE.i.OR.ityp_.NE.ityp (na) ) CALL errore ('readmat', &
-          'inconsistent data', 10 + na)
-  ENDDO
+     DO nt = 1, ntyp
+        READ (iudyn, * ) i, atm, amass_
+        IF ( nt.NE.i .OR. ABS (amass_ - amu_ry*amass (nt) ) > 1.0d-5) &
+             CALL errore ( 'readmat', 'inconsistent data', 1 + nt)
+     ENDDO
+     DO na = 1, nat
+        READ (iudyn, * ) i, ityp_, tau_
+        IF (na.NE.i.OR.ityp_.NE.ityp (na) ) CALL errore ('readmat', &
+             'inconsistent data', 10 + na)
+     ENDDO
+
+  ENDIF
 
   lfound=.false.
+  iq=0
 
   do while(.not.lfound)
 
+  IF(xmldyn) THEN
+
+     iq = iq+1
+     CALL read_dyn_mat(nat,iq,xq,dynr_c)
+     !     CALL read_dyn_mat_tail(nat,omega,u)
+     err_q(1:3)=dabs(xq(1:3)-q(1:3))
+     
+     if(err_q(1).lt.1.d-7.and.err_q(2).lt.1.d-7.and.err_q(3).lt.1.d-7) lfound=.true.
+     
+     DO nb = 1, nat
+        DO j = 1, 3
+           DO na = 1, nat
+              DO i = 1, 3
+                 dynr (1, i, na, j, nb) = REAL(dynr_c(i, j, na, nb))
+                 dynr (2, i, na, j, nb) = AIMAG(dynr_c(i, j, na, nb))
+              ENDDO
+           ENDDO
+        ENDDO
+     ENDDO
+     
+  ELSE
      READ (iudyn, '(a)') line
      READ (iudyn, '(a)') line
      READ (iudyn, '(a)') line
@@ -789,41 +848,42 @@ SUBROUTINE readmat_findq (iudyn, ibrav, celldm, nat, ntyp, ityp, omega, &
         ENDDO
      ENDDO
 
-     if(lfound) then
-        !
-        ! divide the dynamical matrix by the (input) masses (in amu)
-        !
-        DO nb = 1, nat
-           DO j = 1, 3
-              DO na = 1, nat
-                 DO i = 1, 3
-                    dynr (1, i, na, j, nb) = dynr (1, i, na, j, nb) / SQRT (amass ( &
-                         ityp (na) ) * amass (ityp (nb) ) ) / amu_ry
-                    dynr (2, i, na, j, nb) = dynr (2, i, na, j, nb) / SQRT (amass ( &
-                         ityp (na) ) * amass (ityp (nb) ) ) / amu_ry
-                 ENDDO
+  ENDIF
+  
+  if(lfound) then
+     !
+     ! divide the dynamical matrix by the (input) masses (in amu)
+     !
+     DO nb = 1, nat
+        DO j = 1, 3
+           DO na = 1, nat
+              DO i = 1, 3
+                 dynr (1, i, na, j, nb) = dynr (1, i, na, j, nb) / SQRT (amass ( &
+                      ityp (na) ) * amass (ityp (nb) ) ) / amu_ry
+                 dynr (2, i, na, j, nb) = dynr (2, i, na, j, nb) / SQRT (amass ( &
+                      ityp (na) ) * amass (ityp (nb) ) ) / amu_ry
               ENDDO
            ENDDO
         ENDDO
-       !
-       ! solve the eigenvalue problem.
-       ! NOTA BENE: eigenvectors are overwritten on dyn
-       !
-       CALL cdiagh (3 * nat, dynr, 3 * nat, w2, dyn)
-       !
-       ! divide by sqrt(mass) to get displacements
-       !
-       DO nu = 1, 3 * nat
-          DO mu = 1, 3 * nat
-             na = (mu - 1) / 3 + 1
-             dyn (mu, nu) = dyn (mu, nu) / SQRT ( amu_ry * amass (ityp (na) ) )
-          ENDDO
-       ENDDO
-       !
-       !
-     endif
-  enddo
-
+     ENDDO
+     !
+     ! solve the eigenvalue problem.
+     ! NOTA BENE: eigenvectors are overwritten on dyn
+     !
+     CALL cdiagh (3 * nat, dynr, 3 * nat, w2, dyn)
+     !
+     ! divide by sqrt(mass) to get displacements
+     !
+     DO nu = 1, 3 * nat
+        DO mu = 1, 3 * nat
+           na = (mu - 1) / 3 + 1
+           dyn (mu, nu) = dyn (mu, nu) / SQRT ( amu_ry * amass (ityp (na) ) )
+        ENDDO
+     ENDDO
+     !
+     !
+  endif
+enddo
 
 
   RETURN

@@ -61,7 +61,7 @@ TLDEPS= bindir libs pw
 
 all : tldeps pw4gww.x
 
-pw4gww.x : pw4gww.o libpw4gww.a  $(PW4GWWOBJS) $(PWOBJS) $(QEMODS)  $(LIBMIN) 
+pw4gww.x : pw4gww.o libpw4gww.a  $(PW4GWWOBJS) $(PWOBJS) $(QEMODS)  $(LIBOBJS) $(LIBMIN) 
 	$(LD) $(LDFLAGS) -o $@ \
 	pw4gww.o libpw4gww.a $(PWOBJS) $(QEMODS) $(LIBOBJS) $(LIBMIN) $(LIBS)
 	- ( cd ../../bin ; ln -fs ../GWW/pw4gww/$@ . )

@@ -78,7 +78,7 @@ cp : bindir libfft libla mods liblapack libblas libs libiotk
 	if test -d CPV ; then \
 	( cd CPV ; $(MAKE) TLDEPS= all || exit 1) ; fi
 
-ph : bindir libfft libla mods libs pw 
+ph : bindir libfft libla mods libs pw lr-lib
 	( cd install ; $(MAKE) -f plugins_makefile phonon || exit 1 )
 
 neb : bindir libfft libla mods libs pw
@@ -251,10 +251,11 @@ links : bindir
 #########################################################
 
 install : touch-dummy
-	if test -d bin ; then \
-	mkdir -p $(PREFIX) ; for x in `find . -name *.x -type f` ; do \
+	@if test -d bin ; then mkdir -p $(PREFIX) ; \
+	for x in `find . -path ./test-suite -prune -o -name *.x -type f` ; do \
 		cp $$x $(PREFIX)/ ; done ; \
 	fi
+	@echo 'Quantum ESPRESSO binaries installed in $(PREFIX)'
 
 #########################################################
 # Run test-suite for numerical regression testing
@@ -311,7 +312,7 @@ tar :
 	@if test -f espresso.tar.gz ; then /bin/rm espresso.tar.gz ; fi
 	# do not include unneeded stuff 
 	find ./ -type f | grep -v -e /.svn/ -e'/\.' -e'\.o$$' -e'\.mod$$'\
-             -e'\.a$$' -e'\.d$$' -e'\.i$$' -e'_tmp\.f90$$' -e'\.x$$' \
+  		 -e /.git/ -e'\.a$$' -e'\.d$$' -e'\.i$$' -e'_tmp\.f90$$' -e'\.x$$' \
 	     -e'~$$' -e'\./GUI' -e '\./tempdir' | xargs tar rvf espresso.tar
 	gzip espresso.tar
 

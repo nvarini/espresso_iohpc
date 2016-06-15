@@ -62,6 +62,7 @@ MODULE buiol
   ! set to true when the library has been initialized
   LOGICAL,SAVE :: is_init_buiol = .false.
   !
+
   CONTAINS
   ! <<^V^\\=========================================//-//-//========//O\\//
   !
@@ -494,8 +495,8 @@ Module buffers
   !
   ! QE interfaces to BUIOL module
   !
-  PUBLIC :: open_buffer, get_buffer, save_buffer, close_buffer
-  PUBLIC :: save_buffer_hdf5, get_buffer_hdf5
+  PUBLIC :: open_buffer, get_buffer, close_buffer
+  PUBLIC ::  get_buffer_hdf5, save_buffer, save_buffer_hdf5
 
 
 
@@ -594,16 +595,26 @@ contains
   END SUBROUTINE save_buffer
 
   SUBROUTINE save_buffer_hdf5(hdf5desc,data,kpoint)
-    USE hdf5_qe, ONLY : HDF5_type, write_data_hdf5, &
-                        define_dataset_hdf5_hyperslab
+    USE hdf5_qe
+    USE mp_pools, ONLY : inter_pool_comm
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     complex(kind=DP), intent(inout) :: data(:,:)
     integer, intent(in) :: kpoint
+    logical :: flag
+    integer :: error
     
+    if(kpoint.eq.1) then
+       flag = .true.
+    else 
+       flag = .true.
+    endif
+    CALL initialize_io_hdf5( hdf5desc,inter_pool_comm, data,flag,kpoint)
     CALL define_dataset_hdf5_hyperslab(hdf5desc,kpoint)
-    call write_data_hdf5(hdf5desc,data,kpoint)
-   
+
+    CALL write_data_hdf5(hdf5desc,data,kpoint)
+    CALL h5fclose_f(hdf5desc%file_id,error)
+
   END SUBROUTINE save_buffer_hdf5
 
   SUBROUTINE get_buffer_hdf5(hdf5desc,data,kpoint)

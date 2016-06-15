@@ -250,121 +250,6 @@ SUBROUTINE get_et_from_gww ( nbnd, et )
   ENDIF
 END SUBROUTINE get_et_from_gww
 !
-MODULE projections
-  USE kinds, ONLY : DP
-  
-  TYPE wfc_label
-     INTEGER na, n, l, m, ind
-     REAL (DP) jj
-  END TYPE wfc_label
-  TYPE(wfc_label), ALLOCATABLE :: nlmchi(:)
-  
-  REAL (DP),    ALLOCATABLE :: proj (:,:,:)
-  COMPLEX (DP), ALLOCATABLE :: proj_aux (:,:,:)
-  COMPLEX (DP), ALLOCATABLE :: ovps_aux (:,:,:)
-  
-  CONTAINS
-    !
-    SUBROUTINE fill_nlmchi ( natomwfc, nwfc, lmax_wfc )
-      !
-      USE ions_base, ONLY : ityp, nat
-      USE uspp_param, ONLY: upf
-      USE spin_orb, ONLY: lspinorb
-      USE noncollin_module, ONLY: noncolin
-      !
-      IMPLICIT NONE
-      INTEGER, INTENT (IN) :: natomwfc
-      INTEGER, INTENT (OUT) :: nwfc, lmax_wfc 
-      !
-      INTEGER :: na, nt, n, n1, n2, l, m, ind
-      REAL(dp) :: jj, fact(2)
-      REAL(dp), EXTERNAL :: spinor
-      !
-      ALLOCATE (nlmchi(natomwfc))
-      nwfc=0
-      lmax_wfc = 0
-      DO na = 1, nat
-         nt = ityp (na)
-         n2 = 0
-         DO n = 1, upf(nt)%nwfc
-            IF (upf(nt)%oc (n) >= 0.d0) THEN
-               l = upf(nt)%lchi (n)
-               lmax_wfc = max (lmax_wfc, l )
-               IF (lspinorb) THEN
-                  IF (upf(nt)%has_so) THEN
-                     jj = upf(nt)%jchi (n)
-                     ind = 0
-                     DO m = -l-1, l
-                        fact(1) = spinor(l,jj,m,1)
-                        fact(2) = spinor(l,jj,m,2)
-                        IF (abs(fact(1)) > 1.d-8 .or. abs(fact(2)) > 1.d-8) THEN
-                           nwfc = nwfc + 1
-                           ind = ind + 1
-                           nlmchi(nwfc)%na = na
-                           nlmchi(nwfc)%n  =  n
-                           nlmchi(nwfc)%l  =  l
-                           nlmchi(nwfc)%m  =  m
-                           nlmchi(nwfc)%ind  =  ind
-                           nlmchi(nwfc)%jj  =  jj
-                        ENDIF
-                     ENDDO
-                  ELSE
-                     DO n1 = l, l+1
-                        jj= dble(n1) - 0.5d0
-                        ind = 0
-                        IF (jj>0.d0)  THEN
-                           n2 = n2 + 1
-                           DO m = -l-1, l
-                              fact(1) = spinor(l,jj,m,1)
-                              fact(2) = spinor(l,jj,m,2)
-                              IF (abs(fact(1)) > 1.d-8 .or. abs(fact(2)) > 1.d-8) THEN
-                                 nwfc = nwfc + 1
-                                 ind = ind + 1
-                                 nlmchi(nwfc)%na = na
-                                 nlmchi(nwfc)%n  =  n2
-                                 nlmchi(nwfc)%l  =  l
-                                 nlmchi(nwfc)%m  =  m
-                                 nlmchi(nwfc)%ind  =  ind
-                                 nlmchi(nwfc)%jj  =  jj
-                              ENDIF
-                           ENDDO
-                        ENDIF
-                     ENDDO
-                  ENDIF
-               ELSE
-                  DO m = 1, 2 * l + 1
-                     nwfc=nwfc+1
-                     nlmchi(nwfc)%na = na
-                     nlmchi(nwfc)%n  =  n
-                     nlmchi(nwfc)%l  =  l
-                     nlmchi(nwfc)%m  =  m
-                     nlmchi(nwfc)%ind=  m
-                     nlmchi(nwfc)%jj =  0.d0
-                  ENDDO
-                  IF ( noncolin) THEN
-                     DO m = 1, 2 * l + 1
-                        nwfc=nwfc+1
-                        nlmchi(nwfc)%na = na
-                        nlmchi(nwfc)%n  =  n
-                        nlmchi(nwfc)%l  =  l
-                        nlmchi(nwfc)%m  =  m
-                        nlmchi(nwfc)%ind=  m+2*l+1
-                        nlmchi(nwfc)%jj =  0.d0
-                     END DO
-                  ENDIF
-               ENDIF
-            ENDIF
-         ENDDO
-      ENDDO
-      !
-      IF (lmax_wfc > 3) CALL errore ('fill_nlmchi', 'l > 3 not yet implemented',1)
-      IF (nwfc /= natomwfc) CALL errore ('fill_nlmchi','wrong # of atomic wfcs',1)
-      
-    END SUBROUTINE fill_nlmchi
-    !
-END MODULE projections
-!
-!
 !-----------------------------------------------------------------------
 SUBROUTINE projwave( filproj, lsym, lwrite_ovp, lbinary )
   !-----------------------------------------------------------------------
@@ -377,7 +262,7 @@ SUBROUTINE projwave( filproj, lsym, lwrite_ovp, lbinary )
   USE constants, ONLY: rytoev, eps4
   USE gvect
   USE gvecs,   ONLY: dual
-  USE gvecw,   ONLY: gcutw, ecutwfc
+  USE gvecw,   ONLY: ecutwfc
   USE fft_base, ONLY : dfftp
   USE klist, ONLY: xk, nks, nkstot, nelec, ngk, igk_k
   USE lsda_mod, ONLY: nspin, isk, current_spin
@@ -398,7 +283,7 @@ SUBROUTINE projwave( filproj, lsym, lwrite_ovp, lbinary )
   !
   INTEGER :: npw, ik, ibnd, i, j, k, na, nb, nt, isym, n,  m, m1, l, nwfc,&
        nwfc1, lmax_wfc, is, iunproj
-  REAL(DP), ALLOCATABLE :: e (:), gk(:)
+  REAL(DP), ALLOCATABLE :: e (:)
   COMPLEX(DP), ALLOCATABLE :: wfcatom (:,:)
   COMPLEX(DP), ALLOCATABLE :: overlap(:,:), work(:,:),work1(:), proj0(:,:)
   ! Some workspace for k-point calculation ...
@@ -442,7 +327,6 @@ SUBROUTINE projwave( filproj, lsym, lwrite_ovp, lbinary )
       ALLOCATE( ovps_aux(1,1,1) )
   ENDIF
   ovps_aux  = (0.d0, 0.d0)
-
   !
   IF (.not. ALLOCATED(swfcatom)) THEN
      ALLOCATE(swfcatom (npwx , natomwfc ) )
@@ -460,16 +344,14 @@ SUBROUTINE projwave( filproj, lsym, lwrite_ovp, lbinary )
   ENDIF
   CALL allocate_bec_type (nkb, natomwfc, becp )
   ALLOCATE(e (natomwfc) )
-  ALLOCATE(gk(npwx))
-  !
-  !    loop on k points
-  !
+  !  
   CALL init_us_1
   CALL init_at_1
   !
+  !    loop on k points
+  !
   DO ik = 1, nks
 
-     CALL gk_sort (xk(1,ik), ngm, g, gcutw, ngk(ik), igk_k(1,ik), gk)
      npw = ngk(ik)
      CALL davcio (evc, 2*nwordwfc, iunwfc, ik, - 1)
 
@@ -648,7 +530,6 @@ SUBROUTINE projwave( filproj, lsym, lwrite_ovp, lbinary )
      ! on k-points
   ENDDO
   !
-  DEALLOCATE (gk)
   DEALLOCATE (e)
   IF ( gamma_only ) THEN
      DEALLOCATE (roverlap)
@@ -872,7 +753,7 @@ SUBROUTINE projwave_nc(filproj, lsym, lwrite_ovp, lbinary, ef_0 )
   USE constants, ONLY: rytoev, eps4
   USE gvect
   USE gvecs,   ONLY: dual
-  USE gvecw,   ONLY: gcutw, ecutwfc
+  USE gvecw,   ONLY: ecutwfc
   USE fft_base, ONLY : dfftp
   USE klist, ONLY: xk, nks, nkstot, nelec, ngk, igk_k
   USE lsda_mod, ONLY: nspin
@@ -904,7 +785,7 @@ SUBROUTINE projwave_nc(filproj, lsym, lwrite_ovp, lbinary, ef_0 )
              n2, l, nwfc, nwfc1, lmax_wfc, is, nspin0, iunproj, npw, &
              ind0
   REAL(DP) :: jj, ef_0, eband_proj_tot, eband_tot
-  REAL(DP), ALLOCATABLE :: e (:), gk(:)
+  REAL(DP), ALLOCATABLE :: e (:)
   COMPLEX(DP), ALLOCATABLE :: wfcatom (:,:)
   COMPLEX(DP), ALLOCATABLE :: overlap(:,:), work(:,:), work1(:), proj0(:,:)
   ! Some workspace for k-point calculation ...
@@ -935,7 +816,6 @@ SUBROUTINE projwave_nc(filproj, lsym, lwrite_ovp, lbinary, ef_0 )
      freeswfcatom = .false.
   ENDIF
   CALL allocate_bec_type (nkb, natomwfc, becp )
-  ALLOCATE(gk(npwx) )
   ALLOCATE(e (natomwfc) )
   ALLOCATE(work (natomwfc, natomwfc) )
   !
@@ -954,9 +834,6 @@ SUBROUTINE projwave_nc(filproj, lsym, lwrite_ovp, lbinary, ef_0 )
       ALLOCATE( ovps_aux(1,1,1) )
   ENDIF
   ovps_aux  = (0.d0, 0.d0)
-
-  !
-  !    loop on k points
   !
   CALL init_us_1
   CALL init_at_1
@@ -986,11 +863,12 @@ SUBROUTINE projwave_nc(filproj, lsym, lwrite_ovp, lbinary, ef_0 )
       ALLOCATE (eband_proj(natomwfc))
       eband_proj = 0.d0
   ENDIF
-
+  !
+  !    loop on k points
+  !
   DO ik = 1, nks
      wfcatom = (0.d0,0.d0)
      swfcatom= (0.d0,0.d0)
-     CALL gk_sort (xk (1, ik), ngm, g, gcutw, ngk(ik), igk_k(1,ik), gk)
      npw = ngk(ik)
 
      CALL davcio (evc, 2*nwordwfc, iunwfc, ik, - 1)
@@ -1280,7 +1158,6 @@ ENDIF
   DEALLOCATE (work1)
   DEALLOCATE (proj0)
   DEALLOCATE (e)
-  DEALLOCATE (gk)
   CALL deallocate_bec_type (becp)
   DEALLOCATE (overlap)
   DEALLOCATE (wfcatom)
@@ -1498,7 +1375,7 @@ SUBROUTINE projwave_paw( filproj)
   USE constants, ONLY: rytoev, eps4
   USE gvect
   USE gvecs,   ONLY: dual
-  USE gvecw,   ONLY: gcutw, ecutwfc
+  USE gvecw,   ONLY: ecutwfc
   USE fft_base, ONLY : dfftp
   USE klist, ONLY: xk, nks, nkstot, nelec, igk_k, ngk
   USE lsda_mod, ONLY: nspin, isk, current_spin
@@ -1520,7 +1397,7 @@ SUBROUTINE projwave_paw( filproj)
   !
   INTEGER :: npw, ik, ibnd, i, j, k, na, nb, nt, isym, n,  m, m1, l, nwfc,&
        nwfc1, lmax_wfc, is, iunproj, ndm, mr,nbp
-  REAL(DP), ALLOCATABLE :: e (:), gk(:), aux(:), pcharge(:,:,:)
+  REAL(DP), ALLOCATABLE :: e (:), aux(:), pcharge(:,:,:)
   COMPLEX(DP), ALLOCATABLE :: wfcatom (:,:)
   COMPLEX(DP), ALLOCATABLE :: overlap(:,:), work(:,:),work1(:), proj0(:,:)
   ! Some workspace for k-point calculation ...
@@ -1598,15 +1475,13 @@ SUBROUTINE projwave_paw( filproj)
   proj_aux  = (0.d0, 0.d0)
   !
   CALL allocate_bec_type (nkb, nbnd, becp )
-  ALLOCATE(gk(npwx))
-  !
-  !    loop on k points
   !
   CALL init_us_1
   CALL init_at_1
   !
+  !    loop on k points
+  !
   DO ik = 1, nks
-     CALL gk_sort (xk (1, ik), ngm, g, gcutw, npw, igk_k(1,ik), gk)
      CALL davcio (evc, 2*nwordwfc, iunwfc, ik, - 1)
 
      CALL init_us_2 (npw, igk_k(1,ik), xk (1, ik), vkb)
@@ -1633,7 +1508,6 @@ SUBROUTINE projwave_paw( filproj)
     enddo    
      
  ENDDO
- DEALLOCATE (gk)
  DEALLOCATE(proj0,pcharge)
 
   CALL deallocate_bec_type (becp)
@@ -1855,7 +1729,7 @@ SUBROUTINE pprojwave( filproj, lsym, lwrite_ovp, lbinary )
   USE constants, ONLY: rytoev, eps4
   USE gvect
   USE gvecs,   ONLY: dual
-  USE gvecw,   ONLY: gcutw, ecutwfc
+  USE gvecw,   ONLY: ecutwfc
   USE fft_base, ONLY : dfftp
   USE klist, ONLY: xk, nks, nkstot, nelec, ngk, igk_k
   USE lsda_mod, ONLY: nspin, isk, current_spin
@@ -1890,7 +1764,7 @@ SUBROUTINE pprojwave( filproj, lsym, lwrite_ovp, lbinary )
   !
   INTEGER :: npw, ik, ibnd, i, j, na, nb, nt, isym, n,  m, m1, l, nwfc,&
        nwfc1, lmax_wfc, is, iunproj, iunaux
-  REAL(DP),    ALLOCATABLE :: e (:), gk(:)
+  REAL(DP),    ALLOCATABLE :: e (:)
   COMPLEX(DP), ALLOCATABLE :: wfcatom (:,:)
   COMPLEX(DP), ALLOCATABLE :: work1(:), proj0(:,:)
   COMPLEX(DP), ALLOCATABLE :: overlap_d(:,:), work_d(:,:), diag(:,:), vv(:,:)
@@ -1983,16 +1857,14 @@ SUBROUTINE pprojwave( filproj, lsym, lwrite_ovp, lbinary )
   ALLOCATE(wfcatom (npwx, natomwfc) )
   !
   ALLOCATE(e (natomwfc) )
-  ALLOCATE(gk(npwx) )
-  !
-  !    loop on k points
   !
   CALL init_us_1
   CALL init_at_1
   !
+  !    loop on k points
+  !
   DO ik = 1, nks
      !
-     CALL gk_sort (xk (1, ik), ngm, g, gcutw, ngk(ik), igk_k(1,ik), gk)
      npw = ngk(ik)
      CALL davcio (evc, 2*nwordwfc, iunwfc, ik, - 1)
 
@@ -2214,7 +2086,6 @@ SUBROUTINE pprojwave( filproj, lsym, lwrite_ovp, lbinary )
      !
   ENDDO
   !
-  DEALLOCATE (gk)
   DEALLOCATE (e)
   !
   DEALLOCATE (wfcatom)

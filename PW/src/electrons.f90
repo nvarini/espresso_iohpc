@@ -627,7 +627,6 @@ SUBROUTINE electrons_scf ( printout )
         EXIT scf_step
         !
      END DO scf_step
-
      !
      plugin_etot = 0.0_dp
      !
@@ -648,8 +647,6 @@ SUBROUTINE electrons_scf ( printout )
      ! ... PAW: newd contains PAW updates of NL coefficients
      !
      CALL newd()
-
-
      !
      IF ( lelfield ) en_el =  calc_pol ( )
      !
@@ -663,7 +660,6 @@ SUBROUTINE electrons_scf ( printout )
      !
      IF ( conv_elec ) WRITE( stdout, 9101 )
      !
-
      IF ( conv_elec .OR. MOD( iter, iprint ) == 0 ) THEN
         !
         IF ( lda_plus_U .AND. iverbosity == 0 ) THEN
@@ -676,7 +672,6 @@ SUBROUTINE electrons_scf ( printout )
         CALL print_ks_energies()
         !
      END IF
-
      !
      IF ( ABS( charge - nelec ) / charge > 1.D-7 ) THEN
         WRITE( stdout, 9050 ) charge, nelec
@@ -688,7 +683,6 @@ SUBROUTINE electrons_scf ( printout )
            END IF
         END IF
      END IF
-
      !
      etot = eband + ( etxc - etxcc ) + ewld + ehart + deband + demet + descf
      !
@@ -731,18 +725,14 @@ SUBROUTINE electrons_scf ( printout )
      ! ... adds possible external contribution from plugins to the energy
      !
      etot = etot + plugin_etot 
-
      !
      CALL print_energies ( printout )
-
      !
-
      IF ( conv_elec ) THEN
         !
         ! ... if system is charged add a Makov-Payne correction to the energy
         ! ... (not in case of hybrid functionals: it is added at the end)
         !
-
         IF ( do_makov_payne .AND. printout/= 0 ) CALL makov_payne( etot )
         !
         ! ... print out ESM potentials if desired
@@ -756,7 +746,6 @@ SUBROUTINE electrons_scf ( printout )
         GO TO 10
         !
      END IF
-
      !
      ! ... uncomment the following line if you wish to monitor the evolution
      ! ... of the force calculation during self-consistency
@@ -765,25 +754,21 @@ SUBROUTINE electrons_scf ( printout )
      !
      ! ... it can be very useful to track internal clocks during
      ! ... self-consistency for benchmarking purposes
-
 #if defined(__PW_TRACK_ELECTRON_STEPS)
      CALL print_clock_pw()
 #endif
      !
   END DO
-
   !
   WRITE( stdout, 9101 )
   WRITE( stdout, 9120 ) iter
   !
 10  FLUSH( stdout )
-
   !
   ! ... exiting: write (unless disabled) the charge density to file
   ! ... (also write ldaU ns coefficients and PAW becsum)
   !
   IF ( io_level > -1 ) CALL write_rho( rho, nspin )
-
   !
   ! ... delete mixing info if converged, keep it if not
   !
@@ -792,12 +777,9 @@ SUBROUTINE electrons_scf ( printout )
   ELSE
      CALL close_mix_file( iunmix, 'keep' )
   END IF
-
   !
   IF ( output_drho /= ' ' ) CALL remove_atomic_rho()
-
   call destroy_scf_type ( rhoin )
-
   CALL stop_clock( 'electrons' )
   !
   RETURN

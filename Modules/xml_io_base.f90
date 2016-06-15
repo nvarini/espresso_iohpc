@@ -876,8 +876,10 @@ MODULE xml_io_base
       INTEGER                  :: ngroup, ipsour, error
       INTEGER,     ALLOCATABLE :: ipmask(:)
       INTEGER                  :: me_in_group, nproc_in_group, io_in_parent, nproc_in_parent, me_in_parent, my_group, io_group
+#if defined __HDF5
       CHARACTER(LEN=256) :: filename_hdf5
-      CHARACTER          :: gammaonly
+      INTEGER            :: gammaonly
+#endif
       COMPLEX(DP), ALLOCATABLE :: wtmp(:)
       !
       ngroup          = mp_size( inter_group_comm )
@@ -1138,7 +1140,7 @@ MODULE xml_io_base
             IF ( ionode ) THEN 
                !
 #if defined __HDF5
-          CALL read_evc(evc_hdf5_write,j,wtmp(1:igwx),ik)
+             CALL read_evc(evc_hdf5_write,j,wtmp(1:igwx_),ik)
              !  CALL iotk_scan_dat( iuni, &
              !                      "evc" // iotk_index( j ), wtmp(1:igwx_) )
 #else

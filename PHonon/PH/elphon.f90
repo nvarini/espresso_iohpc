@@ -1,5 +1,5 @@
 !
-! Copyright (C) 2001-2013 Quantum ESPRESSO group
+! Copyright (C) 2001-2015 Quantum ESPRESSO group
 ! This file is distributed under the terms of the
 ! GNU General Public License. See the file `License'
 ! in the root directory of the present distribution,
@@ -45,8 +45,10 @@ SUBROUTINE elphon()
   ! counter on the representations
   ! counter on the modes
   ! the change of Vscf due to perturbations
+  INTEGER :: i,j
   COMPLEX(DP), POINTER :: dvscfin(:,:,:), dvscfins (:,:,:)
-
+  COMPLEX(DP), allocatable :: phip (:, :, :, :)
+  
   INTEGER :: ntyp_, nat_, ibrav_, nspin_mag_, mu, nu, na, nb, nta, ntb, nqs_
   REAL(DP) :: celldm_(6)
   CHARACTER(LEN=3) :: atm(ntyp)
@@ -113,6 +115,7 @@ SUBROUTINE elphon()
         CALL readmat (iudyn, ibrav, celldm, nat, ntyp, &
                       ityp, omega, amass, tau, xq, w2, dyn)
      ELSE
+        allocate( phip(3,3,nat,nat) )
         CALL read_dyn_mat_param(fildyn, ntyp_, nat_)
         IF ( ntyp_ /= ntyp .OR. nat_ /= nat ) &
            CALL errore('elphon','uncorrect nat or ntyp',1)
@@ -125,20 +128,27 @@ SUBROUTINE elphon()
              .OR. (nspin_mag_ /= nspin_mag ) ) CALL errore ('elphon', &
              'inconsistent data', 1)
 
-        CALL read_dyn_mat(nat,1,xq,dyn)
+        CALL read_dyn_mat(nat,1,xq,phip)
         !
         !  Diagonalize the dynamical matrix
         !
-        DO mu = 1, 3*nat
-           na = (mu - 1) / 3 + 1
-           nta = ityp (na)
-           DO nu = 1, 3*nat
-              nb = (nu - 1) / 3 + 1
-              ntb = ityp (nb)
-              dyn (mu, nu) = dyn (mu, nu) / &
-                             sqrt (amass (nta)*amass (ntb)) / amu_ry
-           ENDDO
-        ENDDO
+
+        
+        DO i=1,3
+           do na=1,nat
+              nta = ityp (na)
+              mu=3*(na-1)+i
+              do j=1,3
+                 do nb=1,nat
+                   nu=3*(nb-1)+j
+                   ntb = ityp (nb)
+                   dyn (mu, nu) = phip (i, j, na, nb) / &
+                     sqrt( amass(nta)*amass(ntb))/amu_ry
+                 enddo
+              enddo
+           enddo
+        enddo
+
         !
         CALL cdiagh (3 * nat, dyn, 3 * nat, w2, dyn)
         !
@@ -152,6 +162,8 @@ SUBROUTINE elphon()
         ENDDO
 
         CALL read_dyn_mat_tail(nat)
+  
+        deallocate( phip )
      ENDIF
   ENDIF
   !
@@ -262,12 +274,11 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
   USE fft_base, ONLY : dffts
   USE fft_parallel, ONLY : tg_cgather
   USE wavefunctions_module,  ONLY: evc
-  USE io_files, ONLY: iunigk
   USE buffers,  ONLY : get_buffer
-  USE klist, ONLY: xk
+  USE klist, ONLY: xk, ngk, igk_k
   USE lsda_mod, ONLY: lsda, current_spin, isk
   USE noncollin_module, ONLY : noncolin, npol, nspin_mag
-  USE wvfct, ONLY: nbnd, npw, npwx, igk
+  USE wvfct, ONLY: nbnd, npwx
   USE buffers, ONLY : get_buffer
   USE uspp, ONLY : vkb
   USE el_phon, ONLY : el_ph_mat, el_ph_mat_rec, el_ph_mat_rec_col, &
@@ -282,7 +293,7 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
   USE mp,        ONLY: mp_sum
 
   USE eqv,        ONLY : dvpsi, evq
-  USE qpoint,     ONLY : igkq, npwq, nksq, ikks, ikqs, nksqtot
+  USE qpoint,     ONLY : nksq, ikks, ikqs, nksqtot
   USE control_lr, ONLY : lgamma
 
   IMPLICIT NONE
@@ -290,6 +301,7 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
   INTEGER, INTENT(IN) :: irr, npe, imode0
   COMPLEX(DP), INTENT(IN) :: dvscfins (dffts%nnr, nspin_mag, npe)
   ! LOCAL variables
+  INTEGER :: npw, npwq
   INTEGER :: nrec, ik, ikk, ikq, ipert, mode, ibnd, jbnd, ir, ig, &
        ipol, ios, ierr
   COMPLEX(DP) , ALLOCATABLE :: aux1 (:,:), elphmat (:,:,:), tg_dv(:,:), &
@@ -317,28 +329,20 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
   !
   !  Start the loops over the k-points
   !
-  IF (nksq.GT.1) REWIND (unit = iunigk)
   DO ik = 1, nksq
-     IF (nksq.GT.1) THEN
-        READ (iunigk, err = 100, iostat = ios) npw, igk
-100     CALL errore ('elphel', 'reading igk', ABS (ios) )
-     ENDIF
      !
      !  ik = counter of k-points with vector k
      !  ikk= index of k-point with vector k
      !  ikq= index of k-point with vector k+q
      !       k and k+q are alternated if q!=0, are the same if q=0
      !
-     IF (lgamma) npwq = npw
      ikk = ikks(ik)
      ikq = ikqs(ik)
      IF (lsda) current_spin = isk (ikk)
-     IF (.NOT.lgamma.AND.nksq.GT.1) THEN
-        READ (iunigk, err = 200, iostat = ios) npwq, igkq
-200     CALL errore ('elphel', 'reading igkq', ABS (ios) )
-     ENDIF
+     npw = ngk(ikk)
+     npwq= ngk(ikq)
      !
-     CALL init_us_2 (npwq, igkq, xk (1, ikq), vkb)
+     CALL init_us_2 (npwq, igk_k(1,ikq), xk (1, ikq), vkb)
      !
      ! read unperturbed wavefuctions psi(k) and psi(k+q)
      !
@@ -384,13 +388,13 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
         aux2=(0.0_DP,0.0_DP)
         DO ibnd = 1, nbnd, incr
            IF ( dffts%have_task_groups ) THEN
-              CALL cft_wave_tg (evc, tg_psic, 1, v_siz, ibnd, nbnd )
+              CALL cft_wave_tg (ik, evc, tg_psic, 1, v_siz, ibnd, nbnd )
               CALL apply_dpot(v_siz, tg_psic, tg_dv, 1)
-              CALL cft_wave_tg (aux2, tg_psic, -1, v_siz, ibnd, nbnd)
+              CALL cft_wave_tg (ik, aux2, tg_psic, -1, v_siz, ibnd, nbnd)
            ELSE
-              CALL cft_wave (evc(1, ibnd), aux1, +1)
+              CALL cft_wave (ik, evc(1, ibnd), aux1, +1)
               CALL apply_dpot(dffts%nnr, aux1, dvscfins(1,1,ipert), current_spin)
-              CALL cft_wave (aux2(1, ibnd), aux1, -1)
+              CALL cft_wave (ik, aux2(1, ibnd), aux1, -1)
            ENDIF
         ENDDO
         dvpsi=dvpsi+aux2

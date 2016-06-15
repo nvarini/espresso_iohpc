@@ -1,0 +1,9 @@
+phonons of si at X
+ &inputph
+  tr2_ph=1.0d-14,
+  prefix='silicon',
+  amass(1)=28.08,
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/',
+  fildyn='si.dynX',
+ /
+1.0 0.0 0.0

@@ -1,0 +1,541 @@
+
+run_all_examples: starting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example01 : starting
+
+This example shows how to use pw.x to calculate the total energy and
+the band structure of four simple systems: Si, Al, Cu, Ni.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Si... done
+  running the band-structure calculation for Si... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Al... done
+  running the band-structure calculation for Al... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu... done
+  running the band-structure calculation for Cu... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Ni... done
+  running the band-structure calculation for Ni... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si... done
+  running the band-structure calculation for Si... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Al... done
+  running the band-structure calculation for Al... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu... done
+  running the band-structure calculation for Cu... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Ni... done
+  running the band-structure calculation for Ni... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example01 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example02 : starting
+
+This example shows how to use pw.x to compute the equilibrium geometry
+of a simple molecule, CO, and of an Al (001) slab.
+In the latter case the relaxation is performed in two ways:
+1) using the quasi-Newton BFGS algorithm
+2) using a damped dynamics algorithm.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the geometry relaxation for CO... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the geometry relaxation for Al (001) using BFGS... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the geometry relaxation for Al (001) using damped MD... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example02: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example03 : starting
+
+This example shows how to use pw.x to perform molecular dynamics for
+2- and 8-atom cells of Si starting with compressed bonds along (111).
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the MD calculation for Si in a 2 atom cell. G-point... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the MD calculation for Si in a 8 atom cell. G-point... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the MD calculation for Si in a 2 atom cell. G3X-points... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example03: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example04 : starting
+
+This example shows how to calculate the polarization via Berry Phase
+in PbTiO3 (contributed by the Vanderbilt Group in Rutgers University).
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running self-consistent calculation in PbTiO3... done
+  running Berry Phase calculation for PbTiO3... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example04: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example05 : starting
+
+This example shows how to calculate the total energy of an isolated
+atom in a supercell with fixed occupations.
+Three examples: LDA energy of Al, sigma-GGA energy of O,
+and sigma-GGA energy of Ni in two configurations
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running self-consistent calculation for Al atom... done
+  running calculation for O atom... done
+  running calculation for O atom, Gamma-only... done
+  running calculation for Ni atom d8 s2, Gamma-only... done
+  running calculation for Ni atom d9 s1, Gamma-only... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example05: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example06 : starting
+
+This example shows how to use pw.x to calculate the total energy and
+the band structure of four simple systems in the non-collinear case:
+Fe, Cu, Ni, O.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Fe... done
+  running band structure calculation for Fe... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf calculation for Fe with penalty functional... done
+  running the scf calculation for Fe with constrained angle... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Fe with constrained magnetization... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu... done
+  running the band-structure calculation for Cu... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Cu with cg diagonalization... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Ni... done
+  running the band-structure calculation for Ni... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf calculation with relax for oxygen molecule... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example06: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example07 : starting
+
+This example shows how to use pw.x to calculate the total energy
+and the band structure of fcc-Pt with a fully relativistic 
+pseudo-potential including spin-orbit coupling.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Pt with spin-orbit coupling... done
+  running the non-scf calculation for Pt with spin-orbit coupling... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example07: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example08 : starting
+
+This example shows how to use pw.x to calculate the total energy of FeO
+using LDA+U approximation. Read file README for more details
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist...
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running scf for FeO in LDA ... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf for FeO in LDA+U using standard ns initial matrices... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf for FeO in LDA+U using user-defined ns initial matrices... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example08 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example09 : starting
+
+This example shows how to use pw.x to perform SCF
+simulation of C4H6 with TPSS metaGGA Exc.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the pw.x SCF calculation... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example09 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example10 : starting
+
+This example shows how to use pw.x to perform electronic structure
+calculations in the presence of a finite homogeneous electric field 
+described through the modern theory of the polarization. The example
+shows how to calculate high-frequency dielectric constant of bulk Silicon
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the PW calculation for bulk Si E_field=0.0  a.u. ... done
+  running the PW calculation for bulk Si E_field=0.001  a.u. ... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example10 : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example11 : starting
+
+This example tests pw.x with PAW in the noncollinear, spin-orbit case.
+It calculates the band structure of ferromagnetic bcc-Fe.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Fe with PAW spin-orbit... done
+  running the band calculation for Fe with PAW and spin-orbit... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example11: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example12 : starting
+
+This example tests pw.x with USPS and DFT+U in the noncollinear, spin-orbit case.
+It calculates the band structure of ferromagnetic bcc-Fe.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the scf calculation for Fe with USPS and DFT+U with spin-orbit... done
+  running the band calculation for Fe with USPP and DFT+U and spin-orbit... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example12: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/VCSexample : starting
+
+This example shows how to use pw.x to relax a 2-atom cell of As
+at 2 different pressures, 0 kbar and 500 kbar. At those pressures
+As relax to different structures, sc and A7.
+Two strategies are used: Wentzcovitch damped dynamics and bfgs.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the VCS-MD calculation for As at 0 kbar.  done
+  running the VCS-MD calculation for As at 500 kbar.  done
+  running the bfgs vc-relax calculation for As at 0 kbar.  done
+  running the bfgs vc-relax calculation for As at 500 kbar.  done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/VCSexample : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example : starting
+
+This example shows how to use pw.x to calculate the total energy
+of silicon and of a few small molecules using hybrid functionals.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+
+  running PBE0 calculation for Si with nq=1,2,4 
+  running the scf calculation for Si with nq = 1 ... done
+!    total energy              =     -15.90468197 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 2 ... done
+!    total energy              =     -15.84995846 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 4 ... done
+!    total energy              =     -15.83808622 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+  running HSE calculation for Si with nq=1,2,4 
+  running the scf calculation for Si with nq = 1 ... done
+!    total energy              =     -15.89595287 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 2 ... done
+!    total energy              =     -15.84137495 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 4 ... done
+!    total energy              =     -15.83318481 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+  running Gau-PBE calculation for Si with nq=1,2,4 
+  running the scf calculation for Si with nq = 1 ... done
+!    total energy              =     -16.01135564 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 2 ... done
+!    total energy              =     -15.85964289 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si with nq = 4 ... done
+!    total energy              =     -15.85220259 Ry
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+  running now a few molecules with Gamma sampling ...
+  pseudo directory changed to:      /home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example/Pseudo
+
+  Exchange and correlation is:  pbe0 ...
+  running oxygen atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running carbon atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running nitrogen atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running n2 molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running co molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running o2 molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+N2 :  -221.043
+O2 :  -121.856
+CO :  -253.242
+
+  Exchange and correlation is:  hse ...
+  running oxygen atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running carbon atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running nitrogen atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running n2 molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running co molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running o2 molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+N2 :  -220.508
+O2 :  -121.74
+CO :  -253.169
+
+  Exchange and correlation is:  gaupbe ...
+  running oxygen atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running carbon atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running nitrogen atom.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running n2 molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running co molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running o2 molecule.. done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+N2 :  -220.332
+O2 :  -120.538
+CO :  -252.053
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/vdwDF_example : starting
+
+This example shows how to use pw.x with vdw-DF functional. In the
+first part a cell relaxation of graphite will be calculated and
+then the energy of two water molecules far apart will be computed.
+Optionally, at the end, you can see how to set up a force relaxation
+of an Argon dimer, not activated by default in the distribution.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+ done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the graphite cell relaxation... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for water molecules... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for argon dimer...  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/vdwDF_example : done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/ESM_example : starting
+
+This example shows how to use ESM to calculate H2O and Al(001)
+using the three available sets of boundary conditions.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running the calculation for H2O without ESM...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/cluster_example : starting
+
+This example shows how to use pw.x to calculate propeties of 
+isolated systems decoupling periodic images by using 
+Martyna-Tuckerman approach with truncated coulomb interaction.
+
+Three simple systems are considered:
+1) a N atom. 
+2) a NH4+ ion.
+3) a water molecule.
+
+The calculations are performed in a SC cell of dimension 16 bohr
+It is possible to explore convergence of the results w.r.t. box size
+by editing the script and addind/modifying the variable called BOX_SIZE_LIST
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  running tests for a box size =  16 bohr 
+
+  running scf calculation for N atom... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running relax calculation for NH4+ ion... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running relax calculation for H2O molecule... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+ eigenvalues of N atom
+16    -19.9150  -8.2866  -8.2866  -8.2866
+16    -15.3304  -4.1270  -4.1270  -4.1270
+
+ to be compared with the reference values
+12    -19.8776  -8.2463  -8.2463  -8.2463
+12    -15.2899  -4.0718  -4.0718  -4.0718
+16    -19.9135  -8.2852  -8.2852  -8.2852
+16    -15.3289  -4.1256  -4.1256  -4.1256
+20    -19.9158  -8.2866  -8.2866  -8.2866
+20    -15.3321  -4.1285  -4.1285  -4.1285
+24    -19.9137  -8.2856  -8.2856  -8.2856
+24    -15.3296  -4.1277  -4.1277  -4.1277
+
+
+ eigenvalues of NH4+ ions
+16    -31.6043 -20.8579 -20.8579 -20.8579  -7.0874  -4.8262  -4.8262  -4.8262
+
+ to be compared with the reference values
+12    -31.5900 -20.8421 -20.8421 -20.8421  -7.4141  -4.5486  -4.5486  -4.5486
+16    -31.6045 -20.8581 -20.8581 -20.8581  -7.0873  -4.8260  -4.8260  -4.8260
+20    -31.6039 -20.8560 -20.8560 -20.8560  -7.0299  -4.8754  -4.8754  -4.8754
+24    -31.6055 -20.8589 -20.8589 -20.8589  -7.0239  -4.8854  -4.8854  -4.8854
+
+
+ eigenvalues of H2O molecule
+16    -25.2333 -13.0674  -9.2562  -7.2162  -1.3154   0.5208   0.7056   1.2128
+
+ to be compared with the reference values
+12    -25.1842 -13.0227  -9.1992  -7.1566  -1.4272   1.7263   2.0010   2.6525
+16    -25.2332 -13.0742  -9.2511  -7.2158  -1.3149   0.5215   0.7057   1.2127
+20    -25.2351 -13.0758  -9.2534  -7.2189  -1.2138  -0.0461   0.2741   0.5740
+24    -25.2357 -13.0766  -9.2538  -7.2191  -1.1574  -0.2771   0.0529   0.2466
+
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/cluster_example: done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/vdwDF_example : starting
+
+This example shows how to use pw.x with vdw-DF functional. In the
+first part a cell relaxation of graphite will be calculated and
+then the energy of two water molecules far apart will be computed.
+Optionally, at the end, you can see how to set up a force relaxation
+of an Argon dimer, not activated by default in the distribution.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+ done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the graphite cell relaxation... done
+  running the graphite cell relaxation... done
+  running the graphite cell relaxation... done
+  running the scf calculation for water molecules... done
+  running the scf calculation for water molecules... done
+  running the scf calculation for water molecules... done
+
+run_all_examples: done

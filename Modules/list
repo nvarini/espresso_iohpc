@@ -1,0 +1,54 @@
+autopilot.f90:          IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
+autopilot.f90:             IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
+autopilot.f90:       IF( ionode ) write(*,*) 'ADD_RULE: POWER STEERING'
+autopilot.f90:          IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
+autopilot.f90:             IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line
+autopilot.f90:       IF( ionode ) write(*,*) ' AutoPilot: current n_rules', n_rules
+autopilot.f90:    !IF( ionode ) write(*,*) '  Number of rules: ', n_rules
+autopilot.f90:    IF( ionode ) write(*,'("   Reading rule: ",A20,A20)' ) var, value
+autopilot.f90:       !IF( ionode ) write(*,*) 'RULE_DT', rule_dt(event), 'EVENT', event
+autopilot.f90:       IF( ionode ) write(*,*) '  Autopilot: Rule Assignment Failure '
+autopilot.f90:       IF( ionode ) write(*,*) 'SLEEPING'
+autopilot.f90:       IF( ionode ) write(*,*) 'INPUT_LINE=', input_line
+autopilot.f90:       IF( ionode ) write(*,*) 'RUNNING'
+autopilot.f90:       IF( ionode ) write(*,*) 'INPUT_LINE=', input_line
+bfgs_module.f90:        if(info .ne. 0)write( stdout, '(/,5X,"WARNING: info=",i3," for Hessian")' )info
+funct.f90:           ! write(*, '("matches",i2,2X,A,2X,A)') i, name(i), trim(dft)
+funct.f90:           write(*, '(2(2X,i2,2X,A))') i, trim(name(i)), &
+functionals.f90:!        write(*,*) s, t1, t10, d1st1,d1rt1,d1rt10
+mp_base.f90:        write(*,*) 'BCAST_REAL IN'
+mp_base.f90:        write(*,*) 'BCAST_REAL OUT'
+mp_base.f90:        write(*,*) 'BCAST_INTEGER IN'
+mp_base.f90:        write(*,*) 'BCAST_INTEGER OUT'
+mp_base.f90:        write(*,*) 'BCAST_LOGICAL IN'
+mp_base.f90:        write(*,*) 'BCAST_LOGICAL OUT'
+mp_base.f90:  write(*,*) 'reduce_base_real IN'
+mp_base.f90:  write(*,*) 'reduce_base_real OUT'
+mp_base.f90:  write(*,*) 'reduce_base_real IN'
+mp_base.f90:  write(*,*) 'reduce_base_real OUT'
+mp_base.f90:  write(*,*) 'reduce_base_integer IN'
+mp_base.f90:  write(*,*) 'reduce_base_integer OUT'
+mp_base.f90:  write(*,*) 'reduce_base_integer IN'
+mp_base.f90:  write(*,*) 'reduce_base_integer OUT'
+mp_base.f90:  write(*,*) 'reduce_base_real_to IN'
+mp_base.f90:  write(*,*) 'reduce_base_real_to OUT'
+mp_base.f90:  write(*,*) 'reduce_base_integer_to IN'
+mp_base.f90:  write(*,*) 'reduce_base_integer_to OUT'
+mp_base.f90:  write(*,*) 'parallel_min_integer IN'
+mp_base.f90:  write(*,*) 'parallel_min_integer OUT'
+mp_base.f90:  write(*,*) 'parallel_max_integer IN'
+mp_base.f90:  write(*,*) 'parallel_max_integer OUT'
+mp_base.f90:  write(*,*) 'parallel_min_real IN'
+mp_base.f90:  write(*,*) 'parallel_min_real OUT'
+mp_base.f90:  write(*,*) 'parallel_max_real IN'
+mp_base.f90:  write(*,*) 'parallel_max_real OUT'
+read_uspp.f90:    write( upf%dft, "('INDEX:',4i1)") iexch,icorr,igcx,igcc
+xc_rVV10.f90:       if (ionode) write(*,'(/ / A /)') "     ----------------------------------------------------------------"
+xc_rVV10.f90:       if (ionode) write(*,'(A, F22.15 /)') "     Non-local correlation energy =         ", Ec_nl
+xc_rVV10.f90:       if (ionode) write(*,'(A /)') "     ----------------------------------------------------------------"
+xc_rVV10.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xc_rVV10.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xc_vdW_DF.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xc_vdW_DF.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
+xml_io_base.f90:          write(*,*)'done writing evc0'
+xml_io_base.f90:               !IF ( j .eq. 1)write(*,'(10f12.5)')(wtmp(i),i=1,igwx_)

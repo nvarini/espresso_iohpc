@@ -24,27 +24,18 @@ SUBROUTINE wfcinit()
   USE lsda_mod,             ONLY : lsda, current_spin, isk
   USE io_files,             ONLY : nwordwfc, nwordwfcU, iunhub, iunwfc,&
                                    diropn
-  USE buffers,              ONLY : open_buffer, get_buffer, save_buffer, save_buffer_hdf5
+  USE buffers,              ONLY : open_buffer, get_buffer, save_buffer
   USE uspp,                 ONLY : nkb, vkb
   USE wavefunctions_module, ONLY : evc
-  USE wvfct,                ONLY : nbnd, npwx, npw, current_k, igk
+  USE wvfct,                ONLY : nbnd, npwx, current_k
   USE wannier_new,          ONLY : use_wannier
   USE pw_restart,           ONLY : pw_readfile
   USE mp_bands,             ONLY : nbgrp, root_bgrp,inter_bgrp_comm
   USE mp,                   ONLY : mp_bcast
-#if defined  __HDF5
-  USE hdf5
-  USE buffers,              ONLY : save_buffer_hdf5
-  USE hdf5_qe,              ONLY : evc_hdf5, off_npw, npw_g, read_data_hdf5, evc_hdf5_write
-  USE hdf5_qe,              ONLY : prepare_index_hdf5
-  USE hdf5_qe,              ONLY : prepare_for_writing_final
-  USE io_files,             ONLY : wfc_dir
-  USE mp_world, ONLY : nproc, mpime
-#endif
   !
   IMPLICIT NONE
   !
-  INTEGER :: ik, ierr, error
+  INTEGER :: ik, ierr
   LOGICAL :: exst, exst_mem, exst_file, opnd_file
   !
   !
@@ -141,15 +132,12 @@ SUBROUTINE wfcinit()
   !
   ! ... calculate and write all starting wavefunctions to file
   !
-  !CALL prepare_for_writing_final(evc_hdf5_write,evc_hdf5_write%comm,'pippo')
   DO ik = 1, nks
      !
-     ! ... Hpsi initializations: PWs, k, spin, k+G indices, kinetic energy
+     ! ... Hpsi initialization: k-point index, spin, kinetic energy
      !
-     npw = ngk(ik)
      current_k = ik
      IF ( lsda ) current_spin = isk(ik)
-     igk(1:npw) = igk_k(1:npw,ik)
      call g2_kin (ik)
      !
      ! ... More Hpsi initialization: nonlocal pseudopotential projectors |beta>
@@ -167,25 +155,10 @@ SUBROUTINE wfcinit()
      !
      ! ... write  starting wavefunctions to file
      !
-     IF ( nks > 1 .OR. (io_level > 1) .OR. lelfield ) THEN
-#if defined __HDF5
-         !if(ik>1) THEN
-         !    CALL extend_dataset_hdf5(evc_hdf5,evc,npwx,2)
-         !endif
-   CALL save_buffer_hdf5(evc_hdf5,evc,ik)
-
-   !      CALL write_final_data(evc_hdf5_write,ik,evc(:,1))
-
-         !CALL save_buffer( evc, nwordwfc, iunwfc, ik )
-#else
+     IF ( nks > 1 .OR. (io_level > 1) .OR. lelfield ) &
          CALL save_buffer ( evc, nwordwfc, iunwfc, ik )
-#endif
-    ENDIF
      !
   END DO
-    !call h5fclose_f(evc_hdf5_write%file_id,error)
-
-
   !
   CALL stop_clock( 'wfcinit' )
   RETURN
@@ -214,7 +187,6 @@ SUBROUTINE init_wfc ( ik )
   USE random_numbers,       ONLY : randy
   USE mp_bands,             ONLY : intra_bgrp_comm, inter_bgrp_comm, my_bgrp_id
   USE mp,                   ONLY : mp_sum
-  USE control_flags,        ONLY : gamma_only
   !
   IMPLICIT NONE
   !

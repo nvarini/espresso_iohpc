@@ -498,8 +498,8 @@ gipaw_veryclean: gipaw_clean
 	rm -rf ./configure-gipaw
 
 gipaw_distclean:
-	if test -d ../GIPAW; then (rm -R -f ../GIPAW ); fi
-	if test -d ../$(GIPAW); then (rm -R -f ../$(GIPAW) ); fi
+	#if test -d ../GIPAW; then (rm -R -f ../GIPAW ); fi
+	#if test -d ../$(GIPAW); then (rm -R -f ../$(GIPAW) ); fi
 	rm -f ../archive/$(GIPAW).tar.gz
 
 epw_clean:
@@ -511,6 +511,8 @@ epw_veryclean: epw_clean
 # dir is not deleted for compatibility with the repository
 
 epw_distclean:
+	if test -d ../EPW; then (cd ../EPW; \
+	$(MAKE) distclean); fi
 	rm -f ../archive/$(EPW).tar.gz
 
 w90_clean:
@@ -537,7 +539,7 @@ want_veryclean: want_clean
 	if test -d ../WANT; then (rm -R -f ../WANT); fi
 	if test -d ../$(WANT); then (rm -R -f ../$(WANT)); fi
 	if test -e ../archive/$(WANT).tar.gz ; then (rm -f ../archive/$(WANT).tar.gz); fi
-	- rm -rf ./uncompress-want
+	- rm -rf ./uncompress-want ./configure.h
 
 want_distclean: 
 	rm -f ../archive/$(WANT).tar.gz

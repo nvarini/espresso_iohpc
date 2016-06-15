@@ -55,6 +55,7 @@ SUBROUTINE potinit()
   USE paw_variables,        ONLY : okpaw, ddd_PAW
   USE paw_init,             ONLY : PAW_atomic_becsum
   USE paw_onecenter,        ONLY : PAW_potential
+  USE mp_world,             ONLY : mpime
   !
   IMPLICIT NONE
   !
@@ -69,7 +70,11 @@ SUBROUTINE potinit()
   !
   ! check for both .dat and .xml extensions (compatibility reasons) 
   !
+#if defined __HDF5
+  filename = TRIM( tmp_dir ) // TRIM(prefix) // '.save/charge-density.hdf5'
+#else
   filename =  TRIM( tmp_dir ) // TRIM( prefix ) // '.save/charge-density.dat'
+#endif
   exst     =  check_file_exst( TRIM(filename) )
   !
   IF ( .NOT. exst ) THEN
@@ -78,6 +83,8 @@ SUBROUTINE potinit()
       exst     =  check_file_exst( TRIM(filename) )
       !
   ENDIF
+   !  write(mpime+200,*) filename, exst
+   !  call errore('','',440)
   !
   !
   IF ( starting_pot == 'file' .AND. exst ) THEN

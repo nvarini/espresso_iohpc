@@ -1,0 +1,51 @@
+Index: read_file.f90
+===================================================================
+--- read_file.f90	(revision 12491)
++++ read_file.f90	(working copy)
+@@ -29,6 +29,16 @@
+   USE klist,                ONLY : init_igk
+   USE gvect,                ONLY : ngm, g
+   USE gvecw,                ONLY : gcutw
++  USE mp_world,             ONLY : mpime
++  USE wavefunctions_module, ONLY : evc
++#if defined __HDF5
++  USE mp_world,           ONLY : nproc, mpime, world_comm
++  USE mp_pools,           ONLY : inter_pool_comm
++  USE wavefunctions_module,ONLY : evc
++  USE hdf5_qe
++#endif
++
++
+   !
+   IMPLICIT NONE 
+   INTEGER :: ierr
+@@ -39,7 +49,13 @@
+   IF ( ionode ) WRITE( stdout, '(/,5x,A,/,5x,A)') &
+      'Reading data from directory:', TRIM( tmp_dir ) // TRIM( prefix ) // '.save'
+   !
++
+   CALL read_xml_file ( )
++#if defined __HDF5
++  CALL initialize_hdf5()
++!  CALL initialize_io_hdf5( evc_hdf5,inter_pool_comm, evc,.false.,0)
++#endif
++
+   !
+   ! ... Open unit iunwfc, for Kohn-Sham orbitals - we assume that wfcs
+   ! ... have been written to tmp_dir, not to a different directory!
+@@ -49,6 +65,7 @@
+   nwordwfc = nbnd*npwx*npol
+   io_level = 1
+   CALL open_buffer ( iunwfc, 'wfc', nwordwfc, io_level, exst )
++ 
+   !
+   ! ... Allocate and compute k+G indices and number of plane waves
+   ! ... FIXME: should be read from file, not re-computed
+@@ -292,6 +309,7 @@
+   CALL gshells ( lmovecell ) 
+   !
+   ! ... allocate the potential and wavefunctions
++
+   !
+   CALL allocate_locpot()
+   CALL allocate_nlpot()

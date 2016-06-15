@@ -16,7 +16,6 @@ SUBROUTINE read_file()
   USE buffers,              ONLY : open_buffer, close_buffer
   USE wvfct,                ONLY : nbnd, npwx
   USE noncollin_module,     ONLY : npol
-  USE klist,                ONLY : nks
   USE paw_variables,        ONLY : okpaw, ddd_PAW
   USE paw_onecenter,        ONLY : paw_potential
   USE uspp,                 ONLY : becsum
@@ -27,12 +26,10 @@ SUBROUTINE read_file()
   USE ldaU,                 ONLY : lda_plus_u, U_projection
   USE pw_restart,           ONLY : pw_readfile
   USE control_flags,        ONLY : io_level
-  USE mp_world,             ONLY : mpime
-  USE wavefunctions_module, ONLY : evc
+  USE klist,                ONLY : init_igk
+  USE gvect,                ONLY : ngm, g
+  USE gvecw,                ONLY : gcutw
 #if defined __HDF5
-  USE mp_world,           ONLY : nproc, mpime, world_comm
-  USE mp_pools,           ONLY : inter_pool_comm
-  USE wavefunctions_module,ONLY : evc
   USE hdf5_qe
 #endif
 
@@ -51,7 +48,6 @@ SUBROUTINE read_file()
   CALL read_xml_file ( )
 #if defined __HDF5
   CALL initialize_hdf5()
-  CALL initialize_io_hdf5( evc_hdf5,inter_pool_comm, evc,.false.,0)
 #endif
 
   !
@@ -64,6 +60,11 @@ SUBROUTINE read_file()
   io_level = 1
   CALL open_buffer ( iunwfc, 'wfc', nwordwfc, io_level, exst )
  
+  !
+  ! ... Allocate and compute k+G indices and number of plane waves
+  ! ... FIXME: should be read from file, not re-computed
+  !
+  CALL init_igk ( npwx, ngm, g, gcutw ) 
   !
   ! ... Read orbitals, write them in 'distributed' form to iunwfc
   !
