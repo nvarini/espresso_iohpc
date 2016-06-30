@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:18:55 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:49:14 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -275,15 +275,15 @@
 
      Writing output data file cu.save
  
-     init_run     :      0.19s CPU      0.20s WALL (       1 calls)
-     electrons    :      0.26s CPU      0.27s WALL (       1 calls)
+     init_run     :      0.18s CPU      0.20s WALL (       1 calls)
+     electrons    :      0.27s CPU      0.28s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.26s CPU      0.27s WALL (       1 calls)
+     c_bands      :      0.27s CPU      0.28s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
      newd         :      0.01s CPU      0.01s WALL (       1 calls)
 
@@ -316,7 +316,7 @@
      PWSCF        :     0.75s CPU         0.78s WALL
 
  
-   This run was terminated on:  11:18:56  15Jun2016            
+   This run was terminated on:  17:49:15  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

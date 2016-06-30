@@ -24,7 +24,7 @@ FORTRAN  = gfortran
 OPTS     = -O3 -g
 DRVOPTS  = -O3 -g
 NOOPT    = -O0 -g
-LOADER   = mpif90
+LOADER   = gfortran
 LOADOPTS =  -g -pthread
 #
 # Timer for the SECOND and DSECND routines

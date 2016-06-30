@@ -321,6 +321,7 @@ SUBROUTINE iosys()
   !
   lforce    = tprnfor
   !
+
   SELECT CASE( trim( calculation ) )
   CASE( 'scf' )
      !

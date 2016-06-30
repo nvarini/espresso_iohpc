@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:30: 0 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:56:51 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -203,7 +203,7 @@ EXX: grid of k+q points same as grid of k-points
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        2.1 secs
 
      per-process dynamical memory:    49.5 Mb
 
@@ -213,7 +213,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  4.94E-06,  avg # of iterations =  5.0
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.2 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -225,7 +225,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  1.24E-05,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        5.6 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -237,7 +237,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  1.02E-05,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        6.8 secs
+     total cpu time spent up to now is        6.9 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -249,7 +249,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  1.93E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        8.0 secs
+     total cpu time spent up to now is        8.1 secs
 
      End of self-consistent calculation
 
@@ -269,7 +269,7 @@ EXX: grid of k+q points same as grid of k-points
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is        8.2 secs
+     total cpu time spent up to now is        8.3 secs
 
      per-process dynamical memory:    52.3 Mb
 
@@ -285,7 +285,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  3.89E-08,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is       10.4 secs
+     total cpu time spent up to now is       10.5 secs
 
      End of self-consistent calculation
 
@@ -314,28 +314,28 @@ EXX: grid of k+q points same as grid of k-points
 
      Writing output data file n2.save
  
-     init_run     :      0.33s CPU      0.35s WALL (       1 calls)
-     electrons    :      9.03s CPU      9.19s WALL (       3 calls)
-     forces       :      0.46s CPU      0.47s WALL (       1 calls)
+     init_run     :      0.34s CPU      0.36s WALL (       1 calls)
+     electrons    :      9.14s CPU      9.32s WALL (       3 calls)
+     forces       :      0.47s CPU      0.47s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
-     potinit      :      0.15s CPU      0.17s WALL (       1 calls)
+     potinit      :      0.16s CPU      0.17s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      6.14s CPU      6.23s WALL (      10 calls)
-     sum_band     :      0.24s CPU      0.25s WALL (      10 calls)
-     v_of_rho     :      3.09s CPU      3.15s WALL (      11 calls)
+     c_bands      :      6.24s CPU      6.35s WALL (      10 calls)
+     sum_band     :      0.25s CPU      0.25s WALL (      10 calls)
+     v_of_rho     :      3.10s CPU      3.15s WALL (      11 calls)
      mix_rho      :      0.06s CPU      0.07s WALL (      10 calls)
 
      Called by c_bands:
-     init_us_2    :      0.03s CPU      0.04s WALL (      26 calls)
-     regterg      :      6.08s CPU      6.17s WALL (      10 calls)
+     init_us_2    :      0.04s CPU      0.04s WALL (      26 calls)
+     regterg      :      6.18s CPU      6.29s WALL (      10 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      6.04s CPU      6.12s WALL (      38 calls)
+     h_psi        :      6.13s CPU      6.23s WALL (      38 calls)
      g_psi        :      0.01s CPU      0.01s WALL (      27 calls)
      rdiaghg      :      0.01s CPU      0.01s WALL (      34 calls)
 
@@ -344,25 +344,25 @@ EXX: grid of k+q points same as grid of k-points
 
      General routines
      calbec       :      0.02s CPU      0.02s WALL (      47 calls)
-     fft          :      0.53s CPU      0.57s WALL (     128 calls)
+     fft          :      0.57s CPU      0.58s WALL (     128 calls)
      fftw         :      0.77s CPU      0.78s WALL (     284 calls)
-     fftc         :      3.58s CPU      3.58s WALL (     843 calls)
-     fftcw        :      0.60s CPU      0.61s WALL (     218 calls)
+     fftc         :      3.64s CPU      3.66s WALL (     843 calls)
+     fftcw        :      0.61s CPU      0.62s WALL (     218 calls)
      davcio       :      0.00s CPU      0.00s WALL (       1 calls)
  
      Parallel routines
-     fft_scatter  :      1.57s CPU      1.59s WALL (    1473 calls)
+     fft_scatter  :      1.72s CPU      1.75s WALL (    1473 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.07s CPU      0.07s WALL (       3 calls)
-     vexx         :      5.27s CPU      5.33s WALL (      20 calls)
-     exxenergy    :      0.59s CPU      0.59s WALL (       5 calls)
+     vexx         :      5.35s CPU      5.44s WALL (      20 calls)
+     exxenergy    :      0.60s CPU      0.60s WALL (       5 calls)
  
-     PWSCF        :    10.97s CPU        11.19s WALL
+     PWSCF        :    11.12s CPU        11.34s WALL
 
  
-   This run was terminated on:  11:30:11  15Jun2016            
+   This run was terminated on:  17:57: 3  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

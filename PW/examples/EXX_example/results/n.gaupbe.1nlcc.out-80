@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:30:39 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:57:32 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -294,7 +294,7 @@ EXX: grid of k+q points same as grid of k-points
      Magnetic moment per site:
      atom:    1    charge:    4.9976    magn:    2.9980    constr:    0.0000
 
-     total cpu time spent up to now is        5.1 secs
+     total cpu time spent up to now is        5.2 secs
 
      End of self-consistent calculation
 
@@ -324,7 +324,7 @@ EXX: grid of k+q points same as grid of k-points
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        5.4 secs
 
      per-process dynamical memory:    68.2 Mb
 
@@ -343,7 +343,7 @@ EXX: grid of k+q points same as grid of k-points
      Magnetic moment per site:
      atom:    1    charge:    4.9977    magn:    2.9981    constr:    0.0000
 
-     total cpu time spent up to now is        6.5 secs
+     total cpu time spent up to now is        6.7 secs
 
      End of self-consistent calculation
 
@@ -381,28 +381,28 @@ EXX: grid of k+q points same as grid of k-points
 
      Writing output data file n.save
  
-     init_run     :      0.57s CPU      0.60s WALL (       1 calls)
-     electrons    :      5.22s CPU      5.30s WALL (       3 calls)
-     forces       :      0.37s CPU      0.38s WALL (       1 calls)
+     init_run     :      0.58s CPU      0.61s WALL (       1 calls)
+     electrons    :      5.29s CPU      5.39s WALL (       3 calls)
+     forces       :      0.38s CPU      0.39s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
-     potinit      :      0.31s CPU      0.32s WALL (       1 calls)
+     potinit      :      0.31s CPU      0.33s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      2.75s CPU      2.77s WALL (       9 calls)
+     c_bands      :      2.82s CPU      2.84s WALL (       9 calls)
      sum_band     :      0.32s CPU      0.32s WALL (       9 calls)
-     v_of_rho     :      2.59s CPU      2.62s WALL (       9 calls)
+     v_of_rho     :      2.60s CPU      2.64s WALL (       9 calls)
      mix_rho      :      0.08s CPU      0.09s WALL (       9 calls)
 
      Called by c_bands:
      init_us_2    :      0.06s CPU      0.06s WALL (      50 calls)
-     regterg      :      2.68s CPU      2.70s WALL (      18 calls)
+     regterg      :      2.76s CPU      2.78s WALL (      18 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      2.65s CPU      2.68s WALL (      48 calls)
+     h_psi        :      2.73s CPU      2.75s WALL (      48 calls)
      g_psi        :      0.01s CPU      0.01s WALL (      28 calls)
      rdiaghg      :      0.00s CPU      0.00s WALL (      38 calls)
 
@@ -410,26 +410,25 @@ EXX: grid of k+q points same as grid of k-points
      add_vuspsi   :      0.00s CPU      0.01s WALL (      48 calls)
 
      General routines
-     calbec       :      0.02s CPU      0.01s WALL (      66 calls)
-     fft          :      0.85s CPU      0.87s WALL (     202 calls)
-     fftw         :      0.61s CPU      0.62s WALL (     228 calls)
-     fftc         :      1.32s CPU      1.32s WALL (     315 calls)
-     fftcw        :      0.45s CPU      0.45s WALL (     164 calls)
-     davcio       :      0.00s CPU      0.00s WALL (       2 calls)
+     calbec       :      0.02s CPU      0.02s WALL (      66 calls)
+     fft          :      0.87s CPU      0.89s WALL (     202 calls)
+     fftw         :      0.62s CPU      0.63s WALL (     228 calls)
+     fftc         :      1.36s CPU      1.36s WALL (     315 calls)
+     fftcw        :      0.45s CPU      0.46s WALL (     164 calls)
  
      Parallel routines
-     fft_scatter  :      0.92s CPU      0.93s WALL (     909 calls)
+     fft_scatter  :      0.97s CPU      0.98s WALL (     909 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
-     exxinit      :      0.08s CPU      0.08s WALL (       3 calls)
-     vexx         :      2.06s CPU      2.07s WALL (      23 calls)
-     exxenergy    :      0.39s CPU      0.40s WALL (       5 calls)
+     exxinit      :      0.07s CPU      0.08s WALL (       3 calls)
+     vexx         :      2.12s CPU      2.13s WALL (      23 calls)
+     exxenergy    :      0.40s CPU      0.41s WALL (       5 calls)
  
-     PWSCF        :     7.04s CPU         7.19s WALL
+     PWSCF        :     7.12s CPU         7.31s WALL
 
  
-   This run was terminated on:  11:30:47  15Jun2016            
+   This run was terminated on:  17:57:39  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

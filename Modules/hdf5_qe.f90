@@ -97,10 +97,8 @@ module hdf5_qe
         CALL h5fcreate_f(filename, H5F_ACC_TRUNC_F, hdf5desc%file_id, error) 
       endif
     else
-      if(ionode)then
         CALL h5fopen_f(filename, H5F_ACC_RDONLY_F, hdf5desc%file_id, error) ! create the file collectively
         !CALL h5dopen_f(hdf5desc%file_id, hdf5desc%dsetname, hdf5desc%dset_id, error)
-      endif
     endif
    endif
    
@@ -390,7 +388,8 @@ module hdf5_qe
     USE mp_world, ONLY : mpime
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
-    integer, intent(in) :: dsetname, kpoint
+    integer, intent(in) :: dsetname
+    integer, intent(in), optional ::  kpoint
     complex(kind=DP), intent(in) :: var(:)
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
@@ -404,14 +403,19 @@ module hdf5_qe
     dset_name='BAND'//dset_name
     counts=size(var)*2  
     CALL h5screate_simple_f(1, counts, dspace_id, error) !create the dataspace
-    CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
-    CALL h5dcreate_f(hdf5desc%group_id, dset_name, H5T_NATIVE_DOUBLE, dspace_id, &
+    if(present(kpoint))CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
+    if(present(kpoint)) then
+      CALL h5dcreate_f(hdf5desc%group_id, dset_name, H5T_NATIVE_DOUBLE, dspace_id, &
                       dset_id, error)
+    else
+      CALL h5dcreate_f(hdf5desc%file_id, dset_name, H5T_NATIVE_DOUBLE, dspace_id, &
+                      dset_id, error)
+    endif
     f_ptr = C_LOC(var(1))
     CALL h5dwrite_f(dset_id, H5T_NATIVE_DOUBLE, f_ptr, error)
     CALL h5dclose_f(dset_id, error)
     CALL h5sclose_f(dspace_id, error)
-    CALL h5gclose_f(hdf5desc%group_id, error)
+    if(present(kpoint))CALL h5gclose_f(hdf5desc%group_id, error)
   end subroutine write_evc
 
   subroutine read_evc(hdf5desc,dsetname,var,kpoint)
@@ -792,11 +796,11 @@ module hdf5_qe
   END SUBROUTINE add_attributes_hdf5_c
 
 
-  SUBROUTINE read_attributes_hdf5_i(hdf5desc, attr_data, attr_name, kpoint)
+  SUBROUTINE read_attributes_hdf5_i(hdf5desc, attr_data, attr_name, kpoint, debug)
     USE mp_world,  ONLY : mpime
     implicit none
     TYPE(HDF5_type), intent(inout) :: hdf5desc
-    integer, intent(in), optional  :: kpoint
+    integer, intent(in), optional  :: kpoint, debug
     integer, intent(out) ::  attr_data 
     CHARACTER(LEN=*), intent(in) :: attr_name
     character*12 kstring
@@ -863,6 +867,34 @@ module hdf5_qe
     
   END SUBROUTINE read_attributes_hdf5_r
 
+  SUBROUTINE hdf5_close(hdf5desc)
+    implicit none
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer :: errore 
+    CALL h5fclose_f(hdf5desc%file_id,errore)
+  END SUBROUTINE hdf5_close
 
+  SUBROUTINE write_attributes(hdf5desc, ngw, gamma_only, igwx, &
+    nbnd, ik, nk, ispin, nspin, scalef)
+    implicit none
+    INTEGER,            INTENT(IN) :: ik, nk,  ispin, nspin
+    REAL(DP),           INTENT(IN) :: scalef    
+    LOGICAL,            INTENT(IN) :: gamma_only
+    INTEGER,            INTENT(IN) :: nbnd, ngw, igwx
+    TYPE(HDF5_type), intent(inout) :: hdf5desc
+    integer                        :: gammaonly
+    CALL add_attributes_hdf5(hdf5desc,ngw,"ngw",ik)
+    write(gammaonly,'(I0)') gamma_only
+    CALL add_attributes_hdf5(evc_hdf5_write,gammaonly,"gamma_only",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,igwx,"igwx",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,nbnd,"nbnd",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,ik,"ik",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,nk,"nk",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,ispin,"ispin",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,nspin,"nspin",ik)
+    CALL add_attributes_hdf5(evc_hdf5_write,scalef,"scale_factor",ik)
+
+
+  END SUBROUTINE write_attributes
 
 end module hdf5_qe

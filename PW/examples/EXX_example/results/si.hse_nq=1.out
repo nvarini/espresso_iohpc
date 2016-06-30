@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:27:17 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:54: 9 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -454,28 +454,28 @@
      Writing output data file silicon.save
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      0.88s CPU      0.92s WALL (       4 calls)
+     electrons    :      0.91s CPU      0.93s WALL (       4 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.82s CPU      0.86s WALL (      11 calls)
+     c_bands      :      0.84s CPU      0.87s WALL (      11 calls)
      sum_band     :      0.03s CPU      0.03s WALL (      11 calls)
-     v_of_rho     :      0.02s CPU      0.03s WALL (      11 calls)
+     v_of_rho     :      0.03s CPU      0.03s WALL (      11 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (      11 calls)
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     300 calls)
-     cegterg      :      0.81s CPU      0.85s WALL (     110 calls)
+     cegterg      :      0.84s CPU      0.86s WALL (     110 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.73s CPU      0.78s WALL (     346 calls)
+     h_psi        :      0.76s CPU      0.78s WALL (     346 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     226 calls)
-     cdiaghg      :      0.07s CPU      0.05s WALL (     286 calls)
+     cdiaghg      :      0.06s CPU      0.05s WALL (     286 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.00s CPU      0.00s WALL (     346 calls)
@@ -483,24 +483,23 @@
      General routines
      calbec       :      0.01s CPU      0.01s WALL (     416 calls)
      fft          :      0.00s CPU      0.00s WALL (     118 calls)
-     fftw         :      0.13s CPU      0.15s WALL (    5436 calls)
-     fftc         :      0.38s CPU      0.39s WALL (   10984 calls)
-     fftcw        :      0.08s CPU      0.08s WALL (    2906 calls)
-     davcio       :      0.00s CPU      0.00s WALL (      10 calls)
+     fftw         :      0.14s CPU      0.14s WALL (    5436 calls)
+     fftc         :      0.36s CPU      0.40s WALL (   10984 calls)
+     fftcw        :      0.09s CPU      0.08s WALL (    2906 calls)
  
      Parallel routines
-     fft_scatter  :      0.20s CPU      0.21s WALL (   19444 calls)
+     fft_scatter  :      0.21s CPU      0.22s WALL (   19444 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.02s CPU      0.02s WALL (       4 calls)
-     vexx         :      0.60s CPU      0.63s WALL (     187 calls)
-     exxenergy    :      0.08s CPU      0.09s WALL (       7 calls)
+     vexx         :      0.62s CPU      0.63s WALL (     187 calls)
+     exxenergy    :      0.09s CPU      0.09s WALL (       7 calls)
  
-     PWSCF        :     1.08s CPU         1.14s WALL
+     PWSCF        :     1.10s CPU         1.15s WALL
 
  
-   This run was terminated on:  11:27:19  15Jun2016            
+   This run was terminated on:  17:54:10  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

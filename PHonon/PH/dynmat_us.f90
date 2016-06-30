@@ -46,6 +46,11 @@ SUBROUTINE dynmat_us()
   USE lrus,                 ONLY : becp1
   USE qpoint,               ONLY : nksq, ikks
   USE control_lr,           ONLY : nbnd_occ, lgamma
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+#endif
 
   IMPLICIT NONE
   INTEGER :: icart, jcart, na_icart, na_jcart, na, ng, nt, ik, &
@@ -65,6 +70,7 @@ SUBROUTINE dynmat_us()
   COMPLEX(DP), ALLOCATABLE :: rhog (:), aux1 (:,:), work1 (:), &
                work2 (:), deff_nc(:,:,:,:)
   REAL(DP), ALLOCATABLE :: deff(:,:,:)
+  CHARACTER(LEN=256) :: filename_hdf5
   ! fourier transform of rho
   ! the second derivative of the beta
   ! work space
@@ -134,7 +140,14 @@ SUBROUTINE dynmat_us()
      ikk = ikks(ik)
      IF (lsda) current_spin = isk (ikk)
      npw = ngk(ikk)
-     IF (nksq > 1) CALL get_buffer (evc, lrwfc, iuwfc, ikk)
+     IF (nksq > 1) THEN
+#if defined __HDF5
+       filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
+       CALL get_buffer (evc, lrwfc, iuwfc, ikk)
+#endif
+     ENDIF
      CALL init_us_2 (npw, igk_k(1,ikk), xk (1, ikk), vkb)
      !
      !    We first prepare the gamma terms, which are the second derivatives

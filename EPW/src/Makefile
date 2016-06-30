@@ -1,6 +1,6 @@
 # Makefile for EPW
 
-include ../../make.sys
+include ../../make.inc
 include make.libs
 
 #
@@ -21,7 +21,6 @@ elph2.o \
 epw.o \
 a2f.o \
 allocate_epwq.o \
-printout_base.o \
 bcast_epw_input.o \
 broyden.o \
 close_epw.o \
@@ -89,17 +88,14 @@ readgmap.o \
 readmat_shuffle2.o \
 readwfc.o \
 refold.o \
-reset_sym.o \
 rigid_epw.o \
 rotate_eigenm.o \
 rotate_epmat.o \
 selfen_elec.o \
 selfen_phon.o \
 set_ndnmbr.o \
-setphases.o \
 setphases_wrap.o \
 sgama2.o \
-sgam_at2.o \
 sort.o \
 spectral_func.o \
 star_q2.o \
@@ -112,6 +108,7 @@ pw2wan90epw.o \
 wigner_seitz2.o \
 wigner_seitz.o \
 write_ephmat.o 
+# setphases.o \ : SP: We keep it in case its usefull in the future but now depreciated.
 
 #default : epw
 
@@ -126,7 +123,7 @@ LIBOBJS = ../../clib/clib.a ../../iotk/src/libiotk.a
 
 TLDEPS= bindir mods libs pw-lib pw ph
 
-all :   pw ph wannier wcorr pp ld1 upf libepw.a epw.x 
+all :   pw ph wannier pp ld1 upf libepw.a epw.x 
 
 libepw.a : $(EPWOBJS)
 	$(AR) $(ARFLAGS) $@ $?

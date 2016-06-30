@@ -2,7 +2,7 @@
 # WANNIER90 	
 #=======================================
 
-F90=mpif90
+F90=gfortran
 FCOPTS=$(FFLAGS) -x f95-cpp-input 
 LDOPTS= -g -pthread
 

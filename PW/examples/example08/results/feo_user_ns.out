@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:22:15 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:52:39 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -415,7 +415,7 @@ atomic mag. moment =    -3.138087
 N of occupied +U levels =   13.732858
  --- exit write_ns ---
 
-     total cpu time spent up to now is        1.7 secs
+     total cpu time spent up to now is        1.8 secs
 
      total energy              =    -174.07302140 Ry
      Harris-Foulkes estimate   =    -174.93599285 Ry
@@ -525,7 +525,7 @@ N of occupied +U levels =   13.732858
      atom:    3    charge:    5.6869    magn:    3.3519    constr:    0.0000
      atom:    4    charge:    5.6870    magn:   -3.3519    constr:    0.0000
 
-     total cpu time spent up to now is        6.1 secs
+     total cpu time spent up to now is        6.2 secs
 
      End of self-consistent calculation
  --- enter write_ns ---
@@ -696,10 +696,10 @@ N of occupied +U levels =   13.532029
 
      Writing output data file feo_af.save
  
-     init_run     :      1.08s CPU      1.12s WALL (       1 calls)
-     electrons    :      4.88s CPU      4.93s WALL (       1 calls)
-     forces       :      0.16s CPU      0.17s WALL (       1 calls)
-     stress       :      0.62s CPU      0.63s WALL (       1 calls)
+     init_run     :      1.08s CPU      1.13s WALL (       1 calls)
+     electrons    :      4.90s CPU      4.96s WALL (       1 calls)
+     forces       :      0.17s CPU      0.18s WALL (       1 calls)
+     stress       :      0.63s CPU      0.63s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.12s CPU      0.12s WALL (       1 calls)
@@ -707,21 +707,21 @@ N of occupied +U levels =   13.532029
 
      Called by electrons:
      c_bands      :      2.67s CPU      2.70s WALL (       9 calls)
-     sum_band     :      1.59s CPU      1.60s WALL (       9 calls)
+     sum_band     :      1.61s CPU      1.62s WALL (       9 calls)
      v_of_rho     :      0.18s CPU      0.18s WALL (      10 calls)
-     newd         :      0.39s CPU      0.41s WALL (      10 calls)
+     newd         :      0.40s CPU      0.43s WALL (      10 calls)
      mix_rho      :      0.05s CPU      0.05s WALL (       9 calls)
 
      Called by c_bands:
      init_us_2    :      0.08s CPU      0.08s WALL (     256 calls)
-     cegterg      :      2.51s CPU      2.53s WALL (      72 calls)
+     cegterg      :      2.50s CPU      2.54s WALL (      72 calls)
 
      Called by sum_band:
      sum_band:bec :      0.00s CPU      0.00s WALL (      72 calls)
-     addusdens    :      0.97s CPU      0.97s WALL (       9 calls)
+     addusdens    :      0.99s CPU      0.99s WALL (       9 calls)
 
      Called by *egterg:
-     h_psi        :      2.19s CPU      2.21s WALL (     269 calls)
+     h_psi        :      2.18s CPU      2.21s WALL (     269 calls)
      s_psi        :      0.07s CPU      0.07s WALL (     357 calls)
      g_psi        :      0.01s CPU      0.01s WALL (     189 calls)
      cdiaghg      :      0.23s CPU      0.23s WALL (     261 calls)
@@ -731,26 +731,26 @@ N of occupied +U levels =   13.532029
      vhpsi        :      0.04s CPU      0.04s WALL (     269 calls)
 
      General routines
-     calbec       :      0.23s CPU      0.21s WALL (    2114 calls)
-     fft          :      0.19s CPU      0.20s WALL (     170 calls)
+     calbec       :      0.22s CPU      0.21s WALL (    2114 calls)
+     fft          :      0.20s CPU      0.21s WALL (     170 calls)
      ffts         :      0.01s CPU      0.01s WALL (      38 calls)
-     fftw         :      2.07s CPU      2.05s WALL (    8544 calls)
-     interpolate  :      0.06s CPU      0.06s WALL (      38 calls)
-     davcio       :      0.00s CPU      0.00s WALL (      16 calls)
+     fftw         :      2.09s CPU      2.05s WALL (    8544 calls)
+     interpolate  :      0.05s CPU      0.06s WALL (      38 calls)
+     davcio       :      0.00s CPU      0.00s WALL (       8 calls)
  
      Parallel routines
-     fft_scatter  :      0.34s CPU      0.41s WALL (    8752 calls)
+     fft_scatter  :      0.36s CPU      0.43s WALL (    8752 calls)
 
      Hubbard U routines
      new_ns       :      0.01s CPU      0.01s WALL (       9 calls)
      vhpsi        :      0.04s CPU      0.04s WALL (     269 calls)
-     force_hub    :      0.04s CPU      0.04s WALL (       1 calls)
-     stres_hub    :      0.26s CPU      0.27s WALL (       1 calls)
+     force_hub    :      0.03s CPU      0.04s WALL (       1 calls)
+     stres_hub    :      0.27s CPU      0.27s WALL (       1 calls)
  
-     PWSCF        :     6.89s CPU         7.00s WALL
+     PWSCF        :     6.93s CPU         7.07s WALL
 
  
-   This run was terminated on:  11:22:22  15Jun2016            
+   This run was terminated on:  17:52:46  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,0 +1,37 @@
+autoscan: warning: missing AC_PROG_AWK wanted by: 
+	moduledep.sh:35
+	moduledep.sh:45
+	moduledep.sh:51
+	namedep.sh:32
+	namedep.sh:34
+	namedep.sh:45
+	namedep.sh:56
+	namedep.sh:59
+	namedep.sh:63
+	namedep.sh:72
+	namedep.sh:87
+	namedep.sh:90
+	namedep.sh:96
+	namedep.sh:109
+	includedep.sh:37
+	includedep.sh:46
+autoscan: warning: missing AC_PROG_INSTALL wanted by: 
+	addsontool.sh:12
+	addsontool.sh:73
+	addsontool.sh:116
+	addsonpatch.sh:72
+	addsonpatch.sh:73
+	addsonpatch.sh:75
+	refresh-configure.sh:13
+	build-mingw-cross.sh:71
+	build-mingw-cross.sh:83
+	build-mingw-cross.sh:105
+	build-mingw-cross.sh:106
+	build-mingw-cross.sh:107
+	build-mingw-cross.sh:118
+	build-mingw-cross.sh:125
+	build-mingw-cross.sh:127
+	build-mingw-cross.sh:149
+autoscan: warning: missing AC_PROG_LN_S wanted by: 
+	sync-mingw-to-repo.sh:88
+	addsontool.sh:133

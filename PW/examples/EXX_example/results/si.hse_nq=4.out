@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:27:23 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:54:14 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -497,13 +497,13 @@
      Davidson diagonalization with overlap
      ethr =  9.15E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is       15.0 secs
+     total cpu time spent up to now is       14.9 secs
 
      iteration #  3     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  5.72E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is       19.7 secs
+     total cpu time spent up to now is       19.6 secs
 
      End of self-consistent calculation
 
@@ -559,7 +559,7 @@
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is       21.1 secs
+     total cpu time spent up to now is       21.0 secs
 
      per-process dynamical memory:    31.9 Mb
 
@@ -569,13 +569,13 @@
      Davidson diagonalization with overlap
      ethr =  5.72E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is       27.8 secs
+     total cpu time spent up to now is       27.7 secs
 
      iteration #  2     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  4.03E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is       32.4 secs
+     total cpu time spent up to now is       32.3 secs
 
      End of self-consistent calculation
 
@@ -631,7 +631,7 @@
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is       33.9 secs
+     total cpu time spent up to now is       33.8 secs
 
      per-process dynamical memory:    31.9 Mb
 
@@ -647,7 +647,7 @@
      Davidson diagonalization with overlap
      ethr =  9.35E-10,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is       44.0 secs
+     total cpu time spent up to now is       43.9 secs
 
      End of self-consistent calculation
 
@@ -706,53 +706,52 @@
      Writing output data file silicon.save
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :     39.31s CPU     40.40s WALL (       4 calls)
+     electrons    :     39.21s CPU     40.24s WALL (       4 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     39.24s CPU     40.33s WALL (      12 calls)
-     sum_band     :      0.03s CPU      0.04s WALL (      12 calls)
+     c_bands      :     39.14s CPU     40.17s WALL (      12 calls)
+     sum_band     :      0.04s CPU      0.04s WALL (      12 calls)
      v_of_rho     :      0.03s CPU      0.03s WALL (      12 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (      12 calls)
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     320 calls)
-     cegterg      :     39.23s CPU     40.31s WALL (     120 calls)
+     cegterg      :     39.13s CPU     40.15s WALL (     120 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :     39.14s CPU     40.22s WALL (     365 calls)
+     h_psi        :     39.03s CPU     40.06s WALL (     365 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     235 calls)
-     cdiaghg      :      0.06s CPU      0.06s WALL (     305 calls)
+     cdiaghg      :      0.07s CPU      0.07s WALL (     305 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.00s CPU      0.00s WALL (     365 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (     435 calls)
-     fft          :      0.00s CPU      0.01s WALL (     129 calls)
-     fftw         :      0.15s CPU      0.16s WALL (    5806 calls)
-     fftc         :     22.71s CPU     28.16s WALL (  777216 calls)
-     fftcw        :      0.10s CPU      0.10s WALL (    3196 calls)
-     davcio       :      0.00s CPU      0.00s WALL (      10 calls)
+     fft          :      0.01s CPU      0.01s WALL (     129 calls)
+     fftw         :      0.15s CPU      0.15s WALL (    5806 calls)
+     fftc         :     21.85s CPU     27.96s WALL (  777216 calls)
+     fftcw        :      0.09s CPU      0.09s WALL (    3196 calls)
  
      Parallel routines
-     fft_scatter  :      9.18s CPU     10.85s WALL (  786347 calls)
+     fft_scatter  :      8.59s CPU     10.61s WALL (  786347 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
-     exxinit      :      0.19s CPU      0.21s WALL (       4 calls)
-     vexx         :     38.99s CPU     40.06s WALL (     206 calls)
-     exxenergy    :      4.67s CPU      4.77s WALL (       7 calls)
+     exxinit      :      0.19s CPU      0.20s WALL (       4 calls)
+     vexx         :     38.88s CPU     39.90s WALL (     206 calls)
+     exxenergy    :      4.67s CPU      4.80s WALL (       7 calls)
  
-     PWSCF        :    44.27s CPU        45.49s WALL
+     PWSCF        :    44.19s CPU        45.36s WALL
 
  
-   This run was terminated on:  11:28: 8  15Jun2016            
+   This run was terminated on:  17:54:59  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -64,8 +64,15 @@ SUBROUTINE phq_init()
 
   USE lrus,                 ONLY : becp1, dpqq, dpqq_so
   USE qpoint,               ONLY : xq, nksq, eigqts, ikks, ikqs
-  USE eqv,                  ONLY : vlocq, evq, eprec
+  USE eqv,                  ONLY : vlocq, evq
   USE control_lr,           ONLY : nbnd_occ, lgamma
+  USE io_files,             ONLY : tmp_dir, nd_nmbr
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE control_ph,           ONLY : tmp_dir_ph
+  USE save_ph,              ONLY : tmp_dir_save
+  USE mp_world,             ONLY : mpime
+#endif
   !
   IMPLICIT NONE
   !
@@ -82,12 +89,11 @@ SUBROUTINE phq_init()
     ! counter on G vectors
   INTEGER :: ikqg         !for the case elph_mat=.true.
   INTEGER :: npw, npwq
-  REAL(DP), ALLOCATABLE :: gk(:)
   REAL(DP) :: arg
     ! the argument of the phase
   COMPLEX(DP), ALLOCATABLE :: aux1(:,:)
     ! used to compute alphap
-  COMPLEX(DP), EXTERNAL :: zdotc
+  CHARACTER(LEN=256)     :: filename_hdf5
   !
   !
   IF (all_done) RETURN
@@ -144,7 +150,6 @@ SUBROUTINE phq_init()
   endif
   !
   ALLOCATE( aux1( npwx*npol, nbnd ) )
-  ALLOCATE( gk(npwx) )
   !
   DO ik = 1, nksq
      !
@@ -176,11 +181,18 @@ SUBROUTINE phq_init()
      !
      ! ... read the wavefunctions at k
      !
+    write(mpime+500,*) ik, nksq
+    if(ik.eq.18) call errore('','',44)
     if(elph_mat) then
         call read_wfc_rspace_and_fwfft( evc, ik, lrwfcr, iunwfcwann, npw, igk_k(1,ikk) )
 !       CALL davcio (evc, lrwfc, iunwfcwann, ik, - 1)
     else
-       CALL get_buffer( evc, lrwfc, iuwfc, ikk )
+#if defined __HDF5
+    filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+    CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+    CALL get_buffer( evc, lrwfc, iuwfc, ikk )
+#endif
     endif
      !
      ! ... e) we compute the becp terms which are used in the rest of
@@ -237,32 +249,8 @@ SUBROUTINE phq_init()
   ENDIF
 !!!!!!!!!!!!!!!!!!!!!!!! END OF ACFDT TEST !!!!!!!!!!!!!!!!
      !
-     ! diagonal elements of the unperturbed Hamiltonian,
-     ! needed for preconditioning
-     !
-     do ig = 1, npwq
-        gk (ig) = ( (xk (1,ikq) + g (1, igk_k(ig,ikq)) ) **2 + &
-                    (xk (2,ikq) + g (2, igk_k(ig,ikq)) ) **2 + &
-                    (xk (3,ikq) + g (3, igk_k(ig,ikq)) ) **2 ) * tpiba2
-     enddo
-     aux1=(0.d0,0.d0)
-     DO ig = 1, npwq
-        aux1 (ig,1:nbnd_occ(ikk)) = gk (ig) * evq (ig, 1:nbnd_occ(ikk))
-     END DO
-     IF (noncolin) THEN
-        DO ig = 1, npwq
-           aux1 (ig+npwx,1:nbnd_occ(ikk)) = gk (ig)* &
-                                  evq (ig+npwx, 1:nbnd_occ(ikk))
-        END DO
-     END IF
-     DO ibnd=1,nbnd_occ(ikk)
-        eprec (ibnd,ik) = 1.35d0 * zdotc(npwx*npol,evq(1,ibnd),1,aux1(1,ibnd),1)
-     END DO
-     !
   END DO
-  CALL mp_sum ( eprec, intra_bgrp_comm )
   !
-  DEALLOCATE( gk ) 
   DEALLOCATE( aux1 )
   !
   CALL dvanqq()

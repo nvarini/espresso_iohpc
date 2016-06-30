@@ -495,9 +495,12 @@ Module buffers
   !
   ! QE interfaces to BUIOL module
   !
-  PUBLIC :: open_buffer, get_buffer, close_buffer
-  PUBLIC ::  get_buffer_hdf5, save_buffer, save_buffer_hdf5
+  PUBLIC :: open_buffer, get_buffer, close_buffer, save_buffer
+  PUBLIC ::  get_buffer_hdf5, save_buffer_hdf5
 
+  interface close_buffer
+    module procedure close_buffer, close_buffer_hdf5
+  end interface close_buffer
 
 
   PRIVATE
@@ -567,18 +570,31 @@ contains
     !
   END SUBROUTINE open_buffer
   !----------------------------------------------------------------------------
-  SUBROUTINE save_buffer( vect, nword, unit, nrec )
+  SUBROUTINE save_buffer( vect, nword, unit, nrec, filename, hdf5desc )
     !---------------------------------------------------------------------------
     !
     ! ... copy vect(1:nword) into the "nrec"-th record of a previously
     ! ... allocated buffer / opened direct-access file, depending upon
     ! ... how "open_buffer" was called
     !
+#if defined __HDF5
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+                         write_evc, hdf5_close, prepare_for_writing_final
+    USE control_flags, ONLY : twfcollect
+    USE mp_pools,      ONLY : inter_pool_comm
+    USE mp_world,      ONLY : mpime
+#endif
     IMPLICIT NONE
     !
     INTEGER, INTENT(IN) :: nword, unit, nrec
     COMPLEX(DP), INTENT(IN) :: vect(nword)
-    INTEGER :: ierr
+    CHARACTER(LEN=256), OPTIONAL, INTENT(IN) :: filename
+#if defined __HDF5
+    TYPE(HDF5_type), OPTIONAL, INTENT(INOUT) :: hdf5desc
+#endif
+    
+    INTEGER :: ierr, twf_collect
     !
     ierr = buiol_check_unit (unit)
     IF( ierr > 0 ) THEN
@@ -589,21 +605,35 @@ contains
        print *, 'save_buffer: record', nrec, ' written to unit', unit
 #endif
     ELSE 
+#if defined __HDF5
+       IF(present(filename)) THEN
+          CALL prepare_for_writing_final(hdf5desc,inter_pool_comm,filename, nrec)
+          twf_collect = twfcollect
+          CALL add_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec)
+          CALL write_evc(hdf5desc,0,vect, nrec)
+          CALL hdf5_close(hdf5desc)
+       ELSE
+          CALL davcio ( vect, 2*nword, unit, nrec, +1 )
+       ENDIF
+#else
        CALL davcio ( vect, 2*nword, unit, nrec, +1 )
+#endif
     END IF
     !
   END SUBROUTINE save_buffer
 
   SUBROUTINE save_buffer_hdf5(hdf5desc,data,kpoint)
-    USE hdf5_qe
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+                         write_data_hdf5, HDF5_type
     USE mp_pools, ONLY : inter_pool_comm
+    USE hdf5,     ONLY : h5fclose_f
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     complex(kind=DP), intent(inout) :: data(:,:)
     integer, intent(in) :: kpoint
     logical :: flag
     integer :: error
-    
+   
     if(kpoint.eq.1) then
        flag = .true.
     else 
@@ -623,9 +653,9 @@ contains
     type(HDF5_type), intent(inout) :: hdf5desc
     complex(kind=DP), intent(inout) :: data(:,:)
     integer, intent(in) :: kpoint
-    
-    call read_data_hdf5(hdf5desc,data,kpoint)
    
+    call read_data_hdf5(hdf5desc,data,kpoint)
+  
   END SUBROUTINE get_buffer_hdf5
 
 
@@ -633,7 +663,7 @@ contains
 
   !
   !----------------------------------------------------------------------------
-  SUBROUTINE get_buffer( vect, nword, unit, nrec )
+  SUBROUTINE get_buffer( vect, nword, unit, nrec, filename, hdf5desc )
     !---------------------------------------------------------------------------
     !
     ! ... copy vect(1:nword) from the "nrec"-th record of a previously
@@ -641,49 +671,70 @@ contains
     ! ... how "open_buffer" was called. If buffer access was chosen 
     ! ... but buffer is not allocated, open the file, read from file
     !
-    USE io_files, ONLY : diropn
+    USE io_files,      ONLY : diropn
+#if defined __HDF5
+    USE hdf5_qe,       ONLY : HDF5_type, prepare_for_reading_final, &
+                       read_evc, read_attributes_hdf5, hdf5_close
+    USE mp_pools,      ONLY : inter_pool_comm
+    USE control_flags, ONLY : twfcollect
+    USE mp_world,      ONLY : mpime
+#endif
     !
     IMPLICIT NONE
     !
     INTEGER, INTENT(IN) :: nword, unit, nrec
     COMPLEX(DP), INTENT(OUT) :: vect(nword)
+#if defined __HDF5
+    CHARACTER(LEN=256), OPTIONAL,  INTENT(IN) :: filename 
+    TYPE(HDF5_type), OPTIONAL, INTENT(INOUT)  :: hdf5desc
+#endif
     CHARACTER(LEN=256) :: extension, save_dir
-    INTEGER :: ierr
+    INTEGER :: ierr, twf_collect
     LOGICAL :: opnd
     !
-    ierr = buiol_check_unit (unit)
-    IF( ierr > 0 ) THEN
-       ierr = buiol_read_record ( unit, nword, nrec, vect )
+    IF(present(filename))THEN
+       CALL prepare_for_reading_final(hdf5desc,inter_pool_comm,filename, nrec)
+       CALL read_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec,45)
+       twfcollect = twf_collect
+       CALL read_evc(hdf5desc,0,vect, nrec)
+       CALL hdf5_close(hdf5desc)
+    ELSE
+       ierr = buiol_check_unit (unit)
+       IF( ierr > 0 ) THEN
+          ierr = buiol_read_record ( unit, nword, nrec, vect )
 #ifdef __DEBUG
-       print *, 'get_buffer: record', nrec, ' read from unit', unit
+          print *, 'get_buffer: record', nrec, ' read from unit', unit
 #endif
-       if ( ierr < 0 ) then
-          ! record not found: open file if not opened, read from it...
-          INQUIRE( UNIT = unit, OPENED = opnd )
-          IF ( .NOT. opnd ) THEN
-             extension = buiol_get_ext (unit)
-             save_dir  = buiol_get_dir (unit)
-             CALL diropn ( unit, extension, 2*nword, opnd, save_dir )      
-          END IF
-          CALL davcio ( vect, 2*nword, unit, nrec, -1 )
-          ! ... and save to memory
-          ierr =  buiol_write_record ( unit, nword, nrec, vect )
-          if ( ierr /= 0 ) CALL errore ('get_buffer', &
-                                  'cannot store record in memory', unit)
+          if ( ierr < 0 ) then
+             ! record not found: open file if not opened, read from it...
+             INQUIRE( UNIT = unit, OPENED = opnd )
+             IF ( .NOT. opnd ) THEN
+                extension = buiol_get_ext (unit)
+                save_dir  = buiol_get_dir (unit)
+                CALL diropn ( unit, extension, 2*nword, opnd, save_dir )      
+             END IF
+             CALL davcio ( vect, 2*nword, unit, nrec, -1 )
+             ! ... and save to memory
+             ierr =  buiol_write_record ( unit, nword, nrec, vect )
+             if ( ierr /= 0 ) CALL errore ('get_buffer', &
+                  'cannot store record in memory', unit)
+          ENDIF
 #ifdef __DEBUG
           print *, 'get_buffer: record', nrec, ' read from file', unit
 #endif
-       end if
+          
 #ifdef __DEBUG
-       print *, 'get_buffer: record', nrec, ' read from unit', unit
+          print *, 'get_buffer: record', nrec, ' read from unit', unit
 #endif
-    ELSE
-       CALL davcio ( vect, 2*nword, unit, nrec, -1 )
+       
+       ELSE
+          CALL davcio ( vect, 2*nword, unit, nrec, -1 )
+       END IF
     END IF
     !
   END SUBROUTINE get_buffer
 
-  SUBROUTINE close_buffer ( unit, status )
+  SUBROUTINE close_buffer ( unit, status, filename, hdf5desc )
     !
     !     close unit with status "status" ('keep' or 'delete')
     !     deallocate related buffer if any; if "status='keep'"
@@ -691,6 +742,13 @@ contains
     !     Does not complain if closing an already closed unit
     !
     USE io_files, ONLY : diropn
+    USE mp_world, ONLY : mpime
+#if defined __HDF5
+    USE hdf5_qe,  ONLY : prepare_for_writing_final, HDF5_type,&
+                         hdf5_close, write_evc, add_attributes_hdf5
+    USE mp_pools, ONLY : inter_pool_comm
+    USE control_flags,    ONLY : twfcollect
+#endif
     !
     IMPLICIT NONE
     !
@@ -701,6 +759,11 @@ contains
     CHARACTER(LEN=256) :: extension, save_dir
     INTEGER :: n, ierr, nrec, nword
     LOGICAL :: opnd
+#if defined __HDF5
+    CHARACTER(LEN=256), OPTIONAL, INTENT(IN) :: filename
+    TYPE(HDF5_type), OPTIONAL,  INTENT(INOUT) :: hdf5desc
+    INTEGER                                   :: twf_collect
+#endif
     !
     nword = buiol_check_unit (unit)
     !
@@ -719,7 +782,20 @@ contains
   10      continue
              ierr = buiol_read_record ( unit, nword, n, vect )
              IF ( ierr /= 0 ) go to 20
+#if defined __HDF5
+             IF(present(filename)) THEN
+                CALL prepare_for_writing_final(hdf5desc,inter_pool_comm,filename, n)
+                twf_collect = twfcollect
+                CALL add_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",n)
+                CALL write_evc(hdf5desc,0,vect, n)
+                CALL hdf5_close(hdf5desc)
+             ELSE
+                CALL davcio ( vect, 2*nword, unit, n, +1 )
+             ENDIF
+#else
              CALL davcio ( vect, 2*nword, unit, n, +1 )
+#endif
+             !CALL davcio ( vect, 2*nword, unit, n, +1 )
              n = n+1
           go to 10
   20      deallocate (vect)
@@ -738,5 +814,8 @@ contains
   END SUBROUTINE close_buffer
 
   ! end interface for old "buffers" module
+
+  SUBROUTINE close_buffer_hdf5
+  END SUBROUTINE close_buffer_hdf5
 
 end module buffers

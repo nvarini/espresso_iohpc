@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:20:54 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:51:17 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -175,7 +175,7 @@
  ==============================================================================
      Starting wfc are   12 randomized atomic wfcs +    4 random wfc
 
-     total cpu time spent up to now is        0.3 secs
+     total cpu time spent up to now is        0.4 secs
 
      per-process dynamical memory:     6.0 Mb
 
@@ -245,7 +245,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        2.5 secs
 
      total energy              =     -53.84005315 Ry
      Harris-Foulkes estimate   =     -57.46627258 Ry
@@ -270,7 +270,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        2.9 secs
+     total cpu time spent up to now is        2.8 secs
 
      total energy              =     -55.41694913 Ry
      Harris-Foulkes estimate   =     -55.87247121 Ry
@@ -320,7 +320,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        3.6 secs
+     total cpu time spent up to now is        3.5 secs
 
      total energy              =     -55.52073265 Ry
      Harris-Foulkes estimate   =     -55.54677162 Ry
@@ -545,7 +545,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        6.4 secs
+     total cpu time spent up to now is        6.3 secs
 
      total energy              =     -55.58146959 Ry
      Harris-Foulkes estimate   =     -55.57209127 Ry
@@ -570,7 +570,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        6.6 secs
 
      total energy              =     -55.51480857 Ry
      Harris-Foulkes estimate   =     -55.58198776 Ry
@@ -645,7 +645,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        7.6 secs
+     total cpu time spent up to now is        7.5 secs
 
      total energy              =     -55.52481910 Ry
      Harris-Foulkes estimate   =     -55.54775488 Ry
@@ -720,7 +720,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        8.5 secs
+     total cpu time spent up to now is        8.4 secs
 
      total energy              =     -55.51955867 Ry
      Harris-Foulkes estimate   =     -55.63839022 Ry
@@ -745,7 +745,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        8.8 secs
+     total cpu time spent up to now is        8.7 secs
 
      total energy              =     -55.55284542 Ry
      Harris-Foulkes estimate   =     -55.55318784 Ry
@@ -770,7 +770,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is        9.1 secs
+     total cpu time spent up to now is        9.0 secs
 
      total energy              =     -55.55022490 Ry
      Harris-Foulkes estimate   =     -55.55288837 Ry
@@ -920,7 +920,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is       10.8 secs
+     total cpu time spent up to now is       10.7 secs
 
      total energy              =     -55.54461351 Ry
      Harris-Foulkes estimate   =     -55.54494747 Ry
@@ -945,7 +945,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is       11.1 secs
+     total cpu time spent up to now is       11.0 secs
 
      total energy              =     -55.54478092 Ry
      Harris-Foulkes estimate   =     -55.54478117 Ry
@@ -1357,52 +1357,51 @@
 
      Writing output data file fe.save
  
-     init_run     :      0.28s CPU      0.30s WALL (       1 calls)
-     electrons    :     13.09s CPU     13.44s WALL (       1 calls)
+     init_run     :      0.28s CPU      0.31s WALL (       1 calls)
+     electrons    :     13.09s CPU     13.42s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.09s CPU      0.09s WALL (       1 calls)
      potinit      :      0.00s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     10.13s CPU     10.42s WALL (      40 calls)
-     sum_band     :      2.59s CPU      2.66s WALL (      40 calls)
+     c_bands      :     10.12s CPU     10.37s WALL (      40 calls)
+     sum_band     :      2.60s CPU      2.67s WALL (      40 calls)
      v_of_rho     :      0.09s CPU      0.09s WALL (      41 calls)
-     newd         :      0.16s CPU      0.16s WALL (      41 calls)
+     newd         :      0.17s CPU      0.17s WALL (      41 calls)
      mix_rho      :      0.07s CPU      0.07s WALL (      40 calls)
 
      Called by c_bands:
-     init_us_2    :      0.10s CPU      0.09s WALL (    2592 calls)
-     cegterg      :      9.59s CPU      9.90s WALL (    1280 calls)
+     init_us_2    :      0.09s CPU      0.09s WALL (    2592 calls)
+     cegterg      :      9.57s CPU      9.84s WALL (    1280 calls)
 
      Called by sum_band:
      sum_band:bec :      0.03s CPU      0.04s WALL (    1280 calls)
-     addusdens    :      0.66s CPU      0.66s WALL (      40 calls)
+     addusdens    :      0.66s CPU      0.67s WALL (      40 calls)
 
      Called by *egterg:
-     h_psi        :      6.72s CPU      6.90s WALL (    3701 calls)
+     h_psi        :      6.73s CPU      6.89s WALL (    3701 calls)
      s_psi        :      0.18s CPU      0.18s WALL (    3701 calls)
      g_psi        :      0.06s CPU      0.05s WALL (    2389 calls)
-     cdiaghg      :      1.98s CPU      1.98s WALL (    3669 calls)
+     cdiaghg      :      1.91s CPU      1.93s WALL (    3669 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.20s CPU      0.20s WALL (    3701 calls)
 
      General routines
-     calbec       :      0.27s CPU      0.23s WALL (    4981 calls)
-     fft          :      0.13s CPU      0.13s WALL (    1331 calls)
+     calbec       :      0.26s CPU      0.23s WALL (    4981 calls)
+     fft          :      0.14s CPU      0.13s WALL (    1331 calls)
      ffts         :      0.01s CPU      0.01s WALL (     324 calls)
-     fftw         :      5.85s CPU      6.18s WALL (  225956 calls)
+     fftw         :      5.83s CPU      6.17s WALL (  225956 calls)
      interpolate  :      0.05s CPU      0.05s WALL (     324 calls)
-     davcio       :      0.00s CPU      0.00s WALL (      32 calls)
  
      Parallel routines
-     fft_scatter  :      1.36s CPU      1.73s WALL (  227611 calls)
+     fft_scatter  :      1.34s CPU      1.73s WALL (  227611 calls)
  
-     PWSCF        :    13.52s CPU        13.90s WALL
+     PWSCF        :    13.51s CPU        13.90s WALL
 
  
-   This run was terminated on:  11:21: 8  15Jun2016            
+   This run was terminated on:  17:51:31  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

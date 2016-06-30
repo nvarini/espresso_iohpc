@@ -9,7 +9,7 @@ The following libraries have been found:
   LAPACK_LIBS=
   @delete@
   FFT_LIBS=
-  @delete@
+  MPI_LIBS=-lmpi 
   @delete@
 Please check if this is what you expect.
 

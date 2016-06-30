@@ -36,6 +36,12 @@ subroutine zstar_eu
   USE mp_pools,              ONLY : inter_pool_comm
   USE mp_bands,              ONLY : intra_bgrp_comm
   USE mp,                    ONLY : mp_sum
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+#endif
+
 
   implicit none
 
@@ -44,6 +50,7 @@ subroutine zstar_eu
   ! counters
   real(DP) :: weight
   complex(DP), external :: zdotc
+  character(len=256) :: filename_hdf5
   !  scalar product
   !
   call start_clock ('zstar_eu')
@@ -55,7 +62,14 @@ subroutine zstar_eu
      npw = ngk(ik)
      npwq = npw
      weight = wk (ik)
-     if (nksq > 1) call get_buffer (evc, lrwfc, iuwfc, ik)
+     if (nksq > 1) then
+#if defined __HDF5
+          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+          CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+          call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+     endif
      call init_us_2 (npw, igk_k(1,ik), xk (1, ik), vkb)
      imode0 = 0
      do irr = 1, nirr

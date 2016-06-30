@@ -219,6 +219,7 @@ SUBROUTINE read_upf_v2(u, upf, grid, ierr)             !
       !
       CALL iotk_scan_dat(u, 'PP_R',   upf%r(1:upf%mesh))
       CALL iotk_scan_dat(u, 'PP_RAB', upf%rab(1:upf%mesh))
+  call errore('','',460)
       !
       IF (present(grid)) THEN
          ! Reconstruct additional grids

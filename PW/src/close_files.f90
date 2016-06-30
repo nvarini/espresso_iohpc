@@ -21,12 +21,18 @@ SUBROUTINE close_files(lflag)
   USE mp,            ONLY : mp_barrier
   USE wannier_new,   ONLY : use_wannier
   USE bp,            ONLY : lelfield
+#if defined __HDF5
+  USE hdf5_qe,       ONLY : evc_hdf5_write 
+  USE io_files,      ONLY : tmp_dir, nd_nmbr
+  USE mp_world,      ONLY : mpime
+#endif
   !
   IMPLICIT NONE
   !
   LOGICAL, intent(in) :: lflag
   !
   LOGICAL :: opnd
+  CHARACTER(LEN=256) :: filename_hdf5
   !
   !  ... close buffer/file containing wavefunctions: discard if
   !  ... wavefunctions are written in xml format, save otherwise
@@ -34,7 +40,12 @@ SUBROUTINE close_files(lflag)
   IF ( lflag .AND. (twfcollect .OR. io_level < 0 )) THEN
      CALL close_buffer ( iunwfc, 'DELETE' )
   ELSE
+#if defined __HDF5
+     filename_hdf5=trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     CALL close_buffer ( iunwfc, 'KEEP',  filename_hdf5, evc_hdf5_write)
+#else
      CALL close_buffer ( iunwfc, 'KEEP' )
+#endif
   END IF
   !
   ! ... iunsat contains the (orthogonalized) atomic wfcs * S

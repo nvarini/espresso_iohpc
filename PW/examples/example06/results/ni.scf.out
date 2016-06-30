@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:21:27 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:51:51 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -181,7 +181,7 @@
      Davidson diagonalization with overlap
      ethr =  3.16E-03,  avg # of iterations =  1.2
 
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        6.8 secs
 
      total energy              =     -85.89137996 Ry
      Harris-Foulkes estimate   =     -85.89085632 Ry
@@ -194,7 +194,7 @@
      Davidson diagonalization with overlap
      ethr =  2.55E-06,  avg # of iterations =  3.4
 
-     total cpu time spent up to now is        9.3 secs
+     total cpu time spent up to now is        9.4 secs
 
      total energy              =     -85.89189534 Ry
      Harris-Foulkes estimate   =     -85.89188964 Ry
@@ -207,7 +207,7 @@
      Davidson diagonalization with overlap
      ethr =  3.54E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is       10.7 secs
+     total cpu time spent up to now is       10.8 secs
 
      total energy              =     -85.89190143 Ry
      Harris-Foulkes estimate   =     -85.89189967 Ry
@@ -220,7 +220,7 @@
      Davidson diagonalization with overlap
      ethr =  2.95E-08,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is       12.2 secs
+     total cpu time spent up to now is       12.4 secs
 
      total energy              =     -85.89190272 Ry
      Harris-Foulkes estimate   =     -85.89190224 Ry
@@ -233,7 +233,7 @@
      Davidson diagonalization with overlap
      ethr =  1.68E-09,  avg # of iterations =  1.7
 
-     total cpu time spent up to now is       13.7 secs
+     total cpu time spent up to now is       13.9 secs
 
      total energy              =     -85.89190272 Ry
      Harris-Foulkes estimate   =     -85.89190275 Ry
@@ -255,7 +255,7 @@
 
  ==============================================================================
 
-     total cpu time spent up to now is       15.1 secs
+     total cpu time spent up to now is       15.3 secs
 
      End of self-consistent calculation
 
@@ -282,52 +282,51 @@
 
      Writing output data file ni.save
  
-     init_run     :      0.78s CPU      0.80s WALL (       1 calls)
-     electrons    :     13.88s CPU     14.30s WALL (       1 calls)
+     init_run     :      0.76s CPU      0.82s WALL (       1 calls)
+     electrons    :     14.02s CPU     14.41s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      0.45s CPU      0.46s WALL (       1 calls)
+     wfcinit      :      0.44s CPU      0.46s WALL (       1 calls)
      potinit      :      0.02s CPU      0.02s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     11.51s CPU     11.86s WALL (       8 calls)
-     sum_band     :      2.17s CPU      2.24s WALL (       8 calls)
+     c_bands      :     11.64s CPU     11.97s WALL (       8 calls)
+     sum_band     :      2.19s CPU      2.24s WALL (       8 calls)
      v_of_rho     :      0.13s CPU      0.13s WALL (       9 calls)
-     newd         :      0.06s CPU      0.06s WALL (       9 calls)
+     newd         :      0.06s CPU      0.07s WALL (       9 calls)
      mix_rho      :      0.01s CPU      0.01s WALL (       8 calls)
 
      Called by c_bands:
-     init_us_2    :      0.08s CPU      0.08s WALL (    2448 calls)
-     cegterg      :     11.09s CPU     11.45s WALL (    1152 calls)
+     init_us_2    :      0.07s CPU      0.08s WALL (    2448 calls)
+     cegterg      :     11.20s CPU     11.55s WALL (    1152 calls)
 
      Called by sum_band:
      sum_band:bec :      0.03s CPU      0.04s WALL (    1152 calls)
      addusdens    :      0.23s CPU      0.23s WALL (       8 calls)
 
      Called by *egterg:
-     h_psi        :      7.81s CPU      8.03s WALL (    3659 calls)
-     s_psi        :      0.18s CPU      0.18s WALL (    3659 calls)
+     h_psi        :      7.87s CPU      8.09s WALL (    3659 calls)
+     s_psi        :      0.18s CPU      0.19s WALL (    3659 calls)
      g_psi        :      0.05s CPU      0.05s WALL (    2363 calls)
-     cdiaghg      :      2.60s CPU      2.64s WALL (    3515 calls)
+     cdiaghg      :      2.62s CPU      2.66s WALL (    3515 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.22s CPU      0.22s WALL (    3659 calls)
 
      General routines
-     calbec       :      0.28s CPU      0.23s WALL (    4811 calls)
-     fft          :      0.06s CPU      0.06s WALL (     419 calls)
+     calbec       :      0.27s CPU      0.23s WALL (    4811 calls)
+     fft          :      0.07s CPU      0.07s WALL (     419 calls)
      ffts         :      0.00s CPU      0.00s WALL (      68 calls)
-     fftw         :      6.59s CPU      6.99s WALL (  253172 calls)
+     fftw         :      6.68s CPU      7.05s WALL (  253172 calls)
      interpolate  :      0.01s CPU      0.01s WALL (      68 calls)
-     davcio       :      0.00s CPU      0.01s WALL (     144 calls)
  
      Parallel routines
-     fft_scatter  :      1.50s CPU      1.92s WALL (  253659 calls)
+     fft_scatter  :      1.57s CPU      1.98s WALL (  253659 calls)
  
-     PWSCF        :    15.02s CPU        15.52s WALL
+     PWSCF        :    15.18s CPU        15.68s WALL
 
  
-   This run was terminated on:  11:21:43  15Jun2016            
+   This run was terminated on:  17:52: 6  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

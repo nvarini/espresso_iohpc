@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12496M) starts on 15Jun2016 at 11:21:15 
+     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:51:39 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -8,13 +8,13 @@
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
  
-           HOST :    @host@
+           HOST :    x86_64-pc-linux-gnu
            ARCH :    x86_64
-             CC :    cc
+             CC :    icc
             CPP :    cpp
-            F90 :    mpif90
+            F90 :    gfortran
             F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
       BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
@@ -279,26 +279,26 @@
 
      Writing output data file cu.save
  
-     init_run     :      0.19s CPU      0.20s WALL (       1 calls)
-     electrons    :      0.52s CPU      0.54s WALL (       1 calls)
+     init_run     :      0.18s CPU      0.22s WALL (       1 calls)
+     electrons    :      0.53s CPU      0.54s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.52s CPU      0.54s WALL (       1 calls)
+     c_bands      :      0.53s CPU      0.54s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
      newd         :      0.00s CPU      0.01s WALL (       1 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      28 calls)
-     cegterg      :      0.45s CPU      0.47s WALL (      31 calls)
+     cegterg      :      0.46s CPU      0.47s WALL (      31 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.36s CPU      0.38s WALL (     370 calls)
+     h_psi        :      0.37s CPU      0.38s WALL (     370 calls)
      s_psi        :      0.01s CPU      0.01s WALL (     370 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     311 calls)
      cdiaghg      :      0.09s CPU      0.08s WALL (     339 calls)
@@ -315,12 +315,12 @@
      davcio       :      0.00s CPU      0.00s WALL (      28 calls)
  
      Parallel routines
-     fft_scatter  :      0.09s CPU      0.08s WALL (    9534 calls)
+     fft_scatter  :      0.08s CPU      0.08s WALL (    9534 calls)
  
-     PWSCF        :     1.05s CPU         1.09s WALL
+     PWSCF        :     1.03s CPU         1.10s WALL
 
  
-   This run was terminated on:  11:21:16  15Jun2016            
+   This run was terminated on:  17:51:40  29Jun2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
