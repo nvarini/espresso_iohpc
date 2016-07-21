@@ -1,0 +1,13 @@
+vibrations of ch4, only modes of E symmetry 
+ &inputph
+  tr2_ph=4.0d-17,
+  prefix='ch4',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir',
+  nogg=.true.
+  start_irr=2,
+  last_irr=2,
+  recover=.true.,
+  ldiag=.true.,
+  fildyn='ch4_e.dyn',
+ /
+0.0 0.0 0.0

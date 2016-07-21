@@ -26,6 +26,7 @@ add_zstar_ue.o : ../../Modules/uspp.o
 add_zstar_ue.o : ../../Modules/wavefunctions.o
 add_zstar_ue.o : ../../PW/src/buffers.o
 add_zstar_ue.o : ../../PW/src/pwcom.o
+add_zstar_ue.o : save_ph_input.o
 add_zstar_ue.o : phcom.o
 add_zstar_ue_us.o : ../../LR_Modules/lrcom.o
 add_zstar_ue_us.o : ../../Modules/kind.o
@@ -366,6 +367,7 @@ dielec_test.o : ../../PW/src/symme.o
 dielec_test.o : phcom.o
 dielec_test.o : ramanm.o
 do_phonon.o : elph.o
+do_phonon.o : ../../PW/src/buffers.o
 do_phonon.o : phcom.o
 do_phonon.o : yambo.o
 drho.o : ../../LR_Modules/lrcom.o

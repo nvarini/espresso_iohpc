@@ -40,6 +40,9 @@ subroutine zstar_eu
   USE io_files,             ONLY :  nd_nmbr
   USE save_ph,              ONLY : tmp_dir_save
   USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE control_lr,           ONLY : lgamma
+  USE mp_world,             ONLY : mpime
 #endif
 
 
@@ -64,12 +67,18 @@ subroutine zstar_eu
      weight = wk (ik)
      if (nksq > 1) then
 #if defined __HDF5
-          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+          IF ( .NOT. lgamma ) THEN
+            filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+          ELSE
+            filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+          ENDIF
           CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+          !call get_buffer (evc, lrwfc, iuwfc, ik)
 #else
           call get_buffer (evc, lrwfc, iuwfc, ik)
 #endif
      endif
+
      call init_us_2 (npw, igk_k(1,ik), xk (1, ik), vkb)
      imode0 = 0
      do irr = 1, nirr

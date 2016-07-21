@@ -13,7 +13,7 @@
   ! ... diagonalization of the KS hamiltonian in the non-scf case
   !
   USE kinds,                ONLY : DP
-  USE bp,                   ONLY : lelfield, lberry, lorbm, lcalc_z2
+  USE bp,                   ONLY : lelfield, lberry, lorbm
   USE check_stop,           ONLY : stopped_by_user
   USE control_flags,        ONLY : io_level, conv_elec, lbands
   USE ener,                 ONLY : ef
@@ -24,6 +24,10 @@
   USE lsda_mod,             ONLY : lsda, nspin
   USE wvfct,                ONLY : nbnd, et, npwx
   USE wavefunctions_module, ONLY : evc
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : nd_nmbr, tmp_dir
+#endif
   !
   IMPLICIT NONE
   !
@@ -31,6 +35,7 @@
   !
   INTEGER :: iter, i
   REAL(DP), EXTERNAL :: get_clock
+  CHARACTER(LEN=256) :: filename_hdf5
   !
   !
   CALL start_clock( 'electrons' )
@@ -91,8 +96,14 @@
   ! ... save converged wfc if they have not been written previously
   ! ... FIXME: it shouldn't be necessary to do this here
   !
-  IF ( nks == 1 .AND. (io_level < 2) .AND. (io_level > -1) ) &
+  IF ( nks == 1 .AND. (io_level < 2) .AND. (io_level > -1) ) THEN
+#if defined __HDF5
+        filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+        CALL save_buffer ( evc, nwordwfc, iunwfc, nks, filename_hdf5, evc_hdf5_write )
+#else
         CALL save_buffer ( evc, nwordwfc, iunwfc, nks )
+#endif
+  ENDIF
   !
   ! ... do a Berry phase polarization calculation if required
   !

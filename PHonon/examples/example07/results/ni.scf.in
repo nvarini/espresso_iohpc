@@ -1,0 +1,33 @@
+ &control
+    calculation='scf'
+    restart_mode='from_scratch',
+    tprnfor = .true.
+    prefix='nickel',
+    pseudo_dir = '/home/nvarini/espresso_hdf5/espresso/pseudo/',
+    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+ &system
+    ibrav=2, celldm(1) =6.65, nat=  1, ntyp= 1,
+    nr1=27,
+    nr2=27,
+    nr3=27,
+    noncolin=.true.,
+    starting_magnetization(1)=0.5,
+    degauss=0.02,
+    smearing='mp',
+    angle1(1)=90
+    angle2(1)=90
+    occupations='smearing',
+    ecutwfc =27.0
+    ecutrho =300.0
+ /
+ &electrons
+    conv_thr =  1.0d-12
+    mixing_beta = 0.7
+ /
+ATOMIC_SPECIES
+Ni  0.0  Ni.pbe-nd-rrkjus.UPF
+ATOMIC_POSITIONS
+Ni 0.00 0.00 0.00
+K_POINTS AUTOMATIC
+4 4 4 1 1 1

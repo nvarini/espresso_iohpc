@@ -185,6 +185,7 @@ EOF
 
 mkdir $TMP_DIR/$q.$irr
 cp -r $TMP_DIR/$PREFIX.* $TMP_DIR/$q.$irr
+cp -r $TMP_DIR/evc* $TMP_DIR/$q.$irr
 mkdir -p $TMP_DIR/$q.$irr/_ph0/$PREFIX.phsave
 cp -r $TMP_DIR/_ph0/$PREFIX.phsave/* $TMP_DIR/$q.$irr/_ph0/$PREFIX.phsave
 

@@ -583,6 +583,10 @@ SUBROUTINE c_bands_nscf( )
   USE mp_pools,             ONLY : npool, kunit, inter_pool_comm
   USE mp,                   ONLY : mp_sum
   USE check_stop,           ONLY : check_stop_now
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : nd_nmbr, tmp_dir
+#endif
   !
   IMPLICIT NONE
   !
@@ -594,6 +598,7 @@ SUBROUTINE c_bands_nscf( )
   LOGICAL :: exst
   !
   REAL(DP), EXTERNAL :: get_clock
+  CHARACTER(LEN=256) :: filename_hdf5
   !
   CALL start_clock( 'c_bands' )
   !
@@ -655,7 +660,16 @@ SUBROUTINE c_bands_nscf( )
      !
      ! ... save wave-functions (unless disabled in input)
      !
-     IF ( io_level > -1 ) CALL save_buffer ( evc, nwordwfc, iunwfc, ik )
+     IF ( io_level > -1 )THEN 
+#if defined __HDF5
+        filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+        CALL save_buffer ( evc, nwordwfc, iunwfc, ik, filename_hdf5, evc_hdf5_write )
+        !CALL save_buffer ( evc, nwordwfc, iunwfc, nks )
+#else
+        CALL save_buffer ( evc, nwordwfc, iunwfc, nks )
+#endif
+     ENDIF
+    
      !
      ! ... beware: with pools, if the number of k-points on different
      ! ... pools differs, make sure that all processors are still in

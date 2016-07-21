@@ -1,0 +1,3 @@
+ &input
+   fildyn='alas.dyn.xml', zasr='simple', flfrc='alas.444.fc'
+ /

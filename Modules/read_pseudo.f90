@@ -51,6 +51,7 @@ SUBROUTINE readpp ( input_dft, printout, ecutwfc_pp, ecutrho_pp )
   USE upf_to_internal,  ONLY: set_pseudo_upf
   USE read_uspp_module, ONLY: readvan, readrrkj
   USE m_gth,            ONLY: readgth
+  USE mp_world,         ONLY: mpime
   !
   IMPLICIT NONE
   !
@@ -154,6 +155,10 @@ SUBROUTINE readpp ( input_dft, printout, ecutwfc_pp, ecutrho_pp )
                        & ' from file :',/,3X,A)") nt, TRIM(file_pseudo)
      END IF
      !
+     !write(mpime+100,*) upf(nt)
+     !write(mpime+200,*) rgrid(nt)
+     !write(mpime+300,*) isupf
+     !if(nt.eq.2) call errore('','',44)
      call read_upf(upf(nt), rgrid(nt), isupf, unit=iunps)
      !
      upf(nt)%is_gth=.false.

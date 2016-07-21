@@ -80,7 +80,7 @@ CPPFLAGS       = -P -C -traditional $(DFLAGS) $(IFLAGS)
 
 CFLAGS         = -O3 $(DFLAGS) $(IFLAGS)
 F90FLAGS       = $(FFLAGS) -nomodule  -fpp $(FDFLAGS) $(IFLAGS) $(MODFLAGS)
-FFLAGS         = -O2 -assume byterecl -g -traceback  -I/home/nvarini/sofware/hdf5-1.8.16/include
+FFLAGS         = -O2 -assume byterecl -g -traceback  -I/home/nvarini/sofware/hdf5-1.8.17/include
 
 # compiler flags without optimization for fortran-77
 #the latter is NEEDED to properly compile dlamch.f, used by lapack
@@ -97,7 +97,7 @@ FFLAGS_NOMAIN   = -nofor_main
 
 LD             = mpiifort
 LDFLAGS        = -static-intel  
-LD_LIBS        = -L/home/nvarini/sofware/hdf5-1.8.16/lib -lhdf5_fortran -lhdf5
+LD_LIBS        = -L/home/nvarini/sofware/hdf5-1.8.17/lib -lhdf5_fortran -lhdf5
 
 # External Libraries (if any) : blas, lapack, fft, MPI
 

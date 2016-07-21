@@ -42,6 +42,14 @@ subroutine solve_e2
   USE qpoint,    ONLY : nksq, ikks, ikqs
   USE control_lr, ONLY : nbnd_occ, lgamma
   USE dv_of_drho_lr
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
 
   implicit none
 
@@ -77,6 +85,7 @@ subroutine solve_e2
   ! counter on mesh points
   ! the record number
   ! integer variable for I/O control
+  character(len=256) :: filename_hdf5
 
   if (lsda) call errore ('solve_e2', ' LSDA not implemented', 1)
   if (okvan) call errore ('solve_e2', ' Ultrasoft PP not implemented', 1)
@@ -121,7 +130,18 @@ subroutine solve_e2
         !
         ! reads unperturbed wavefunctions psi_k in G_space, for all bands
         !
-        if (nksq.gt.1) call get_buffer(evc, lrwfc, iuwfc, ikk)
+        if (nksq.gt.1) then
+#if defined __HDF5
+          IF ( .NOT. lgamma ) THEN
+             filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+          ELSE
+             filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+          ENDIF
+          CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
+          call get_buffer (evc, lrwfc, iuwfc, ikk)
+#endif
+        endif
         npw = ngk(ikk)
         npwq= ngk(ikq)
         !

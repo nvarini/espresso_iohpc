@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:57:22 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:45:10 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -174,6 +174,13 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied level (ev):    -7.5296
 
+     total energy              =     -33.74775969 Ry
+     Harris-Foulkes estimate   =     -33.71073017 Ry
+     estimated scf accuracy    <       0.08118253 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.00 Bohr mag/cell
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  1.35E-03,  avg # of iterations =  1.5
@@ -197,6 +204,13 @@ EXX: grid of k+q points same as grid of k-points
    -21.8461  -7.4274  -6.8769  -6.8697
 
      highest occupied level (ev):    -7.4274
+
+     total energy              =     -33.76083178 Ry
+     Harris-Foulkes estimate   =     -33.75255055 Ry
+     estimated scf accuracy    <       0.00677362 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.01 Bohr mag/cell
 
      iteration #  3     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -224,6 +238,13 @@ EXX: grid of k+q points same as grid of k-points
    -21.3251  -7.2628  -6.2588  -6.2504
 
      highest occupied level (ev):    -7.2628
+
+!    total energy              =     -33.76217883 Ry
+     Harris-Foulkes estimate   =     -33.76198681 Ry
+     estimated scf accuracy    <       0.00017182 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.02 Bohr mag/cell
 
      convergence has been achieved in   3 iterations
 
@@ -257,6 +278,13 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied level (ev):    -9.7754
 
+     total energy              =     -33.62910436 Ry
+     Harris-Foulkes estimate   =     -34.68903478 Ry
+     estimated scf accuracy    <       0.00096663 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.02 Bohr mag/cell
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  1.61E-05,  avg # of iterations =  2.0
@@ -264,7 +292,7 @@ EXX: grid of k+q points same as grid of k-points
      Magnetic moment per site:
      atom:    1    charge:    5.9984    magn:    1.9998    constr:    0.0000
 
-     total cpu time spent up to now is        4.4 secs
+     total cpu time spent up to now is        4.3 secs
 
      End of self-consistent calculation
 
@@ -284,6 +312,13 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied level (ev):    -9.4245
 
+!    total energy              =     -33.62925914 Ry
+     Harris-Foulkes estimate   =     -34.68754650 Ry
+     estimated scf accuracy    <       0.00014819 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.02 Bohr mag/cell
+
      convergence has been achieved in   2 iterations
 
 !    total energy              =     -33.62936688 Ry
@@ -302,28 +337,28 @@ EXX: grid of k+q points same as grid of k-points
 
      Writing output data file o.save
  
-     init_run     :      0.57s CPU      0.60s WALL (       1 calls)
-     electrons    :      3.21s CPU      3.29s WALL (       2 calls)
-     forces       :      0.38s CPU      0.38s WALL (       1 calls)
+     init_run     :      0.56s CPU      0.60s WALL (       1 calls)
+     electrons    :      3.19s CPU      3.26s WALL (       2 calls)
+     forces       :      0.37s CPU      0.38s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
      potinit      :      0.29s CPU      0.32s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      1.52s CPU      1.54s WALL (       5 calls)
+     c_bands      :      1.51s CPU      1.52s WALL (       5 calls)
      sum_band     :      0.18s CPU      0.18s WALL (       5 calls)
-     v_of_rho     :      1.99s CPU      2.03s WALL (       7 calls)
+     v_of_rho     :      1.98s CPU      2.02s WALL (       7 calls)
      mix_rho      :      0.05s CPU      0.07s WALL (       5 calls)
 
      Called by c_bands:
-     init_us_2    :      0.04s CPU      0.04s WALL (      30 calls)
-     regterg      :      1.49s CPU      1.51s WALL (      10 calls)
+     init_us_2    :      0.03s CPU      0.04s WALL (      30 calls)
+     regterg      :      1.47s CPU      1.48s WALL (      10 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      1.48s CPU      1.50s WALL (      29 calls)
+     h_psi        :      1.47s CPU      1.47s WALL (      29 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      17 calls)
      rdiaghg      :      0.00s CPU      0.00s WALL (      25 calls)
 
@@ -332,24 +367,24 @@ EXX: grid of k+q points same as grid of k-points
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (      43 calls)
-     fft          :      0.66s CPU      0.68s WALL (     154 calls)
-     fftw         :      0.36s CPU      0.37s WALL (     134 calls)
-     fftc         :      0.75s CPU      0.75s WALL (     170 calls)
-     fftcw        :      0.25s CPU      0.25s WALL (      88 calls)
+     fft          :      0.67s CPU      0.68s WALL (     154 calls)
+     fftw         :      0.37s CPU      0.37s WALL (     134 calls)
+     fftc         :      0.73s CPU      0.73s WALL (     170 calls)
+     fftcw        :      0.24s CPU      0.25s WALL (      88 calls)
  
      Parallel routines
-     fft_scatter  :      0.60s CPU      0.61s WALL (     546 calls)
+     fft_scatter  :      0.57s CPU      0.58s WALL (     546 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.05s CPU      0.06s WALL (       2 calls)
-     vexx         :      1.12s CPU      1.13s WALL (      12 calls)
-     exxenergy    :      0.27s CPU      0.27s WALL (       3 calls)
+     vexx         :      1.10s CPU      1.11s WALL (      12 calls)
+     exxenergy    :      0.26s CPU      0.27s WALL (       3 calls)
  
-     PWSCF        :     4.87s CPU         5.05s WALL
+     PWSCF        :     4.86s CPU         5.01s WALL
 
  
-   This run was terminated on:  17:57:27  29Jun2016            
+   This run was terminated on:  15:45:15  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:57:39 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:45:28 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -159,6 +159,10 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):   -11.6512   -2.7990
 
+     total energy              =     -42.85278242 Ry
+     Harris-Foulkes estimate   =     -42.94333343 Ry
+     estimated scf accuracy    <       0.14840725 Ry
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  1.48E-03,  avg # of iterations =  2.0
@@ -173,6 +177,10 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):    -9.1697   -1.2149
 
+     total energy              =     -42.87862905 Ry
+     Harris-Foulkes estimate   =     -42.88431248 Ry
+     estimated scf accuracy    <       0.00968332 Ry
+
      iteration #  3     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  9.68E-05,  avg # of iterations =  2.0
@@ -185,11 +193,15 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):    -9.6955   -1.4057
 
+     total energy              =     -42.88039900 Ry
+     Harris-Foulkes estimate   =     -42.88063838 Ry
+     estimated scf accuracy    <       0.00049353 Ry
+
      iteration #  4     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  4.94E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        1.4 secs
+     total cpu time spent up to now is        1.5 secs
 
      End of self-consistent calculation
 
@@ -198,6 +210,10 @@ EXX: grid of k+q points same as grid of k-points
    -27.6557 -12.7754 -10.9481 -10.9481  -9.5882  -1.3413  -1.3413  -1.2269
 
      highest occupied, lowest unoccupied level (ev):    -9.5882   -1.3413
+
+!    total energy              =     -42.88043725 Ry
+     Harris-Foulkes estimate   =     -42.88047977 Ry
+     estimated scf accuracy    <       0.00005097 Ry
 
      convergence has been achieved in   4 iterations
 
@@ -221,11 +237,15 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):   -11.8234   -1.1743
 
+     total energy              =     -42.59640420 Ry
+     Harris-Foulkes estimate   =     -44.20161795 Ry
+     estimated scf accuracy    <       0.00093491 Ry
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  9.35E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        4.8 secs
+     total cpu time spent up to now is        4.9 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -233,11 +253,15 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):   -11.6160   -1.1695
 
+     total energy              =     -42.59641287 Ry
+     Harris-Foulkes estimate   =     -44.20052520 Ry
+     estimated scf accuracy    <       0.00100408 Ry
+
      iteration #  3     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  9.35E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        5.9 secs
+     total cpu time spent up to now is        6.0 secs
 
      End of self-consistent calculation
 
@@ -246,6 +270,10 @@ EXX: grid of k+q points same as grid of k-points
    -30.8224 -15.0662 -12.6748 -12.6748 -11.6315  -1.1694  -0.7645  -0.7645
 
      highest occupied, lowest unoccupied level (ev):   -11.6315   -1.1694
+
+!    total energy              =     -42.59648913 Ry
+     Harris-Foulkes estimate   =     -44.20025091 Ry
+     estimated scf accuracy    <       0.00009018 Ry
 
      convergence has been achieved in   3 iterations
 
@@ -257,7 +285,7 @@ EXX: grid of k+q points same as grid of k-points
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is        6.2 secs
+     total cpu time spent up to now is        6.3 secs
 
      per-process dynamical memory:    52.3 Mb
 
@@ -275,11 +303,15 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):   -11.6702   -1.1687
 
+     total energy              =     -42.59638728 Ry
+     Harris-Foulkes estimate   =     -44.20844880 Ry
+     estimated scf accuracy    <       0.00046764 Ry
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  4.68E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        8.5 secs
+     total cpu time spent up to now is        8.6 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -287,11 +319,15 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):   -11.6434   -1.1683
 
+     total energy              =     -42.59643219 Ry
+     Harris-Foulkes estimate   =     -44.20854090 Ry
+     estimated scf accuracy    <       0.00124665 Ry
+
      iteration #  3     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  4.68E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        9.6 secs
+     total cpu time spent up to now is        9.8 secs
 
      End of self-consistent calculation
 
@@ -300,6 +336,10 @@ EXX: grid of k+q points same as grid of k-points
    -30.8133 -15.0607 -12.6726 -12.6726 -11.6465  -1.1683  -0.7443  -0.7443
 
      highest occupied, lowest unoccupied level (ev):   -11.6465   -1.1683
+
+!    total energy              =     -42.59663935 Ry
+     Harris-Foulkes estimate   =     -44.20824910 Ry
+     estimated scf accuracy    <       0.00000013 Ry
 
      convergence has been achieved in   3 iterations
 
@@ -320,28 +360,28 @@ EXX: grid of k+q points same as grid of k-points
 
      Writing output data file n2.save
  
-     init_run     :      0.34s CPU      0.35s WALL (       1 calls)
-     electrons    :      8.48s CPU      8.67s WALL (       3 calls)
-     forces       :      0.23s CPU      0.24s WALL (       1 calls)
+     init_run     :      0.32s CPU      0.36s WALL (       1 calls)
+     electrons    :      8.63s CPU      8.77s WALL (       3 calls)
+     forces       :      0.24s CPU      0.24s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
-     potinit      :      0.16s CPU      0.17s WALL (       1 calls)
+     potinit      :      0.14s CPU      0.17s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      6.58s CPU      6.69s WALL (      10 calls)
+     c_bands      :      6.69s CPU      6.77s WALL (      10 calls)
      sum_band     :      0.24s CPU      0.25s WALL (      10 calls)
-     v_of_rho     :      1.89s CPU      1.92s WALL (      12 calls)
-     mix_rho      :      0.05s CPU      0.08s WALL (      10 calls)
+     v_of_rho     :      1.89s CPU      1.94s WALL (      12 calls)
+     mix_rho      :      0.07s CPU      0.08s WALL (      10 calls)
 
      Called by c_bands:
-     init_us_2    :      0.03s CPU      0.04s WALL (      26 calls)
-     regterg      :      6.52s CPU      6.63s WALL (      10 calls)
+     init_us_2    :      0.04s CPU      0.04s WALL (      26 calls)
+     regterg      :      6.63s CPU      6.71s WALL (      10 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      6.47s CPU      6.56s WALL (      38 calls)
+     h_psi        :      6.58s CPU      6.64s WALL (      38 calls)
      g_psi        :      0.01s CPU      0.01s WALL (      27 calls)
      rdiaghg      :      0.01s CPU      0.01s WALL (      35 calls)
 
@@ -350,25 +390,24 @@ EXX: grid of k+q points same as grid of k-points
 
      General routines
      calbec       :      0.02s CPU      0.02s WALL (      47 calls)
-     fft          :      0.59s CPU      0.61s WALL (     137 calls)
-     fftw         :      0.81s CPU      0.81s WALL (     296 calls)
-     fftc         :      3.82s CPU      3.85s WALL (     903 calls)
-     fftcw        :      0.66s CPU      0.66s WALL (     234 calls)
-     davcio       :      0.00s CPU      0.00s WALL (       1 calls)
+     fft          :      0.59s CPU      0.62s WALL (     137 calls)
+     fftw         :      0.81s CPU      0.82s WALL (     296 calls)
+     fftc         :      3.90s CPU      3.91s WALL (     903 calls)
+     fftcw        :      0.64s CPU      0.66s WALL (     234 calls)
  
      Parallel routines
-     fft_scatter  :      1.71s CPU      1.74s WALL (    1570 calls)
+     fft_scatter  :      1.75s CPU      1.78s WALL (    1570 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
-     exxinit      :      0.06s CPU      0.06s WALL (       3 calls)
-     vexx         :      5.65s CPU      5.74s WALL (      20 calls)
-     exxenergy    :      0.60s CPU      0.61s WALL (       5 calls)
+     exxinit      :      0.05s CPU      0.06s WALL (       3 calls)
+     vexx         :      5.76s CPU      5.82s WALL (      20 calls)
+     exxenergy    :      0.60s CPU      0.60s WALL (       5 calls)
  
-     PWSCF        :     9.98s CPU        10.21s WALL
+     PWSCF        :    10.11s CPU        10.32s WALL
 
  
-   This run was terminated on:  17:57:50  29Jun2016            
+   This run was terminated on:  15:45:38  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

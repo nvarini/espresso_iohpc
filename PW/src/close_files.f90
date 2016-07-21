@@ -37,16 +37,21 @@ SUBROUTINE close_files(lflag)
   !  ... close buffer/file containing wavefunctions: discard if
   !  ... wavefunctions are written in xml format, save otherwise
   !
-  IF ( lflag .AND. (twfcollect .OR. io_level < 0 )) THEN
-     CALL close_buffer ( iunwfc, 'DELETE' )
-  ELSE
 #if defined __HDF5
-     filename_hdf5=trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
-     CALL close_buffer ( iunwfc, 'KEEP',  filename_hdf5, evc_hdf5_write)
-#else
-     CALL close_buffer ( iunwfc, 'KEEP' )
-#endif
+  filename_hdf5=trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+  IF ( lflag .AND. (twfcollect .OR. io_level < 0 )) THEN
+    CALL close_buffer ( iunwfc, 'DELETE',  filename_hdf5, evc_hdf5_write)
+  ELSE
+    CALL close_buffer ( iunwfc, 'KEEP',  filename_hdf5, evc_hdf5_write)
   END IF
+
+#else
+  IF ( lflag .AND. (twfcollect .OR. io_level < 0 )) THEN
+    CALL close_buffer ( iunwfc, 'DELETE' )
+  ELSE
+    CALL close_buffer ( iunwfc, 'KEEP' )
+  END IF
+#endif
   !
   ! ... iunsat contains the (orthogonalized) atomic wfcs * S
   ! ... iunhub as above, only for wavefcts having an associated Hubbard U

@@ -1,0 +1,9 @@
+phonons of Pt at X
+ &inputph
+  amass(1)=195.078,
+  prefix='platinum',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir'
+  fildyn='ptdyn',
+  tr2_ph=1.0d-16,
+ /
+1.0 0.0 0.0

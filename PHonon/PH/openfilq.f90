@@ -84,9 +84,11 @@ SUBROUTINE openfilq()
   iuwfc = 20
   lrwfc = nbnd * npwx * npol
   CALL open_buffer (iuwfc, 'wfc', lrwfc, io_level, exst_mem, exst, tmp_dir)
+#if !defined __HDF5
   IF (.NOT.exst.AND..NOT.exst_mem.and..not.all_done) THEN
      CALL errore ('openfilq', 'file '//trim(prefix)//'.wfc not found', 1)
   END IF
+#endif
   IF (elph_mat) then
      iunwfcwann=733
      lrwfcr= 2 * dffts%nr1x*dffts%nr2x*dffts%nr3x *npol

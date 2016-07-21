@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:54:59 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:42:49 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -169,17 +169,29 @@
 
      total cpu time spent up to now is        0.1 secs
 
+     total energy              =     -15.82340180 Ry
+     Harris-Foulkes estimate   =     -15.83974476 Ry
+     estimated scf accuracy    <       0.06415505 Ry
+
      iteration #  2     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  8.02E-04,  avg # of iterations =  1.0
 
      total cpu time spent up to now is        0.1 secs
 
+     total energy              =     -15.82634547 Ry
+     Harris-Foulkes estimate   =     -15.82635432 Ry
+     estimated scf accuracy    <       0.00228159 Ry
+
      iteration #  3     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  2.85E-05,  avg # of iterations =  1.9
 
      total cpu time spent up to now is        0.1 secs
+
+     total energy              =     -15.82644721 Ry
+     Harris-Foulkes estimate   =     -15.82643492 Ry
+     estimated scf accuracy    <       0.00004971 Ry
 
      iteration #  4     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -231,6 +243,10 @@
 
      highest occupied, lowest unoccupied level (ev):     5.9961    7.2968
 
+!    total energy              =     -15.82645315 Ry
+     Harris-Foulkes estimate   =     -15.82645294 Ry
+     estimated scf accuracy    <       0.00000021 Ry
+
      convergence has been achieved in   4 iterations
 
      EXX: now go back to refine exchange calculation
@@ -247,11 +263,19 @@
 
      total cpu time spent up to now is        0.4 secs
 
+     total energy              =     -16.01129150 Ry
+     Harris-Foulkes estimate   =     -17.04828993 Ry
+     estimated scf accuracy    <       0.00004366 Ry
+
      iteration #  2     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  5.46E-07,  avg # of iterations =  1.0
 
      total cpu time spent up to now is        0.5 secs
+
+     total energy              =     -16.01126947 Ry
+     Harris-Foulkes estimate   =     -17.04819220 Ry
+     estimated scf accuracy    <       0.00000127 Ry
 
      iteration #  3     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -302,6 +326,10 @@
     -5.0624  -2.2144   2.3302   3.0300   9.5298  10.8710  11.3829  14.6680
 
      highest occupied, lowest unoccupied level (ev):     4.3528    8.0857
+
+!    total energy              =     -16.01126329 Ry
+     Harris-Foulkes estimate   =     -17.04816718 Ry
+     estimated scf accuracy    <       0.00000006 Ry
 
      convergence has been achieved in   3 iterations
 
@@ -368,6 +396,10 @@
     -5.0608  -2.2142   2.3282   3.0244   9.5354  10.8734  11.3847  14.6678
 
      highest occupied, lowest unoccupied level (ev):     4.3389    8.0897
+
+!    total energy              =     -16.01135237 Ry
+     Harris-Foulkes estimate   =     -17.04882077 Ry
+     estimated scf accuracy    <       0.00000033 Ry
 
      convergence has been achieved in   1 iterations
 
@@ -441,6 +473,10 @@
 
      highest occupied, lowest unoccupied level (ev):     4.3344    8.0892
 
+!    total energy              =     -16.01135551 Ry
+     Harris-Foulkes estimate   =     -17.04885944 Ry
+     estimated scf accuracy    <          7.8E-09 Ry
+
      convergence has been achieved in   1 iterations
 
 !    total energy              =     -16.01135564 Ry
@@ -454,21 +490,21 @@
      Writing output data file silicon.save
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      0.89s CPU      0.92s WALL (       4 calls)
+     electrons    :      0.88s CPU      0.92s WALL (       4 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.84s CPU      0.86s WALL (      11 calls)
+     c_bands      :      0.83s CPU      0.86s WALL (      11 calls)
      sum_band     :      0.03s CPU      0.03s WALL (      11 calls)
      v_of_rho     :      0.02s CPU      0.02s WALL (      11 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (      11 calls)
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     300 calls)
-     cegterg      :      0.83s CPU      0.85s WALL (     110 calls)
+     cegterg      :      0.82s CPU      0.85s WALL (     110 calls)
 
      Called by sum_band:
 
@@ -478,13 +514,13 @@
      cdiaghg      :      0.06s CPU      0.06s WALL (     293 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.00s CPU      0.00s WALL (     353 calls)
+     add_vuspsi   :      0.01s CPU      0.00s WALL (     353 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (     423 calls)
      fft          :      0.00s CPU      0.00s WALL (     118 calls)
      fftw         :      0.14s CPU      0.15s WALL (    5486 calls)
-     fftc         :      0.38s CPU      0.41s WALL (   11184 calls)
+     fftc         :      0.38s CPU      0.40s WALL (   11184 calls)
      fftcw        :      0.08s CPU      0.08s WALL (    2956 calls)
  
      Parallel routines
@@ -493,13 +529,13 @@
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.01s CPU      0.01s WALL (       4 calls)
-     vexx         :      0.61s CPU      0.62s WALL (     194 calls)
+     vexx         :      0.60s CPU      0.62s WALL (     194 calls)
      exxenergy    :      0.08s CPU      0.08s WALL (       7 calls)
  
-     PWSCF        :     1.08s CPU         1.13s WALL
+     PWSCF        :     1.07s CPU         1.13s WALL
 
  
-   This run was terminated on:  17:55: 1  29Jun2016            
+   This run was terminated on:  15:42:50  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

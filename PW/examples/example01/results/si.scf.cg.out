@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:49:21 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:33:37 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -271,7 +271,7 @@
 
      Writing output data file silicon.save
  
-     init_run     :      0.03s CPU      0.03s WALL (       1 calls)
+     init_run     :      0.02s CPU      0.03s WALL (       1 calls)
      electrons    :      0.18s CPU      0.19s WALL (       1 calls)
      forces       :      0.00s CPU      0.00s WALL (       1 calls)
      stress       :      0.01s CPU      0.01s WALL (       1 calls)
@@ -288,7 +288,7 @@
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     170 calls)
-     ccgdiagg     :      0.13s CPU      0.13s WALL (      70 calls)
+     ccgdiagg     :      0.12s CPU      0.13s WALL (      70 calls)
      wfcrot       :      0.03s CPU      0.04s WALL (      60 calls)
 
      Called by sum_band:
@@ -298,7 +298,7 @@
      cdiaghg      :      0.01s CPU      0.00s WALL (      60 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.01s CPU      0.01s WALL (     827 calls)
+     add_vuspsi   :      0.00s CPU      0.00s WALL (     827 calls)
      h_1psi       :      0.10s CPU      0.10s WALL (     767 calls)
 
      General routines
@@ -307,12 +307,12 @@
      fftw         :      0.11s CPU      0.11s WALL (    2374 calls)
  
      Parallel routines
-     fft_scatter  :      0.03s CPU      0.03s WALL (    2408 calls)
+     fft_scatter  :      0.02s CPU      0.03s WALL (    2408 calls)
  
      PWSCF        :     0.31s CPU         0.33s WALL
 
  
-   This run was terminated on:  17:49:21  29Jun2016            
+   This run was terminated on:  15:33:37  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,0 +1,10 @@
+phonons of Si at Gamma
+ &inputph
+  tr2_ph=1.0d-16,
+  epsil=.true.,
+  prefix='Si_pbe',
+  fildyn='Sig.dyn',
+  amass(1)=28.0855,
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+0.0 0.0 0.0

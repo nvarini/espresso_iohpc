@@ -189,6 +189,7 @@ SUBROUTINE prepare_q(auxdyn, do_band, do_iq, setup_pw, iq)
   !     of q \= 0   we do make first a nscf run
   !
   setup_pw = (.NOT.lgamma .OR. modenum /= 0 .OR. newgrid) 
+  !setup_pw = ( modenum /= 0 .OR. newgrid) 
   ! YAMBO >
   if (qplot.and.elph_yambo) setup_pw=.true.
   ! YAMBO <

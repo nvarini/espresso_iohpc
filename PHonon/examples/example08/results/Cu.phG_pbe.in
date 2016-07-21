@@ -1,0 +1,8 @@
+phonons of Cu at Gamma
+ &inputph
+  tr2_ph=1.0d-14,
+  prefix='copper',
+  fildyn='Cug.dyn',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+0.0 0.0 0.0

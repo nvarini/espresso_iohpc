@@ -34,16 +34,28 @@ SUBROUTINE do_phonon(auxdyn)
   USE control_ph,      ONLY : epsil, trans, qplot, only_init, &
                               only_wfc, rec_code, where_rec
   USE el_phon,         ONLY : elph, elph_mat, elph_simple
+  USE units_ph,             ONLY : lrwfc, iuwfc
   !
   ! YAMBO >
   USE YAMBO,           ONLY : elph_yambo
+  USE mp_world,        ONLY : mpime
+  USE wavefunctions_module, ONLY : evc
+  USE qpoint,          ONLY : nksq
+  USE buffers,         ONLY : save_buffer
   ! YAMBO <
   !
+#if defined __HDF5
+  USE hdf5_qe,        ONLY : evc_hdf5_write
+  USE control_lr,     ONLY : lgamma
+  USE io_files,       ONLY : tmp_dir, nd_nmbr
+  USE save_ph,        ONLY : tmp_dir_save
+#endif
   IMPLICIT NONE
   !
   CHARACTER (LEN=256), INTENT(IN) :: auxdyn
   INTEGER :: iq
   LOGICAL :: do_band, do_iq, setup_pw
+  CHARACTER(LEN=256) :: filename_hdf5
   !
   DO iq = 1, nqs
      !
@@ -55,7 +67,9 @@ SUBROUTINE do_phonon(auxdyn)
      !
      !  If necessary the bands are recalculated
      !
-     IF (setup_pw) CALL run_nscf(do_band, iq)
+     IF (setup_pw) THEN
+       CALL run_nscf(do_band, iq)
+     ENDIF
      !
      !  If only_wfc=.TRUE. the code computes only the wavefunctions 
      !

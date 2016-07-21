@@ -1,0 +1,1166 @@
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example13 : starting
+
+This example shows how to use pw.x, ph.x and d3.x to calculate the
+third-order expansion coefficients of the total energy of Si.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running d3.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/d3.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si... done
+  running the phonon calculation for Si at Gamma... done
+  running the calculation of D3(0,0,0)...HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+MPI-process 0:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    minor: Inappropriate type
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+MPI-process 0:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)     major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 591 in H5Fopen(): invalid file name
+    major: Invalid arguments to routine
+    minor: Bad value
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16)   #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1MPI-process 0:
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) :
+  #000: H5A.c line 401 in H5Aopen(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+MPI-process 0:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5A.c line 634 in H5Aread(): not an attribute
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #000: H5A.c line 1602 in H5Aclose(): not an attribute
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 173 in H5G_loc(): invalid file ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 454 in H5Gopen2(): not a location
+    major: Invalid arguments to routine
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 195 in H5G_loc(): invalid group ID
+    major: Invalid arguments to routine
+    minor: Bad value
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 340 in H5Dopen2(): not a location
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+  #001: H5Gloc.c line 253 in H5G_loc(): invalid object ID
+    major: Invalid arguments to routine
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+    minor: Bad value
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5Dio.c line 140 in H5Dread(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 0:
+  #000: H5F.c line 781 in H5Fclose(): invalid file identifier
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5D.c line 415 in H5Dclose(): not a dataset
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5G.c line 812 in H5Gclose(): not a group
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.8.16) MPI-process 1:
+  #000: H5F.c line 774 in H5Fclose(): not a file ID
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting

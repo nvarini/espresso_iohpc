@@ -42,6 +42,15 @@ subroutine ef_shift (drhoscf, ldos, ldoss, dos_ef, irr, npe, flag)
   USE modes,                ONLY : npert
   USE mp_bands,             ONLY : intra_bgrp_comm
   USE mp,                   ONLY : mp_sum
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
+
 
   implicit none
   !
@@ -84,6 +93,7 @@ subroutine ef_shift (drhoscf, ldos, ldoss, dos_ef, irr, npe, flag)
   !
   ! determines Fermi energy shift (such that each pertubation is neutral)
   !
+  character(len=256) :: filename_hdf5
   call start_clock ('ef_shift')
   if (.not.flag) then
      WRITE( stdout, * )
@@ -119,38 +129,47 @@ subroutine ef_shift (drhoscf, ldos, ldoss, dos_ef, irr, npe, flag)
         ! reads unperturbed wavefuctions psi_k in G_space, for all bands
         !
         ikrec = ik
-        if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ikrec)
-        !
-        ! reads delta_psi from iunit iudwf, k=kpoint
-        !
-        do ipert = 1, npert (irr)
-           nrec = (ipert - 1) * nksq + ik
-           if (nksq.gt.1.or.npert(irr).gt.1) &
-                call get_buffer(dpsi, lrdwf, iudwf, nrec)
-           do ibnd = 1, nbnd_occ (ik)
-              wfshift = 0.5d0 * def(ipert) * &
-                   w0gauss( (ef-et(ibnd,ik))/degauss, ngauss) / degauss
-              IF (noncolin) THEN
-                 call zaxpy (npwx*npol,wfshift,evc(1,ibnd),1,dpsi(1,ibnd),1)
-              ELSE
-                 call zaxpy (npw, wfshift, evc(1,ibnd), 1, dpsi(1,ibnd), 1)
-              ENDIF
-           enddo
-           !
-           ! writes corrected delta_psi to iunit iudwf, k=kpoint,
-           !
-           if (nksq.gt.1.or.npert(irr).gt.1) &
-                call save_buffer (dpsi, lrdwf, iudwf, nrec)
-        enddo
-     enddo
+#if defined __HDF5
+     IF ( .NOT. lgamma ) THEN
+        filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     ELSE
+        filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+     ENDIF
+     CALL get_buffer( evc, lrwfc, iuwfc, ikrec, filename_hdf5, evc_hdf5_write )
+#else
+     call get_buffer (evc, lrwfc, iuwfc, ikrec)
+#endif
+     !
+     ! reads delta_psi from iunit iudwf, k=kpoint
+     !
      do ipert = 1, npert (irr)
-        do is = 1, nspin_mag
-           call zaxpy (dffts%nnr, def(ipert), ldoss(1,is), 1, drhoscf(1,is,ipert), 1)
+        nrec = (ipert - 1) * nksq + ik
+        if (nksq.gt.1.or.npert(irr).gt.1) &
+             call get_buffer(dpsi, lrdwf, iudwf, nrec)
+        do ibnd = 1, nbnd_occ (ik)
+           wfshift = 0.5d0 * def(ipert) * &
+                w0gauss( (ef-et(ibnd,ik))/degauss, ngauss) / degauss
+           IF (noncolin) THEN
+              call zaxpy (npwx*npol,wfshift,evc(1,ibnd),1,dpsi(1,ibnd),1)
+           ELSE
+              call zaxpy (npw, wfshift, evc(1,ibnd), 1, dpsi(1,ibnd), 1)
+           ENDIF
         enddo
+        !
+        ! writes corrected delta_psi to iunit iudwf, k=kpoint,
+        !
+        if (nksq.gt.1.or.npert(irr).gt.1) &
+             call save_buffer (dpsi, lrdwf, iudwf, nrec)
      enddo
-  endif
-  call stop_clock ('ef_shift')
-  return
+  enddo
+  do ipert = 1, npert (irr)
+     do is = 1, nspin_mag
+        call zaxpy (dffts%nnr, def(ipert), ldoss(1,is), 1, drhoscf(1,is,ipert), 1)
+     enddo
+  enddo
+endif
+call stop_clock ('ef_shift')
+return
 end subroutine ef_shift
 
 !-----------------------------------------------------------------------
@@ -186,7 +205,14 @@ subroutine ef_shift_paw (drhoscf, dbecsum, ldos, ldoss, becsum1, &
   USE modes,                ONLY : npert
   USE mp_bands,             ONLY : intra_bgrp_comm
   USE mp,                   ONLY : mp_sum
-
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
   implicit none
   !
   ! input/output variables
@@ -230,6 +256,7 @@ subroutine ef_shift_paw (drhoscf, dbecsum, ldos, ldoss, becsum1, &
   !
   ! determines Fermi energy shift (such that each pertubation is neutral)
   !
+  character(len=256) filename_hdf5
   call start_clock ('ef_shift')
   if (.not.flag) then
      WRITE( stdout, * )
@@ -267,7 +294,19 @@ subroutine ef_shift_paw (drhoscf, dbecsum, ldos, ldoss, becsum1, &
         ! reads unperturbed wavefuctions psi_k in G_space, for all bands
         !
         ikrec = ik
-        if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ikrec)
+        if (nksq.gt.1) then
+#if defined __HDF5
+          IF ( .NOT. lgamma ) THEN
+            filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+          ELSE
+            filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+          ENDIF
+          CALL get_buffer( evc, lrwfc, iuwfc, ikrec, filename_hdf5, evc_hdf5_write )
+#else
+          call get_buffer (evc, lrwfc, iuwfc, ikrec)
+#endif
+        endif
+
         !
         ! reads delta_psi from iunit iudwf, k=kpoint
         !

@@ -285,6 +285,7 @@ subroutine read_pseudo_mesh (upf, iunps)
   !
   USE kinds
   USE pseudo_types, ONLY: pseudo_upf
+  USE mp_world,     ONLY: mpime
 
   implicit none
   !

@@ -37,6 +37,15 @@ subroutine raman_mat
   USE mp_pools, ONLY : inter_pool_comm
   USE mp_bands, ONLY : intra_bgrp_comm
   USE mp,       ONLY : mp_sum
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
+
   implicit none
 
   logical :: wr_all
@@ -70,6 +79,7 @@ subroutine raman_mat
   complex(DP) :: tmpc
   ! the scalar product function
   complex(DP), EXTERNAL :: zdotc
+  character(len=256) :: filename_hdf5
 
   allocate (wrk       (6,3*nat,2)   )
   allocate (matram    (3,3,3,nat)   )
@@ -116,7 +126,18 @@ subroutine raman_mat
      weight = - 2.d0 * wk (ik) * e2 * fpi / omega
      npw = ngk(ik)
      npwq = npw
-     if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ik)
+     if (nksq.gt.1) then
+#if defined __HDF5
+       IF ( .NOT. lgamma ) THEN
+          filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+       ELSE
+          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       ENDIF
+       CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+       call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+     endif
      call init_us_2 (npw, igk_k(1,ik), xk (1,ik), vkb)
 
      do ipa = 1, 3

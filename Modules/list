@@ -1,54 +1,240 @@
-autopilot.f90:          IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
-autopilot.f90:             IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
-autopilot.f90:       IF( ionode ) write(*,*) 'ADD_RULE: POWER STEERING'
-autopilot.f90:          IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line 
-autopilot.f90:             IF( ionode ) write(*,*) ' AutoPilot: current input_line', input_line
-autopilot.f90:       IF( ionode ) write(*,*) ' AutoPilot: current n_rules', n_rules
-autopilot.f90:    !IF( ionode ) write(*,*) '  Number of rules: ', n_rules
-autopilot.f90:    IF( ionode ) write(*,'("   Reading rule: ",A20,A20)' ) var, value
-autopilot.f90:       !IF( ionode ) write(*,*) 'RULE_DT', rule_dt(event), 'EVENT', event
-autopilot.f90:       IF( ionode ) write(*,*) '  Autopilot: Rule Assignment Failure '
-autopilot.f90:       IF( ionode ) write(*,*) 'SLEEPING'
-autopilot.f90:       IF( ionode ) write(*,*) 'INPUT_LINE=', input_line
-autopilot.f90:       IF( ionode ) write(*,*) 'RUNNING'
-autopilot.f90:       IF( ionode ) write(*,*) 'INPUT_LINE=', input_line
-bfgs_module.f90:        if(info .ne. 0)write( stdout, '(/,5X,"WARNING: info=",i3," for Hessian")' )info
-funct.f90:           ! write(*, '("matches",i2,2X,A,2X,A)') i, name(i), trim(dft)
-funct.f90:           write(*, '(2(2X,i2,2X,A))') i, trim(name(i)), &
-functionals.f90:!        write(*,*) s, t1, t10, d1st1,d1rt1,d1rt10
-mp_base.f90:        write(*,*) 'BCAST_REAL IN'
-mp_base.f90:        write(*,*) 'BCAST_REAL OUT'
-mp_base.f90:        write(*,*) 'BCAST_INTEGER IN'
-mp_base.f90:        write(*,*) 'BCAST_INTEGER OUT'
-mp_base.f90:        write(*,*) 'BCAST_LOGICAL IN'
-mp_base.f90:        write(*,*) 'BCAST_LOGICAL OUT'
-mp_base.f90:  write(*,*) 'reduce_base_real IN'
-mp_base.f90:  write(*,*) 'reduce_base_real OUT'
-mp_base.f90:  write(*,*) 'reduce_base_real IN'
-mp_base.f90:  write(*,*) 'reduce_base_real OUT'
-mp_base.f90:  write(*,*) 'reduce_base_integer IN'
-mp_base.f90:  write(*,*) 'reduce_base_integer OUT'
-mp_base.f90:  write(*,*) 'reduce_base_integer IN'
-mp_base.f90:  write(*,*) 'reduce_base_integer OUT'
-mp_base.f90:  write(*,*) 'reduce_base_real_to IN'
-mp_base.f90:  write(*,*) 'reduce_base_real_to OUT'
-mp_base.f90:  write(*,*) 'reduce_base_integer_to IN'
-mp_base.f90:  write(*,*) 'reduce_base_integer_to OUT'
-mp_base.f90:  write(*,*) 'parallel_min_integer IN'
-mp_base.f90:  write(*,*) 'parallel_min_integer OUT'
-mp_base.f90:  write(*,*) 'parallel_max_integer IN'
-mp_base.f90:  write(*,*) 'parallel_max_integer OUT'
-mp_base.f90:  write(*,*) 'parallel_min_real IN'
-mp_base.f90:  write(*,*) 'parallel_min_real OUT'
-mp_base.f90:  write(*,*) 'parallel_max_real IN'
-mp_base.f90:  write(*,*) 'parallel_max_real OUT'
-read_uspp.f90:    write( upf%dft, "('INDEX:',4i1)") iexch,icorr,igcx,igcc
-xc_rVV10.f90:       if (ionode) write(*,'(/ / A /)') "     ----------------------------------------------------------------"
-xc_rVV10.f90:       if (ionode) write(*,'(A, F22.15 /)') "     Non-local correlation energy =         ", Ec_nl
-xc_rVV10.f90:       if (ionode) write(*,'(A /)') "     ----------------------------------------------------------------"
-xc_rVV10.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
-xc_rVV10.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
-xc_vdW_DF.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
-xc_vdW_DF.f90:     write(*,'(A,F10.5,A,F10.5)') "k =  ", k, "     k_max =  ",Nr_points*dk
-xml_io_base.f90:          write(*,*)'done writing evc0'
-xml_io_base.f90:               !IF ( j .eq. 1)write(*,'(10f12.5)')(wtmp(i),i=1,igwx_)
+gth.f90:subroutine readgth (iunps, np, upf)
+gth.f90:  integer :: iunps, np
+gth.f90:  read (iunps, '(a)', end=400, err=400, iostat=ios) info
+gth.f90:  read (iunps, *, err=400) znucl, upf%zp, pspdat
+gth.f90:  read (iunps, *, err=400) pspcod,pspxc,lmax,lloc,mmax,r2well
+gth.f90:  read (iunps, *, err=400) rloc,nn,(cc(jj),jj=1,nn)
+gth.f90:  read (iunps, *, err=400) nnonloc
+gth.f90:    read (iunps, *, err=400) rrl,nprl,(hij(ll,1,jj),jj=1,nprl)
+gth.f90:      read (iunps, *, err=400) (hij(ll,ii,jj),jj=ii,nprl)
+gth.f90:      read (iunps, *, err=400) (kij(ll,ii,jj),jj=ii,nprl)
+read_ncpp.f90:subroutine read_ncpp (iunps, np, upf)
+read_ncpp.f90:  integer :: iunps, np
+read_ncpp.f90:  read (iunps, *, end=300, err=300, iostat=ios) upf%dft
+read_ncpp.f90:  read (iunps, *, err=300, iostat=ios) upf%psd, upf%zp, lmax, nlc, &
+read_ncpp.f90:     read (iunps, *, err=300, iostat=ios) &
+read_ncpp.f90:        read (iunps, *, err=300, iostat=ios) (alps(i,l), i=1,3), &
+read_ncpp.f90:        read (iunps, *, err=300, iostat=ios) &
+read_ncpp.f90:  read (iunps, *, err=300, iostat=ios) upf%zmesh, upf%xmin, upf%dx, &
+read_ncpp.f90:        read (iunps, '(a)', err=300, iostat=ios)
+read_ncpp.f90:        read (iunps, *, err=300, iostat=ios) (vnl(ir,l), ir=1,upf%mesh )
+read_ncpp.f90:        read (iunps, *, err=300, iostat=ios) (upf%rho_atc(ir), ir=1,upf%mesh)
+read_ncpp.f90:     read (iunps, '(a)', err=300, iostat=ios)
+read_ncpp.f90:     read (iunps, *, err=300, iostat=ios) upf%lchi(nb), upf%oc(nb)
+read_ncpp.f90:     read (iunps, *, err=300, iostat=ios) ( upf%chi(ir,nb), ir=1,upf%mesh )
+read_pseudo.f90:  INTEGER :: iunps, isupf, nt, nb, ir, ios
+read_pseudo.f90:  iunps = 4
+read_pseudo.f90:        OPEN  (unit = iunps, file = file_pseudo, status = 'old', &
+read_pseudo.f90:        OPEN  (unit = iunps, file = file_pseudo, status = 'old', &
+read_pseudo.f90:     call read_upf(upf(nt), rgrid(nt), isupf, unit=iunps)
+read_pseudo.f90:        rewind (unit = iunps)
+read_pseudo.f90:              call readrrkj (iunps, nt, upf(nt))
+read_pseudo.f90:              CALL readvan (iunps, nt, upf(nt))
+read_pseudo.f90:           CALL readgth (iunps, nt, upf(nt))
+read_pseudo.f90:           call read_ncpp (iunps, nt, upf(nt))
+read_pseudo.f90:     close (iunps)
+read_upf_v1.f90:subroutine read_upf_v1 (iunps, upf, grid, ierr, header_only)
+read_upf_v1.f90:  !   from unit "iunps" - return error code in "ierr" (success: ierr=0)
+read_upf_v1.f90:  INTEGER, INTENT(IN) :: iunps
+read_upf_v1.f90:     read (iunps, *, iostat = ios, err = 200) dummy  
+read_upf_v1.f90:  rewind(iunps)
+read_upf_v1.f90:     read (iunps, *, iostat = ios, err = 200) dummy  
+read_upf_v1.f90:        call read_pseudo_header (upf, iunps)  
+read_upf_v1.f90:  call scan_end (iunps, "HEADER")  
+read_upf_v1.f90:  call scan_begin (iunps, "MESH", .true.)  
+read_upf_v1.f90:  call read_pseudo_mesh (upf, iunps)  
+read_upf_v1.f90:  call scan_end (iunps, "MESH")  
+read_upf_v1.f90:     call scan_begin (iunps, "NLCC", .true.)  
+read_upf_v1.f90:     call read_pseudo_nlcc (upf, iunps)  
+read_upf_v1.f90:     call scan_end (iunps, "NLCC")  
+read_upf_v1.f90:     call scan_begin (iunps, "LOCAL", .true.)  
+read_upf_v1.f90:     call read_pseudo_local (upf, iunps)  
+read_upf_v1.f90:     call scan_end (iunps, "LOCAL")  
+read_upf_v1.f90:     call scan_begin (iunps, "NONLOCAL", .true.)  
+read_upf_v1.f90:     call read_pseudo_nl (upf, iunps)  
+read_upf_v1.f90:     call scan_end (iunps, "NONLOCAL")  
+read_upf_v1.f90:  call scan_begin (iunps, "PSWFC", .true.)  
+read_upf_v1.f90:  call read_pseudo_pswfc (upf, iunps)  
+read_upf_v1.f90:  call scan_end (iunps, "PSWFC")  
+read_upf_v1.f90:  call scan_begin (iunps, "RHOATOM", .true.)  
+read_upf_v1.f90:  call read_pseudo_rhoatom (upf, iunps)  
+read_upf_v1.f90:  call scan_end (iunps, "RHOATOM")  
+read_upf_v1.f90:     call scan_begin (iunps, "ADDINFO", .true.)  
+read_upf_v1.f90:     call read_pseudo_addinfo (upf, iunps)  
+read_upf_v1.f90:     call scan_end (iunps, "ADDINFO")  
+read_upf_v1.f90:     CALL scan_begin ( iunps, "GIPAW_RECONSTRUCTION_DATA", .false. )
+read_upf_v1.f90:     CALL read_pseudo_gipaw ( upf, iunps )
+read_upf_v1.f90:     CALL scan_end ( iunps, "GIPAW_RECONSTRUCTION_DATA" )
+read_upf_v1.f90:     call scan_begin (iunps, "INFO", .true.)  
+read_upf_v1.f90:     call read_pseudo_ppinfo (upf, iunps)  
+read_upf_v1.f90:     call scan_end (iunps, "INFO")
+read_upf_v1.f90:subroutine scan_begin (iunps, string, rew)  
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:  if (rew) rewind (iunps)  
+read_upf_v1.f90:     read (iunps, *, iostat = ios, err = 300) rstring  
+read_upf_v1.f90:subroutine scan_end (iunps, string)  
+read_upf_v1.f90:  integer :: iunps
+read_upf_v1.f90:  read (iunps, '(a)', end = 300, err = 300) rstring  
+read_upf_v1.f90:subroutine read_pseudo_header (upf, iunps)  
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) upf%nv , dummy  
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) upf%psd , dummy  
+read_upf_v1.f90:  read (iunps, '(a80)', err = 100, end = 100) dummy
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) upf%nlcc , dummy  
+read_upf_v1.f90:  read (iunps, '(a20,t24,a)', err = 100, end = 100) upf%dft, dummy  
+read_upf_v1.f90:  read (iunps, * ) upf%zp , dummy  
+read_upf_v1.f90:  read (iunps, * ) upf%etotps, dummy  
+read_upf_v1.f90:  read (iunps, * ) upf%ecutwfc, upf%ecutrho
+read_upf_v1.f90:  read (iunps, * ) upf%lmax , dummy
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) upf%mesh , dummy
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) upf%nwfc, upf%nbeta , dummy
+read_upf_v1.f90:  read (iunps, '(a)', err = 100, end = 100) dummy
+read_upf_v1.f90:     read (iunps, * ) upf%els (nw), upf%lchi (nw), upf%oc (nw)  
+read_upf_v1.f90:subroutine read_pseudo_mesh (upf, iunps)  
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:  call scan_begin (iunps, "R", .false.)  
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) (upf%r(ir), ir=1,upf%mesh )
+read_upf_v1.f90:  call scan_end (iunps, "R")  
+read_upf_v1.f90:  call scan_begin (iunps, "RAB", .false.)  
+read_upf_v1.f90:  read (iunps, *, err = 101, end = 101) (upf%rab(ir), ir=1,upf%mesh )
+read_upf_v1.f90:  call scan_end (iunps, "RAB")  
+read_upf_v1.f90:subroutine read_pseudo_nlcc (upf, iunps)
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:  read (iunps, *, err = 100, end = 100) (upf%rho_atc(ir), ir=1,upf%mesh )
+read_upf_v1.f90:subroutine read_pseudo_local (upf, iunps)
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:  read (iunps, *, err=100, end=100) (upf%vloc(ir) , ir=1,upf%mesh )
+read_upf_v1.f90:subroutine read_pseudo_nl (upf, iunps)  
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:     call scan_begin (iunps, "BETA", .false.)  
+read_upf_v1.f90:     read (iunps, *, err = 100, end = 100) idum, upf%lll(nb), dummy
+read_upf_v1.f90:     read (iunps, *, err = 100, end = 100) ikk  
+read_upf_v1.f90:     read (iunps, *, err = 100, end = 100) (upf%beta(ir,nb), ir=1,ikk)
+read_upf_v1.f90:     read (iunps, *, err=200,iostat=ios) upf%rcut(nb), upf%rcutus(nb)
+read_upf_v1.f90:     read (iunps, *, err=200,iostat=ios) upf%els_beta(nb)
+read_upf_v1.f90:     call scan_end (iunps, "BETA")  
+read_upf_v1.f90:  call scan_begin (iunps, "DIJ", .false.)  
+read_upf_v1.f90:  read (iunps, *, err = 101, end = 101) nd, dummy  
+read_upf_v1.f90:     read (iunps, *, err = 101, end = 101) nb, mb, upf%dion(nb,mb)
+read_upf_v1.f90:  call scan_end (iunps, "DIJ")  
+read_upf_v1.f90:     call scan_begin (iunps, "QIJ", .false.)  
+read_upf_v1.f90:     read (iunps, *, err = 102, end = 102) upf%nqf
+read_upf_v1.f90:        call scan_begin (iunps, "RINNER", .false.)  
+read_upf_v1.f90:        read (iunps,*,err=103,end=103) ( idum, upf%rinner(i), i=1,upf%nqlc )
+read_upf_v1.f90:        call scan_end (iunps, "RINNER")  
+read_upf_v1.f90:           read (iunps,*,err=102,end=102) idum, idum, ldum, dummy
+read_upf_v1.f90:           read (iunps,*,err=104,end=104) upf%qqq(nb,mb), dummy
+read_upf_v1.f90:                 read (iunps, *, err=105, end=105) (upf%qfuncl(n,ijv,l), &
+read_upf_v1.f90:              read (iunps, *, err=105, end=105) (upf%qfunc(n,ijv), n=1,upf%mesh)
+read_upf_v1.f90:              call scan_begin (iunps, "QFCOEF", .false.)  
+read_upf_v1.f90:              read (iunps,*,err=106,end=106) &
+read_upf_v1.f90:              call scan_end (iunps, "QFCOEF")  
+read_upf_v1.f90:     call scan_end (iunps, "QIJ")  
+read_upf_v1.f90:subroutine read_pseudo_pswfc (upf, iunps)  
+read_upf_v1.f90:  integer :: iunps
+read_upf_v1.f90:     read (iunps, *, err=100, end=100) dummy  !Wavefunction labels
+read_upf_v1.f90:     read (iunps, *, err=100, end=100) ( upf%chi(ir,nb), ir=1,upf%mesh )
+read_upf_v1.f90:subroutine read_pseudo_rhoatom (upf, iunps)  
+read_upf_v1.f90:  integer :: iunps
+read_upf_v1.f90:  read (iunps,*,err=100,end=100) ( upf%rho_at(ir), ir=1,upf%mesh )
+read_upf_v1.f90:subroutine read_pseudo_addinfo (upf, iunps)
+read_upf_v1.f90:  integer :: iunps
+read_upf_v1.f90:     read (iunps, *,err=100,end=100) upf%els(nb),  &
+read_upf_v1.f90:     read (iunps, *, err=100,end=100) upf%lll(nb), upf%jjj(nb)
+read_upf_v1.f90:  read(iunps, *) upf%xmin, upf%rmax, upf%zmesh, upf%dx
+read_upf_v1.f90:SUBROUTINE read_pseudo_gipaw ( upf, iunps )
+read_upf_v1.f90:  INTEGER :: iunps
+read_upf_v1.f90:  CALL scan_begin ( iunps, "GIPAW_FORMAT_VERSION", .false. )
+read_upf_v1.f90:  READ ( iunps, *, err=100, end=100 ) version
+read_upf_v1.f90:  CALL scan_end ( iunps, "GIPAW_FORMAT_VERSION" )
+read_upf_v1.f90:     CALL read_pseudo_gipaw_core_orbitals ( upf, iunps )
+read_upf_v1.f90:     CALL read_pseudo_gipaw_local ( upf, iunps )
+read_upf_v1.f90:     CALL read_pseudo_gipaw_orbitals ( upf, iunps )
+read_upf_v1.f90:SUBROUTINE read_pseudo_gipaw_core_orbitals ( upf, iunps )
+read_upf_v1.f90:  INTEGER :: iunps
+read_upf_v1.f90:  CALL scan_begin ( iunps, "GIPAW_CORE_ORBITALS", .false. )
+read_upf_v1.f90:  READ ( iunps, *, err=100, end=100 ) upf%gipaw_ncore_orbitals
+read_upf_v1.f90:     CALL scan_begin ( iunps, "GIPAW_CORE_ORBITAL", .false. )
+read_upf_v1.f90:     READ (iunps, *, err=100, end=100) &
+read_upf_v1.f90:     READ ( iunps, *, err=100, end=100 ) &
+read_upf_v1.f90:     CALL scan_end ( iunps, "GIPAW_CORE_ORBITAL" )
+read_upf_v1.f90:  CALL scan_end ( iunps, "GIPAW_CORE_ORBITALS" )
+read_upf_v1.f90:SUBROUTINE read_pseudo_gipaw_local ( upf, iunps )
+read_upf_v1.f90:  INTEGER :: iunps
+read_upf_v1.f90:  CALL scan_begin ( iunps, "GIPAW_LOCAL_DATA", .false. )
+read_upf_v1.f90:  CALL scan_begin ( iunps, "GIPAW_VLOCAL_AE", .false. )
+read_upf_v1.f90:  READ ( iunps, *, err=100, end=100 ) &
+read_upf_v1.f90:  CALL scan_end ( iunps, "GIPAW_VLOCAL_AE" )
+read_upf_v1.f90:  CALL scan_begin ( iunps, "GIPAW_VLOCAL_PS", .false. )
+read_upf_v1.f90:  READ ( iunps, *, err=100, end=100 ) &
+read_upf_v1.f90:  CALL scan_end ( iunps, "GIPAW_VLOCAL_PS" )
+read_upf_v1.f90:  CALL scan_end ( iunps, "GIPAW_LOCAL_DATA" )
+read_upf_v1.f90:SUBROUTINE read_pseudo_gipaw_orbitals ( upf, iunps )
+read_upf_v1.f90:  INTEGER :: iunps
+read_upf_v1.f90:  CALL scan_begin ( iunps, "GIPAW_ORBITALS", .false. )
+read_upf_v1.f90:  READ ( iunps, *, err=100, end=100 ) upf%gipaw_wfs_nchannels
+read_upf_v1.f90:  inquire ( unit = iunps, name = dummy )
+read_upf_v1.f90:     CALL scan_begin ( iunps, "GIPAW_AE_ORBITAL", .false. )
+read_upf_v1.f90:     READ (iunps, *, err=100, end=100) &
+read_upf_v1.f90:     READ ( iunps, *, err=100, end=100 ) &
+read_upf_v1.f90:     CALL scan_end ( iunps, "GIPAW_AE_ORBITAL" )
+read_upf_v1.f90:     CALL scan_begin ( iunps, "GIPAW_PS_ORBITAL", .false. )
+read_upf_v1.f90:     READ (iunps, *, err=100, end=100) &
+read_upf_v1.f90:     READ ( iunps, *, err=100, end=100 ) &
+read_upf_v1.f90:     CALL scan_end ( iunps, "GIPAW_PS_ORBITAL" )
+read_upf_v1.f90:  CALL scan_end ( iunps, "GIPAW_ORBITALS" )
+read_upf_v1.f90:subroutine read_pseudo_ppinfo (upf, iunps)  
+read_upf_v1.f90:  integer :: iunps  
+read_upf_v1.f90:     READ (iunps, '(a)', err = 100, end = 100, iostat=ios) dummy  
+read_upf_v1.f90:           READ (iunps, '(a2,2i3,f6.2,3f19.11)',err=100, end=100,iostat=ios) &
+read_uspp.f90:  subroutine readvan( iunps, is, upf )
+read_uspp.f90:    !     Read Vanderbilt pseudopotential from unit "iunps"
+read_uspp.f90:         &      iunps       ! The unit of the pseudo file
+read_uspp.f90:    if (iunps <= 0 .or. iunps >= 100000) &
+read_uspp.f90:    read(iunps, *, err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(a20,3f15.9)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(2i5,1pe19.11)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(i5,2f15.9)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(2i5,f15.9)', err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(2i5,f9.5,2i5,f9.5)', err=100, iostat=ios )  &
+read_uspp.f90:       read( iunps, *, err=100, iostat=ios ) &
+read_uspp.f90:         read( iunps, '(i5)',err=100, iostat=ios ) irel
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(2i5)', err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(i5)',err=100, iostat=ios ) upf%lll(iv)
+read_uspp.f90:       read( iunps, '(1p4e19.11)',err=100, iostat=ios ) &
+read_uspp.f90:          read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(6i5)',err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(i5,f15.9)',err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)',err=100, iostat=ios ) &
+read_uspp.f90:            read( iunps, '(1p4e19.11)', err=100, iostat=ios ) dummy
+read_uspp.f90:       read( iunps, '(1p4e19.11)', err=100, iostat=ios )  &
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(1p4e19.11)',err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(1p4e19.11)',err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, *, err=100, iostat=ios ) i
+read_uspp.f90:         read( iunps, *, err=100, iostat=ios ) &
+read_uspp.f90:          read(iunps,*, err=100) &
+read_uspp.f90:  subroutine readrrkj( iunps, is, upf )
+read_uspp.f90:         iunps       ! the unit from with pseudopotential is read
+read_uspp.f90:    if (iunps <= 0 .or. iunps >= 100000) &
+read_uspp.f90:    read( iunps, '(a75)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(i5)',err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(2l5)',err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(4i5)',err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(2e17.11,i5)') &
+read_uspp.f90:    read( iunps, '(4e17.11,i5)',err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(2i5)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:       read(iunps,'(a2,2i3,f6.2)',err=100,iostat=ios) &
+read_uspp.f90:       read ( iunps, '(i6)',err=100, iostat=ios ) upf%kbeta(nb)
+read_uspp.f90:       read ( iunps, '(1p4e19.11)',err=100, iostat=ios ) &
+read_uspp.f90:          read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:             read(iunps,'(1p4e19.11)',err=100,iostat=ios) &
+read_uspp.f90:             read(iunps,'(1p4e19.11)',err=100,iostat=ios) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)',err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:       read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &
+read_uspp.f90:    read( iunps, '(1p4e19.11)', err=100, iostat=ios ) &

@@ -1,0 +1,267 @@
+
+run_all_examples: starting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example01 : starting
+
+This example shows how to use pw.x and ph.x to calculate phonon
+frequencies at Gamma and X for Si and C in the diamond structure and
+for fcc-Ni.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Si... done
+  running the phonon calculation at Gamma for Si...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+ done
+  running the phonon calculation at X for Si...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example02 : starting
+
+This example shows how to calculate interatomic force constants in
+real space for AlAs in zincblende structure.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist...
+ERROR: /home/nvarini/espresso_hdf5/espresso/bin/plotband.x not existent or not executable
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example03 : starting
+
+This example shows how to calculate electron-phonon interaction
+coefficients for fcc Al.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running q2r.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/q2r.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running matdyn.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/matdyn.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running lambda.x as: /home/nvarini/espresso_hdf5/espresso/bin/lambda.x 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir...  done
+  running the scf calculation with dense k-point grid...  done
+  running the scf calculation...  done
+  running the el-ph calculation...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example04 : starting
+
+This example shows how to use pw.x and ph.x to calculate the normal
+modes for molecules (CH4) at Gamma.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running dynmat.x as:  /home/nvarini/espresso_hdf5/espresso/bin/dynmat.x
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for CH4... done
+  running normal mode calculation for CH4...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example05 : starting
+
+This example shows how to use pw.x and ph.x to calculate
+the Raman tensor for AlAs.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x as:  mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as:  mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation... done
+  running the response calculation...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+ done
+  recovering the response calculation...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example06 : starting
+
+This example shows how to use ph.x to calculate the phonons at X and Gamma
+of fcc-Pt using fully relativistic pseudo-potential and including spin-orbit coupling.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for Pt with spin-orbit coupling... done
+  running the phonon calculation for Pt with spin-orbit coupling...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example07 : starting
+
+This example tests pw.x and ph.x in several cases that require 
+the noncollinear or the spin-orbit part of the code together 
+with the gga.
+ph.x is used to calculate the phonons at X and Gamma of fcc-Pt with gga,
+and to calculate the phonons at X and Gamma of fcc-Ni to test
+the magnetic case with gga with or without spin-orbit 
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running scf pw.x for Pt with gga-pbe and spin-orbit coupling... done
+  running ph.x at Gamma for Pt with gga-pbe and spin-orbit coupling...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example08 : starting
+
+This example tests ph.x with PAW
+It calculates the phonon modes of C at the gamma and X points
+and the vibrational modes of a molecule (CH4) at Gamma.
+
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+  checking that needed directories and files exist... done
+
+  running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation for C... done
+  running the phonon calculation for C at Gamma...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+Error condition encountered during test: exit status = 1
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example09 : starting
+
+This example shows how to use pw.x and ph.x to calculate dynamic
+polarizability of methane molecule 
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running the scf calculation...forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+pw.x               0000000000C5CA81  Unknown               Unknown  Unknown
+pw.x               0000000000C5B1D7  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FA1154DE5E2  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FA1154DE436  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FA1154CCC9C  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FA1154AD0D8  Unknown               Unknown  Unknown
+libpthread.so.0    00007FA115A4C330  Unknown               Unknown  Unknown
+pw.x               0000000000810593  hdf5_qe_mp_prepar         240  hdf5_qe.f90
+pw.x               0000000000476501  buffers_mp_save_b         602  buffers.f90
+pw.x               00000000005FD10E  punch_                     60  punch.f90
+pw.x               0000000000409334  run_pwscf_                173  run_pwscf.f90
+pw.x               0000000000408F65  MAIN__                     30  pwscf.f90
+pw.x               0000000000408EDE  Unknown               Unknown  Unknown
+libc.so.6          00007FA113CEAF45  Unknown               Unknown  Unknown
+pw.x               0000000000408DE9  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+pw.x               0000000000C5CA81  Unknown               Unknown  Unknown
+pw.x               0000000000C5B1D7  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007F040CD775E2  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007F040CD77436  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007F040CD65C9C  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007F040CD460D8  Unknown               Unknown  Unknown
+libpthread.so.0    00007F040D2E5330  Unknown               Unknown  Unknown
+pw.x               0000000000810593  hdf5_qe_mp_prepar         240  hdf5_qe.f90
+pw.x               0000000000476501  buffers_mp_save_b         602  buffers.f90
+pw.x               00000000005FD10E  punch_                     60  punch.f90
+pw.x               0000000000409334  run_pwscf_                173  run_pwscf.f90
+pw.x               0000000000408F65  MAIN__                     30  pwscf.f90
+pw.x               0000000000408EDE  Unknown               Unknown  Unknown
+libc.so.6          00007F040B583F45  Unknown               Unknown  Unknown
+pw.x               0000000000408DE9  Unknown               Unknown  Unknown
+Error condition encountered during test: exit status = 174
+Aborting
+
+/home/nvarini/espresso_hdf5/espresso/PHonon/examples/example10 : starting
+
+This example tests the Born effective charges and dielectric constant
+together with the noncollinear or the spin-orbit part of the code
+The collinear version for insulators with fixed total 
+magnetization is also tested.
+
+  executables directory: /home/nvarini/espresso_hdf5/espresso/bin
+  pseudo directory:      /home/nvarini/espresso_hdf5/espresso/pseudo
+  temporary directory:   /home/nvarini/espresso_hdf5/espresso/tempdir
+
+  checking that needed directories and files exist... done
+
+  running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
+  running ph.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/ph.x  -nk 1 -nd 1 -nb 1 -nt 1 
+
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running pw.x for Si with gga-pbe and spin-orbit coupling...forrtl: error (69): process interrupted (SIGINT)
+Image              PC                Routine            Line        Source             
+pw.x               0000000000C5CA81  Unknown               Unknown  Unknown
+pw.x               0000000000C5B1D7  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FB237CDA5E2  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FB237CDA436  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FB237CC8C9C  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FB237CA9998  Unknown               Unknown  Unknown
+libpthread.so.0    00007FB238248330  Unknown               Unknown  Unknown
+libc.so.6          00007FB2364FBF07  Unknown               Unknown  Unknown
+libhdf5_fortran.s  00007FB237CB492C  Unknown               Unknown  Unknown
+pw.x               0000000000C2033B  Unknown               Unknown  Unknown
+pw.x               00000000009D1D5A  read_upf_v1_modul          61  read_upf_v1.f90
+pw.x               000000000090D5AD  upf_module_mp_rea          71  upf.f90
+pw.x               000000000088D7AE  read_pseudo_mod_m         157  read_pseudo.f90
+pw.x               0000000000567615  iosys_                   1461  input.f90
+pw.x               0000000000409065  run_pwscf_                 74  run_pwscf.f90
+pw.x               0000000000408F65  MAIN__                     30  pwscf.f90
+pw.x               0000000000408EDE  Unknown               Unknown  Unknown
+libc.so.6          00007FB2364E6F45  Unknown               Unknown  Unknown
+pw.x               0000000000408DE9  Unknown               Unknown  Unknown

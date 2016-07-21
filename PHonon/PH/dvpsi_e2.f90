@@ -31,6 +31,15 @@ subroutine dvpsi_e2
   USE mp_bands,        ONLY : intra_bgrp_comm
   USE mp,        ONLY: mp_sum
   USE dv_of_drho_lr
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
+
 
   implicit none
 
@@ -62,6 +71,7 @@ subroutine dvpsi_e2
   ! working space
   ! weight in k-point summation
   !
+  character(len=256) :: filename_hdf5
   call start_clock('dvpsi_e2')
   !
   ! First, calculates the second derivative of the charge-density
@@ -71,12 +81,23 @@ subroutine dvpsi_e2
   allocate (depsi  (npwx,nbnd,3))
   allocate (aux3s  (dffts%nnr,3))
   allocate (ps     (nbnd,nbnd,3,3))
-
+#if defined __HDF5
+  IF ( .NOT. lgamma ) THEN
+   filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+  ELSE
+   filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+  ENDIF
+#endif
   raux6 (:,:) = 0.d0
   do ik = 1, nksq
      npw = ngk(ik)
      npwq = npw
-     if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ik)
+#if defined __HDF5
+     CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+     call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+
      weight = 2.d0 * wk(ik) / omega
 
      do ipa = 1, 3
@@ -210,7 +231,13 @@ subroutine dvpsi_e2
   do ik = 1, nksq
      npw = ngk(ik)
      npwq = npw
-     if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ik)
+     if (nksq.gt.1) then 
+#if defined __HDF5
+       CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+       call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+     endif
      do ipa = 1, 6
         nrec = (ipa - 1) * nksq + ik
         call davcio (auxg, lrchf, iuchf, nrec, -1)

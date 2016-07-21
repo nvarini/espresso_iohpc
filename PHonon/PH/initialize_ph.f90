@@ -15,6 +15,7 @@ SUBROUTINE initialize_ph()
   !
   USE qpoint, ONLY : nksq, nksqtot, ikks, ikqs
   USE control_lr, ONLY : lgamma
+  USE mp_world, ONLY : mpime
   !
   IMPLICIT NONE
   INTEGER :: ik

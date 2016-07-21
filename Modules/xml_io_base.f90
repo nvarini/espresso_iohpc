@@ -819,12 +819,14 @@ MODULE xml_io_base
       !
       IF ( ionode ) THEN
          !
-#if !defined __HDF5
+#if defined __HDF5
+         CALL h5fclose_f(rho_hdf5_write%file_id,ierr)
+#else
+   !
          CALL iotk_scan_end( rhounit, "CHARGE-DENSITY" )
          !
          CALL iotk_close_read( rhounit )
-#endif
-         !
+#endif    
       END IF
       !
       RETURN

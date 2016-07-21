@@ -42,6 +42,14 @@ subroutine zstar_eu_us
   USE eqv,        ONLY : dvpsi, dpsi
   USE qpoint,     ONLY : nksq
   USE dv_of_drho_lr
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir, nd_nmbr
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
   !
   implicit none
   integer :: npw, ibnd, jbnd, ipol, jpol, imode0, irr, imode, nrec, mode
@@ -61,6 +69,7 @@ subroutine zstar_eu_us
   complex(DP), allocatable :: drhoscfh (:,:)
   complex(DP), allocatable :: dvkb (:,:,:)
   integer :: npe, irr1, imode1, na, nt
+  character(len=256) :: filename_hdf5
 
 #ifdef TIMINIG_ZSTAR_US
   call start_clock('zstar_eu_us')
@@ -88,7 +97,19 @@ subroutine zstar_eu_us
   !
   do ik = 1, nksq
      npw = ngk(ik)
-     if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ik)
+     if (nksq.gt.1) then
+#if defined __HDF5
+       IF ( .NOT. lgamma ) THEN
+          filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+       ELSE
+          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       ENDIF
+       CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+       call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+     endif
+
      if (lsda) current_spin = isk (ik)
      call init_us_2 (npw, igk_k(1,ik), xk(1,ik), vkb)
      weight = wk (ik)
@@ -185,7 +206,19 @@ subroutine zstar_eu_us
   do ik = 1, nksq
      npw = ngk(ik)
      weight = wk (ik)
-     if (nksq.gt.1) call get_buffer (evc, lrwfc, iuwfc, ik)
+     if (nksq.gt.1) then
+#if defined __HDF5
+       IF ( .NOT. lgamma ) THEN
+          filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+       ELSE
+          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       ENDIF
+       CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+       call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+     endif
+
      call init_us_2 (npw, igk_k(1,ik), xk (1, ik), vkb)
      call dvkb3(ik, dvkb)
      imode0 = 0

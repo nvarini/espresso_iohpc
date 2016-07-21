@@ -50,6 +50,7 @@ SUBROUTINE phq_init()
   USE noncollin_module,     ONLY : noncolin, npol
   USE uspp,                 ONLY : okvan, vkb, nlcc_any
   USE uspp_param,           ONLY : upf
+  USE m_gth,                ONLY : setlocq_gth
   USE phus,                 ONLY : alphap
   USE nlcc_ph,              ONLY : drc
   USE control_ph,           ONLY : trans, zue, epsil, all_done
@@ -66,13 +67,14 @@ SUBROUTINE phq_init()
   USE qpoint,               ONLY : xq, nksq, eigqts, ikks, ikqs
   USE eqv,                  ONLY : vlocq, evq
   USE control_lr,           ONLY : nbnd_occ, lgamma
-  USE io_files,             ONLY : tmp_dir, nd_nmbr
 #if defined __HDF5
-  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir, nd_nmbr
+  USE hdf5_qe,              ONLY : evc_hdf5_write, evq_hdf5_write
   USE control_ph,           ONLY : tmp_dir_ph
   USE save_ph,              ONLY : tmp_dir_save
   USE mp_world,             ONLY : mpime
 #endif
+
   !
   IMPLICIT NONE
   !
@@ -93,13 +95,22 @@ SUBROUTINE phq_init()
     ! the argument of the phase
   COMPLEX(DP), ALLOCATABLE :: aux1(:,:)
     ! used to compute alphap
-  CHARACTER(LEN=256)     :: filename_hdf5
+  character(len=256) :: filename_hdf5
+  logical            :: exst
   !
   !
   IF (all_done) RETURN
   !
   CALL start_clock( 'phq_init' )
   !
+  IF ( .NOT. lgamma ) THEN
+    filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // trim(nd_nmbr)
+  ELSE
+    filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // trim(nd_nmbr)
+    inquire(file =TRIM(filename_hdf5), exist = exst)
+    if(.NOT. exst) filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // trim(nd_nmbr)
+  ENDIF
+
   DO na = 1, nat
      !
      arg = ( xq(1) * tau(1,na) + &
@@ -122,6 +133,8 @@ SUBROUTINE phq_init()
      !
      IF (upf(nt)%tcoulombp) then
         CALL setlocq_coul ( xq, upf(nt)%zp, tpiba2, ngm, g, omega, vlocq(1,nt) )
+     ELSE IF (upf(nt)%is_gth) then
+        CALL setlocq_gth ( nt, xq, upf(nt)%zp, tpiba2, ngm, g, omega, vlocq(1,nt) )
      ELSE
         CALL setlocq( xq, rgrid(nt)%mesh, msh(nt), rgrid(nt)%rab, rgrid(nt)%r,&
                    upf(nt)%vloc(1), upf(nt)%zp, tpiba2, ngm, g, omega, &
@@ -129,6 +142,7 @@ SUBROUTINE phq_init()
      END IF
      !
   END DO
+
   !
   ! only for electron-phonon coupling with wannier functions
   ! 
@@ -181,17 +195,14 @@ SUBROUTINE phq_init()
      !
      ! ... read the wavefunctions at k
      !
-    write(mpime+500,*) ik, nksq
-    if(ik.eq.18) call errore('','',44)
     if(elph_mat) then
         call read_wfc_rspace_and_fwfft( evc, ik, lrwfcr, iunwfcwann, npw, igk_k(1,ikk) )
 !       CALL davcio (evc, lrwfc, iunwfcwann, ik, - 1)
     else
 #if defined __HDF5
-    filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
-    CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+       CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
 #else
-    CALL get_buffer( evc, lrwfc, iuwfc, ikk )
+       CALL get_buffer( evc, lrwfc, iuwfc, ikk )
 #endif
     endif
      !
@@ -226,15 +237,28 @@ SUBROUTINE phq_init()
   IF (acfdt_is_active) THEN
      ! ACFDT -test always read calculated wcf from non_scf calculation
      IF(acfdt_num_der) then 
+#if defined __HDF5
+       CALL get_buffer( evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write )
+#else
        CALL get_buffer( evq, lrwfc, iuwfc, ikq )
+#endif
      ELSE
        IF ( .NOT. lgamma ) &
+#if defined __HDF5
+          CALL get_buffer( evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write )
+#else
           CALL get_buffer( evq, lrwfc, iuwfc, ikq )
+#endif
      ENDIF
   ELSE
      ! this is the standard treatment
      IF ( .NOT. lgamma .and..not. elph_mat )then 
-        CALL get_buffer( evq, lrwfc, iuwfc, ikq )
+#if defined __HDF5
+       CALL get_buffer( evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write )
+#else
+       CALL get_buffer( evq, lrwfc, iuwfc, ikq )
+#endif
+
      ELSEIF(.NOT. lgamma .and. elph_mat) then
         !
         ! I read the wavefunction in real space and fwfft it

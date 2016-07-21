@@ -41,13 +41,20 @@ SUBROUTINE run_pwscf ( exit_status )
   USE qmmm,             ONLY : qmmm_initialization, qmmm_shutdown, &
                                qmmm_update_positions, qmmm_update_forces
 #ifdef __XSD
-  USE qexsd_module,     ONLY:   qexsd_set_status
+  USE qexsd_module,     ONLY : qexsd_set_status
+#endif
+#if defined __HDF5
+  USE hdf5_qe,          ONLY : evc_hdf5_write
+  USE io_files,         ONLY : tmp_dir, nd_nmbr
 #endif
   !
 
   IMPLICIT NONE
   INTEGER, INTENT(OUT) :: exit_status
   INTEGER :: idone 
+#if defined __HDF5
+  CHARACTER(LEN=256) :: filename_hdf5
+#endif
   ! counter of electronic + ionic steps done in this run
   !
   !
@@ -144,8 +151,6 @@ SUBROUTINE run_pwscf ( exit_status )
      !
      ! ... send out forces to MM code in QM/MM run
      !
-     CALL qmmm_update_forces( force, rho%of_r, nspin, dfftp)
-     !
      IF ( lmd .OR. lbfgs ) THEN
         !
         if (fix_volume) CALL impose_deviatoric_stress(sigma)
@@ -165,12 +170,19 @@ SUBROUTINE run_pwscf ( exit_status )
 #ifdef __XSD 
             CALL qexsd_set_status(255)
 #endif
-            CALL punch( 'config' )
+#if defined __HDF5
+            filename_hdf5 = trim(tmp_dir)//"evc.hdf5_" // trim(nd_nmbr)
+            CALL punch('config', filename_hdf5, evc_hdf5_write)
+#else
+            CALL punch('config')
+#endif
         END IF
         !
      END IF
      !
      CALL stop_clock( 'ions' )
+     !
+     CALL qmmm_update_forces( force, rho%of_r, nspin, dfftp)
      !
      ! ... exit condition (ionic convergence) is checked here
      !
@@ -210,7 +222,12 @@ SUBROUTINE run_pwscf ( exit_status )
 #ifdef __XSD
   CALL qexsd_set_status(exit_status)
 #endif
+#if defined __HDF5
+  filename_hdf5 = trim(tmp_dir)//"evc.hdf5_" // trim(nd_nmbr)
+  CALL punch('all', filename_hdf5, evc_hdf5_write)
+#else
   CALL punch('all')
+#endif
   !
   CALL qmmm_shutdown()
   !

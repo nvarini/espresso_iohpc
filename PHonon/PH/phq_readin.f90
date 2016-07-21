@@ -77,6 +77,7 @@ SUBROUTINE phq_readin()
 
   ! YAMBO >
   USE YAMBO,         ONLY : elph_yambo,dvscf_yambo
+  USE mp_world,      ONLY : mpime
   ! YAMBO <
   !
   IMPLICIT NONE

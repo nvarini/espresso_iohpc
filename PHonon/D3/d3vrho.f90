@@ -35,6 +35,15 @@ subroutine d3vrho()
 
   USE qpoint,               ONLY : nksq, npwq, igkq
   USE control_lr,           ONLY : nbnd_occ, lgamma
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE buffers,              ONLY : get_buffer
+#endif
+
   !
   implicit none
   integer :: icart, jcart, kcart, na_i, na_j, na_k, na, ng, ir, nt, &
@@ -49,7 +58,7 @@ subroutine d3vrho()
   complex (DP) :: alpha (8), zdotc, work
   complex (DP), allocatable :: d3dynwrk (:,:,:), d3dynwrk2 (:,:,:), &
        rhog (:), work1 (:,:), work2 (:,:), work3 (:)
-
+  character(len=256) :: filename_hdf5
   allocate  (rhog( dfftp%nnr))
   allocate  (d3dynwrk( 3 * nat, 3 * nat, 3 * nat))
   allocate  (d3dynwrk2(3 * nat, 3 * nat, 3 * nat))
@@ -102,7 +111,12 @@ subroutine d3vrho()
      endif
 100  call errore ('d3vrho', 'reading igk', abs (ios) )
 200  call errore ('d3vrho', 'reading igkq', abs (ios) )
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     call get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
      call davcio (evc, lrwfc, iuwfc, ikk, - 1)
+#endif
      call init_us_2 (npw, igk, xk (1, ikk), vkb0)
 
      do kcart = 1, 3

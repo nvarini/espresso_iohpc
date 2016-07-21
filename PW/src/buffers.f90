@@ -570,7 +570,7 @@ contains
     !
   END SUBROUTINE open_buffer
   !----------------------------------------------------------------------------
-  SUBROUTINE save_buffer( vect, nword, unit, nrec, filename, hdf5desc )
+  SUBROUTINE save_buffer( vect, nword, unit, nrec, filename, hdf5desc, debug )
     !---------------------------------------------------------------------------
     !
     ! ... copy vect(1:nword) into the "nrec"-th record of a previously
@@ -592,10 +592,20 @@ contains
     CHARACTER(LEN=256), OPTIONAL, INTENT(IN) :: filename
 #if defined __HDF5
     TYPE(HDF5_type), OPTIONAL, INTENT(INOUT) :: hdf5desc
+    INTEGER,         OPTIONAL, INTENT(IN)    :: debug
 #endif
     
     INTEGER :: ierr, twf_collect
     !
+#if defined __HDF5
+    IF(present(filename)) THEN
+       CALL prepare_for_writing_final(hdf5desc,inter_pool_comm,filename, nrec)
+       twf_collect = twfcollect
+       CALL add_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec)
+       CALL write_evc(hdf5desc,0,vect, nrec)
+       CALL hdf5_close(hdf5desc)
+    ENDIF
+#endif
     ierr = buiol_check_unit (unit)
     IF( ierr > 0 ) THEN
        ierr = buiol_write_record ( unit, nword, nrec, vect )
@@ -605,19 +615,7 @@ contains
        print *, 'save_buffer: record', nrec, ' written to unit', unit
 #endif
     ELSE 
-#if defined __HDF5
-       IF(present(filename)) THEN
-          CALL prepare_for_writing_final(hdf5desc,inter_pool_comm,filename, nrec)
-          twf_collect = twfcollect
-          CALL add_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec)
-          CALL write_evc(hdf5desc,0,vect, nrec)
-          CALL hdf5_close(hdf5desc)
-       ELSE
-          CALL davcio ( vect, 2*nword, unit, nrec, +1 )
-       ENDIF
-#else
        CALL davcio ( vect, 2*nword, unit, nrec, +1 )
-#endif
     END IF
     !
   END SUBROUTINE save_buffer
@@ -694,7 +692,7 @@ contains
     !
     IF(present(filename))THEN
        CALL prepare_for_reading_final(hdf5desc,inter_pool_comm,filename, nrec)
-       CALL read_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec,45)
+       CALL read_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec)
        twfcollect = twf_collect
        CALL read_evc(hdf5desc,0,vect, nrec)
        CALL hdf5_close(hdf5desc)
@@ -781,6 +779,7 @@ contains
           n = 1
   10      continue
              ierr = buiol_read_record ( unit, nword, n, vect )
+
              IF ( ierr /= 0 ) go to 20
 #if defined __HDF5
              IF(present(filename)) THEN
@@ -795,7 +794,6 @@ contains
 #else
              CALL davcio ( vect, 2*nword, unit, n, +1 )
 #endif
-             !CALL davcio ( vect, 2*nword, unit, n, +1 )
              n = n+1
           go to 10
   20      deallocate (vect)

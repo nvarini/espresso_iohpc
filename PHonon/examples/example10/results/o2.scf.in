@@ -1,0 +1,33 @@
+o2
+o2 molecule in a cubic box
+ &control
+    calculation = 'relax',
+    prefix='o2_mol',
+    tprnfor = .true.,
+    pseudo_dir='/home/nvarini/espresso_hdf5/espresso/pseudo',
+    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir'
+ /
+ &system
+    ibrav=  1,
+    celldm(1) =10.0,
+    nat=2,
+    ntyp= 1,
+    ecutwfc =45,
+    ecutrho =500,
+    nspin=2
+    starting_magnetization=0.5,
+    tot_magnetization=2.0
+ /
+ &electrons
+    mixing_beta = 0.5,
+    conv_thr =  1.0d-10
+ /
+ &ions
+ /
+ATOMIC_SPECIES
+O  0.0   O.pbe-rrkjus.UPF
+ATOMIC_POSITIONS BOHR
+O       -1.156  0.000000000   0.000000000
+O        1.156   0.000000000   0.000000000
+K_POINTS AUTOMATIC
+1 1 1 0 0 0

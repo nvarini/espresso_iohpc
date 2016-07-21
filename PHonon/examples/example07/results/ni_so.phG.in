@@ -1,0 +1,8 @@
+phonons of Ni at Gamma
+ &inputph
+  tr2_ph=1.0d-16,
+  prefix='ni_so',
+  fildyn='niG.dyn',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir'
+ /
+0.0 0.0 0.0

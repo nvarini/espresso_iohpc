@@ -77,6 +77,8 @@ SUBROUTINE solve_linter (irr, imode0, npe, drhoscf)
   USE io_files,             ONLY :  nd_nmbr
   USE save_ph,              ONLY : tmp_dir_save
   USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
 #endif
 
   implicit none
@@ -260,18 +262,21 @@ SUBROUTINE solve_linter (irr, imode0, npe, drhoscf)
            if (lgamma) then
 #if defined __HDF5
               filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+
               CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+              !call get_buffer (evc, lrwfc, iuwfc, ik)
 #else
               call get_buffer (evc, lrwfc, iuwfc, ik)
 #endif
            else
 #if defined __HDF5
-              filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+              filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
               CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+              call get_buffer (evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write)
 #else
               call get_buffer (evc, lrwfc, iuwfc, ikk)
-#endif
               call get_buffer (evq, lrwfc, iuwfc, ikq)
+#endif
 
            endif
 

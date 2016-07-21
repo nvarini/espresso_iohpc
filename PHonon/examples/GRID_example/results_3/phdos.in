@@ -1,0 +1,4 @@
+ &input
+    asr='simple',  dos=.true. amass(1)=26.98, amass(2)=74.922,
+    flfrc='alas.444.fc.xml', fldos='alas.phdos', nk1=6,nk2=6,nk3=6
+ /

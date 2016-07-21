@@ -57,6 +57,15 @@ subroutine dhdrhopsi
   USE mp_pools,  ONLY : inter_pool_comm
   USE mp_bands,  ONLY : intra_bgrp_comm
   USE mp,        ONLY : mp_sum
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
+
 
   implicit none
 
@@ -104,6 +113,8 @@ subroutine dhdrhopsi
   complex(DP), EXTERNAL :: zdotc
   ! the scalar product function
 
+  character(LEN=256) :: filename_hdf5
+
   allocate (et_sw     (nbnd)          )
   allocate (ev_sw     (npwx,nbnd)     )
   allocate (chif      (npwx,nbnd,6)   )
@@ -115,6 +126,16 @@ subroutine dhdrhopsi
   allocate (ps0       (nbnd)          )
   allocate (ps1       (nbnd,nbnd)     )
   allocate (ps2       (nbnd,nbnd,3)   )
+
+#if defined __HDF5
+  IF ( .NOT. lgamma ) THEN
+   filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+  ELSE
+   filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+  ENDIF
+#endif
+
+
 
   CALL allocate_bec_type (nkb, nbnd, becp1_sw)
 
@@ -156,7 +177,11 @@ subroutine dhdrhopsi
      call dcopy (3, xk (1, ik), 1, xk_sw, 1)
      call dcopy (nbnd, et (1, ik), 1, et_sw, 1)
      call beccopy (becp1(ik), becp1_sw, nkb, nbnd)
+#if defined __HDF5
+     CALL get_buffer( ev_sw, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
      call get_buffer (ev_sw, lrwfc, iuwfc, ik)
+#endif
 
      do ipa = 1, 3
         do isg = -1, 1, 2

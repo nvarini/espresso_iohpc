@@ -101,6 +101,7 @@ SUBROUTINE check_initial_status(auxdyn)
   ! YAMBO <
   !
   USE acfdtest,        ONLY : acfdt_is_active, acfdt_num_der
+  USE mp_world,        ONLY : mpime
   !
   IMPLICIT NONE
   !

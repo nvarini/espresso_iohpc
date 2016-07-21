@@ -1,0 +1,9 @@
+phonons of graphite
+ &inputph
+   tr2_ph=1.0d-18,
+   prefix='graphite'
+   outdir='/home/nvarini/espresso_hdf5/espresso/tempdir'
+   amass(1)=12.0107,
+   fildyn='graphiteG.dyn',
+ /
+0.0 0.0 0.0

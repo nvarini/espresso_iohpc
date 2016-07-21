@@ -10420,7 +10420,7 @@ ac_config_files="$ac_config_files make.inc"
 
 ac_config_files="$ac_config_files configure.msg"
 
-ac_config_files="$ac_config_files install/make_wannier90.sys"
+ac_config_files="$ac_config_files install/make_wannier90.inc"
 
 
 
@@ -11120,7 +11120,7 @@ do
     "include/configure.h") CONFIG_FILES="$CONFIG_FILES include/configure.h:include/configure.h.in" ;;
     "make.inc") CONFIG_FILES="$CONFIG_FILES make.inc" ;;
     "configure.msg") CONFIG_FILES="$CONFIG_FILES configure.msg" ;;
-    "install/make_wannier90.sys") CONFIG_FILES="$CONFIG_FILES install/make_wannier90.sys" ;;
+    "install/make_wannier90.inc") CONFIG_FILES="$CONFIG_FILES install/make_wannier90.inc" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

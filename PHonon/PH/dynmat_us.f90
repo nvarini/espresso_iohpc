@@ -50,6 +50,8 @@ SUBROUTINE dynmat_us()
   USE io_files,             ONLY :  nd_nmbr
   USE save_ph,              ONLY : tmp_dir_save
   USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
 #endif
 
   IMPLICIT NONE
@@ -142,7 +144,11 @@ SUBROUTINE dynmat_us()
      npw = ngk(ikk)
      IF (nksq > 1) THEN
 #if defined __HDF5
-       filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       IF ( .NOT. lgamma ) THEN
+         filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+       ELSE
+         filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       ENDIF
        CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
 #else
        CALL get_buffer (evc, lrwfc, iuwfc, ikk)

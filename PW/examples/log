@@ -213,10 +213,10 @@ simulation of C4H6 with TPSS metaGGA Exc.
 
   running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
 
-  running the pw.x SCF calculation...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
-Error condition encountered during test: exit status = 1
-Aborting
+  running the pw.x SCF calculation... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example09 : done
 
 /home/nvarini/espresso_hdf5/espresso/PW/examples/example10 : starting
 
@@ -232,10 +232,11 @@ shows how to calculate high-frequency dielectric constant of bulk Silicon
 
   running pw.x as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
 
-  running the PW calculation for bulk Si E_field=0.0  a.u. ...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
-Error condition encountered during test: exit status = 1
-Aborting
+  running the PW calculation for bulk Si E_field=0.0  a.u. ... done
+  running the PW calculation for bulk Si E_field=0.001  a.u. ... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example10 : done
 
 /home/nvarini/espresso_hdf5/espresso/PW/examples/example11 : starting
 
@@ -250,40 +251,11 @@ It calculates the band structure of ferromagnetic bcc-Fe.
 
   running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
 
-  running the scf calculation for Fe with PAW spin-orbit...########################################################################################################################
-# FROM IOTK LIBRARY, VERSION 1.2.0
-# UNRECOVERABLE ERROR (ierr=2)
-# ERROR IN: iotk_getline (iotk_scan.f90:947)
-# CVS Revision: 1.23 
-# 
-iostat=-1
-########################################################################################################################
-# FROM IOTK LIBRARY, VERSION 1.2.0
-# UNRECOVERABLE ERROR (ierr=2)
-# ERROR IN: iotk_getline (iotk_scan.f90:947)
-# CVS Revision: 1.23 
-# 
-iostat=-1
-# ERROR IN: iotk_scan_tag (iotk_scan.f90:593)
-# CVS Revision: 1.23 
-# ERROR IN: iotk_scan (iotk_scan.f90:821)
-# CVS Revision: 1.23 
-# ERROR IN: iotk_scan_end (iotk_scan.f90:241)
-# CVS Revision: 1.23 
-# foundl
-########################################################################################################################
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
-# ERROR IN: iotk_scan_tag (iotk_scan.f90:593)
-# CVS Revision: 1.23 
-# ERROR IN: iotk_scan (iotk_scan.f90:821)
-# CVS Revision: 1.23 
-# ERROR IN: iotk_scan_end (iotk_scan.f90:241)
-# CVS Revision: 1.23 
-# foundl
-########################################################################################################################
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-Error condition encountered during test: exit status = 1
-Aborting
+  running the scf calculation for Fe with PAW spin-orbit... done
+  running the band calculation for Fe with PAW and spin-orbit... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example11: done
 
 /home/nvarini/espresso_hdf5/espresso/PW/examples/example12 : starting
 
@@ -298,10 +270,11 @@ It calculates the band structure of ferromagnetic bcc-Fe.
 
   running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
 
-  running the scf calculation for Fe with USPS and DFT+U with spin-orbit...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
-Error condition encountered during test: exit status = 1
-Aborting
+  running the scf calculation for Fe with USPS and DFT+U with spin-orbit... done
+  running the band calculation for Fe with USPP and DFT+U and spin-orbit... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/example12: done
 
 /home/nvarini/espresso_hdf5/espresso/PW/examples/VCSexample : starting
 
@@ -497,10 +470,49 @@ by editing the script and addind/modifying the variable called BOX_SIZE_LIST
 
   running tests for a box size =  16 bohr 
 
-  running scf calculation for N atom...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
-Error condition encountered during test: exit status = 1
-Aborting
+  running scf calculation for N atom... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running relax calculation for NH4+ ion... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+  running relax calculation for H2O molecule... done
+  cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
+
+ eigenvalues of N atom
+16    -19.9150  -8.2866  -8.2866  -8.2866
+16    -15.3304  -4.1270  -4.1270  -4.1270
+
+ to be compared with the reference values
+12    -19.8776  -8.2463  -8.2463  -8.2463
+12    -15.2899  -4.0718  -4.0718  -4.0718
+16    -19.9135  -8.2852  -8.2852  -8.2852
+16    -15.3289  -4.1256  -4.1256  -4.1256
+20    -19.9158  -8.2866  -8.2866  -8.2866
+20    -15.3321  -4.1285  -4.1285  -4.1285
+24    -19.9137  -8.2856  -8.2856  -8.2856
+24    -15.3296  -4.1277  -4.1277  -4.1277
+
+
+ eigenvalues of NH4+ ions
+16    -31.6043 -20.8579 -20.8579 -20.8579  -7.0874  -4.8262  -4.8262  -4.8262
+
+ to be compared with the reference values
+12    -31.5900 -20.8421 -20.8421 -20.8421  -7.4141  -4.5486  -4.5486  -4.5486
+16    -31.6045 -20.8581 -20.8581 -20.8581  -7.0873  -4.8260  -4.8260  -4.8260
+20    -31.6039 -20.8560 -20.8560 -20.8560  -7.0299  -4.8754  -4.8754  -4.8754
+24    -31.6055 -20.8589 -20.8589 -20.8589  -7.0239  -4.8854  -4.8854  -4.8854
+
+
+ eigenvalues of H2O molecule
+16    -25.2333 -13.0674  -9.2562  -7.2162  -1.3154   0.5208   0.7056   1.2128
+
+ to be compared with the reference values
+12    -25.1842 -13.0227  -9.1992  -7.1566  -1.4272   1.7263   2.0010   2.6525
+16    -25.2332 -13.0742  -9.2511  -7.2158  -1.3149   0.5215   0.7057   1.2127
+20    -25.2351 -13.0758  -9.2534  -7.2189  -1.2138  -0.0461   0.2741   0.5740
+24    -25.2357 -13.0766  -9.2538  -7.2191  -1.1574  -0.2771   0.0529   0.2466
+
+
+/home/nvarini/espresso_hdf5/espresso/PW/examples/cluster_example: done
 
 /home/nvarini/espresso_hdf5/espresso/PW/examples/vdwDF_example : starting
 

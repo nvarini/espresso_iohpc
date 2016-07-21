@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:56:21 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:44:10 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -147,7 +147,7 @@ EXX: grid of k+q points same as grid of k-points
      negative rho (up, down):  3.227E-04 2.151E-04
      Starting wfc are    8 randomized atomic wfcs
 
-     total cpu time spent up to now is        0.7 secs
+     total cpu time spent up to now is        0.8 secs
 
      per-process dynamical memory:    45.6 Mb
 
@@ -183,6 +183,13 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):    -6.4849   -4.5457
 
+     total energy              =     -67.95768530 Ry
+     Harris-Foulkes estimate   =     -67.95565518 Ry
+     estimated scf accuracy    <       0.05496130 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.02 Bohr mag/cell
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  4.58E-04,  avg # of iterations =  2.0
@@ -206,6 +213,13 @@ EXX: grid of k+q points same as grid of k-points
    -31.2625 -18.0517 -11.8377 -11.1943 -11.1943  -3.9948  -3.9947  -1.6509
 
      highest occupied, lowest unoccupied level (ev):    -6.1951   -3.9948
+
+     total energy              =     -67.96920527 Ry
+     Harris-Foulkes estimate   =     -67.96567598 Ry
+     estimated scf accuracy    <       0.00293409 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.04 Bohr mag/cell
 
      iteration #  3     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -235,6 +249,13 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):    -6.2610   -3.9299
 
+!    total energy              =     -67.96998271 Ry
+     Harris-Foulkes estimate   =     -67.96959217 Ry
+     estimated scf accuracy    <       0.00026997 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.04 Bohr mag/cell
+
      convergence has been achieved in   3 iterations
 
      EXX: now go back to refine exchange calculation
@@ -249,7 +270,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  2.45E-05,  avg # of iterations =  3.5
 
-     total cpu time spent up to now is        6.4 secs
+     total cpu time spent up to now is        6.5 secs
 
  ------ SPIN UP ------------
 
@@ -267,6 +288,13 @@ EXX: grid of k+q points same as grid of k-points
 
      highest occupied, lowest unoccupied level (ev):    -8.2837   -2.3060
 
+     total energy              =     -66.79013612 Ry
+     Harris-Foulkes estimate   =     -69.93357972 Ry
+     estimated scf accuracy    <       0.00103774 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.07 Bohr mag/cell
+
      iteration #  2     ecut=    80.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  8.65E-06,  avg # of iterations =  2.0
@@ -275,7 +303,7 @@ EXX: grid of k+q points same as grid of k-points
      atom:    1    charge:    2.8750    magn:    0.5726    constr:    0.0000
      atom:    2    charge:    2.8766    magn:    0.5719    constr:    0.0000
 
-     total cpu time spent up to now is        8.9 secs
+     total cpu time spent up to now is        9.0 secs
 
      End of self-consistent calculation
 
@@ -294,6 +322,13 @@ EXX: grid of k+q points same as grid of k-points
    -34.6680 -20.5790 -13.9323 -12.5082 -12.5082  -2.3728  -2.3728  -1.0350
 
      highest occupied, lowest unoccupied level (ev):    -8.3976   -2.3728
+
+!    total energy              =     -66.79027245 Ry
+     Harris-Foulkes estimate   =     -69.93323573 Ry
+     estimated scf accuracy    <       0.00009529 Ry
+
+     total magnetization       =     2.00 Bohr mag/cell
+     absolute magnetization    =     2.07 Bohr mag/cell
 
      convergence has been achieved in   2 iterations
 
@@ -316,27 +351,27 @@ EXX: grid of k+q points same as grid of k-points
      Writing output data file o2.save
  
      init_run     :      0.68s CPU      0.72s WALL (       1 calls)
-     electrons    :      7.40s CPU      7.50s WALL (       2 calls)
-     forces       :      0.33s CPU      0.33s WALL (       1 calls)
+     electrons    :      7.47s CPU      7.55s WALL (       2 calls)
+     forces       :      0.32s CPU      0.34s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.06s CPU      0.06s WALL (       1 calls)
-     potinit      :      0.30s CPU      0.32s WALL (       1 calls)
+     potinit      :      0.29s CPU      0.32s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      5.70s CPU      5.74s WALL (       6 calls)
-     sum_band     :      0.29s CPU      0.30s WALL (       6 calls)
-     v_of_rho     :      1.84s CPU      1.87s WALL (       7 calls)
-     mix_rho      :      0.06s CPU      0.07s WALL (       6 calls)
+     c_bands      :      5.75s CPU      5.78s WALL (       6 calls)
+     sum_band     :      0.30s CPU      0.30s WALL (       6 calls)
+     v_of_rho     :      1.85s CPU      1.88s WALL (       7 calls)
+     mix_rho      :      0.05s CPU      0.07s WALL (       6 calls)
 
      Called by c_bands:
-     init_us_2    :      0.05s CPU      0.05s WALL (      34 calls)
-     regterg      :      5.63s CPU      5.67s WALL (      12 calls)
+     init_us_2    :      0.04s CPU      0.05s WALL (      34 calls)
+     regterg      :      5.68s CPU      5.70s WALL (      12 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      5.58s CPU      5.61s WALL (      56 calls)
+     h_psi        :      5.63s CPU      5.65s WALL (      56 calls)
      g_psi        :      0.01s CPU      0.01s WALL (      42 calls)
      rdiaghg      :      0.01s CPU      0.01s WALL (      50 calls)
 
@@ -344,25 +379,25 @@ EXX: grid of k+q points same as grid of k-points
      add_vuspsi   :      0.01s CPU      0.01s WALL (      56 calls)
 
      General routines
-     calbec       :      0.03s CPU      0.03s WALL (      70 calls)
-     fft          :      0.66s CPU      0.69s WALL (     158 calls)
-     fftw         :      0.95s CPU      0.95s WALL (     354 calls)
-     fftc         :      3.44s CPU      3.45s WALL (     821 calls)
-     fftcw        :      0.51s CPU      0.51s WALL (     187 calls)
+     calbec       :      0.03s CPU      0.02s WALL (      70 calls)
+     fft          :      0.69s CPU      0.70s WALL (     158 calls)
+     fftw         :      0.96s CPU      0.97s WALL (     354 calls)
+     fftc         :      3.48s CPU      3.49s WALL (     821 calls)
+     fftcw        :      0.52s CPU      0.52s WALL (     187 calls)
  
      Parallel routines
-     fft_scatter  :      1.63s CPU      1.65s WALL (    1520 calls)
+     fft_scatter  :      1.64s CPU      1.64s WALL (    1520 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.09s CPU      0.10s WALL (       2 calls)
-     vexx         :      4.62s CPU      4.65s WALL (      15 calls)
-     exxenergy    :      0.97s CPU      0.98s WALL (       3 calls)
+     vexx         :      4.65s CPU      4.67s WALL (      15 calls)
+     exxenergy    :      0.99s CPU      0.99s WALL (       3 calls)
  
-     PWSCF        :     9.81s CPU        10.01s WALL
+     PWSCF        :     9.92s CPU        10.08s WALL
 
  
-   This run was terminated on:  17:56:31  29Jun2016            
+   This run was terminated on:  15:44:20  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

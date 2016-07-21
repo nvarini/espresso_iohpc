@@ -83,8 +83,6 @@ SUBROUTINE potinit()
       exst     =  check_file_exst( TRIM(filename) )
       !
   ENDIF
-   !  write(mpime+200,*) filename, exst
-   !  call errore('','',440)
   !
   !
   IF ( starting_pot == 'file' .AND. exst ) THEN

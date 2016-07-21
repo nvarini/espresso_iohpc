@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:53:19 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:41: 7 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -239,17 +239,29 @@
 
      total cpu time spent up to now is        0.1 secs
 
+     total energy              =     -15.82340180 Ry
+     Harris-Foulkes estimate   =     -15.83974476 Ry
+     estimated scf accuracy    <       0.06415505 Ry
+
      iteration #  2     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  8.02E-04,  avg # of iterations =  1.0
 
      total cpu time spent up to now is        0.1 secs
 
+     total energy              =     -15.82634547 Ry
+     Harris-Foulkes estimate   =     -15.82635432 Ry
+     estimated scf accuracy    <       0.00228159 Ry
+
      iteration #  3     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  2.85E-05,  avg # of iterations =  1.9
 
      total cpu time spent up to now is        0.1 secs
+
+     total energy              =     -15.82644721 Ry
+     Harris-Foulkes estimate   =     -15.82643492 Ry
+     estimated scf accuracy    <       0.00004971 Ry
 
      iteration #  4     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -301,6 +313,10 @@
 
      highest occupied, lowest unoccupied level (ev):     5.9961    7.2968
 
+!    total energy              =     -15.82645315 Ry
+     Harris-Foulkes estimate   =     -15.82645294 Ry
+     estimated scf accuracy    <       0.00000021 Ry
+
      convergence has been achieved in   4 iterations
 
      EXX: now go back to refine exchange calculation
@@ -317,11 +333,19 @@
 
      total cpu time spent up to now is        1.4 secs
 
+     total energy              =     -15.84984468 Ry
+     Harris-Foulkes estimate   =     -16.93098123 Ry
+     estimated scf accuracy    <       0.00004277 Ry
+
      iteration #  2     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  5.35E-07,  avg # of iterations =  1.0
 
      total cpu time spent up to now is        2.0 secs
+
+     total energy              =     -15.84984652 Ry
+     Harris-Foulkes estimate   =     -16.93097846 Ry
+     estimated scf accuracy    <       0.00000258 Ry
 
      iteration #  3     ecut=    12.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -372,6 +396,10 @@
     -5.0445  -1.8761   2.9355   3.5936   9.4718  10.8508  11.4360  14.7822
 
      highest occupied, lowest unoccupied level (ev):     4.9736    8.0561
+
+!    total energy              =     -15.84984660 Ry
+     Harris-Foulkes estimate   =     -16.93097893 Ry
+     estimated scf accuracy    <       0.00000003 Ry
 
      convergence has been achieved in   3 iterations
 
@@ -438,6 +466,10 @@
     -5.0443  -1.8774   2.9335   3.5824   9.4809  10.8540  11.4381  14.7829
 
      highest occupied, lowest unoccupied level (ev):     4.9567    8.0652
+
+!    total energy              =     -15.84995604 Ry
+     Harris-Foulkes estimate   =     -16.93202076 Ry
+     estimated scf accuracy    <       0.00000066 Ry
 
      convergence has been achieved in   1 iterations
 
@@ -511,6 +543,10 @@
 
      highest occupied, lowest unoccupied level (ev):     4.9548    8.0663
 
+!    total energy              =     -15.84995840 Ry
+     Harris-Foulkes estimate   =     -16.93226711 Ry
+     estimated scf accuracy    <       0.00000001 Ry
+
      convergence has been achieved in   1 iterations
 
 !    total energy              =     -15.84995846 Ry
@@ -533,7 +569,7 @@
      Writing output data file silicon.save
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      4.49s CPU      4.61s WALL (       4 calls)
+     electrons    :      4.48s CPU      4.59s WALL (       4 calls)
      stress       :      0.18s CPU      0.19s WALL (       1 calls)
 
      Called by init_run:
@@ -541,45 +577,45 @@
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      4.44s CPU      4.56s WALL (      11 calls)
+     c_bands      :      4.43s CPU      4.54s WALL (      11 calls)
      sum_band     :      0.03s CPU      0.03s WALL (      11 calls)
      v_of_rho     :      0.01s CPU      0.01s WALL (      11 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (      11 calls)
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     310 calls)
-     cegterg      :      4.43s CPU      4.54s WALL (     110 calls)
+     cegterg      :      4.42s CPU      4.52s WALL (     110 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      4.35s CPU      4.46s WALL (     346 calls)
+     h_psi        :      4.33s CPU      4.44s WALL (     346 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     226 calls)
      cdiaghg      :      0.06s CPU      0.06s WALL (     286 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.01s CPU      0.00s WALL (     346 calls)
+     add_vuspsi   :      0.00s CPU      0.00s WALL (     346 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (     426 calls)
-     fft          :      0.01s CPU      0.01s WALL (     124 calls)
+     fft          :      0.00s CPU      0.01s WALL (     124 calls)
      fftw         :      0.14s CPU      0.15s WALL (    5450 calls)
-     fftc         :      3.06s CPU      3.27s WALL (   90880 calls)
+     fftc         :      2.97s CPU      3.25s WALL (   90880 calls)
      fftcw        :      0.08s CPU      0.09s WALL (    3000 calls)
  
      Parallel routines
-     fft_scatter  :      1.28s CPU      1.31s WALL (   99454 calls)
+     fft_scatter  :      1.25s CPU      1.29s WALL (   99454 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.07s CPU      0.08s WALL (       4 calls)
-     vexx         :      4.20s CPU      4.31s WALL (     187 calls)
-     exxenergy    :      0.54s CPU      0.55s WALL (       7 calls)
+     vexx         :      4.18s CPU      4.29s WALL (     187 calls)
+     exxenergy    :      0.52s CPU      0.55s WALL (       7 calls)
  
-     PWSCF        :     5.39s CPU         5.54s WALL
+     PWSCF        :     5.37s CPU         5.52s WALL
 
  
-   This run was terminated on:  17:53:24  29Jun2016            
+   This run was terminated on:  15:41:13  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

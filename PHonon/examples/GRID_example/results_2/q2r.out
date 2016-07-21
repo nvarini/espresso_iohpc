@@ -1,0 +1,173 @@
+
+     Program Q2R v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:37:50 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+ 
+           HOST :    x86_64-pc-linux-gnu
+           ARCH :    x86_64
+             CC :    icc
+            CPP :    cpp
+            F90 :    gfortran
+            F77 :    gfortran
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+    LAPACK LIBS :    
+       FFT LIBS :    
+      MASS LIBS :    
+
+     Parallel version (MPI), running on     2 processors
+     R & G space division:  proc/nbgrp/npool/nimage =       2
+
+     reading grid info from file al.dyn0    
+  reading force constants from file al.dyn1
+  Dielectric Tensor not found
+  nqs=            1
+ q=   0.00000000  0.00000000  0.00000000
+  reading force constants from file al.dyn2
+  nqs=            8
+ q=  -0.25000000  0.25000000 -0.25000000
+ q=   0.25000000 -0.25000000 -0.25000000
+ q=   0.25000000 -0.25000000  0.25000000
+ q=   0.25000000  0.25000000  0.25000000
+ q=  -0.25000000 -0.25000000 -0.25000000
+ q=  -0.25000000 -0.25000000  0.25000000
+ q=  -0.25000000  0.25000000  0.25000000
+ q=   0.25000000  0.25000000 -0.25000000
+  reading force constants from file al.dyn3
+  nqs=            4
+ q=   0.50000000 -0.50000000  0.50000000
+ q=   0.50000000  0.50000000 -0.50000000
+ q=  -0.50000000  0.50000000  0.50000000
+ q=  -0.50000000 -0.50000000 -0.50000000
+  reading force constants from file al.dyn4
+  nqs=            6
+ q=   0.00000000  0.50000000  0.00000000
+ q=   0.00000000 -0.50000000  0.00000000
+ q=   0.50000000  0.00000000  0.00000000
+ q=  -0.50000000  0.00000000  0.00000000
+ q=   0.00000000  0.00000000  0.50000000
+ q=   0.00000000  0.00000000 -0.50000000
+  reading force constants from file al.dyn5
+  nqs=           24
+ q=   0.75000000 -0.25000000  0.75000000
+ q=   0.75000000 -0.25000000 -0.75000000
+ q=   0.75000000  0.25000000 -0.75000000
+ q=  -0.75000000 -0.75000000  0.25000000
+ q=  -0.75000000 -0.75000000 -0.25000000
+ q=  -0.75000000  0.75000000  0.25000000
+ q=  -0.75000000  0.75000000 -0.25000000
+ q=  -0.75000000  0.25000000 -0.75000000
+ q=  -0.75000000  0.25000000  0.75000000
+ q=  -0.75000000 -0.25000000 -0.75000000
+ q=   0.75000000  0.25000000  0.75000000
+ q=  -0.25000000  0.75000000  0.75000000
+ q=   0.25000000  0.75000000 -0.75000000
+ q=  -0.25000000 -0.75000000 -0.75000000
+ q=  -0.25000000  0.75000000 -0.75000000
+ q=   0.75000000  0.75000000 -0.25000000
+ q=   0.75000000 -0.75000000  0.25000000
+ q=   0.25000000 -0.75000000  0.75000000
+ q=   0.25000000  0.75000000  0.75000000
+ q=  -0.25000000 -0.75000000  0.75000000
+ q=  -0.75000000 -0.25000000  0.75000000
+ q=   0.75000000  0.75000000  0.25000000
+ q=   0.25000000 -0.75000000 -0.75000000
+ q=   0.75000000 -0.75000000 -0.25000000
+  reading force constants from file al.dyn6
+  nqs=           12
+ q=   0.50000000  0.00000000  0.50000000
+ q=  -0.50000000 -0.50000000  0.00000000
+ q=  -0.50000000  0.50000000  0.00000000
+ q=  -0.50000000  0.00000000 -0.50000000
+ q=  -0.50000000  0.00000000  0.50000000
+ q=   0.50000000  0.00000000 -0.50000000
+ q=   0.00000000  0.50000000  0.50000000
+ q=   0.00000000  0.50000000 -0.50000000
+ q=   0.00000000 -0.50000000 -0.50000000
+ q=   0.50000000  0.50000000  0.00000000
+ q=   0.50000000 -0.50000000  0.00000000
+ q=   0.00000000 -0.50000000  0.50000000
+  reading force constants from file al.dyn7
+  nqs=            3
+ q=   0.00000000 -1.00000000  0.00000000
+ q=  -1.00000000  0.00000000  0.00000000
+ q=   0.00000000  0.00000000 -1.00000000
+  reading force constants from file al.dyn8
+  nqs=            6
+ q=  -0.50000000 -1.00000000  0.00000000
+ q=   0.50000000  1.00000000  0.00000000
+ q=   0.00000000  1.00000000 -0.50000000
+ q=   0.00000000  1.00000000  0.50000000
+ q=  -1.00000000 -0.50000000  0.00000000
+ q=   0.00000000 -0.50000000 -1.00000000
+
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+   Preparing gamma for a2F 
+ 
+ 
+ Broadening =      0.005
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.010
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.015
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.020
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.025
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.030
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.035
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.040
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.045
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+ Broadening =      0.050
+      q-space grid ok, #points =   64
+
+      fft-check success (sum of imaginary terms < 10^-12)
+ 
+     Q2R          :     0.05s CPU         0.05s WALL
+
+ 
+   This run was terminated on:  16:37:50  21Jul2016            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

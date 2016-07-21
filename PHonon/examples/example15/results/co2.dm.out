@@ -1,0 +1,60 @@
+
+     Program DYNMAT v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:11:34 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+ 
+           HOST :    x86_64-pc-linux-gnu
+           ARCH :    x86_64
+             CC :    icc
+            CPP :    cpp
+            F90 :    gfortran
+            F77 :    gfortran
+         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+    LAPACK LIBS :    
+       FFT LIBS :    
+      MASS LIBS :    
+
+     Parallel version (MPI), running on     1 processors
+
+     Reading Dynamical Matrix from file dmat.co2
+     ...Force constants read
+     ...epsilon and Z* read
+     Acoustic Sum Rule: || Z*(ASR) - Z*(orig)|| =    4.846185E-01
+     Acoustic Sum Rule: ||dyn(ASR) - dyn(orig)||=    1.349952E+00
+     A direction for q was not specified:TO-LO splitting will be absent
+     Max |d(i,j)-d*(j,i)| =  0.000273
+     Max |d(i,j)-d*(j,i)|/|d(i,j)|:   0.1771%
+
+     Polarizability (A^3 units)
+     multiply by 0.971500 for Clausius-Mossotti correction
+         3.208298    1.105310   -0.000272
+         1.105310    3.208298   -0.000272
+         0.000035    0.000035    2.126484
+
+     IR activities are in (D/A)^2/amu units
+
+# mode   [cm-1]    [THz]      IR
+    1   -851.18  -25.5176    0.0287
+    2    -27.74   -0.8315    0.0000
+    3      0.09    0.0027    0.0000
+    4     19.57    0.5867    0.0000
+    5     80.45    2.4119    0.0000
+    6    591.78   17.7410    0.0449
+    7    622.35   18.6577    0.4203
+    8   1323.43   39.6755    0.0028
+    9   2354.53   70.5871   13.0956
+ 
+     DYNMAT       :     0.01s CPU         0.01s WALL
+
+ 
+   This run was terminated on:  16:11:34  21Jul2016            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

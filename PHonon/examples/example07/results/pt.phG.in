@@ -1,0 +1,8 @@
+phonons of Pt at Gamma
+ &inputph
+  prefix='Pt_pbe',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir'
+  fildyn='ptdyn',
+  tr2_ph=1.0d-16,
+ /
+0.0 0.0 0.0

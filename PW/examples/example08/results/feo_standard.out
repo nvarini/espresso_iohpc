@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:52:28 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:36:40 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -381,7 +381,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  1.52E-04,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is        3.3 secs
+     total cpu time spent up to now is        3.4 secs
 
      total energy              =    -174.45596482 Ry
      Harris-Foulkes estimate   =    -174.45442726 Ry
@@ -394,7 +394,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  3.89E-05,  avg # of iterations =  2.1
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        3.9 secs
 
      total energy              =    -174.45698665 Ry
      Harris-Foulkes estimate   =    -174.45876833 Ry
@@ -407,7 +407,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  3.89E-05,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.3 secs
+     total cpu time spent up to now is        4.4 secs
 
      total energy              =    -174.46179776 Ry
      Harris-Foulkes estimate   =    -174.45852349 Ry
@@ -420,7 +420,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  2.07E-05,  avg # of iterations =  1.4
 
-     total cpu time spent up to now is        4.8 secs
+     total cpu time spent up to now is        4.9 secs
 
      total energy              =    -174.46906884 Ry
      Harris-Foulkes estimate   =    -174.46863787 Ry
@@ -433,7 +433,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  1.84E-05,  avg # of iterations =  1.6
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        5.4 secs
 
      total energy              =    -174.47013676 Ry
      Harris-Foulkes estimate   =    -174.47129729 Ry
@@ -446,7 +446,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  6.48E-06,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        5.9 secs
 
      total energy              =    -174.46970367 Ry
      Harris-Foulkes estimate   =    -174.47061913 Ry
@@ -459,7 +459,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  6.48E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        6.3 secs
+     total cpu time spent up to now is        6.4 secs
 
      total energy              =    -174.47132683 Ry
      Harris-Foulkes estimate   =    -174.47128448 Ry
@@ -472,7 +472,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  1.24E-06,  avg # of iterations =  1.2
 
-     total cpu time spent up to now is        6.8 secs
+     total cpu time spent up to now is        6.9 secs
 
      total energy              =    -174.47146066 Ry
      Harris-Foulkes estimate   =    -174.47133845 Ry
@@ -524,7 +524,7 @@ N of occupied +U levels =   12.246701
      Davidson diagonalization with overlap
      ethr =  5.28E-08,  avg # of iterations =  2.2
 
-     total cpu time spent up to now is        8.8 secs
+     total cpu time spent up to now is        8.9 secs
 
      total energy              =    -174.47155944 Ry
      Harris-Foulkes estimate   =    -174.47155908 Ry
@@ -728,60 +728,60 @@ N of occupied +U levels =   13.673106
      Writing output data file feo_af.save
  
      init_run     :      1.09s CPU      1.13s WALL (       1 calls)
-     electrons    :      8.68s CPU      8.74s WALL (       1 calls)
+     electrons    :      8.72s CPU      8.78s WALL (       1 calls)
      forces       :      0.17s CPU      0.17s WALL (       1 calls)
-     stress       :      0.63s CPU      0.64s WALL (       1 calls)
+     stress       :      0.63s CPU      0.63s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.12s CPU      0.12s WALL (       1 calls)
      potinit      :      0.04s CPU      0.04s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      4.48s CPU      4.52s WALL (      17 calls)
+     c_bands      :      4.51s CPU      4.55s WALL (      17 calls)
      sum_band     :      3.02s CPU      3.03s WALL (      17 calls)
      v_of_rho     :      0.32s CPU      0.32s WALL (      18 calls)
-     newd         :      0.74s CPU      0.74s WALL (      18 calls)
+     newd         :      0.73s CPU      0.74s WALL (      18 calls)
      mix_rho      :      0.11s CPU      0.11s WALL (      17 calls)
 
      Called by c_bands:
      init_us_2    :      0.12s CPU      0.12s WALL (     384 calls)
-     cegterg      :      4.17s CPU      4.21s WALL (     136 calls)
+     cegterg      :      4.20s CPU      4.24s WALL (     136 calls)
 
      Called by sum_band:
      sum_band:bec :      0.00s CPU      0.00s WALL (     136 calls)
-     addusdens    :      1.83s CPU      1.83s WALL (      17 calls)
+     addusdens    :      1.81s CPU      1.83s WALL (      17 calls)
 
      Called by *egterg:
-     h_psi        :      3.67s CPU      3.71s WALL (     387 calls)
+     h_psi        :      3.69s CPU      3.72s WALL (     387 calls)
      s_psi        :      0.10s CPU      0.10s WALL (     475 calls)
      g_psi        :      0.02s CPU      0.02s WALL (     243 calls)
-     cdiaghg      :      0.28s CPU      0.28s WALL (     379 calls)
+     cdiaghg      :      0.29s CPU      0.29s WALL (     379 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.08s CPU      0.08s WALL (     387 calls)
      vhpsi        :      0.06s CPU      0.06s WALL (     387 calls)
 
      General routines
-     calbec       :      0.30s CPU      0.28s WALL (    2478 calls)
-     fft          :      0.34s CPU      0.34s WALL (     306 calls)
+     calbec       :      0.30s CPU      0.29s WALL (    2478 calls)
+     fft          :      0.39s CPU      0.39s WALL (     306 calls)
      ffts         :      0.03s CPU      0.03s WALL (      70 calls)
-     fftw         :      3.50s CPU      3.53s WALL (   14642 calls)
+     fftw         :      3.53s CPU      3.53s WALL (   14642 calls)
      interpolate  :      0.11s CPU      0.11s WALL (      70 calls)
      davcio       :      0.00s CPU      0.00s WALL (       8 calls)
  
      Parallel routines
-     fft_scatter  :      0.65s CPU      0.71s WALL (   15018 calls)
+     fft_scatter  :      0.74s CPU      0.77s WALL (   15018 calls)
 
      Hubbard U routines
      new_ns       :      0.02s CPU      0.02s WALL (      17 calls)
      vhpsi        :      0.06s CPU      0.06s WALL (     387 calls)
      force_hub    :      0.04s CPU      0.04s WALL (       1 calls)
-     stres_hub    :      0.27s CPU      0.28s WALL (       1 calls)
+     stres_hub    :      0.27s CPU      0.27s WALL (       1 calls)
  
-     PWSCF        :    10.72s CPU        10.85s WALL
+     PWSCF        :    10.75s CPU        10.87s WALL
 
  
-   This run was terminated on:  17:52:39  29Jun2016            
+   This run was terminated on:  15:36:51  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

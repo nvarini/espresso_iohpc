@@ -177,15 +177,11 @@ MODULE units_epw
   !
   SAVE
   !
-  INTEGER :: iuncuf, &
-      lrcuf, lrepmatf, lretf
+  INTEGER :: lrepmatf
   !INTEGER :: iudvscf0
   !
   ! iudvscf0: the unit where the delta Vscf is read to generate the fake perturbation 
-  ! iuncuf: unit with rotation matrix on fine mesh
-  ! lrcuf: the length of the record for the rotation matrix
   ! lrepmatf: the length of the record for the electron-phonon matrix
-  ! lretf: the length of the record for the interpolated hamiltonian eigenvalues
   !
   logical, ALLOCATABLE :: this_dvkb3_is_on_file(:), &
                           this_pcxpsi_is_on_file(:,:)

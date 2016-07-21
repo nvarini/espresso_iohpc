@@ -39,6 +39,14 @@ subroutine localdos_paw (ldos, ldoss, becsum1, dos_ef)
 
   USE mp_pools,        ONLY : inter_pool_comm
   USE mp,               ONLY : mp_sum
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE control_lr,           ONLY : lgamma
+  USE mp_world,             ONLY : mpime
+#endif
 
   implicit none
 
@@ -70,6 +78,7 @@ subroutine localdos_paw (ldos, ldoss, becsum1, dos_ef)
   !
   !  initialize ldos and dos_ef
   !
+  character(len=256) :: filename_hdf5
   call start_clock ('localdos')
   IF (noncolin) THEN
      allocate (becsum1_nc( (nhm * (nhm + 1)) / 2, nat, npol, npol))
@@ -92,7 +101,18 @@ subroutine localdos_paw (ldos, ldoss, becsum1, dos_ef)
      !
      ! unperturbed wfs in reciprocal space read from unit iuwfc
      !
-     if (nksq > 1) call get_buffer (evc, lrwfc, iuwfc, ik)
+     if (nksq > 1) THEN 
+#if defined __HDF5
+       IF ( .NOT. lgamma ) THEN
+          filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+       ELSE
+          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       ENDIF
+       CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
+       call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+     endif
      call init_us_2 (npw, igk_k(1,ik), xk (1, ik), vkb)
      !
      call calbec ( npw, vkb, evc, becp)

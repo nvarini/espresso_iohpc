@@ -31,6 +31,13 @@ subroutine compute_becalp (becq, alpq)
   USE control_lr, ONLY : lgamma
   USE eqv, ONLY : evq
   USE qpoint, ONLY : nksq, ikqs
+#if defined __HDF5
+  USE hdf5_qe,              ONLY : evc_hdf5_write, evq_hdf5_write
+  USE control_ph,           ONLY : tmp_dir_ph
+  USE save_ph,              ONLY : tmp_dir_save
+  USE mp_world,             ONLY : mpime
+  USE io_files,             ONLY : tmp_dir, nd_nmbr
+#endif
 
   implicit none
 
@@ -45,6 +52,8 @@ subroutine compute_becalp (becq, alpq)
 
   complex(DP) :: fact
   complex(DP), allocatable :: aux (:,:)
+
+  CHARACTER(LEN=256)     :: filename_hdf5
   !
   if (lgamma) return
   IF (rec_code_read >= -20.AND..NOT.okpaw) RETURN
@@ -54,7 +63,18 @@ subroutine compute_becalp (becq, alpq)
      ikq = ikqs(ik)
      npwq = ngk(ikq)
      call init_us_2 (npwq, igk_k(1,ikq), xk (1, ikq), vkb)
-     call get_buffer (evq, lrwfc, iuwfc, ikq)
+#if defined __HDF5
+     IF ( .NOT. lgamma ) THEN
+       filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     ELSE
+       filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+     ENDIF
+
+     CALL get_buffer( evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write )
+#else
+     CALL get_buffer( evq, lrwfc, iuwfc, ikq )
+#endif
+
      call calbec ( npwq, vkb, evq, becq(ik) )
      do ipol = 1, 3
         aux=(0.d0,0.d0)

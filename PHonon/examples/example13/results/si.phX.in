@@ -1,0 +1,11 @@
+phonons of Si at the X-point
+ &inputph
+  tr2_ph=1.0d-12,
+  prefix='silicon',
+  trans=.true.,
+  amass(1)=28.0855,
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/',
+  fildyn='si.dyn_X',
+  fildrho='si.drho_X',
+ /
+0.0 0.0 1.0

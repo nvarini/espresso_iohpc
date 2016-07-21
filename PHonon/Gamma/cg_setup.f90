@@ -30,6 +30,13 @@ SUBROUTINE cg_setup
   USE wvfct,      ONLY: nbnd, npwx, npw
   USE gvecw,      ONLY: gcutw
   USE cgcom
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE buffers,              ONLY : get_buffer
+#endif
   !
   IMPLICIT NONE
   !
@@ -39,6 +46,7 @@ SUBROUTINE cg_setup
   REAL(DP) :: rhotot
   INTEGER       :: ndr, kunittmp, ierr
   REAL(DP) :: edum(1,1), wdum(1,1)
+  CHARACTER(LEN=256) :: filename_hdf5
   !
   CALL start_clock('cg_setup')
   !
@@ -109,7 +117,12 @@ SUBROUTINE cg_setup
   !  read wave functions and calculate indices
   !
   ik=1
-  CALL davcio(evc,lrwfc,iunpun,ik,-1)
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     call get_buffer( evc, lrwfc, iunpun, ik, filename_hdf5, evc_hdf5_write )
+#else
+     call davcio (evc, lrwfc, iunpun, ik, - 1)
+#endif
   IF ( exst ) THEN
      CLOSE(unit=iunpun,status='keep')
   ELSE

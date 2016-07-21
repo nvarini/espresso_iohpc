@@ -91,6 +91,7 @@ program d3toten
      WRITE( stdout, '(5x,"gen_dwfc(1)   cpu time:",f9.2, &
           &         " sec    Total time:",f12.2," sec")') t1, t0
   endif
+
   if (istop.eq.1) stop
   !
   ! It calculates the variation of wavefunctions | d/du(q=0) psi(k) >

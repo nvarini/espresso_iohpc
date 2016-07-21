@@ -35,6 +35,14 @@ subroutine compute_drhous_nc (drhous, dbecsum, wgg, becq, alpq)
 
   USE units_ph,   ONLY : lrwfc, iuwfc
   USE becmod,     ONLY : bec_type
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
 
   implicit none
   !
@@ -68,6 +76,7 @@ subroutine compute_drhous_nc (drhous, dbecsum, wgg, becq, alpq)
 
   complex(DP), allocatable :: evcr (:,:,:)
   ! the wavefunctions in real space
+  character(len=256) :: filename_hdf5
 
   if (.not.okvan) return
 
@@ -93,7 +102,17 @@ subroutine compute_drhous_nc (drhous, dbecsum, wgg, becq, alpq)
      !   Read the wavefunctions at k and transform to real space
      !
 
-     call get_buffer(evc, lrwfc, iuwfc, ikk)
+#if defined __HDF5
+     IF ( .NOT. lgamma ) THEN
+        filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     ELSE
+        filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+     ENDIF
+     CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
+     call get_buffer (evc, lrwfc, iuwfc, ikk)
+#endif
+     
      evcr = (0.d0, 0.d0)
      do ibnd = 1, nbnd
         do ig = 1, npw
@@ -106,7 +125,19 @@ subroutine compute_drhous_nc (drhous, dbecsum, wgg, becq, alpq)
      !
      !   Read the wavefunctions at k+q
      !
-     if (.not.lgamma.and.nksq.gt.1) call get_buffer(evq, lrwfc, iuwfc, ikq)
+     if (.not.lgamma.and.nksq.gt.1) then
+#if defined __HDF5
+       IF ( .NOT. lgamma ) THEN
+          filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+       ELSE
+          filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+       ENDIF
+       CALL get_buffer( evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write )
+#else
+       call get_buffer (evq, lrwfc, iuwfc, ikq)
+#endif
+     endif
+     
      !
      !   And compute the contribution of this k point to the change of
      !   the charge density

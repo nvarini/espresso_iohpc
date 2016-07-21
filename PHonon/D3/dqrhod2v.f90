@@ -30,6 +30,15 @@ SUBROUTINE dqrhod2v (ipert, drhoscf)
 
   use qpoint,     ONLY : xq, npwq, nksq, igkq
   use control_lr, ONLY : lgamma
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE buffers,              ONLY : get_buffer
+#endif
+
   !
   IMPLICIT NONE
   !
@@ -52,6 +61,7 @@ SUBROUTINE dqrhod2v (ipert, drhoscf)
   COMPLEX (DP), ALLOCATABLE :: d3dywrk (:,:), work0 (:), &
        work1 (:), work2 (:), work3 (:), work4 (:), work5 (:), work6 (:)
   ! work space
+  CHARACTER(LEN=256) :: filename_hdf5
 
   ALLOCATE  (d3dywrk( 3 * nat, 3 * nat))
   ALLOCATE  (work0( dfftp%nnr))
@@ -115,7 +125,12 @@ SUBROUTINE dqrhod2v (ipert, drhoscf)
 300     CALL errore ('dqrhod2v', 'reading igkq', ABS (ios) )
      ENDIF
      wgg = wk (ikk)
-     CALL davcio (evc, lrwfc, iuwfc, ikk, - 1)
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     call get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
+     call davcio (evc, lrwfc, iuwfc, ikk, - 1)
+#endif
      !
      ! In metallic case it necessary to know the wave function at k+q point
      ! so as to correct dpsi. dvpsi is used as working array

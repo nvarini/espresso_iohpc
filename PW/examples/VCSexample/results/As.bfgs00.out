@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:53: 5 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:40:54 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -696,7 +696,7 @@ As      -0.273968033  -0.273968022  -0.273968022
      Davidson diagonalization with overlap
      ethr =  1.69E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.0 secs
 
      total energy              =     -25.49757796 Ry
      Harris-Foulkes estimate   =     -25.49757899 Ry
@@ -880,7 +880,7 @@ As      -0.272134263  -0.272134251  -0.272134251
      Davidson diagonalization with overlap
      ethr =  3.20E-09,  avg # of iterations =  2.9
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        2.6 secs
 
      total energy              =     -25.49878933 Ry
      Harris-Foulkes estimate   =     -25.49878934 Ry
@@ -2043,7 +2043,7 @@ As      -0.272257063  -0.272257051  -0.272257051
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.00128, renormalised to   10.00000
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        5.9 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -2069,7 +2069,7 @@ As      -0.272257063  -0.272257051  -0.272257051
      Davidson diagonalization with overlap
      ethr =  8.47E-11,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        6.0 secs
+     total cpu time spent up to now is        6.1 secs
 
      total energy              =     -25.49951638 Ry
      Harris-Foulkes estimate   =     -25.49951638 Ry
@@ -2284,7 +2284,7 @@ End final coordinates
 
      Writing output data file pwscf.save
 
-     total cpu time spent up to now is        6.2 secs
+     total cpu time spent up to now is        6.3 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -2294,7 +2294,7 @@ End final coordinates
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations = 11.2
 
-     total cpu time spent up to now is        6.4 secs
+     total cpu time spent up to now is        6.5 secs
 
      total energy              =     -25.50073074 Ry
      Harris-Foulkes estimate   =     -25.50285685 Ry
@@ -2314,7 +2314,7 @@ End final coordinates
      Davidson diagonalization with overlap
      ethr =  8.22E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        6.5 secs
+     total cpu time spent up to now is        6.6 secs
 
      total energy              =     -25.50089025 Ry
      Harris-Foulkes estimate   =     -25.50090948 Ry
@@ -2434,29 +2434,29 @@ End final coordinates
      Writing output data file pwscf.save
  
      init_run     :      0.12s CPU      0.12s WALL (       2 calls)
-     electrons    :      4.94s CPU      5.05s WALL (      13 calls)
-     update_pot   :      0.41s CPU      0.41s WALL (      11 calls)
-     forces       :      0.19s CPU      0.19s WALL (      13 calls)
-     stress       :      0.34s CPU      0.35s WALL (      13 calls)
+     electrons    :      5.01s CPU      5.08s WALL (      13 calls)
+     update_pot   :      0.39s CPU      0.41s WALL (      11 calls)
+     forces       :      0.20s CPU      0.20s WALL (      13 calls)
+     stress       :      0.35s CPU      0.35s WALL (      13 calls)
 
      Called by init_run:
      wfcinit      :      0.04s CPU      0.04s WALL (       2 calls)
      potinit      :      0.02s CPU      0.02s WALL (       2 calls)
 
      Called by electrons:
-     c_bands      :      4.13s CPU      4.21s WALL (      78 calls)
-     sum_band     :      0.70s CPU      0.72s WALL (      78 calls)
-     v_of_rho     :      0.05s CPU      0.06s WALL (      85 calls)
-     mix_rho      :      0.02s CPU      0.03s WALL (      78 calls)
+     c_bands      :      4.19s CPU      4.24s WALL (      78 calls)
+     sum_band     :      0.71s CPU      0.72s WALL (      78 calls)
+     v_of_rho     :      0.06s CPU      0.06s WALL (      85 calls)
+     mix_rho      :      0.03s CPU      0.03s WALL (      78 calls)
 
      Called by c_bands:
-     init_us_2    :      0.10s CPU      0.09s WALL (    1840 calls)
-     cegterg      :      4.01s CPU      4.09s WALL (     780 calls)
+     init_us_2    :      0.10s CPU      0.10s WALL (    1840 calls)
+     cegterg      :      4.06s CPU      4.12s WALL (     780 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      3.05s CPU      3.12s WALL (    2565 calls)
+     h_psi        :      3.09s CPU      3.14s WALL (    2565 calls)
      g_psi        :      0.03s CPU      0.04s WALL (    1765 calls)
      cdiaghg      :      0.52s CPU      0.51s WALL (    2375 calls)
 
@@ -2464,17 +2464,17 @@ End final coordinates
      add_vuspsi   :      0.05s CPU      0.06s WALL (    2565 calls)
 
      General routines
-     calbec       :      0.11s CPU      0.11s WALL (    3215 calls)
+     calbec       :      0.13s CPU      0.12s WALL (    3215 calls)
      fft          :      0.04s CPU      0.05s WALL (     415 calls)
-     fftw         :      3.13s CPU      3.14s WALL (   44038 calls)
+     fftw         :      3.17s CPU      3.15s WALL (   44038 calls)
  
      Parallel routines
-     fft_scatter  :      0.78s CPU      0.80s WALL (   44453 calls)
+     fft_scatter  :      0.83s CPU      0.81s WALL (   44453 calls)
  
-     PWSCF        :     6.60s CPU         6.80s WALL
+     PWSCF        :     6.69s CPU         6.82s WALL
 
  
-   This run was terminated on:  17:53:12  29Jun2016            
+   This run was terminated on:  15:41: 1  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

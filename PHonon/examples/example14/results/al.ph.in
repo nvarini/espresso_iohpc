@@ -1,0 +1,17 @@
+Phonon dispersions for Al
+ &inputph
+  tr2_ph=1.0d-10,
+  prefix='aluminum',
+  amass(1)=26.98,
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/',
+  fildyn='al.dyn',
+  ldisp=.true.
+  qplot=.true.,
+  q_in_band_form=.true.,
+ /
+5
+0.0 0.0 0.0 4
+1.0 0.0 0.0 4
+1.0 1.0 0.0 4
+0.0 0.0 0.0 4
+0.5 0.5 0.5 1

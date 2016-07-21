@@ -159,7 +159,8 @@ input_description -distribution {Quantum Espresso} -package PWscf -program pw.x 
 
 	var nstep -type INTEGER {
 	    info {
-		number of ionic + electronic steps performed in this run
+		number of molecular-dynamics or structural optimization steps 
+                performed in this run
 	    }
 	    default {
 		1  if calculation = 'scf', 'nscf', 'bands';
@@ -350,7 +351,17 @@ input_description -distribution {Quantum Espresso} -package PWscf -program pw.x 
 	    }
 	}
 
-	var lorbm -type LOGICAL { 
+	var efield_phase -type CHARACTER {
+	    default { 'none' }
+	    info {
+	    	'read':      set the zero of the electronic polarization (with lelfield=.true..) 
+                              to the result of a previous calculation
+		'write':     write on disk data on electronic polarization to be read in another 
+                             calculation   	   
+                'none':      none of the above points
+             }  
+	  }
+       var lorbm -type LOGICAL { 
 	    default { .FALSE. }
 	    info {
 		If .TRUE. perform orbital magnetization calculation.
@@ -458,7 +469,7 @@ input_description -distribution {Quantum Espresso} -package PWscf -program pw.x 
                     and tx, ty, tz as for case ibrav=5
                     Note: if you prefer x,y,z as axis in the cubic limit,
                           set  u = tz + 2*sqrt(2)*ty,  v = tz - sqrt(2)*ty
-                          See also the note in flib/latgen.f90 
+                          See also the note in Modules/latgen.f90 
               
                 6          Tetragonal P (st)               celldm(3)=c/a
                     v1 = a(1,0,0),  v2 = a(0,1,0),  v3 = a(0,0,c/a)
@@ -989,7 +1000,7 @@ input_description -distribution {Quantum Espresso} -package PWscf -program pw.x 
 	    default { .FALSE. }
 	    status {
 		DFT+U (formerly known as LDA+U) currently works only for 
-                a few selected elements. Modify flib/set_hubbard_l.f90 and 
+                a few selected elements. Modify Modules/set_hubbard_l.f90 and 
                 PW/src/tabd.f90 if you plan to use DFT+U with an element that 
                 is not configured there.
 	    }

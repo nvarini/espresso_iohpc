@@ -49,6 +49,7 @@ SUBROUTINE read_file()
 #if defined __HDF5
   CALL initialize_hdf5()
 #endif
+  
 
   !
   ! ... Open unit iunwfc, for Kohn-Sham orbitals - we assume that wfcs

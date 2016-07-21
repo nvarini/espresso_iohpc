@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:58:22 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:46:12 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -107,7 +107,7 @@
 
 
      vdW kernel table read from file vdW_kernel_table
-     MD5 check sum: 6b2967463524b0525b15c05acbefa6f2
+     MD5 check sum: 88c60d17101ec99b63477f765c8de84d
 
      atomic species   valence    mass     pseudopotential
         O              6.00    15.99940     O ( 1.00)
@@ -257,7 +257,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        3.1 secs
+     total cpu time spent up to now is        3.0 secs
 
      total energy              =     -68.61240494 Ry
      Harris-Foulkes estimate   =     -69.74361062 Ry
@@ -275,7 +275,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        3.9 secs
 
      total energy              =     -68.82954825 Ry
      Harris-Foulkes estimate   =     -69.34223501 Ry
@@ -293,7 +293,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        4.9 secs
+     total cpu time spent up to now is        4.8 secs
 
      total energy              =     -69.04868114 Ry
      Harris-Foulkes estimate   =     -69.06818213 Ry
@@ -311,7 +311,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        5.7 secs
 
      total energy              =     -69.05568350 Ry
      Harris-Foulkes estimate   =     -69.05605539 Ry
@@ -329,7 +329,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        6.6 secs
 
      total energy              =     -69.05588020 Ry
      Harris-Foulkes estimate   =     -69.05585908 Ry
@@ -347,7 +347,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        7.6 secs
+     total cpu time spent up to now is        7.5 secs
 
      total energy              =     -69.05588359 Ry
      Harris-Foulkes estimate   =     -69.05588593 Ry
@@ -365,7 +365,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        8.5 secs
+     total cpu time spent up to now is        8.4 secs
 
      total energy              =     -69.05588394 Ry
      Harris-Foulkes estimate   =     -69.05588406 Ry
@@ -383,7 +383,7 @@ A''    1.00 -1.00
      -----------------------------------------------
 
 
-     total cpu time spent up to now is        9.4 secs
+     total cpu time spent up to now is        9.3 secs
 
      End of self-consistent calculation
 
@@ -522,21 +522,21 @@ A''    1.00 -1.00
 
      Writing output data file water_vdw.save
  
-     init_run     :      1.85s CPU      1.91s WALL (       1 calls)
-     electrons    :      7.02s CPU      7.25s WALL (       1 calls)
+     init_run     :      1.85s CPU      1.89s WALL (       1 calls)
+     electrons    :      6.91s CPU      7.16s WALL (       1 calls)
      forces       :      0.47s CPU      0.47s WALL (       1 calls)
-     stress       :      2.25s CPU      2.27s WALL (       1 calls)
+     stress       :      2.24s CPU      2.27s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.02s CPU      0.02s WALL (       1 calls)
-     potinit      :      1.12s CPU      1.17s WALL (       1 calls)
+     potinit      :      1.12s CPU      1.16s WALL (       1 calls)
 
      Called by electrons:
      c_bands      :      0.36s CPU      0.36s WALL (       8 calls)
      sum_band     :      0.52s CPU      0.53s WALL (       8 calls)
-     v_of_rho     :      6.41s CPU      6.67s WALL (       9 calls)
+     v_of_rho     :      6.31s CPU      6.55s WALL (       9 calls)
      v_h          :      0.05s CPU      0.05s WALL (       9 calls)
-     v_xc         :      6.37s CPU      6.62s WALL (       9 calls)
+     v_xc         :      6.27s CPU      6.51s WALL (       9 calls)
      newd         :      0.30s CPU      0.31s WALL (       9 calls)
      mix_rho      :      0.09s CPU      0.09s WALL (       8 calls)
 
@@ -549,34 +549,33 @@ A''    1.00 -1.00
      addusdens    :      0.33s CPU      0.34s WALL (       8 calls)
 
      Called by *egterg:
-     h_psi        :      0.30s CPU      0.30s WALL (      25 calls)
+     h_psi        :      0.31s CPU      0.31s WALL (      25 calls)
      s_psi        :      0.01s CPU      0.01s WALL (      25 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      16 calls)
-     rdiaghg      :      0.00s CPU      0.01s WALL (      24 calls)
+     rdiaghg      :      0.01s CPU      0.01s WALL (      24 calls)
      regterg:over :      0.01s CPU      0.01s WALL (      16 calls)
      regterg:upda :      0.01s CPU      0.01s WALL (      16 calls)
      regterg:last :      0.00s CPU      0.00s WALL (       8 calls)
 
      Called by h_psi:
-     h_psi:vloc   :      0.29s CPU      0.29s WALL (      25 calls)
-     h_psi:vnl    :      0.01s CPU      0.01s WALL (      25 calls)
+     h_psi:vloc   :      0.30s CPU      0.30s WALL (      25 calls)
+     h_psi:vnl    :      0.02s CPU      0.01s WALL (      25 calls)
      add_vuspsi   :      0.01s CPU      0.01s WALL (      25 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (      38 calls)
-     fft          :      2.51s CPU      2.52s WALL (     642 calls)
+     fft          :      2.47s CPU      2.49s WALL (     642 calls)
      ffts         :      0.03s CPU      0.04s WALL (      17 calls)
-     fftw         :      0.28s CPU      0.29s WALL (     228 calls)
-     interpolate  :      0.12s CPU      0.12s WALL (      17 calls)
-     davcio       :      0.00s CPU      0.00s WALL (       1 calls)
+     fftw         :      0.29s CPU      0.29s WALL (     228 calls)
+     interpolate  :      0.11s CPU      0.12s WALL (      17 calls)
  
      Parallel routines
-     fft_scatter  :      1.03s CPU      1.04s WALL (     887 calls)
+     fft_scatter  :      0.99s CPU      1.00s WALL (     887 calls)
  
-     PWSCF        :    12.02s CPU        12.58s WALL
+     PWSCF        :    11.90s CPU        12.42s WALL
 
  
-   This run was terminated on:  17:58:35  29Jun2016            
+   This run was terminated on:  15:46:24  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -30,6 +30,15 @@ SUBROUTINE d0rhod2v (ipert, drhoscf)
 
   USE qpoint,     ONLY : igkq, nksq, npwq
   USE control_lr, ONLY : lgamma
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE buffers,              ONLY : get_buffer
+#endif
+
   !
   IMPLICIT NONE
   !
@@ -61,6 +70,7 @@ SUBROUTINE d0rhod2v (ipert, drhoscf)
   COMPLEX (DP), ALLOCATABLE :: work0 (:), work1 (:), work2 (:), &
                                       work3 (:), work4 (:), work5 (:), &
                                       work6 (:)
+  CHARACTER(LEN=256) :: filename_hdf5
   ! auxiliary space
 
   ALLOCATE (work0(dfftp%nnr))
@@ -130,7 +140,12 @@ SUBROUTINE d0rhod2v (ipert, drhoscf)
         npwq = npw
      ENDIF
      wgg = wk (ikk)
-     CALL davcio (evc, lrwfc, iuwfc, ikk, - 1)
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     call get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
+     call davcio (evc, lrwfc, iuwfc, ikk, - 1)
+#endif
 
      CALL init_us_2 (npw, igk, xk (1, ikk), vkb0)
      !

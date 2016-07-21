@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12547M) starts on 29Jun2016 at 17:49:14 
+     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:33:30 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -275,21 +275,21 @@
 
      Writing output data file cu.save
  
-     init_run     :      0.18s CPU      0.20s WALL (       1 calls)
-     electrons    :      0.27s CPU      0.28s WALL (       1 calls)
+     init_run     :      0.19s CPU      0.19s WALL (       1 calls)
+     electrons    :      0.28s CPU      0.29s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.27s CPU      0.28s WALL (       1 calls)
+     c_bands      :      0.28s CPU      0.29s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
      newd         :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      28 calls)
-     cegterg      :      0.24s CPU      0.25s WALL (      30 calls)
+     cegterg      :      0.25s CPU      0.25s WALL (      30 calls)
 
      Called by sum_band:
 
@@ -297,7 +297,7 @@
      h_psi        :      0.14s CPU      0.14s WALL (     418 calls)
      s_psi        :      0.00s CPU      0.00s WALL (     418 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     360 calls)
-     cdiaghg      :      0.09s CPU      0.09s WALL (     388 calls)
+     cdiaghg      :      0.10s CPU      0.09s WALL (     388 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.00s CPU      0.00s WALL (     418 calls)
@@ -313,10 +313,10 @@
      Parallel routines
      fft_scatter  :      0.02s CPU      0.03s WALL (    3680 calls)
  
-     PWSCF        :     0.75s CPU         0.78s WALL
+     PWSCF        :     0.77s CPU         0.79s WALL
 
  
-   This run was terminated on:  17:49:15  29Jun2016            
+   This run was terminated on:  15:33:31  21Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

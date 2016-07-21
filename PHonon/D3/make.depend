@@ -369,6 +369,7 @@ solve_linter_d3.o : ../../Modules/uspp.o
 solve_linter_d3.o : ../../Modules/wavefunctions.o
 solve_linter_d3.o : ../../PHonon/PH/phcom.o
 solve_linter_d3.o : ../../PW/src/pwcom.o
+solve_linter_d3.o : ../../PW/src/buffers.o
 solve_linter_d3.o : d3com.o
 stop_d3.o : ../../LR_Modules/lrcom.o
 stop_d3.o : ../../Modules/control_flags.o

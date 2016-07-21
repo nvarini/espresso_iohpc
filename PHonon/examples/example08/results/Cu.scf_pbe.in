@@ -1,0 +1,25 @@
+ &control
+    calculation='scf',
+    restart_mode='from_scratch',
+    prefix='copper',
+    pseudo_dir = '/home/nvarini/espresso_hdf5/espresso/pseudo/',
+    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+ &system
+    ibrav = 2, celldm(1) =6.90, nat=  1, ntyp= 1,
+    occupations='smearing',
+    smearing='mp',
+    degauss=0.01,
+    ecutwfc = 30.0
+    ecutrho = 700.0
+ /
+ &electrons
+    mixing_beta = 0.7
+    conv_thr =  1.0d-9
+ /
+ATOMIC_SPECIES
+Cu   0.0  Cu.pbe-kjpaw.UPF
+ATOMIC_POSITIONS (alat)
+ Cu  0.00 0.00 0.00
+K_POINTS AUTOMATIC
+4 4 4 1 1 1

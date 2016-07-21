@@ -25,6 +25,16 @@ subroutine dielec_test
   USE eqv, ONLY : dpsi
   USE control_lr, ONLY : nbnd_occ
   USE units_ph, ONLY : lrwfc, iuwfc
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
+
+
 
   USE ramanm, ONLY : a1j, a2j, lrd2w, iud2w
   USE mp_pools, ONLY : inter_pool_comm
@@ -37,13 +47,24 @@ subroutine dielec_test
   integer :: ibnd, ipol, jpol, nrec, ik, i1, i2
   real(DP) :: w_, weight, tmp
   complex(DP), external :: zdotc
+  character(len=256) :: filename_hdf5
 
   epsilon (:,:) = 0.d0
   do ik = 1, nksq
      npw = ngk(ik)
      weight = wk (ik)
      w_ = - fpi * weight / omega
+#if defined __HDF5
+     IF ( .NOT. lgamma ) THEN
+        filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     ELSE
+        filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+     ENDIF
+     CALL get_buffer( evc, lrwfc, iuwfc, ik, filename_hdf5, evc_hdf5_write )
+#else
      call get_buffer (evc, lrwfc, iuwfc, ik)
+#endif
+
      do ipol = 1, 6
         nrec = (ipol - 1) * nksq + ik
         call davcio (dpsi, lrd2w, iud2w, nrec, -1)

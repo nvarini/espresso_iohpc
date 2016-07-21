@@ -1,0 +1,27 @@
+ &control
+    calculation='scf',
+    restart_mode='from_scratch',
+    prefix='gold',
+    pseudo_dir = '/home/nvarini/espresso_hdf5/espresso/pseudo/',
+    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+ &system
+    ibrav = 2, celldm(1) =7.666, nat=  1, ntyp= 1,
+    noncolin=.true.,
+    lspinorb=.true.,
+    occupations='smearing',
+    smearing='mp',
+    degauss=0.04,
+    ecutwfc = 35.0
+    ecutrho = 400.0
+ /
+ &electrons
+    mixing_beta = 0.7
+    conv_thr =  1.0d-9
+ /
+ATOMIC_SPECIES
+Au   0.0  Au.rel-pz-kjpaw.UPF
+ATOMIC_POSITIONS (alat)
+Au  0.00 0.00 0.00
+K_POINTS AUTOMATIC
+4 4 4 1 1 1

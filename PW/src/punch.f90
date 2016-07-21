@@ -6,7 +6,7 @@
 ! or http://www.gnu.org/copyleft/gpl.txt .
 !
 !----------------------------------------------------------------------------
-SUBROUTINE punch( what )
+SUBROUTINE punch( what, filename, hdf5desc )
   !----------------------------------------------------------------------------
   !
   ! ... This routine is called at the end of the run to save to a file
@@ -24,6 +24,13 @@ SUBROUTINE punch( what )
 #endif
   USE a2F,                  ONLY : la2F, a2Fsave
   USE wavefunctions_module, ONLY : evc
+#if defined __HDF5
+  USE hdf5_qe,  ONLY :  HDF5_type
+  USE buffers,  ONLY : save_buffer
+  USE mp_world, ONLY : mpime
+#endif
+
+
   !
   IMPLICIT NONE
   !
@@ -31,6 +38,11 @@ SUBROUTINE punch( what )
   LOGICAL :: exst
   CHARACTER(LEN=256) :: cp_source, cp_dest
   INTEGER            :: cp_status
+#if defined __HDF5
+  CHARACTER(LEN=256), OPTIONAL, INTENT(IN) :: filename
+  TYPE(HDF5_type), OPTIONAL,  INTENT(INOUT) :: hdf5desc
+#endif
+
   !
   !
   IF (io_level < 0 ) RETURN
@@ -42,9 +54,21 @@ SUBROUTINE punch( what )
   ! ... save here wavefunctions to file if never saved before
   !
   IF ( .NOT. twfcollect .AND. nks == 1 ) THEN
-     IF (io_level < 1) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
-     CALL davcio ( evc, 2*nwordwfc, iunwfc, nks, 1 )
-     IF (io_level < 1) CLOSE ( UNIT=iunwfc, STATUS='keep' )
+#if defined __HDF5
+    IF(present(filename)) THEN
+      IF (io_level < 1) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
+      CALL save_buffer ( evc, nwordwfc, iunwfc, nks, filename, hdf5desc, 23 )
+      IF (io_level < 1) CLOSE ( UNIT=iunwfc, STATUS='keep' )
+    ELSE
+      IF (io_level < 1) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
+      CALL davcio ( evc, 2*nwordwfc, iunwfc, nks, 1 )
+      IF (io_level < 1) CLOSE ( UNIT=iunwfc, STATUS='keep' )
+    ENDIF
+#else
+    IF (io_level < 1) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
+      CALL davcio ( evc, 2*nwordwfc, iunwfc, nks, 1 )
+    IF (io_level < 1) CLOSE ( UNIT=iunwfc, STATUS='keep' )
+#endif
   END IF
   iunpun = 4
   !

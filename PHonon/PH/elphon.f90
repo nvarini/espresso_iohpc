@@ -38,6 +38,15 @@ SUBROUTINE elphon()
 
   USE lrus,   ONLY : int3, int3_nc, int3_paw
   USE qpoint, ONLY : xq
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE control_lr,           ONLY : lgamma
+#endif
+
   !
   IMPLICIT NONE
   !
@@ -52,6 +61,7 @@ SUBROUTINE elphon()
   INTEGER :: ntyp_, nat_, ibrav_, nspin_mag_, mu, nu, na, nb, nta, ntb, nqs_
   REAL(DP) :: celldm_(6)
   CHARACTER(LEN=3) :: atm(ntyp)
+  character(len=256) :: filename_hdf5
    
   CALL start_clock ('elphon')
 
@@ -295,6 +305,13 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
   USE eqv,        ONLY : dvpsi, evq
   USE qpoint,     ONLY : nksq, ikks, ikqs, nksqtot
   USE control_lr, ONLY : lgamma
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+#endif
 
   IMPLICIT NONE
   !
@@ -308,6 +325,7 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
        tg_psic(:,:), aux2(:,:)
   INTEGER :: v_siz, incr
   COMPLEX(DP), EXTERNAL :: zdotc
+  character(len=256) :: filename_hdf5
   !
   IF (.NOT. comp_elph(irr) .OR. done_elph(irr)) RETURN
   IF ( ntask_groups > 1 ) dffts%have_task_groups=.TRUE.
@@ -348,10 +366,22 @@ SUBROUTINE elphel (irr, npe, imode0, dvscfins)
      !
      IF (nksq.GT.1) THEN
         IF (lgamma) THEN
-           CALL get_buffer(evc, lrwfc, iuwfc, ikk)
+#if defined __HDF5
+           filename_hdf5 = trim(tmp_dir_save) //"evc.hdf5_" // nd_nmbr
+           CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+#else
+           call get_buffer (evc, lrwfc, iuwfc, ikk)
+#endif
         ELSE
-           CALL get_buffer (evc, lrwfc, iuwfc, ikk)
-           CALL get_buffer (evq, lrwfc, iuwfc, ikq)
+#if defined __HDF5
+           filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+           CALL get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+           call get_buffer (evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write)
+#else
+           call get_buffer (evc, lrwfc, iuwfc, ikk)
+           call get_buffer (evq, lrwfc, iuwfc, ikq)
+#endif
+
         ENDIF
      ENDIF
      !

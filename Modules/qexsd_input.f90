@@ -35,7 +35,7 @@ MODULE qexsd_input
   SUBROUTINE  qexsd_init_control_variables(obj,title,calculation,restart_mode,&
                   prefix,pseudo_dir,outdir,stress,forces,wf_collect,disk_io,  &
                   max_seconds,etot_conv_thr,forc_conv_thr,press_conv_thr,verbosity, &
-                  iprint) 
+                  iprint, nstep) 
   !---------------------------------------------------------------------------------------------------------------------
   !
   TYPE(control_variables_type)         :: obj
@@ -44,12 +44,13 @@ MODULE qexsd_input
   LOGICAL,INTENT(IN)                   :: stress,forces,wf_collect
   REAL(DP),INTENT(IN)                  :: max_seconds,etot_conv_thr,forc_conv_thr,&
                                           press_conv_thr   
-  INTEGER,INTENT(IN)                   :: iprint
+  INTEGER,INTENT(IN)                   :: iprint, nstep
   !
   !
   CHARACTER(LEN=*),PARAMETER           :: TAGNAME='control_variables'
   CHARACTER(LEN=256)                   :: verbosity_value, disk_io_value
   INTEGER                              :: int_max_seconds
+  LOGICAL                              :: nstep_ispresent
 
   int_max_seconds=nint(max_seconds)
   IF ( TRIM( verbosity ) .EQ. 'default' ) THEN 
@@ -62,13 +63,30 @@ MODULE qexsd_input
   ELSE
      disk_io_value=TRIM(disk_io)
   END IF
+  !
+  SELECT CASE ( TRIM (calculation)) 
+    CASE ('scf', 'nscf', 'bands') 
+       IF ( nstep == 1) THEN 
+          nstep_ispresent = .FALSE. 
+       ELSE 
+          nstep_ispresent = .TRUE. 
+       END IF 
+   CASE DEFAULT 
+       IF ( nstep == 50 ) THEN 
+          nstep_ispresent = .FALSE. 
+       ELSE 
+          nstep_ispresent = .TRUE.
+       END IF 
+  END SELECT 
+  !
   CALL qes_init_control_variables(obj,tagname,title=title,calculation=calculation,&
                                   restart_mode=restart_mode,prefix=prefix,        &
                                   pseudo_dir=pseudo_dir,outdir=outdir,disk_io=disk_io_value,&
                                   verbosity=TRIM(verbosity_value),stress=stress,forces=forces,    &
                                   wf_collect=wf_collect,max_seconds=int_max_seconds,  &
                                   etot_conv_thr=etot_conv_thr,forc_conv_thr=forc_conv_thr, &
-                                  press_conv_thr=press_conv_thr,print_every=iprint)
+                                  press_conv_thr=press_conv_thr,print_every=iprint, NSTEP = nstep, &
+                                  NSTEP_ISPRESENT = nstep_ispresent )
 
   END SUBROUTINE qexsd_init_control_variables
   !
@@ -250,7 +268,7 @@ MODULE qexsd_input
    !
    !
    !-------------------------------------------------------------------------------------------------
-   SUBROUTINE qexsd_init_k_points_ibz(obj,k_points,calculation,nk1,nk2,nk3,s1,s2,s3,nk,xk,wk,alat,a1)
+   SUBROUTINE qexsd_init_k_points_ibz(obj,k_points,calculation,nk1,nk2,nk3,s1,s2,s3,nk,xk,wk,alat,a1, ibrav_lattice)
    ! 
    IMPLICIT NONE
    ! 
@@ -259,6 +277,7 @@ MODULE qexsd_input
    INTEGER,INTENT(IN)                   :: nk1,nk2,nk3,s1,s2,s3,nk
    REAL(DP),INTENT(IN)                  :: xk(:,:),wk(:)
    REAL(DP),INTENT(IN)                  :: alat,a1(3)
+   LOGICAL,INTENT(IN)                   :: ibrav_lattice
    !
    CHARACTER(LEN=*),PARAMETER           :: TAGNAME="k_points_IBZ"
    TYPE(monkhorst_pack_type)            :: mpack_obj
@@ -284,7 +303,11 @@ MODULE qexsd_input
                                  nk=0,k_point_ispresent=.FALSE.,ndim_k_point=0,k_point=kp_obj)
       CALL qes_reset_monkhorst_pack(mpack_obj)
    ELSE
-      scale_factor=alat/sqrt(a1(1)*a1(1)+a1(2)*a1(2)+a1(3)*a1(3))
+      IF ( ibrav_lattice ) THEN 
+         scale_factor = 1.d0
+      ELSE 
+         scale_factor=alat/sqrt(a1(1)*a1(1)+a1(2)*a1(2)+a1(3)*a1(3))
+      END IF 
       !
       IF (TRIM(calculation).NE.'bands' .AND. (TRIM(k_points).EQ.'tpiba_b' .OR. &
                                               TRIM(k_points) .EQ. 'crystal_b')) THEN

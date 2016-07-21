@@ -46,6 +46,15 @@ subroutine solve_linter_d3 (irr, imode0, npe, isw_sl)
 
   use qpoint,     ONLY : xq, igkq, npwq, nksq
   use control_lr, ONLY : nbnd_occ, lgamma
+#if defined __HDF5
+  USE io_files,             ONLY :  nd_nmbr
+  USE save_ph,              ONLY : tmp_dir_save
+  USE hdf5_qe,              ONLY : evc_hdf5_write
+  USE io_files,             ONLY : tmp_dir
+  USE mp_world,             ONLY : mpime
+  USE buffers,              ONLY : get_buffer
+#endif
+
 
   implicit none
   integer :: irr, npe, imode0, isw_sl
@@ -95,6 +104,7 @@ subroutine solve_linter_d3 (irr, imode0, npe, isw_sl)
   ! counters
   !
   external ch_psi_all2, cg_psi
+  character(len=256) :: filename_hdf5
   !
   call start_clock ('solve_linter')
   allocate  (drhoscf( dfftp%nnr, npe))
@@ -156,8 +166,14 @@ subroutine solve_linter_d3 (irr, imode0, npe, isw_sl)
      !
      ! reads unperturbed wavefuctions psi(k) and psi(k+q)
      !
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir) //"evc.hdf5_" // nd_nmbr
+     call get_buffer( evc, lrwfc, iuwfc, ikk, filename_hdf5, evc_hdf5_write )
+     if (.not.lgamma)call get_buffer (evq, lrwfc, iuwfc, ikq, filename_hdf5, evc_hdf5_write)
+#else
      call davcio (evc, lrwfc, iuwfc, ikk, - 1)
      if (.not.lgamma) call davcio (evq, lrwfc, iuwfc, ikq, - 1)
+#endif
      !
      ! compute the kinetic energy
      !

@@ -35,6 +35,11 @@ SUBROUTINE run_nscf(do_band, iq)
   USE lr_symm_base,    ONLY : minus_q, nsymq, invsymq
   USE qpoint,          ONLY : xq
   USE el_phon,         ONLY : elph_mat
+#if defined __HDF5
+  USE hdf5_qe,          ONLY : evc_hdf5_write
+  USE io_files,         ONLY : tmp_dir, nd_nmbr
+#endif
+
  !
   IMPLICIT NONE
   !
@@ -42,6 +47,7 @@ SUBROUTINE run_nscf(do_band, iq)
   INTEGER, INTENT(IN) :: iq
   !
   LOGICAL :: exst
+  CHARACTER(LEN=256) :: filename_hdf5
   !
   CALL start_clock( 'PWSCF' )
   !
@@ -84,13 +90,17 @@ SUBROUTINE run_nscf(do_band, iq)
 !
   IF (do_band) CALL non_scf ( )
 
-
   IF ( check_stop_now() ) THEN
 !
 !  In this case the code stops inside the band calculation. Save the
 !  files and stop the pwscf run
 !
-     CALL punch( 'config' )
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir)//"evc.hdf5_" // trim(nd_nmbr)
+     CALL punch('config', filename_hdf5, evc_hdf5_write)
+#else
+     CALL punch('config')
+#endif
      CALL stop_run( -1 )
      CALL do_stop( 1 )
   ENDIF
@@ -102,7 +112,13 @@ SUBROUTINE run_nscf(do_band, iq)
 !  calculation.
 !
      IF (.NOT. only_wfc) twfcollect=.FALSE.
-     CALL punch( 'all' )
+#if defined __HDF5
+     filename_hdf5 = trim(tmp_dir)//"evc.hdf5_" // trim(nd_nmbr)
+     CALL punch('all', filename_hdf5, evc_hdf5_write)
+#else
+     CALL punch('all')
+#endif
+
   ENDIF
   !
   CALL seqopn( 4, 'restart', 'UNFORMATTED', exst )

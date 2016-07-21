@@ -1,0 +1,9 @@
+phonons of O2 at Gamma
+ &inputph
+  tr2_ph=1.0d-15,
+  epsil=.true.,
+  zue=.true.,
+  prefix='o2_mol',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir'
+ /
+0.0 0.0 0.0

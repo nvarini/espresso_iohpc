@@ -1,0 +1,9 @@
+phonons of Au at X
+ &inputph
+  tr2_ph=1.0d-14,
+  prefix='gold',
+  recover=.true.,
+  fildyn='AuX.dyn',
+  outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+1.0 0.0 0.0
