@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:22:45 
+     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:36:37 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -162,7 +162,7 @@
 
      total cpu time spent up to now is        0.3 secs
 
-     per-process dynamical memory:    16.7 Mb
+     per-process dynamical memory:    16.8 Mb
 
      Self-consistent Calculation
 
@@ -335,51 +335,51 @@
 
      Writing output data file graphite.save
  
-     init_run     :      0.13s CPU      0.13s WALL (       1 calls)
-     electrons    :      1.19s CPU      1.20s WALL (       1 calls)
+     init_run     :      0.12s CPU      0.13s WALL (       1 calls)
+     electrons    :      1.17s CPU      1.19s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
      potinit      :      0.04s CPU      0.04s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.55s CPU      0.55s WALL (      13 calls)
+     c_bands      :      0.54s CPU      0.54s WALL (      13 calls)
      sum_band     :      0.15s CPU      0.15s WALL (      13 calls)
      v_of_rho     :      0.47s CPU      0.48s WALL (      14 calls)
-     newd         :      0.04s CPU      0.04s WALL (      14 calls)
+     newd         :      0.03s CPU      0.04s WALL (      14 calls)
      mix_rho      :      0.01s CPU      0.01s WALL (      13 calls)
 
      Called by c_bands:
      init_us_2    :      0.02s CPU      0.02s WALL (     162 calls)
-     cegterg      :      0.49s CPU      0.50s WALL (      78 calls)
+     cegterg      :      0.48s CPU      0.49s WALL (      78 calls)
 
      Called by sum_band:
      sum_band:bec :      0.00s CPU      0.00s WALL (      78 calls)
      addusdens    :      0.04s CPU      0.04s WALL (      13 calls)
 
      Called by *egterg:
-     h_psi        :      0.40s CPU      0.40s WALL (     270 calls)
+     h_psi        :      0.39s CPU      0.40s WALL (     270 calls)
      s_psi        :      0.02s CPU      0.02s WALL (     270 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     186 calls)
      cdiaghg      :      0.05s CPU      0.05s WALL (     264 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.01s CPU      0.02s WALL (     270 calls)
+     add_vuspsi   :      0.02s CPU      0.02s WALL (     270 calls)
 
      General routines
      calbec       :      0.03s CPU      0.03s WALL (     348 calls)
-     fft          :      0.18s CPU      0.19s WALL (     919 calls)
+     fft          :      0.17s CPU      0.17s WALL (     919 calls)
      ffts         :      0.00s CPU      0.00s WALL (      27 calls)
-     fftw         :      0.39s CPU      0.38s WALL (    4258 calls)
+     fftw         :      0.38s CPU      0.37s WALL (    4258 calls)
      interpolate  :      0.01s CPU      0.01s WALL (      27 calls)
  
      Parallel routines
-     fft_scatter  :      0.16s CPU      0.16s WALL (    5204 calls)
+     fft_scatter  :      0.14s CPU      0.14s WALL (    5204 calls)
  
-     PWSCF        :     1.73s CPU         1.96s WALL
+     PWSCF        :     1.78s CPU         1.97s WALL
 
  
-   This run was terminated on:  16:22:47  21Jul2016            
+   This run was terminated on:  11:36:39  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:57:32 
+     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:11:41 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -138,7 +138,7 @@
 
      total cpu time spent up to now is        0.3 secs
 
-     per-process dynamical memory:    16.9 Mb
+     per-process dynamical memory:    17.4 Mb
 
      Self-consistent Calculation
 
@@ -365,8 +365,8 @@
      Writing output data file ch4.save
  
      init_run     :      0.27s CPU      0.28s WALL (       1 calls)
-     electrons    :      1.23s CPU      1.24s WALL (       1 calls)
-     forces       :      0.04s CPU      0.04s WALL (       1 calls)
+     electrons    :      1.22s CPU      1.24s WALL (       1 calls)
+     forces       :      0.04s CPU      0.05s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.02s CPU      0.02s WALL (       1 calls)
@@ -388,26 +388,26 @@
      addusdens    :      0.29s CPU      0.30s WALL (      16 calls)
 
      Called by *egterg:
-     h_psi        :      0.26s CPU      0.26s WALL (      42 calls)
+     h_psi        :      0.25s CPU      0.26s WALL (      42 calls)
      s_psi        :      0.01s CPU      0.01s WALL (      42 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      25 calls)
      cdiaghg      :      0.00s CPU      0.00s WALL (      41 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.01s CPU      0.01s WALL (      42 calls)
+     add_vuspsi   :      0.00s CPU      0.01s WALL (      42 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (      62 calls)
      fft          :      0.12s CPU      0.12s WALL (     103 calls)
-     fftw         :      0.25s CPU      0.25s WALL (     402 calls)
+     fftw         :      0.26s CPU      0.25s WALL (     402 calls)
  
      Parallel routines
-     fft_scatter  :      0.12s CPU      0.11s WALL (     505 calls)
+     fft_scatter  :      0.12s CPU      0.12s WALL (     505 calls)
  
-     PWSCF        :     1.63s CPU         1.66s WALL
+     PWSCF        :     1.60s CPU         1.67s WALL
 
  
-   This run was terminated on:  15:57:34  21Jul2016            
+   This run was terminated on:  11:11:42  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

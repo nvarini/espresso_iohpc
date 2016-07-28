@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:37:51 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:51:42 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -1554,45 +1554,45 @@
      Writing output data file alas.save
  
      init_run     :      0.15s CPU      0.15s WALL (       7 calls)
-     electrons    :      1.30s CPU      1.36s WALL (       7 calls)
+     electrons    :      1.33s CPU      1.38s WALL (       7 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       7 calls)
      potinit      :      0.01s CPU      0.01s WALL (       7 calls)
 
      Called by electrons:
-     c_bands      :      1.30s CPU      1.36s WALL (       7 calls)
+     c_bands      :      1.33s CPU      1.38s WALL (       7 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       8 calls)
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     156 calls)
-     cegterg      :      1.05s CPU      1.10s WALL (     156 calls)
+     cegterg      :      1.07s CPU      1.10s WALL (     156 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.88s CPU      0.93s WALL (    2094 calls)
+     h_psi        :      0.91s CPU      0.93s WALL (    2094 calls)
      g_psi        :      0.01s CPU      0.01s WALL (    1782 calls)
-     cdiaghg      :      0.20s CPU      0.16s WALL (    1938 calls)
+     cdiaghg      :      0.20s CPU      0.17s WALL (    1938 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.02s CPU      0.02s WALL (    2094 calls)
+     add_vuspsi   :      0.03s CPU      0.02s WALL (    2094 calls)
 
      General routines
-     calbec       :      0.04s CPU      0.05s WALL (    2094 calls)
+     calbec       :      0.04s CPU      0.04s WALL (    2094 calls)
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
-     fftw         :      0.73s CPU      0.75s WALL (   16220 calls)
+     fftw         :      0.75s CPU      0.76s WALL (   16220 calls)
      davcio       :      0.00s CPU      0.00s WALL (     156 calls)
  
      Parallel routines
-     fft_scatter  :      0.18s CPU      0.19s WALL (   16244 calls)
+     fft_scatter  :      0.18s CPU      0.20s WALL (   16244 calls)
  
-     PHONON       :     2.40s CPU         2.51s WALL
+     PHONON       :     2.44s CPU         2.52s WALL
 
      INITIALIZATION: 
  
      init_vloc    :      0.00s CPU      0.00s WALL (       8 calls)
-     init_us_1    :      0.06s CPU      0.07s WALL (       8 calls)
+     init_us_1    :      0.07s CPU      0.07s WALL (       8 calls)
  
      DYNAMICAL MATRIX:
  
@@ -1604,21 +1604,21 @@
  
  
  
-     add_vuspsi   :      0.02s CPU      0.02s WALL (    2094 calls)
+     add_vuspsi   :      0.03s CPU      0.02s WALL (    2094 calls)
  
  
  
       General routines
-     calbec       :      0.04s CPU      0.05s WALL (    2094 calls)
+     calbec       :      0.04s CPU      0.04s WALL (    2094 calls)
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
-     fftw         :      0.73s CPU      0.75s WALL (   16220 calls)
+     fftw         :      0.75s CPU      0.76s WALL (   16220 calls)
      davcio       :      0.00s CPU      0.00s WALL (     156 calls)
  
  
-     PHONON       :     2.40s CPU         2.51s WALL
+     PHONON       :     2.44s CPU         2.52s WALL
 
  
-   This run was terminated on:  16:37:54  21Jul2016            
+   This run was terminated on:  11:51:45  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

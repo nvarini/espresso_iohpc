@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:40:24 
+     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:54:19 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -248,7 +248,7 @@
 
      Writing output data file alas.save
  
-     init_run     :      0.02s CPU      0.03s WALL (       1 calls)
+     init_run     :      0.03s CPU      0.03s WALL (       1 calls)
      electrons    :      0.04s CPU      0.04s WALL (       1 calls)
      forces       :      0.00s CPU      0.00s WALL (       1 calls)
      stress       :      0.00s CPU      0.00s WALL (       1 calls)
@@ -265,7 +265,7 @@
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      38 calls)
-     cegterg      :      0.03s CPU      0.03s WALL (      16 calls)
+     cegterg      :      0.02s CPU      0.03s WALL (      16 calls)
 
      Called by sum_band:
 
@@ -288,7 +288,7 @@
      PWSCF        :     0.15s CPU         0.15s WALL
 
  
-   This run was terminated on:  16:40:24  21Jul2016            
+   This run was terminated on:  11:54:20  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

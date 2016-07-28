@@ -87,6 +87,7 @@ recvec_subs.o \
 run_info.o \
 space_group.o \
 set_signal.o \
+setqf.o \
 splinelib.o \
 timestep.o\
 tsvdw.o\
@@ -110,6 +111,7 @@ qes_types.o \
 qes_libs.o  \
 qexsd.o   \
 qexsd_input.o \
+qexsd_reader_module.o \
 xsf.o \
 wypos.o \
 zdotc_wrapper.o  \

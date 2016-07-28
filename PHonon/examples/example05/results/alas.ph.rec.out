@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:57:51 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:12: 0 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -145,7 +145,7 @@
      Representation     2      3 modes -T_2  G_15 P_4  Done
 
 
-     PHONON       :     0.35s CPU         0.35s WALL
+     PHONON       :     0.36s CPU         0.37s WALL
 
 
           Dielectric constant in cartesian axis 
@@ -267,7 +267,7 @@
      freq (  1 -  3) =         -5.2  [cm-1]   --> T_2  G_15 P_4   I+R
      freq (  4 -  6) =        353.0  [cm-1]   --> T_2  G_15 P_4   I+R
  
-     PHONON       :     0.35s CPU         0.36s WALL
+     PHONON       :     0.36s CPU         0.37s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -300,10 +300,10 @@
      fft          :      0.00s CPU      0.00s WALL (       3 calls)
  
  
-     PHONON       :     0.35s CPU         0.36s WALL
+     PHONON       :     0.36s CPU         0.37s WALL
 
  
-   This run was terminated on:  15:57:52  21Jul2016            
+   This run was terminated on:  11:12: 0  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

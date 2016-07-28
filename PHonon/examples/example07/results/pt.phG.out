@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:58: 7 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:12:15 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -122,7 +122,7 @@
 
 
      Alpha used in Ewald sum =   2.8000
-     PHONON       :     1.76s CPU         1.79s WALL
+     PHONON       :     1.79s CPU         1.81s WALL
 
 
 
@@ -201,7 +201,7 @@
 
      freq (  1 -  3) =         -0.5  [cm-1]   --> T_1u G_15  G_4- I  
  
-     PHONON       :     5.66s CPU         5.77s WALL
+     PHONON       :     5.67s CPU         5.78s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.03s CPU      0.03s WALL (       1 calls)
@@ -212,16 +212,16 @@
      init_vloc    :      0.00s CPU      0.00s WALL (       1 calls)
      init_us_1    :      0.39s CPU      0.39s WALL (       1 calls)
      newd         :      0.02s CPU      0.03s WALL (       1 calls)
-     dvanqq       :      0.18s CPU      0.18s WALL (       1 calls)
-     drho         :      0.19s CPU      0.20s WALL (       1 calls)
+     dvanqq       :      0.17s CPU      0.18s WALL (       1 calls)
+     drho         :      0.20s CPU      0.20s WALL (       1 calls)
  
      DYNAMICAL MATRIX:
      dynmat0      :      0.34s CPU      0.34s WALL (       1 calls)
-     phqscf       :      3.89s CPU      3.97s WALL (       1 calls)
-     dynmatrix    :      0.01s CPU      0.01s WALL (       1 calls)
+     phqscf       :      3.88s CPU      3.97s WALL (       1 calls)
+     dynmatrix    :      0.00s CPU      0.01s WALL (       1 calls)
  
-     phqscf       :      3.89s CPU      3.97s WALL (       1 calls)
-     solve_linter :      3.88s CPU      3.96s WALL (       1 calls)
+     phqscf       :      3.88s CPU      3.97s WALL (       1 calls)
+     solve_linter :      3.87s CPU      3.96s WALL (       1 calls)
      drhodv       :      0.01s CPU      0.01s WALL (       1 calls)
  
      dynmat0      :      0.34s CPU      0.34s WALL (       1 calls)
@@ -232,33 +232,33 @@
      dynmat_us    :      0.03s CPU      0.03s WALL (       1 calls)
      addusdynmat  :      0.01s CPU      0.01s WALL (       1 calls)
  
-     phqscf       :      3.89s CPU      3.97s WALL (       1 calls)
-     solve_linter :      3.88s CPU      3.96s WALL (       1 calls)
+     phqscf       :      3.88s CPU      3.97s WALL (       1 calls)
+     solve_linter :      3.87s CPU      3.96s WALL (       1 calls)
  
-     solve_linter :      3.88s CPU      3.96s WALL (       1 calls)
+     solve_linter :      3.87s CPU      3.96s WALL (       1 calls)
      dvqpsi_us    :      0.05s CPU      0.05s WALL (       6 calls)
      ortho        :      0.02s CPU      0.02s WALL (      42 calls)
-     cgsolve      :      1.51s CPU      1.54s WALL (      42 calls)
+     cgsolve      :      1.52s CPU      1.55s WALL (      42 calls)
      incdrhoscf   :      0.11s CPU      0.12s WALL (      42 calls)
      addusddens   :      0.31s CPU      0.31s WALL (       8 calls)
      vpsifft      :      0.08s CPU      0.09s WALL (      36 calls)
-     dv_of_drho   :      0.08s CPU      0.08s WALL (      21 calls)
-     mix_pot      :      0.03s CPU      0.04s WALL (       7 calls)
+     dv_of_drho   :      0.07s CPU      0.08s WALL (      21 calls)
+     mix_pot      :      0.02s CPU      0.04s WALL (       7 calls)
      ef_shift     :      0.01s CPU      0.01s WALL (       8 calls)
-     localdos     :      0.03s CPU      0.04s WALL (       1 calls)
-     psymdvscf    :      0.97s CPU      0.97s WALL (       7 calls)
-     newdq        :      0.63s CPU      0.63s WALL (       7 calls)
+     localdos     :      0.04s CPU      0.04s WALL (       1 calls)
+     psymdvscf    :      0.96s CPU      0.96s WALL (       7 calls)
+     newdq        :      0.63s CPU      0.64s WALL (       7 calls)
      adddvscf     :      0.02s CPU      0.02s WALL (      36 calls)
      drhodvus     :      0.00s CPU      0.00s WALL (       1 calls)
  
      dvqpsi_us    :      0.05s CPU      0.05s WALL (       6 calls)
      dvqpsi_us_on :      0.03s CPU      0.03s WALL (       6 calls)
  
-     cgsolve      :      1.51s CPU      1.54s WALL (      42 calls)
-     ch_psi       :      1.48s CPU      1.51s WALL (     617 calls)
+     cgsolve      :      1.52s CPU      1.55s WALL (      42 calls)
+     ch_psi       :      1.49s CPU      1.52s WALL (     617 calls)
  
-     ch_psi       :      1.48s CPU      1.51s WALL (     617 calls)
-     last         :      0.14s CPU      0.15s WALL (     617 calls)
+     ch_psi       :      1.49s CPU      1.52s WALL (     617 calls)
+     last         :      0.15s CPU      0.15s WALL (     617 calls)
  
      add_vuspsi   :      0.05s CPU      0.05s WALL (     617 calls)
  
@@ -268,17 +268,17 @@
  
       General routines
      calbec       :      0.10s CPU      0.10s WALL (    1370 calls)
-     fft          :      0.11s CPU      0.12s WALL (     454 calls)
+     fft          :      0.11s CPU      0.11s WALL (     454 calls)
      ffts         :      0.01s CPU      0.01s WALL (     106 calls)
-     fftw         :      1.11s CPU      1.14s WALL (   24764 calls)
+     fftw         :      1.14s CPU      1.15s WALL (   24764 calls)
      davcio       :      0.02s CPU      0.02s WALL (     215 calls)
      write_rec    :      0.01s CPU      0.02s WALL (       8 calls)
  
  
-     PHONON       :     5.66s CPU         5.77s WALL
+     PHONON       :     5.67s CPU         5.78s WALL
 
  
-   This run was terminated on:  15:58:13  21Jul2016            
+   This run was terminated on:  11:12:21  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

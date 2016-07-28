@@ -27,7 +27,7 @@
 
 # Top QE directory, not used in QE but useful for linking QE libs with plugins
 # The following syntax should always point to TOPDIR:
-#   $(dir $(abspath $(filter %make.inc,$(MAKEFILE_LIST))))
+#   $(dir $(abspath $(filter %make.sys,$(MAKEFILE_LIST))))
 
 TOPDIR = @topdir@
 
@@ -146,12 +146,16 @@ ARFLAGS        = @arflags@
 
 RANLIB         = @ranlib@
 
+# hdf5 library
+
+HDF5_LIBS      = @hdf5_libs@
+
 # all internal and external libraries - do not modify
 
 FLIB_TARGETS   = all
 
 LIBOBJS        = ../clib/clib.a ../iotk/src/libiotk.a
-LIBS           = $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(FFT_LIBS) $(BLAS_LIBS) $(MPI_LIBS) $(MASS_LIBS) $(LD_LIBS)
+LIBS           = $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(FFT_LIBS) $(BLAS_LIBS) $(MPI_LIBS) $(MASS_LIBS) $(LD_LIBS) $(HDF5_LIBS)
 
 # wget or curl - useful to download from network
 WGET = @wget@

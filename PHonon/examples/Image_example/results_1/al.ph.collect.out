@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:35:19 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:49: 9 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -130,7 +130,7 @@
      Representation     1      3 modes -T_1u G_15  G_4-  Done
 
 
-     PHONON       :     2.09s CPU         2.10s WALL
+     PHONON       :     2.15s CPU         2.16s WALL
 
  
      Number of q in the star =    1
@@ -696,7 +696,7 @@ Possibly too few bands at point  200  -0.75000  -0.50000   0.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     2.11s CPU         2.12s WALL
+     PHONON       :     2.17s CPU         2.17s WALL
 
  
      Number of q in the star =    6
@@ -1268,7 +1268,7 @@ Possibly too few bands at point  200  -0.50000  -0.50000   0.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     2.13s CPU         2.14s WALL
+     PHONON       :     2.18s CPU         2.19s WALL
 
  
      Number of q in the star =    6
@@ -1840,7 +1840,7 @@ Possibly too few bands at point  200  -0.25000  -0.50000   0.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     2.14s CPU         2.16s WALL
+     PHONON       :     2.20s CPU         2.21s WALL
 
  
      Number of q in the star =    6
@@ -2248,7 +2248,7 @@ Possibly too few bands at point  118   1.00000   1.00000   0.50000
      Representation     2      2 modes -E_u  X_5' M_5'  Done
 
 
-     PHONON       :     2.16s CPU         2.18s WALL
+     PHONON       :     2.21s CPU         2.23s WALL
 
  
      Number of q in the star =    3
@@ -3075,7 +3075,7 @@ Possibly too few bands at point  328   1.00000  -0.25000   1.00000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.18s CPU         2.20s WALL
+     PHONON       :     2.23s CPU         2.24s WALL
 
  
      Number of q in the star =   12
@@ -3602,7 +3602,7 @@ Possibly too few bands at point  174   1.00000   0.00000   1.00000
      Representation     2      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     2.20s CPU         2.21s WALL
+     PHONON       :     2.25s CPU         2.26s WALL
 
  
      Number of q in the star =    6
@@ -4432,7 +4432,7 @@ Possibly too few bands at point  328   1.00000   0.25000   1.00000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.22s CPU         2.23s WALL
+     PHONON       :     2.27s CPU         2.28s WALL
 
  
      Number of q in the star =   12
@@ -4847,7 +4847,7 @@ Possibly too few bands at point  118   2.00000   1.00000   0.50000
      Representation     2      2 modes -E_u  X_5' M_5'  Done
 
 
-     PHONON       :     2.23s CPU         2.25s WALL
+     PHONON       :     2.28s CPU         2.30s WALL
 
  
      Number of q in the star =    3
@@ -5674,7 +5674,7 @@ Possibly too few bands at point  328   1.75000   0.75000   0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.25s CPU         2.27s WALL
+     PHONON       :     2.30s CPU         2.32s WALL
 
  
      Number of q in the star =   12
@@ -6511,7 +6511,7 @@ Possibly too few bands at point  328   1.50000   0.50000   0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.27s CPU         2.29s WALL
+     PHONON       :     2.32s CPU         2.34s WALL
 
  
      Number of q in the star =   12
@@ -7348,7 +7348,7 @@ Possibly too few bands at point  328   1.25000   0.25000   0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.29s CPU         2.31s WALL
+     PHONON       :     2.34s CPU         2.36s WALL
 
  
      Number of q in the star =   12
@@ -7471,7 +7471,7 @@ Possibly too few bands at point  328   1.25000   0.25000   0.50000
      Representation     1      3 modes -T_1u G_15  G_4-  Done
 
 
-     PHONON       :     4.33s CPU         4.36s WALL
+     PHONON       :     4.38s CPU         4.40s WALL
 
  
      Number of q in the star =    1
@@ -8117,7 +8117,7 @@ Possibly too few bands at point  240   0.37500  -0.87500   0.12500
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     4.35s CPU         4.38s WALL
+     PHONON       :     4.39s CPU         4.42s WALL
 
  
      Number of q in the star =    8
@@ -8771,7 +8771,7 @@ Possibly too few bands at point  240   0.50000  -0.75000   0.25000
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     4.37s CPU         4.40s WALL
+     PHONON       :     4.41s CPU         4.44s WALL
 
  
      Number of q in the star =    8
@@ -9425,7 +9425,7 @@ Possibly too few bands at point  240   0.62500  -0.62500   0.37500
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     4.39s CPU         4.42s WALL
+     PHONON       :     4.42s CPU         4.46s WALL
 
  
      Number of q in the star =    8
@@ -9859,7 +9859,7 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      Representation     2      2 modes -E_u  L_3'  Done
 
 
-     PHONON       :     4.41s CPU         4.43s WALL
+     PHONON       :     4.44s CPU         4.47s WALL
 
  
      Number of q in the star =    4
@@ -9884,7 +9884,7 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      freq (  1 -  2) =        149.5  [cm-1]   --> E_u  L_3'          
      freq (  3 -  3) =        312.6  [cm-1]   --> A_2u L_2'          
  
-     init_run     :      0.11s CPU      0.11s WALL (      15 calls)
+     init_run     :      0.10s CPU      0.11s WALL (      15 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (      15 calls)
@@ -9907,7 +9907,7 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      51 calls)
  
-     PHONON       :     4.41s CPU         4.44s WALL
+     PHONON       :     4.44s CPU         4.48s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.07s CPU      0.07s WALL (      17 calls)
@@ -9936,10 +9936,10 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      fft          :      0.00s CPU      0.00s WALL (      51 calls)
  
  
-     PHONON       :     4.41s CPU         4.44s WALL
+     PHONON       :     4.44s CPU         4.48s WALL
 
  
-   This run was terminated on:  16:35:23  21Jul2016            
+   This run was terminated on:  11:49:14  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

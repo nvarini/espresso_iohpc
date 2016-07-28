@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 15:58: 5 
+     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:12:13 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -132,7 +132,7 @@
 
      total cpu time spent up to now is        0.6 secs
 
-     per-process dynamical memory:     9.0 Mb
+     per-process dynamical memory:    10.1 Mb
 
      Self-consistent Calculation
 
@@ -216,7 +216,7 @@
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        1.6 secs
+     total cpu time spent up to now is        1.5 secs
 
      total energy              =     -90.21444011 Ry
      Harris-Foulkes estimate   =     -90.21444011 Ry
@@ -226,7 +226,7 @@
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.7 secs
+     total cpu time spent up to now is        1.6 secs
 
      End of self-consistent calculation
 
@@ -266,16 +266,16 @@
 
      Writing output data file Pt_pbe.save
  
-     init_run     :      0.50s CPU      0.51s WALL (       1 calls)
-     electrons    :      1.06s CPU      1.08s WALL (       1 calls)
-     forces       :      0.05s CPU      0.05s WALL (       1 calls)
+     init_run     :      0.49s CPU      0.51s WALL (       1 calls)
+     electrons    :      1.05s CPU      1.08s WALL (       1 calls)
+     forces       :      0.04s CPU      0.04s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
-     potinit      :      0.02s CPU      0.02s WALL (       1 calls)
+     potinit      :      0.01s CPU      0.02s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.33s CPU      0.34s WALL (      10 calls)
+     c_bands      :      0.32s CPU      0.34s WALL (      10 calls)
      sum_band     :      0.39s CPU      0.40s WALL (      10 calls)
      v_of_rho     :      0.08s CPU      0.08s WALL (      10 calls)
      newd         :      0.24s CPU      0.25s WALL (      10 calls)
@@ -300,18 +300,18 @@
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (      94 calls)
-     fft          :      0.08s CPU      0.07s WALL (     315 calls)
-     ffts         :      0.01s CPU      0.01s WALL (      80 calls)
+     fft          :      0.07s CPU      0.07s WALL (     315 calls)
+     ffts         :      0.00s CPU      0.01s WALL (      80 calls)
      fftw         :      0.19s CPU      0.20s WALL (    4384 calls)
      interpolate  :      0.03s CPU      0.03s WALL (      80 calls)
  
      Parallel routines
      fft_scatter  :      0.08s CPU      0.09s WALL (    4779 calls)
  
-     PWSCF        :     1.72s CPU         1.77s WALL
+     PWSCF        :     1.71s CPU         1.76s WALL
 
  
-   This run was terminated on:  15:58: 7  21Jul2016            
+   This run was terminated on:  11:12:15  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

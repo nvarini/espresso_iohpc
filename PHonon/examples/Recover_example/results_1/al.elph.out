@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:32:49 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:46:39 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -125,7 +125,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.66s CPU         0.67s WALL
 
 
 
@@ -144,7 +144,7 @@
      Pert. #  2: Fermi energy shift (Ry) =     7.9271E-24     1.1632E-39
      Pert. #  3: Fermi energy shift (Ry) =     3.3087E-24    -1.7755E-39
 
-      iter #   2 total cpu time :     0.9 secs   av.it.:   5.8
+      iter #   2 total cpu time :     1.0 secs   av.it.:   5.8
       thresh= 1.123E-05 alpha_mix =  0.700 |ddv_scf|^2 =  1.307E-09
  
      Pert. #  1: Fermi energy shift (Ry) =     1.1029E-23    -1.3469E-39
@@ -318,49 +318,49 @@
      Maximum CPU time exceeded
 
      max_seconds     =       3.00
-     elapsed seconds =       3.00
-     Calculation stopped in k-point loop, point #    86
+     elapsed seconds =       3.01
+     Calculation stopped in k-point loop, point #    87
 
      Writing output data file aluminum.save
  
-     init_run     :      0.01s CPU      0.01s WALL (       1 calls)
-     electrons    :      1.13s CPU      1.15s WALL (       1 calls)
+     init_run     :      0.00s CPU      0.01s WALL (       1 calls)
+     electrons    :      1.08s CPU      1.15s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      1.13s CPU      1.15s WALL (       1 calls)
+     c_bands      :      1.08s CPU      1.15s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       2 calls)
 
      Called by c_bands:
-     init_us_2    :      0.00s CPU      0.00s WALL (     318 calls)
-     cegterg      :      0.64s CPU      0.66s WALL (      95 calls)
+     init_us_2    :      0.00s CPU      0.00s WALL (     319 calls)
+     cegterg      :      0.62s CPU      0.67s WALL (      96 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.54s CPU      0.56s WALL (    2867 calls)
-     g_psi        :      0.00s CPU      0.01s WALL (    1309 calls)
-     cdiaghg      :      0.23s CPU      0.21s WALL (    1395 calls)
+     h_psi        :      0.53s CPU      0.57s WALL (    2882 calls)
+     g_psi        :      0.00s CPU      0.01s WALL (    1322 calls)
+     cdiaghg      :      0.22s CPU      0.21s WALL (    1409 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.01s CPU      0.01s WALL (    2867 calls)
+     add_vuspsi   :      0.01s CPU      0.01s WALL (    2882 calls)
 
      General routines
-     calbec       :      0.06s CPU      0.07s WALL (    4911 calls)
+     calbec       :      0.06s CPU      0.07s WALL (    4926 calls)
      fft          :      0.00s CPU      0.00s WALL (      52 calls)
      ffts         :      0.00s CPU      0.00s WALL (     142 calls)
-     fftw         :      0.53s CPU      0.55s WALL (   20470 calls)
-     davcio       :      0.01s CPU      0.01s WALL (    1141 calls)
+     fftw         :      0.53s CPU      0.55s WALL (   20608 calls)
+     davcio       :      0.01s CPU      0.01s WALL (    1142 calls)
  
      Parallel routines
-     fft_scatter  :      0.14s CPU      0.15s WALL (   20664 calls)
+     fft_scatter  :      0.14s CPU      0.15s WALL (   20802 calls)
  
-     PWSCF        :      1.14s CPU      1.16s WALL (       1 calls)
+     PWSCF        :      1.08s CPU      1.16s WALL (       1 calls)
  
-   This run was terminated on:  16:32:53  21Jul2016            
+   This run was terminated on:  11:46:43  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

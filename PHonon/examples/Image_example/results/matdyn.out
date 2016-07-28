@@ -1,5 +1,5 @@
 
-     Program MATDYN v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:34: 4 
+     Program MATDYN v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:47:55 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -23,10 +23,10 @@
      Parallel version (MPI), running on     2 processors
      R & G space division:  proc/nbgrp/npool/nimage =       2
  
-     MATDYN       :     0.06s CPU         0.06s WALL
+     MATDYN       :     0.05s CPU         0.06s WALL
 
  
-   This run was terminated on:  16:34: 4  21Jul2016            
+   This run was terminated on:  11:47:55  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

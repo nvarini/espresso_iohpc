@@ -1,0 +1,92 @@
+buffers.f90(581): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+--------^
+buffers.f90(594): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    TYPE(HDF5_type), OPTIONAL, INTENT(INOUT) :: hdf5desc
+---------^
+buffers.f90(624): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+--------^
+buffers.f90(629): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    type(HDF5_type), intent(inout) :: hdf5desc
+---------^
+buffers.f90(649): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe, ONLY : HDF5_type, read_data_hdf5
+--------^
+buffers.f90(651): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    type(HDF5_type), intent(inout) :: hdf5desc
+---------^
+buffers.f90(674): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,       ONLY : HDF5_type, prepare_for_reading_final, &
+--------^
+buffers.f90(687): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    TYPE(HDF5_type), OPTIONAL, INTENT(INOUT)  :: hdf5desc
+---------^
+buffers.f90(745): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,  ONLY : prepare_for_writing_final, HDF5_type,&
+--------^
+buffers.f90(762): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    TYPE(HDF5_type), OPTIONAL,  INTENT(INOUT) :: hdf5desc
+---------^
+buffers.f90(602): error #6406: Conflicting attributes or multiple declaration of name.   [PREPARE_FOR_WRITING_FINAL]
+       CALL prepare_for_writing_final(hdf5desc,inter_pool_comm,filename, nrec)
+------------^
+buffers.f90(603): error #6404: This name does not have a type, and must have an explicit type.   [TWFCOLLECT]
+       twf_collect = twfcollect
+---------------------^
+buffers.f90(604): error #6406: Conflicting attributes or multiple declaration of name.   [ADD_ATTRIBUTES_HDF5]
+       CALL add_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec)
+------------^
+buffers.f90(605): error #6406: Conflicting attributes or multiple declaration of name.   [WRITE_EVC]
+       CALL write_evc(hdf5desc,0,vect, nrec)
+------------^
+buffers.f90(606): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_CLOSE]
+       CALL hdf5_close(hdf5desc)
+------------^
+buffers.f90(573): error #6404: This name does not have a type, and must have an explicit type.   [HDF5DESC]
+  SUBROUTINE save_buffer( vect, nword, unit, nrec, filename, hdf5desc, debug )
+-------------------------------------------------------------^
+buffers.f90(581): error #6580: Name in only-list does not exist.   [INITIALIZE_IO_HDF5]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+-------------------------^
+buffers.f90(581): error #6580: Name in only-list does not exist.   [DEFINE_DATASET_HDF5_HYPERSLAB]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+---------------------------------------------^
+buffers.f90(582): error #6580: Name in only-list does not exist.   [WRITE_DATA_HDF5]
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+-------------------------^
+buffers.f90(582): error #6580: Name in only-list does not exist.   [HDF5_TYPE]
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+------------------------------------------^
+buffers.f90(582): error #6580: Name in only-list does not exist.   [ADD_ATTRIBUTES_HDF5]
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+-----------------------------------------------------^
+buffers.f90(583): error #6580: Name in only-list does not exist.   [WRITE_EVC]
+                         write_evc, hdf5_close, prepare_for_writing_final
+-------------------------^
+buffers.f90(583): error #6580: Name in only-list does not exist.   [HDF5_CLOSE]
+                         write_evc, hdf5_close, prepare_for_writing_final
+------------------------------------^
+buffers.f90(583): error #6580: Name in only-list does not exist.   [PREPARE_FOR_WRITING_FINAL]
+                         write_evc, hdf5_close, prepare_for_writing_final
+------------------------------------------------^
+buffers.f90(584): error #6580: Name in only-list does not exist.   [TWFCOLLECT]
+    USE control_flags, ONLY : twfcollect
+------------------------------^
+buffers.f90(585): error #6580: Name in only-list does not exist.   [INTER_POOL_COMM]
+    USE mp_pools,      ONLY : inter_pool_comm
+------------------------------^
+buffers.f90(586): error #6580: Name in only-list does not exist.   [MPIME]
+    USE mp_world,      ONLY : mpime
+------------------------------^
+buffers.f90(640): error #6404: This name does not have a type, and must have an explicit type.   [HDF5DESC]
+    CALL initialize_io_hdf5( hdf5desc,inter_pool_comm, data,flag,kpoint)
+-----------------------------^
+buffers.f90(640): error #6404: This name does not have a type, and must have an explicit type.   [INTER_POOL_COMM]
+    CALL initialize_io_hdf5( hdf5desc,inter_pool_comm, data,flag,kpoint)
+--------------------------------------^
+buffers.f90(644): error #6460: This is not a field name that is defined in the encompassing structure.   [FILE_ID]
+    CALL h5fclose_f(hdf5desc%file_id,error)
+-----------------------------^
+/tmp/ifort4l0FOw.i90(803): catastrophic error: Too many errors, exiting
+compilation aborted for buffers.f90 (code 1)

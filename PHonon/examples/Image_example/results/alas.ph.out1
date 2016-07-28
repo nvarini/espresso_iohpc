@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:34: 3 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:47:54 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -137,7 +137,7 @@
      Representation     2      3 modes -T_2  G_15 P_4  Done
 
 
-     PHONON       :     0.55s CPU         0.55s WALL
+     PHONON       :     0.56s CPU         0.57s WALL
 
 
           Dielectric constant in cartesian axis 
@@ -395,7 +395,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.58s CPU         0.59s WALL
+     PHONON       :     0.60s CPU         0.61s WALL
 
  
      Number of q in the star =    4
@@ -608,7 +608,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.62s CPU         0.62s WALL
+     PHONON       :     0.64s CPU         0.64s WALL
 
  
      Number of q in the star =    4
@@ -834,7 +834,7 @@
      Representation     6      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     0.66s CPU         0.66s WALL
+     PHONON       :     0.67s CPU         0.68s WALL
 
  
      Number of q in the star =    6
@@ -1080,7 +1080,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.70s CPU         0.70s WALL
+     PHONON       :     0.71s CPU         0.72s WALL
 
  
      Number of q in the star =   12
@@ -1345,7 +1345,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.73s CPU         0.74s WALL
+     PHONON       :     0.75s CPU         0.76s WALL
 
  
      Number of q in the star =   12
@@ -1559,7 +1559,7 @@
      Representation     4      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     0.77s CPU         0.78s WALL
+     PHONON       :     0.79s CPU         0.80s WALL
 
  
      Number of q in the star =    3
@@ -1776,7 +1776,7 @@
      Representation     6      1 modes -E*   W_2  Done
 
 
-     PHONON       :     0.81s CPU         0.82s WALL
+     PHONON       :     0.83s CPU         0.84s WALL
 
  
      Number of q in the star =    6
@@ -1833,10 +1833,10 @@
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      24 calls)
  
-     PHONON       :     0.81s CPU         0.82s WALL
+     PHONON       :     0.83s CPU         0.84s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.04s CPU      0.05s WALL (       8 calls)
+     phq_setup    :      0.04s CPU      0.04s WALL (       8 calls)
  
      init_vloc    :      0.00s CPU      0.00s WALL (       8 calls)
      init_us_1    :      0.07s CPU      0.07s WALL (       8 calls)
@@ -1862,10 +1862,10 @@
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
  
  
-     PHONON       :     0.81s CPU         0.82s WALL
+     PHONON       :     0.83s CPU         0.84s WALL
 
  
-   This run was terminated on:  16:34: 4  21Jul2016            
+   This run was terminated on:  11:47:55  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

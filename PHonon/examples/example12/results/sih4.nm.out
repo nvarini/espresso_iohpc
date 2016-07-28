@@ -1,5 +1,5 @@
 
-     Program PHCG v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16: 7:17 
+     Program PHCG v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:21:15 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -125,9 +125,9 @@ H        0.128530744  -0.128530744  -0.128530744
      omega( 15) = 82.471706 [THz] =2750.959996 [cm-1]
  **************************************************************************
  
-     PHCG         :     0.46s CPU         0.47s WALL
+     PHCG         :     0.46s CPU         0.46s WALL
 
-     cg_readin    :      0.30s CPU      0.31s WALL (       1 calls)
+     cg_readin    :      0.30s CPU      0.30s WALL (       1 calls)
      init_vloc    :      0.00s CPU      0.00s WALL (       2 calls)
      fft          :      0.02s CPU      0.03s WALL (     232 calls)
      fft_scatter  :      0.03s CPU      0.03s WALL (    1498 calls)
@@ -142,9 +142,9 @@ H        0.128530744  -0.128530744  -0.128530744
      stres_us32   :      0.00s CPU      0.00s WALL (       3 calls)
      stres_us33   :      0.00s CPU      0.00s WALL (       3 calls)
      stres_us34   :      0.00s CPU      0.00s WALL (       3 calls)
-     calbec       :      0.00s CPU      0.00s WALL (     318 calls)
+     calbec       :      0.01s CPU      0.00s WALL (     318 calls)
      cgsolve      :      0.11s CPU      0.12s WALL (       9 calls)
-     h_h          :      0.02s CPU      0.02s WALL (      45 calls)
+     h_h          :      0.01s CPU      0.01s WALL (      45 calls)
      fftw         :      0.09s CPU      0.09s WALL (    1266 calls)
      add_vuspsi   :      0.00s CPU      0.00s WALL (     132 calls)
      solve_e      :      0.05s CPU      0.05s WALL (       1 calls)

@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:39:41 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:53:34 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -161,18 +161,18 @@
      Compute atoms:     2,
 
 
-     PHONON       :     0.66s CPU         0.67s WALL
+     PHONON       :     0.69s CPU         0.70s WALL
 
 
      Not diagonalizing because representation    2 is not done
  
-     PHONON       :     0.66s CPU         0.67s WALL
+     PHONON       :     0.69s CPU         0.70s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.00s CPU      0.01s WALL (       1 calls)
+     phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
  
      init_vloc    :      0.00s CPU      0.00s WALL (       2 calls)
-     init_us_1    :      0.02s CPU      0.02s WALL (       2 calls)
+     init_us_1    :      0.01s CPU      0.02s WALL (       2 calls)
  
      DYNAMICAL MATRIX:
      phqscf       :      0.00s CPU      0.00s WALL (       1 calls)
@@ -195,10 +195,10 @@
      fft          :      0.00s CPU      0.00s WALL (       6 calls)
  
  
-     PHONON       :     0.66s CPU         0.67s WALL
+     PHONON       :     0.69s CPU         0.70s WALL
 
  
-   This run was terminated on:  16:39:42  21Jul2016            
+   This run was terminated on:  11:53:35  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

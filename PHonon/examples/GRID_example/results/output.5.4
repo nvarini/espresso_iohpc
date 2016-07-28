@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:35:50 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:49:41 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -442,7 +442,7 @@
      Compute atoms:     1,
 
 
-     PHONON       :     0.79s CPU         0.82s WALL
+     PHONON       :     0.81s CPU         0.83s WALL
 
 
 
@@ -478,24 +478,24 @@
      Not diagonalizing because representation    0 is not done
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      0.32s CPU      0.35s WALL (       1 calls)
+     electrons    :      0.34s CPU      0.35s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.32s CPU      0.35s WALL (       1 calls)
+     c_bands      :      0.34s CPU      0.35s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       2 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.01s WALL (     220 calls)
-     cegterg      :      0.26s CPU      0.28s WALL (      40 calls)
+     cegterg      :      0.27s CPU      0.28s WALL (      40 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.76s CPU      0.78s WALL (    1825 calls)
+     h_psi        :      0.77s CPU      0.78s WALL (    1825 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     440 calls)
      cdiaghg      :      0.05s CPU      0.04s WALL (     480 calls)
 
@@ -503,16 +503,16 @@
      add_vuspsi   :      0.02s CPU      0.02s WALL (    1825 calls)
 
      General routines
-     calbec       :      0.06s CPU      0.06s WALL (    3290 calls)
+     calbec       :      0.05s CPU      0.06s WALL (    3290 calls)
      fft          :      0.00s CPU      0.00s WALL (      27 calls)
      ffts         :      0.00s CPU      0.00s WALL (      26 calls)
-     fftw         :      0.73s CPU      0.74s WALL (   15708 calls)
+     fftw         :      0.75s CPU      0.75s WALL (   15708 calls)
      davcio       :      0.01s CPU      0.01s WALL (     510 calls)
  
      Parallel routines
-     fft_scatter  :      0.20s CPU      0.20s WALL (   15761 calls)
+     fft_scatter  :      0.21s CPU      0.20s WALL (   15761 calls)
  
-     PHONON       :     1.69s CPU         1.74s WALL
+     PHONON       :     1.71s CPU         1.75s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -527,20 +527,20 @@
      dynmatrix    :      0.00s CPU      0.00s WALL (       1 calls)
  
      phqscf       :      0.90s CPU      0.92s WALL (       1 calls)
-     solve_linter :      0.89s CPU      0.91s WALL (       1 calls)
+     solve_linter :      0.90s CPU      0.92s WALL (       1 calls)
      drhodv       :      0.00s CPU      0.00s WALL (       1 calls)
  
  
  
      phqscf       :      0.90s CPU      0.92s WALL (       1 calls)
-     solve_linter :      0.89s CPU      0.91s WALL (       1 calls)
+     solve_linter :      0.90s CPU      0.92s WALL (       1 calls)
  
-     solve_linter :      0.89s CPU      0.91s WALL (       1 calls)
+     solve_linter :      0.90s CPU      0.92s WALL (       1 calls)
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      20 calls)
      ortho        :      0.00s CPU      0.00s WALL (     140 calls)
-     cgsolve      :      0.62s CPU      0.63s WALL (     140 calls)
+     cgsolve      :      0.62s CPU      0.64s WALL (     140 calls)
      incdrhoscf   :      0.07s CPU      0.07s WALL (     140 calls)
-     vpsifft      :      0.05s CPU      0.05s WALL (     120 calls)
+     vpsifft      :      0.05s CPU      0.06s WALL (     120 calls)
      dv_of_drho   :      0.00s CPU      0.00s WALL (       7 calls)
      mix_pot      :      0.00s CPU      0.00s WALL (       7 calls)
      psymdvscf    :      0.01s CPU      0.01s WALL (       7 calls)
@@ -548,11 +548,11 @@
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      20 calls)
      dvqpsi_us_on :      0.00s CPU      0.00s WALL (      20 calls)
  
-     cgsolve      :      0.62s CPU      0.63s WALL (     140 calls)
-     ch_psi       :      0.59s CPU      0.61s WALL (    1305 calls)
+     cgsolve      :      0.62s CPU      0.64s WALL (     140 calls)
+     ch_psi       :      0.60s CPU      0.61s WALL (    1305 calls)
  
-     ch_psi       :      0.59s CPU      0.61s WALL (    1305 calls)
-     last         :      0.05s CPU      0.05s WALL (    1305 calls)
+     ch_psi       :      0.60s CPU      0.61s WALL (    1305 calls)
+     last         :      0.04s CPU      0.05s WALL (    1305 calls)
  
      add_vuspsi   :      0.02s CPU      0.02s WALL (    1825 calls)
  
@@ -560,18 +560,18 @@
  
  
       General routines
-     calbec       :      0.06s CPU      0.06s WALL (    3290 calls)
+     calbec       :      0.05s CPU      0.06s WALL (    3290 calls)
      fft          :      0.00s CPU      0.00s WALL (      27 calls)
      ffts         :      0.00s CPU      0.00s WALL (      26 calls)
-     fftw         :      0.73s CPU      0.74s WALL (   15708 calls)
+     fftw         :      0.75s CPU      0.75s WALL (   15708 calls)
      davcio       :      0.01s CPU      0.01s WALL (     510 calls)
      write_rec    :      0.01s CPU      0.01s WALL (       8 calls)
  
  
-     PHONON       :     1.69s CPU         1.74s WALL
+     PHONON       :     1.71s CPU         1.76s WALL
 
  
-   This run was terminated on:  16:35:52  21Jul2016            
+   This run was terminated on:  11:49:43  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

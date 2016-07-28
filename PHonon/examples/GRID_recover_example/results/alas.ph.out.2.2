@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:38:59 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:52:52 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -338,7 +338,7 @@
      Compute atoms:     1,
 
 
-     PHONON       :     0.60s CPU         0.64s WALL
+     PHONON       :     0.61s CPU         0.63s WALL
 
 
 
@@ -349,7 +349,7 @@
       iter #   1 total cpu time :     0.7 secs   av.it.:   5.6
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  6.514E-04
 
-      iter #   2 total cpu time :     0.8 secs   av.it.:   7.6
+      iter #   2 total cpu time :     0.7 secs   av.it.:   7.6
       thresh= 2.552E-03 alpha_mix =  0.700 |ddv_scf|^2 =  5.928E-03
 
       iter #   3 total cpu time :     0.8 secs   av.it.:   6.2
@@ -360,7 +360,7 @@
      max_seconds     =       0.50
      elapsed seconds =       0.51
  
-     PHONON       :     0.77s CPU         0.82s WALL
+     PHONON       :     0.78s CPU         0.81s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -406,7 +406,7 @@
  
  
       General routines
-     calbec       :      0.01s CPU      0.01s WALL (     786 calls)
+     calbec       :      0.02s CPU      0.01s WALL (     786 calls)
      fft          :      0.00s CPU      0.00s WALL (      15 calls)
      ffts         :      0.00s CPU      0.00s WALL (      10 calls)
      fftw         :      0.19s CPU      0.19s WALL (    4152 calls)
@@ -414,10 +414,10 @@
      write_rec    :      0.00s CPU      0.00s WALL (       3 calls)
  
  
-     PHONON       :     0.77s CPU         0.82s WALL
+     PHONON       :     0.78s CPU         0.81s WALL
 
  
-   This run was terminated on:  16:39: 0  21Jul2016            
+   This run was terminated on:  11:52:53  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

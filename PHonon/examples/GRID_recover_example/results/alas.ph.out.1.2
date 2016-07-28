@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:38:56 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:52:49 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -139,7 +139,7 @@
      Compute atoms:     1,
 
 
-     PHONON       :     0.33s CPU         0.34s WALL
+     PHONON       :     0.34s CPU         0.34s WALL
 
 
      Electric Fields Calculation
@@ -194,7 +194,7 @@
      max_seconds     =       0.50
      elapsed seconds =       0.51
  
-     PHONON       :     0.77s CPU         0.80s WALL
+     PHONON       :     0.78s CPU         0.81s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -210,20 +210,20 @@
      zstar_eu     :      0.01s CPU      0.01s WALL (       1 calls)
  
      DYNAMICAL MATRIX:
-     phqscf       :      0.10s CPU      0.11s WALL (       1 calls)
+     phqscf       :      0.11s CPU      0.11s WALL (       1 calls)
  
-     phqscf       :      0.10s CPU      0.11s WALL (       2 calls)
-     solve_linter :      0.10s CPU      0.11s WALL (       1 calls)
+     phqscf       :      0.11s CPU      0.11s WALL (       2 calls)
+     solve_linter :      0.11s CPU      0.11s WALL (       1 calls)
  
  
  
-     phqscf       :      0.10s CPU      0.11s WALL (       3 calls)
-     solve_linter :      0.10s CPU      0.11s WALL (       2 calls)
+     phqscf       :      0.11s CPU      0.11s WALL (       3 calls)
+     solve_linter :      0.11s CPU      0.11s WALL (       2 calls)
  
-     solve_linter :      0.10s CPU      0.11s WALL (       3 calls)
+     solve_linter :      0.11s CPU      0.11s WALL (       3 calls)
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      18 calls)
      ortho        :      0.00s CPU      0.00s WALL (      48 calls)
-     cgsolve      :      0.24s CPU      0.25s WALL (      48 calls)
+     cgsolve      :      0.24s CPU      0.26s WALL (      48 calls)
      incdrhoscf   :      0.02s CPU      0.02s WALL (      42 calls)
      vpsifft      :      0.00s CPU      0.00s WALL (       6 calls)
      dv_of_drho   :      0.00s CPU      0.00s WALL (      21 calls)
@@ -233,7 +233,7 @@
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      18 calls)
      dvqpsi_us_on :      0.00s CPU      0.00s WALL (      18 calls)
  
-     cgsolve      :      0.24s CPU      0.25s WALL (      48 calls)
+     cgsolve      :      0.24s CPU      0.26s WALL (      48 calls)
      ch_psi       :      0.23s CPU      0.24s WALL (     548 calls)
  
      ch_psi       :      0.23s CPU      0.24s WALL (     548 calls)
@@ -249,14 +249,14 @@
      fft          :      0.01s CPU      0.01s WALL (      66 calls)
      ffts         :      0.00s CPU      0.00s WALL (      18 calls)
      fftw         :      0.20s CPU      0.21s WALL (    4552 calls)
-     davcio       :      0.00s CPU      0.01s WALL (     208 calls)
+     davcio       :      0.01s CPU      0.01s WALL (     208 calls)
      write_rec    :      0.01s CPU      0.01s WALL (       7 calls)
  
  
-     PHONON       :     0.77s CPU         0.80s WALL
+     PHONON       :     0.78s CPU         0.81s WALL
 
  
-   This run was terminated on:  16:38:57  21Jul2016            
+   This run was terminated on:  11:52:49  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

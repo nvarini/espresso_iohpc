@@ -1,0 +1,158 @@
+test -d bin || mkdir bin
+( cd FFTXlib ; make TLDEPS= all || exit 1 )
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/FFTXlib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/FFTXlib'
+cd install ; make -f extlibs_makefile libelpa
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/install'
+touch fake_libelpa.a
+rm fake_libelpa.a
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/install'
+( cd LAXlib ; make TLDEPS= all || exit 1 )
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/LAXlib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/LAXlib'
+cd install ; make -f extlibs_makefile libiotk
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/install'
+if test ! -d ../S3DE; then \
+	(gzip -dc ../archive/iotk-1.2.beta.tar.gz | (cd ../; tar -xvf -)) ; \
+	if test -e Makefile_iotk; then \
+        (cp Makefile_iotk ../S3DE/iotk/src/Makefile); fi; \
+	if test -e iotk_config.h; then \
+	(cp iotk_config.h ../S3DE/iotk/include/iotk_config.h); fi; fi
+cd ../S3DE/iotk/src; make lib+util; 
+make[2]: Entering directory `/home/nvarini/espresso_hdf5/espresso/S3DE/iotk/src'
+make[2]: Nothing to be done for `lib+util'.
+make[2]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/S3DE/iotk/src'
+cd ../bin; ln -fs ../S3DE/iotk/tools/iotk .; \
+	ln -fs ../S3DE/iotk/src/iotk.x .; \
+	ln -fs ../S3DE/iotk/src/iotk_print_kinds.x .; \
+	cd ../; ln -fs S3DE/iotk iotk
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/install'
+( cd Modules ; make TLDEPS= all || exit 1 )
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/Modules'
+( if test -x ../install/update_version ; then \
+	../install/update_version; \
+	else if test ! -f version.f90 ; then \
+	cat version.f90.in > version.f90 ; fi ; fi )	
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/Modules'
+cd install ; make -f extlibs_makefile liblapack
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/install'
+touch fake_liblapack.a
+rm fake_liblapack.a
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/install'
+cd install ; make -f extlibs_makefile libblas
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/install'
+touch fake_libblas.a
+rm fake_libblas.a
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/install'
+( cd clib ; make TLDEPS= all || exit 1 )
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/clib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/clib'
+if test -d PW ; then \
+	( cd PW ; make TLDEPS= all || exit 1) ; fi
+make[1]: Entering directory `/home/nvarini/espresso_hdf5/espresso/PW'
+( cd src ; make all || exit 1 )
+make[2]: Entering directory `/home/nvarini/espresso_hdf5/espresso/PW/src'
+if test -n "" ; then \
+	( cd ../.. ; make  || exit 1 ) ; fi
+cpp -P -traditional -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5  buffers.f90 -o buffers_tmp.f90 ; \
+        mpiifort -O2 -assume byterecl -g -traceback  -nomodule -fpp -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5   -I../../iotk/src -I../../Modules -I../../FFTXlib -I../../LAXlib -c buffers_tmp.f90 -o buffers.o
+buffers_tmp.f90(557): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+--------^
+buffers_tmp.f90(568): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    TYPE(HDF5_type), OPTIONAL, INTENT(INOUT) :: hdf5desc
+---------^
+buffers_tmp.f90(592): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+--------^
+buffers_tmp.f90(597): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    type(HDF5_type), intent(inout) :: hdf5desc
+---------^
+buffers_tmp.f90(617): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe, ONLY : HDF5_type, read_data_hdf5
+--------^
+buffers_tmp.f90(619): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    type(HDF5_type), intent(inout) :: hdf5desc
+---------^
+buffers_tmp.f90(641): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,       ONLY : HDF5_type, prepare_for_reading_final, &
+--------^
+buffers_tmp.f90(652): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    TYPE(HDF5_type), OPTIONAL, INTENT(INOUT)  :: hdf5desc
+---------^
+buffers_tmp.f90(699): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [HDF5]
+    USE hdf5_qe,  ONLY : prepare_for_writing_final, HDF5_type,&
+--------^
+buffers_tmp.f90(714): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_TYPE]
+    TYPE(HDF5_type), OPTIONAL,  INTENT(INOUT) :: hdf5desc
+---------^
+buffers_tmp.f90(574): error #6406: Conflicting attributes or multiple declaration of name.   [PREPARE_FOR_WRITING_FINAL]
+       CALL prepare_for_writing_final(hdf5desc,inter_pool_comm,filename, nrec)
+------------^
+buffers_tmp.f90(575): error #6404: This name does not have a type, and must have an explicit type.   [TWFCOLLECT]
+       twf_collect = twfcollect
+---------------------^
+buffers_tmp.f90(576): error #6406: Conflicting attributes or multiple declaration of name.   [ADD_ATTRIBUTES_HDF5]
+       CALL add_attributes_hdf5(hdf5desc,twf_collect,"twfcollect",nrec)
+------------^
+buffers_tmp.f90(577): error #6406: Conflicting attributes or multiple declaration of name.   [WRITE_EVC]
+       CALL write_evc(hdf5desc,0,vect, nrec)
+------------^
+buffers_tmp.f90(578): error #6406: Conflicting attributes or multiple declaration of name.   [HDF5_CLOSE]
+       CALL hdf5_close(hdf5desc)
+------------^
+buffers_tmp.f90(550): error #6404: This name does not have a type, and must have an explicit type.   [HDF5DESC]
+  SUBROUTINE save_buffer( vect, nword, unit, nrec, filename, hdf5desc, debug )
+-------------------------------------------------------------^
+buffers_tmp.f90(557): error #6580: Name in only-list does not exist.   [INITIALIZE_IO_HDF5]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+-------------------------^
+buffers_tmp.f90(557): error #6580: Name in only-list does not exist.   [DEFINE_DATASET_HDF5_HYPERSLAB]
+    USE hdf5_qe,  ONLY : initialize_io_hdf5, define_dataset_hdf5_hyperslab, &
+---------------------------------------------^
+buffers_tmp.f90(558): error #6580: Name in only-list does not exist.   [WRITE_DATA_HDF5]
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+-------------------------^
+buffers_tmp.f90(558): error #6580: Name in only-list does not exist.   [HDF5_TYPE]
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+------------------------------------------^
+buffers_tmp.f90(558): error #6580: Name in only-list does not exist.   [ADD_ATTRIBUTES_HDF5]
+                         write_data_hdf5, HDF5_type, add_attributes_hdf5, &
+-----------------------------------------------------^
+buffers_tmp.f90(559): error #6580: Name in only-list does not exist.   [WRITE_EVC]
+                         write_evc, hdf5_close, prepare_for_writing_final
+-------------------------^
+buffers_tmp.f90(559): error #6580: Name in only-list does not exist.   [HDF5_CLOSE]
+                         write_evc, hdf5_close, prepare_for_writing_final
+------------------------------------^
+buffers_tmp.f90(559): error #6580: Name in only-list does not exist.   [PREPARE_FOR_WRITING_FINAL]
+                         write_evc, hdf5_close, prepare_for_writing_final
+------------------------------------------------^
+buffers_tmp.f90(560): error #6580: Name in only-list does not exist.   [TWFCOLLECT]
+    USE control_flags, ONLY : twfcollect
+------------------------------^
+buffers_tmp.f90(561): error #6580: Name in only-list does not exist.   [INTER_POOL_COMM]
+    USE mp_pools,      ONLY : inter_pool_comm
+------------------------------^
+buffers_tmp.f90(562): error #6580: Name in only-list does not exist.   [MPIME]
+    USE mp_world,      ONLY : mpime
+------------------------------^
+buffers_tmp.f90(608): error #6404: This name does not have a type, and must have an explicit type.   [HDF5DESC]
+    CALL initialize_io_hdf5( hdf5desc,inter_pool_comm, data,flag,kpoint)
+-----------------------------^
+buffers_tmp.f90(608): error #6404: This name does not have a type, and must have an explicit type.   [INTER_POOL_COMM]
+    CALL initialize_io_hdf5( hdf5desc,inter_pool_comm, data,flag,kpoint)
+--------------------------------------^
+buffers_tmp.f90(612): error #6460: This is not a field name that is defined in the encompassing structure.   [FILE_ID]
+    CALL h5fclose_f(hdf5desc%file_id,error)
+-----------------------------^
+/tmp/ifortqEO8Vn.i90(765): catastrophic error: Too many errors, exiting
+compilation aborted for buffers_tmp.f90 (code 1)
+make[2]: *** [buffers.o] Error 1
+make[2]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/PW/src'
+make[1]: *** [pw] Error 1
+make[1]: Leaving directory `/home/nvarini/espresso_hdf5/espresso/PW'
+make: *** [pw] Error 1

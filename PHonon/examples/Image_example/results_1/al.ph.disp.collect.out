@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16:34:31 
+     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:48:21 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -121,7 +121,7 @@
      Representation     1      3 modes -T_1u G_15  G_4-  Done
 
 
-     PHONON       :     3.32s CPU         3.34s WALL
+     PHONON       :     3.44s CPU         3.45s WALL
 
  
      Number of q in the star =    1
@@ -767,7 +767,7 @@ Possibly too few bands at point  240  -0.25000  -0.75000   0.00000
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     3.33s CPU         3.36s WALL
+     PHONON       :     3.45s CPU         3.47s WALL
 
  
      Number of q in the star =    8
@@ -1201,7 +1201,7 @@ Possibly too few bands at point  130  -0.25000  -0.50000   1.00000
      Representation     2      2 modes -E_u  L_3'  Done
 
 
-     PHONON       :     3.35s CPU         3.38s WALL
+     PHONON       :     3.47s CPU         3.49s WALL
 
  
      Number of q in the star =    4
@@ -1771,7 +1771,7 @@ Possibly too few bands at point  200   0.00000   0.00000  -1.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     3.37s CPU         3.40s WALL
+     PHONON       :     3.48s CPU         3.50s WALL
 
  
      Number of q in the star =    6
@@ -3097,7 +3097,7 @@ Possibly too few bands at point  576   0.75000  -0.75000  -0.25000
      Representation     3      1 modes -A''  Done
 
 
-     PHONON       :     3.39s CPU         3.42s WALL
+     PHONON       :     3.50s CPU         3.53s WALL
 
  
      Number of q in the star =   24
@@ -3946,7 +3946,7 @@ Possibly too few bands at point  328   0.50000  -0.50000  -0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     3.41s CPU         3.44s WALL
+     PHONON       :     3.52s CPU         3.55s WALL
 
  
      Number of q in the star =   12
@@ -4361,7 +4361,7 @@ Possibly too few bands at point  118   0.00000  -1.50000  -1.00000
      Representation     2      2 modes -E_u  X_5' M_5'  Done
 
 
-     PHONON       :     3.43s CPU         3.46s WALL
+     PHONON       :     3.54s CPU         3.56s WALL
 
  
      Number of q in the star =    3
@@ -4878,7 +4878,7 @@ Possibly too few bands at point  174  -0.50000  -2.00000  -0.50000
      Representation     2      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     3.44s CPU         3.47s WALL
+     PHONON       :     3.55s CPU         3.58s WALL
 
  
      Number of q in the star =    6
@@ -4928,13 +4928,13 @@ Possibly too few bands at point  174  -0.50000  -2.00000  -0.50000
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      24 calls)
  
-     PHONON       :     3.44s CPU         3.48s WALL
+     PHONON       :     3.55s CPU         3.58s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.03s CPU      0.03s WALL (       8 calls)
  
      init_vloc    :      0.00s CPU      0.00s WALL (       8 calls)
-     init_us_1    :      0.02s CPU      0.02s WALL (       8 calls)
+     init_us_1    :      0.01s CPU      0.02s WALL (       8 calls)
  
      DYNAMICAL MATRIX:
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
@@ -4957,10 +4957,10 @@ Possibly too few bands at point  174  -0.50000  -2.00000  -0.50000
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
  
  
-     PHONON       :     3.44s CPU         3.48s WALL
+     PHONON       :     3.55s CPU         3.58s WALL
 
  
-   This run was terminated on:  16:34:35  21Jul2016            
+   This run was terminated on:  11:48:25  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

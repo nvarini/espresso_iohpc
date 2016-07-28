@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12590M) starts on 21Jul2016 at 16: 7:38 
+     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:21:36 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -12,10 +12,10 @@
            ARCH :    x86_64
              CC :    icc
             CPP :    cpp
-            F90 :    gfortran
-            F77 :    gfortran
-         DFLAGS :    -D__GFORTRAN -D__STD_F95 -D__DFTI -D__MPI -D__PARA -D__HDF5
-      BLAS LIBS :    -lmkl_gf_lp64  -lmkl_sequential -lmkl_core
+            F90 :    ifort
+            F77 :    ifort
+         DFLAGS :    -D__INTEL -D__FFTW -D__MPI -D__PARA -D__HDF5
+      BLAS LIBS :    -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
     LAPACK LIBS :    
        FFT LIBS :    
       MASS LIBS :    
@@ -328,7 +328,7 @@
      Writing output data file aluminum.save
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      0.23s CPU      0.24s WALL (       1 calls)
+     electrons    :      0.22s CPU      0.24s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
@@ -347,7 +347,7 @@
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.13s CPU      0.14s WALL (     465 calls)
+     h_psi        :      0.12s CPU      0.14s WALL (     465 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     291 calls)
      cdiaghg      :      0.05s CPU      0.05s WALL (     407 calls)
 
@@ -357,15 +357,15 @@
      General routines
      calbec       :      0.00s CPU      0.01s WALL (     465 calls)
      fft          :      0.00s CPU      0.00s WALL (      21 calls)
-     fftw         :      0.13s CPU      0.14s WALL (    5500 calls)
+     fftw         :      0.12s CPU      0.14s WALL (    5500 calls)
  
      Parallel routines
      fft_scatter  :      0.03s CPU      0.03s WALL (    5521 calls)
  
-     PWSCF        :     0.37s CPU         0.40s WALL
+     PWSCF        :     0.35s CPU         0.41s WALL
 
  
-   This run was terminated on:  16: 7:39  21Jul2016            
+   This run was terminated on:  11:21:37  28Jul2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
