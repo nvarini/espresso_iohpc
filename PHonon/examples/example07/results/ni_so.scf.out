@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:13:13 
+     Program PWSCF v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 10:39:22 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -192,20 +192,20 @@
      Davidson diagonalization with overlap
      ethr =  6.03E-03,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        2.1 secs
 
      total energy              =     -90.54628260 Ry
      Harris-Foulkes estimate   =     -90.84925483 Ry
      estimated scf accuracy    <       0.82502622 Ry
 
-     total magnetization       =     0.69     0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.74 Bohr mag/cell
 
      iteration #  3     ecut=    27.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  6.03E-03,  avg # of iterations =  1.1
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        2.6 secs
 
      total energy              =     -90.68987871 Ry
      Harris-Foulkes estimate   =     -90.67048568 Ry
@@ -237,7 +237,7 @@
      Harris-Foulkes estimate   =     -90.69766446 Ry
      estimated scf accuracy    <       0.00009821 Ry
 
-     total magnetization       =     0.69    -0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.79 Bohr mag/cell
 
      iteration #  6     ecut=    27.00 Ry     beta=0.70
@@ -250,7 +250,7 @@
      Harris-Foulkes estimate   =     -90.69769579 Ry
      estimated scf accuracy    <       0.00001396 Ry
 
-     total magnetization       =     0.69    -0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      iteration #  7     ecut=    27.00 Ry     beta=0.70
@@ -263,7 +263,7 @@
      Harris-Foulkes estimate   =     -90.69769967 Ry
      estimated scf accuracy    <       0.00000229 Ry
 
-     total magnetization       =     0.69     0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      iteration #  8     ecut=    27.00 Ry     beta=0.70
@@ -276,33 +276,33 @@
      Harris-Foulkes estimate   =     -90.69770103 Ry
      estimated scf accuracy    <       0.00000003 Ry
 
-     total magnetization       =     0.69    -0.00    -0.00 Bohr mag/cell
+     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      iteration #  9     ecut=    27.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  3.41E-10,  avg # of iterations =  2.3
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        5.8 secs
 
      total energy              =     -90.69770109 Ry
      Harris-Foulkes estimate   =     -90.69770108 Ry
      estimated scf accuracy    <          1.2E-09 Ry
 
-     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
+     total magnetization       =     0.69    -0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      iteration # 10     ecut=    27.00 Ry     beta=0.70
      Davidson diagonalization with overlap
      ethr =  1.19E-11,  avg # of iterations =  1.6
 
-     total cpu time spent up to now is        6.2 secs
+     total cpu time spent up to now is        6.3 secs
 
      total energy              =     -90.69770109 Ry
      Harris-Foulkes estimate   =     -90.69770109 Ry
      estimated scf accuracy    <          4.5E-11 Ry
 
-     total magnetization       =     0.69     0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69     0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      iteration # 11     ecut=    27.00 Ry     beta=0.70
@@ -315,7 +315,7 @@
      Harris-Foulkes estimate   =     -90.69770109 Ry
      estimated scf accuracy    <          2.6E-11 Ry
 
-     total magnetization       =     0.69     0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69    -0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      iteration # 12     ecut=    27.00 Ry     beta=0.70
@@ -325,8 +325,8 @@
  ==============================================================================
      atom number    1 relative position :    0.0000   0.0000   0.0000
      charge :     8.738099
-     magnetization :          0.729238   -0.000000    0.000000
-     magnetization/charge:    0.083455   -0.000000    0.000000
+     magnetization :          0.729238   -0.000000   -0.000000
+     magnetization/charge:    0.083455   -0.000000   -0.000000
      polar coord.: r, theta, phi [deg] :     0.729238   90.000000    0.000000
 
  ==============================================================================
@@ -469,7 +469,7 @@
      ewald contribution        =     -68.94529435 Ry
      smearing contrib. (-TS)   =      -0.00020127 Ry
 
-     total magnetization       =     0.69    -0.00     0.00 Bohr mag/cell
+     total magnetization       =     0.69    -0.00    -0.00 Bohr mag/cell
      absolute magnetization    =     0.78 Bohr mag/cell
 
      convergence has been achieved in  12 iterations
@@ -482,52 +482,52 @@
 
      Writing output data file ni_so.save
  
-     init_run     :      0.65s CPU      0.66s WALL (       1 calls)
-     electrons    :      6.39s CPU      6.49s WALL (       1 calls)
+     init_run     :      0.65s CPU      0.67s WALL (       1 calls)
+     electrons    :      6.39s CPU      6.55s WALL (       1 calls)
      forces       :      0.14s CPU      0.14s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      0.07s CPU      0.07s WALL (       1 calls)
+     wfcinit      :      0.07s CPU      0.08s WALL (       1 calls)
      potinit      :      0.02s CPU      0.02s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      2.76s CPU      2.82s WALL (      12 calls)
-     sum_band     :      2.45s CPU      2.48s WALL (      12 calls)
+     c_bands      :      2.75s CPU      2.86s WALL (      12 calls)
+     sum_band     :      2.45s CPU      2.49s WALL (      12 calls)
      v_of_rho     :      0.23s CPU      0.23s WALL (      13 calls)
-     newd         :      1.00s CPU      1.01s WALL (      13 calls)
+     newd         :      1.01s CPU      1.02s WALL (      13 calls)
      mix_rho      :      0.02s CPU      0.03s WALL (      12 calls)
 
      Called by c_bands:
      init_us_2    :      0.03s CPU      0.03s WALL (     520 calls)
-     cegterg      :      2.41s CPU      2.46s WALL (     240 calls)
+     cegterg      :      2.40s CPU      2.50s WALL (     240 calls)
 
      Called by sum_band:
      sum_band:bec :      0.53s CPU      0.53s WALL (     240 calls)
-     addusdens    :      1.43s CPU      1.45s WALL (      12 calls)
+     addusdens    :      1.43s CPU      1.46s WALL (      12 calls)
 
      Called by *egterg:
-     h_psi        :      1.66s CPU      1.70s WALL (     739 calls)
+     h_psi        :      1.67s CPU      1.73s WALL (     739 calls)
      s_psi        :      0.12s CPU      0.11s WALL (     739 calls)
      g_psi        :      0.01s CPU      0.01s WALL (     479 calls)
-     cdiaghg      :      0.49s CPU      0.49s WALL (     719 calls)
+     cdiaghg      :      0.48s CPU      0.49s WALL (     719 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.12s CPU      0.11s WALL (     739 calls)
+     add_vuspsi   :      0.11s CPU      0.12s WALL (     739 calls)
 
      General routines
-     calbec       :      0.11s CPU      0.09s WALL (    1059 calls)
-     fft          :      0.15s CPU      0.15s WALL (     638 calls)
+     calbec       :      0.10s CPU      0.09s WALL (    1059 calls)
+     fft          :      0.12s CPU      0.12s WALL (     638 calls)
      ffts         :      0.00s CPU      0.00s WALL (     100 calls)
-     fftw         :      1.26s CPU      1.39s WALL (   48888 calls)
-     interpolate  :      0.02s CPU      0.02s WALL (     100 calls)
+     fftw         :      1.28s CPU      1.41s WALL (   48888 calls)
+     interpolate  :      0.02s CPU      0.03s WALL (     100 calls)
  
      Parallel routines
-     fft_scatter  :      0.33s CPU      0.47s WALL (   49626 calls)
+     fft_scatter  :      0.35s CPU      0.45s WALL (   49626 calls)
  
-     PWSCF        :     7.38s CPU         7.51s WALL
+     PWSCF        :     7.38s CPU         7.58s WALL
 
  
-   This run was terminated on:  11:13:21  28Jul2016            
+   This run was terminated on:  10:39:30   3Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

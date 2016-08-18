@@ -9,8 +9,8 @@
   !                                                                            
   ! 
   !-----------------------------------------------------------------------
-  SUBROUTINE ephbloch2wane ( nbnd, nbndsub, nks, nkstot, lgamma, xk, &
-       cu, cuq, lwin, lwinq, epmatk, nrr, irvec, wslen, epmatw)
+  SUBROUTINE ephbloch2wane ( nbnd, nbndsub, nks, nkstot, xk, &
+       cu, cuq, epmatk, nrr, irvec, wslen, epmatw)
   !-----------------------------------------------------------------------
   !!
   !!  From the electron-phonon matrix elements in Bloch representation (coarse 
@@ -23,12 +23,10 @@
   USE pwcom,     ONLY : at, bg, celldm
   USE constants_epw, ONLY : bohr2ang, twopi, ci, czero, cone
   USE io_epw,    ONLY : iuwane
-#ifdef __PARA
   USE io_global, ONLY : ionode_id
-  USE mp_global, ONLY : inter_pool_comm,my_pool_id
+  USE mp_global, ONLY : inter_pool_comm
   USE mp       , ONLY : mp_sum 
   USE mp_world,  ONLY : mpime
-#endif
   implicit none
   !
   !  input variables
@@ -45,13 +43,6 @@
   !! Number of kpoint blocks, total
   INTEGER, INTENT (in) :: irvec (3, nrr)
   !! Number of WS points and coordinates
-  !
-  LOGICAL, INTENT (in) :: lgamma
-  !! True if we are working with q=0
-  LOGICAL, INTENT (in) :: lwin( nbnd, nks )
-  !! Identify bands within outer energy window (for disentanglement)
-  LOGICAL, INTENT (in) :: lwinq( nbnd, nks )
-  !! Identify bands within outer energy window (for disentanglement)
   !
   REAL(kind=DP), INTENT (in) :: xk (3, nks)
   !! kpoint coordinates (cartesian in units of 2piba)
@@ -136,9 +127,7 @@
      !
   ENDDO
   !
-#ifdef __PARA
   CALL mp_sum(epmatw,inter_pool_comm)  
-#endif
   !
   ! bring xk back into cart coord
   !
@@ -149,21 +138,17 @@
   !  the unit in r-space is angstrom, and I am plotting 
   !  the matrix for the first mode only
   !
-#ifdef __PARA
-    IF (mpime.eq.ionode_id) THEN
-#endif
-      OPEN (unit=iuwane,file='decay.epwane')
-      WRITE(iuwane, '(a)') '# Spatial decay of e-p matrix elements in Wannier basis'
-      DO ir = 1, nrr
-        ! 
-        tmp =  maxval ( abs(epmatw(:,:,ir)) ) 
-        WRITE(iuwane, *) wslen(ir) * celldm (1) * bohr2ang, tmp
-        !
-      ENDDO
-      CLOSE(iuwane)
-#ifdef __PARA
-    ENDIF
-#endif
+  IF (mpime.eq.ionode_id) THEN
+    OPEN (unit=iuwane,file='decay.epwane')
+    WRITE(iuwane, '(a)') '# Spatial decay of e-p matrix elements in Wannier basis'
+    DO ir = 1, nrr
+      ! 
+      tmp =  maxval ( abs(epmatw(:,:,ir)) ) 
+      WRITE(iuwane, *) wslen(ir) * celldm (1) * bohr2ang, tmp
+      !
+    ENDDO
+    CLOSE(iuwane)
+  ENDIF
   !
   CALL stop_clock ( 'ep: step 2' )
   !

@@ -19,13 +19,11 @@
   !!
   !-----------------------------------------------------------------------
   !
-#ifdef __PARA
   USE mp_global,     ONLY : my_pool_id, inter_pool_comm, root_pool, &
                             intra_pool_comm,npool
-  USE mp_world,      ONLY : mpime, root
+  USE mp_world,      ONLY : mpime
   USE mp,            ONLY : mp_barrier, mp_bcast
   USE io_global,     ONLY : ionode_id
-#endif
   USE us,            ONLY : nqxq, dq, qrad
   USE gvect,         ONLY : gcutm
   USE cellmd,        ONLY : cell_factor
@@ -37,10 +35,10 @@
   USE io_global,     ONLY : stdout, ionode
   USE io_epw,        ONLY : iuepb 
   USE kinds,         ONLY : DP
-  USE pwcom,         ONLY : et, xk, ibrav, igk, nks, nbnd, nkstot, ngm
+  USE pwcom,         ONLY : et, xk, nks, nbnd, nkstot, ngm
   USE cell_base,     ONLY : at, bg
-  USE symm_base,     ONLY : irt, s, nsym, ftau, sname, invs, &
-                            s_axis_to_cart, sr, nrot, copy_sym, set_sym_bl, find_sym, inverse_s
+  USE symm_base,     ONLY : irt, s, nsym, ftau, sname, invs, s_axis_to_cart,&
+                            sr, nrot, copy_sym, set_sym_bl, find_sym, inverse_s
   USE start_k,       ONLY : nk1, nk2, nk3
   USE phcom,         ONLY : dpsi, dvpsi, evq, nq1, nq3, nq2 
   USE qpoint,        ONLY : igkq
@@ -48,10 +46,8 @@
   USE qpoint,        ONLY : xq
   USE modes,         ONLY : nmodes
   USE lr_symm_base,  ONLY : minus_q, rtau, gi, gimq, irotmq, nsymq, invsymq
-  USE epwcom,        ONLY : epbread, epbwrite, epwread, phinterp, &
-                            phonselfen, elecselfen, nbndsub, elinterp,    &
-                            iswitch, kmaps, nest_fn, eig_read, &
-                            band_plot, specfun, dvscf_dir, lpolar
+  USE epwcom,        ONLY : epbread, epbwrite, epwread,  &
+                            nbndsub, iswitch, kmaps, eig_read, dvscf_dir, lpolar
   USE elph2,         ONLY : epmatq, dynq, sumr, et_all, xk_all, et_mb, et_ks, &
                             zstar, epsi, cu, cuq, lwin, lwinq, bmat, igk_k_all, &
                             ngk_all
@@ -73,10 +69,8 @@
   !! Name of the directory
   character (len=256) :: filename
   !! Name of the file
-#ifdef __PARA
   character (len=3) :: filelab
   !! Append the number of the core that works on that file
-#endif
   character(len=6), external :: int_to_char
   !! Transfor an int to a character
   logical :: sym(48)
@@ -191,33 +185,23 @@
   !
   CALL start_clock ( 'elphon_wrap' )
   !
-  IF ( elinterp .and. (.not.phinterp ) ) CALL errore &
-        ('elphon_shuffle_wrap','elinterp requires phinterp' ,1)
+  IF (lgamma) CALL errore('elphon_shuffle_wrap','EPW does not support Gamma only calculation ',1)
   !
   ! READ qpoint list from stdin
   !
-#ifdef __PARA
-  IF (mpime.eq.ionode_id) &
-#endif
-  READ(5,*) nqc_irr
-#ifdef __PARA
+  IF (mpime.eq.ionode_id) READ(5,*) nqc_irr
   CALL mp_bcast (nqc_irr, ionode_id, inter_pool_comm)
   CALL mp_bcast (nqc_irr, root_pool, intra_pool_comm)
-#endif
   allocate ( xqc_irr(3,nqc_irr), wqlist_irr(nqc_irr) )
   allocate ( xqc(3,nq1*nq2*nq3), wqlist(nq1*nq2*nq3) )
   !  
-#ifdef __PARA
   IF (mpime.eq.ionode_id) then
-#endif
     DO iq = 1, nqc_irr
       READ (5,*) xqc_irr (:,iq), wqlist_irr (iq)
     ENDDO
-#ifdef __PARA
   ENDIF
   CALL mp_bcast (xqc_irr, ionode_id, inter_pool_comm)
   CALL mp_bcast (xqc_irr, root_pool, intra_pool_comm)
-#endif
   !
   ! fix for uspp
   maxvalue = nqxq
@@ -241,35 +225,31 @@
   et_ks(:,:) = 0.d0
   et_mb(:,:) = 0.d0
   IF (eig_read) then
-#ifdef __PARA
-  IF (mpime.eq.ionode_id) then
-#endif
-   WRITE (stdout,'(5x,a,i5,a,i5,a)') "Reading external electronic eigenvalues (", &
-        nbnd, ",", nkstot,")"
-   tempfile=trim(prefix)//'.eig'
-   OPEN(1, file=tempfile, form='formatted', action='read', iostat=ios)
-   IF (ios /= 0) CALL errore ('elphon_shuffle_wrap','error opening' // tempfile, 1)
+  IF (mpime.eq.ionode_id) THEN
+    WRITE (stdout,'(5x,a,i5,a,i5,a)') "Reading external electronic eigenvalues (", &
+         nbnd, ",", nkstot,")"
+    tempfile=trim(prefix)//'.eig'
+    OPEN(1, file=tempfile, form='formatted', action='read', iostat=ios)
+    IF (ios /= 0) CALL errore ('elphon_shuffle_wrap','error opening' // tempfile, 1)
     DO ik = 1, nkstot
-       DO ibnd = 1, nbnd
-          READ (1,*) dummy1, dummy2, et_tmp (ibnd,ik)
-          IF (dummy1.ne.ibnd) CALL errore('elphon_shuffle_wrap', "Incorrect eigenvalue file", 1)
-          IF (dummy2.ne.ik)   CALL errore('elphon_shuffle_wrap', "Incorrect eigenvalue file", 1)
-       ENDDO
+      DO ibnd = 1, nbnd
+        READ (1,*) dummy1, dummy2, et_tmp (ibnd,ik)
+        IF (dummy1.ne.ibnd) CALL errore('elphon_shuffle_wrap', "Incorrect eigenvalue file", 1)
+        IF (dummy2.ne.ik)   CALL errore('elphon_shuffle_wrap', "Incorrect eigenvalue file", 1)
+      ENDDO
     ENDDO
     CLOSE(1)
     ! from eV to Ryd
     et_tmp = et_tmp / ryd2ev
-#ifdef __PARA
     ENDIF
     CALL mp_bcast (et_tmp, ionode_id, inter_pool_comm)
     CALL mp_bcast (et_tmp, root_pool, intra_pool_comm)
-#endif
     !
     CALL ckbounds(ik_start, ik_stop)
     et_ks(:,:)  = et(:,1:nks)
     et(:,1:nks) = et_tmp(:,ik_start:ik_stop)
     et_mb(:,:)  = et(:,1:nks)
- ENDIF
+  ENDIF
   !
   ! compute coarse grid dipole matrix elements.  Very fast 
   CALL compute_pmn_para
@@ -295,14 +275,8 @@
      ! 
      WRITE (stdout, '(/5x,a)')  'Using kmap and kgmap from disk'
   ENDIF
-#ifdef __PARA
-  CALL mp_barrier(inter_pool_comm)
-#endif
-  !  if we start with a gamma point calculation, ../PW/set_kplusq.f90
-  !  is not active and the gmap has not been produced...
   !
-  IF (lgamma) CALL errore &
-    ('elphon_shuffle_wrap','tshuffle2 requires q!=0 starting nscf calculation',1)
+  CALL mp_barrier(inter_pool_comm)
   !
   !  allocate dynamical matrix and ep matrix for all q's
   !
@@ -431,25 +405,21 @@
       !
       CALL sgam_ph_new (at, bg, nsym, s, irt, tau, rtau, nat)
       !
-#ifdef __PARA
-     IF ( .not. allocated(sumr) ) allocate ( sumr(2,3,nat,3) )
-     IF (mpime.eq.ionode_id) then
-#endif
-        CALL readmat_shuffle2 ( iq_irr, nqc_irr, nq, iq_first, sxq, imq,isq,&
-                              invs, s, irt, rtau)
-#ifdef __PARA
-     ENDIF
-     CALL mp_barrier(inter_pool_comm)
-     CALL mp_barrier(intra_pool_comm)
-     CALL mp_bcast (zstar, ionode_id, inter_pool_comm)
-     CALL mp_bcast (zstar, root_pool, intra_pool_comm)
-     CALL mp_bcast (epsi, ionode_id, inter_pool_comm)
-     CALL mp_bcast (epsi, root_pool, intra_pool_comm)
-     CALL mp_bcast (dynq, ionode_id, inter_pool_comm)
-     CALL mp_bcast (dynq, root_pool, intra_pool_comm)
-     CALL mp_bcast (sumr, ionode_id, inter_pool_comm)
-     CALL mp_bcast (sumr, root_pool, intra_pool_comm)
-#endif
+      IF ( .not. allocated(sumr) ) allocate ( sumr(2,3,nat,3) )
+      IF (mpime.eq.ionode_id) THEN
+         CALL readmat_shuffle2 ( iq_irr, nqc_irr, nq, iq_first, sxq, imq,isq,&
+                               invs, s, irt, rtau)
+      ENDIF
+      CALL mp_barrier(inter_pool_comm)
+      CALL mp_barrier(intra_pool_comm)
+      CALL mp_bcast (zstar, ionode_id, inter_pool_comm)
+      CALL mp_bcast (zstar, root_pool, intra_pool_comm)
+      CALL mp_bcast (epsi, ionode_id, inter_pool_comm)
+      CALL mp_bcast (epsi, root_pool, intra_pool_comm)
+      CALL mp_bcast (dynq, ionode_id, inter_pool_comm)
+      CALL mp_bcast (dynq, root_pool, intra_pool_comm)
+      CALL mp_bcast (sumr, ionode_id, inter_pool_comm)
+      CALL mp_bcast (sumr, root_pool, intra_pool_comm)
       !
       ! now dynq is the cartesian dyn mat (NOT divided by the masses)
       !
@@ -565,7 +535,7 @@
             !
             symmo = (ftau(1,isym).eq.0 .and. ftau(2,isym).eq.0 .and. ftau(3,isym).eq.0)
             !
-            WRITE(stdout,'(3i5,2a)') iq, i, isym, nog, symmo
+            WRITE(stdout,'(3i5,L3,L3)') iq, i, isym, nog, symmo
             !
           ENDDO  
           !
@@ -609,7 +579,7 @@
         CALL loadumat ( nbnd, nbndsub, nks, nkstot, xq, cu, cuq, lwin, lwinq )
         !
         ! Calculate overlap U_k+q U_k^\dagger
-        IF (lpolar) CALL compute_bmn_para3 ( nbnd, nbndsub, nks, cu, cuq,bmat(:,:,:,nqc) )
+        IF (lpolar) CALL compute_umn_c ( nbnd, nbndsub, nks, cu, cuq, bmat(:,:,:,nqc) )
         !
         !   calculate the sandwiches
         !
@@ -619,13 +589,13 @@
         ! are equal to 5+ digits)
         ! For any volunteers, please write to giustino@civet.berkeley.edu
         !
-        CALL elphon_shuffle ( iq_irr, nqc_irr, nqc, gmapsym, eigv, isym, invs, xq0, .false. )
+        CALL elphon_shuffle ( iq_irr, nqc_irr, nqc, gmapsym, eigv, isym, xq0, .false. )
         !
         !  bring epmatq in the mode representation of iq_first, 
         !  and then in the cartesian representation of iq
         !
-        CALL rotate_eigenm ( iq_first, iq, nqc, isym, nsym, s, invs, irt, &
-           rtau, xq, isq, cz1, cz2 )
+        CALL rotate_eigenm ( iq_first, nqc, isym, s, invs, irt, &
+           rtau, xq, cz1, cz2 )
         !
         CALL rotate_epmat ( cz1, cz2, xq, nqc, lwin, lwinq )
   !DBSP
@@ -660,15 +630,15 @@
           CALL loadumat ( nbnd, nbndsub, nks, nkstot, xq, cu, cuq, lwin, lwinq )
           !
           ! Calculate overlap U_k+q U_k^\dagger
-          IF (lpolar) CALL compute_bmn_para3 ( nbnd, nbndsub, nks, cu, cuq,bmat(:,:,:,nqc) )
+          IF (lpolar) CALL compute_umn_c ( nbnd, nbndsub, nks, cu, cuq, bmat(:,:,:,nqc) )
           !
-          CALL elphon_shuffle ( iq_irr, nqc_irr, nqc, gmapsym, eigv, isym, invs, xq0, .true. )
+          CALL elphon_shuffle ( iq_irr, nqc_irr, nqc, gmapsym, eigv, isym, xq0, .true. )
           !
           !  bring epmatq in the mode representation of iq_first, 
           !  and then in the cartesian representation of iq
           !
-          CALL rotate_eigenm ( iq_first, iq, nqc, isym, nsym, s, invs, irt, &
-             rtau, xq, isq, cz1, cz2 )
+          CALL rotate_eigenm ( iq_first, nqc, isym, s, invs, irt, &
+             rtau, xq, cz1, cz2 )
           !
           CALL rotate_epmat ( cz1, cz2, xq, nqc, lwin, lwinq )
           !
@@ -701,28 +671,26 @@
     ! in .epb files (one for each pool)
     !
     tempfile = trim(tmp_dir) // trim(prefix) // '.epb' 
-#ifdef __PARA
-     CALL set_ndnmbr (0,my_pool_id+1,1,npool,filelab)
-     tempfile = trim(tmp_dir) // trim(prefix) // '.epb' // filelab
-#endif
-     !
-     IF (epbread)  THEN
-        inquire(file = tempfile, exist=exst)
-        IF (.not. exst ) CALL errore( 'elphon_shuffle_wrap', 'epb files not found ', 1)
-        OPEN  (iuepb, file = tempfile, form = 'unformatted')
-        WRITE(stdout,'(/5x,"Reading epmatq from .epb files"/)') 
-        READ  (iuepb) nqc, xqc, et, dynq, epmatq, zstar, epsi
-        CLOSE (iuepb)
-        WRITE(stdout,'(/5x,"The .epb files have been correctly read"/)')
-     ENDIF
-     !
-     IF (epbwrite) THEN
-        OPEN  (iuepb, file = tempfile, form = 'unformatted')
-        WRITE(stdout,'(/5x,"Writing epmatq on .epb files"/)') 
-        WRITE (iuepb) nqc, xqc, et, dynq, epmatq, zstar, epsi
-        CLOSE (iuepb)
-        WRITE(stdout,'(/5x,"The .epb files have been correctly written"/)')
-     ENDIF
+    CALL set_ndnmbr (0,my_pool_id+1,1,npool,filelab)
+    tempfile = trim(tmp_dir) // trim(prefix) // '.epb' // filelab
+    !
+    IF (epbread)  THEN
+       inquire(file = tempfile, exist=exst)
+       IF (.not. exst ) CALL errore( 'elphon_shuffle_wrap', 'epb files not found ', 1)
+       OPEN  (iuepb, file = tempfile, form = 'unformatted')
+       WRITE(stdout,'(/5x,"Reading epmatq from .epb files"/)') 
+       READ  (iuepb) nqc, xqc, et, dynq, epmatq, zstar, epsi
+       CLOSE (iuepb)
+       WRITE(stdout,'(/5x,"The .epb files have been correctly read"/)')
+    ENDIF
+    !
+    IF (epbwrite) THEN
+       OPEN  (iuepb, file = tempfile, form = 'unformatted')
+       WRITE(stdout,'(/5x,"Writing epmatq on .epb files"/)') 
+       WRITE (iuepb) nqc, xqc, et, dynq, epmatq, zstar, epsi
+       CLOSE (iuepb)
+       WRITE(stdout,'(/5x,"The .epb files have been correctly written"/)')
+    ENDIF
   ENDIF
   !
   IF ( .not.epbread .and. epwread ) THEN
@@ -733,10 +701,7 @@
   !
   ENDIF
   !
-  !
-#ifdef __PARA
   CALL mp_barrier(inter_pool_comm)
-#endif
   !
   !   now dynq is the cartesian dyn mat ( NOT divided by the masses)
   !   and epmatq is the epmat in cartesian representation (rotation in elphon_shuffle)
@@ -747,7 +712,6 @@
   IF ( ASSOCIATED (evq)  )     NULLIFY    (evq)
   IF ( ALLOCATED  (evc)  )     DEALLOCATE (evc)
   IF ( ASSOCIATED (igkq) )     NULLIFY    (igkq)
-  IF ( ALLOCATED  (igk)  )     DEALLOCATE (igk)
   IF ( ALLOCATED  (dvpsi))     DEALLOCATE (dvpsi)
   IF ( ALLOCATED  (dpsi) )     DEALLOCATE (dpsi)
   IF ( ALLOCATED  (sumr) )     DEALLOCATE (sumr)

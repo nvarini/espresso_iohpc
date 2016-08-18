@@ -14,7 +14,7 @@ MODULE fft_custom_gwl
   USE kinds, ONLY: DP
   USE parallel_include
   
-  USE fft_types, ONLY: fft_dlay_descriptor
+  USE fft_types, ONLY: fft_type_descriptor
   
   IMPLICIT NONE
 
@@ -24,7 +24,7 @@ MODULE fft_custom_gwl
         ! ... about fft data distribution for a given
         ! ... potential grid, and its wave functions sub-grid.
 
-     TYPE ( fft_dlay_descriptor ) :: dfftt ! descriptor for custom grim
+     TYPE ( fft_type_descriptor ) :: dfftt ! descriptor for custom grim
   
      REAL(kind=DP) :: ecutt!custom cutoff in rydberg
      REAL(kind=DP) :: dual_t!dual facor
@@ -177,7 +177,7 @@ CONTAINS
   USE mp_world,   ONLY : world_comm, nproc
   USE stick_base
   USE fft_support, ONLY : good_fft_dimension
-  USE fft_types,  ONLY : fft_dlay_allocate, fft_dlay_set, fft_dlay_scalar, fft_dlay_set_dims
+  USE fft_types,  ONLY : fft_type_allocate, fft_type_set, fft_type_scalar
   !
   !
   IMPLICIT NONE
@@ -191,7 +191,7 @@ CONTAINS
   REAL(DP) :: amod
   ! modulus of G vectors
 
-  INTEGER, ALLOCATABLE :: stw(:,:)
+  INTEGER, ALLOCATABLE :: stw(:,:), index_map(:,:)
   ! sticks maps
 
   INTEGER :: ub(3), lb(3)
@@ -203,14 +203,14 @@ CONTAINS
   INTEGER  :: ncplane, nxx
   INTEGER  :: ncplanes, nxxs
 
-#ifdef __MPI
-  INTEGER, ALLOCATABLE :: st(:,:), sts(:,:)
+  INTEGER, ALLOCATABLE :: st(:,:), sts(:,:), stown(:,:)
   ! sticks maps
 
   INTEGER, ALLOCATABLE :: ngc (:), ngcs (:), ngkc (:)
   INTEGER  ::  ncp (nproc), nct, nkcp (nproc), ncts, ncps(nproc)
   INTEGER  ::  ngp (nproc), ngps(nproc), ngkp (nproc), ncp_(nproc),&
-       i, j, jj, idum
+       i, j, jj, idum, ic, ngw, ngs, ngm
+#ifdef __MPI
 
   !      nxx              !  local fft data dim
   !      ncplane,        &!  number of columns in a plane
@@ -271,7 +271,11 @@ CONTAINS
   ALLOCATE( stw ( lb(1) : ub(1), lb(2) : ub(2) ) )
   ALLOCATE( st  ( lb(1) : ub(1), lb(2) : ub(2) ) )
   ALLOCATE( sts ( lb(1) : ub(1), lb(2) : ub(2) ) )
+  ALLOCATE( index_map ( lb(1) : ub(1), lb(2) : ub(2) ) )
+  ALLOCATE( stown ( lb(1) : ub(1), lb(2) : ub(2) ) )
 
+  index_map = 0
+  stown = 0
  !
 ! ...     Fill in the stick maps, for given g-space base (b1,b2,b3)
 ! ...     and cut-offs
@@ -280,8 +284,9 @@ CONTAINS
 !
 
 
-  CALL sticks_maps( tk, ub, lb, fc%bg_t(:,1), fc%bg_t(:,2), fc%bg_t(:,3), fc%gcutmt, gkcut, fc%gcutmt, st, &
-       &stw, sts ,me_pool,nproc_pool,intra_pool_comm)
+  CALL sticks_map_set( (.not.tk), ub, lb, fc%bg_t, fc%gcutmt, st, intra_pool_comm)
+  CALL sticks_map_set( (.not.tk), ub, lb, fc%bg_t, gkcut, stw, intra_pool_comm)
+  CALL sticks_map_set( (.not.tk), ub, lb, fc%bg_t, fc%gcutmt, sts , intra_pool_comm)
     
   nct  = count( st  > 0 )
   ncts = count( sts > 0 )
@@ -305,6 +310,7 @@ CONTAINS
   ALLOCATE( in1( nct ), in2( nct ) )
   ALLOCATE( ngc( nct ), ngcs( nct ), ngkc( nct ) )
   ALLOCATE( idx( nct ) )
+  idx = 0
 
 !
 ! ...     initialize the sticks indexes array ist
@@ -312,18 +318,49 @@ CONTAINS
 ! ...     ncts counts columns contaning G-vectors for the smooth grid
 !
 
+  CALL sticks_map_index( ub, lb, st, in1, in2, ngc, index_map )
+  CALL sticks_map_index( ub, lb, stw, in1, in2, ngkc, index_map )
+  CALL sticks_map_index( ub, lb, sts, in1, in2, ngcs, index_map )
 
-  CALL sticks_countg( tk, ub, lb, st, stw, sts, in1, in2, ngc, ngkc, ngcs )
+  idx = 0
 
-  CALL sticks_sort( ngc, ngkc, ngcs, nct, idx ,nproc_pool)
+  CALL sticks_sort_new( nproc_pool>1, ngkc, nct, idx )
+  CALL sticks_sort_new( nproc_pool>1, ngcs, nct, idx )
+  CALL sticks_sort_new( nproc_pool>1, ngc, nct, idx )
 
-  CALL sticks_dist( tk, ub, lb, idx, in1, in2, ngc, ngkc, ngcs, nct, &
-          ncp, nkcp, ncps, ngp, ngkp, ngps, st, stw, sts , me_pool, nproc_pool)
-
-  CALL sticks_pairup( tk, ub, lb, idx, in1, in2, ngc, ngkc, ngcs, nct, &
-          ncp, nkcp, ncps, ngp, ngkp, ngps, st, stw, sts ,nproc_pool)
-
-
+  CALL sticks_dist_new( (.not.tk), me_pool, nproc_pool, ub, lb, idx, &
+                         in1, in2, ngkc, SIZE(idx), nkcp, ngkp, stown, ngw )
+  stw = 0
+  DO ic = 1, SIZE( idx )
+     IF( idx( ic ) > 0 ) THEN
+        IF( ngkc( idx( ic ) ) > 0 ) THEN
+           stw( in1(idx( ic )), in2(idx( ic )) ) = stown( in1(idx( ic )),in2(idx( ic )))
+           if(.not.tk) stw(-in1(idx(ic)),-in2(idx( ic ))) = stown( in1(idx( ic )),in2(idx( ic )))
+        END IF
+     END IF
+  END DO
+  CALL sticks_dist_new( (.not.tk), me_pool, nproc_pool, ub, lb, idx, &
+                         in1, in2, ngcs, SIZE(idx), ncps, ngps, stown, ngs )
+  sts = 0
+  DO ic = 1, SIZE( idx )
+     IF( idx( ic ) > 0 ) THEN
+        IF( ngkc( idx( ic ) ) > 0 ) THEN
+           sts( in1(idx( ic )), in2(idx( ic )) ) = stown( in1(idx( ic )),in2(idx( ic )))
+           if(.not.tk) sts(-in1(idx(ic)),-in2(idx( ic ))) = stown( in1(idx( ic )),in2(idx( ic )))
+        END IF
+     END IF
+  END DO
+  CALL sticks_dist_new( (.not.tk), me_pool, nproc_pool, ub, lb, idx, &
+                         in1, in2, ngc, SIZE(idx), ncp, ngp, stown, ngm )
+  st = 0
+  DO ic = 1, SIZE( idx )
+     IF( idx( ic ) > 0 ) THEN
+        IF( ngkc( idx( ic ) ) > 0 ) THEN
+           st( in1(idx( ic )), in2(idx( ic )) ) = stown( in1(idx( ic )),in2(idx( ic )))
+           if(.not.tk) st(-in1(idx(ic)),-in2(idx( ic ))) = stown( in1(idx( ic )),in2(idx( ic )))
+        END IF
+     END IF
+  END DO
 
   !  set the total number of G vectors
 
@@ -337,14 +374,12 @@ CONTAINS
     ENDIF
   ENDIF
 
-  CALL fft_dlay_set_dims( fc%dfftt, fc%nr1t, fc%nr2t, fc%nr3t, fc%nrx1t, fc%nrx2t, fc%nrx3t )
-
-  CALL fft_dlay_allocate( fc%dfftt, me_pool,root_pool,nproc_pool,intra_pool_comm ,0 )
+  CALL fft_type_allocate( fc%dfftt, fc%at_t, fc%bg_t, fc%gcutmt, intra_pool_comm )
  
   !  here set the fft data layout structures for dense and smooth mesh,
   !  according to stick distribution
 
-  CALL fft_dlay_set( fc%dfftt, tk, nct, ub, lb, idx, in1(:), in2(:), ncp, nkcp, ngp, ngkp, st, stw)
+  CALL fft_type_set( fc%dfftt, tk, nct, ub, lb, idx, in1(:), in2(:), ncp, nkcp, ngp, ngkp, st, stw)
 
   !  if tk = .FALSE. only half reciprocal space is considered, then we
   !  need to correct the number of sticks
@@ -382,7 +417,7 @@ CONTAINS
   ENDIF
   WRITE( stdout,*)
 
-  DEALLOCATE( stw, st, sts, in1, in2, idx, ngc, ngcs, ngkc )
+  DEALLOCATE( stw, st, sts, in1, in2, idx, ngc, ngcs, ngkc, index_map, stown )
 
   !
   !   ncp0 = starting column for each processor
@@ -431,9 +466,7 @@ CONTAINS
   nxx   = fc%nrxxt
   nxxs  = fc%nrxxt
 
-  CALL fft_dlay_set_dims( fc%dfftt, fc%nr1t, fc%nr2t, fc%nr3t, fc%nrx1t, fc%nrx2t, fc%nrx3t )
-
-  CALL fft_dlay_allocate( fc%dfftt, me_pool,root_pool,nproc_pool, intra_pool_comm,0 )
+  CALL fft_type_allocate( fc%dfftt, fc%at_t, fc%bg_t, fc%gcutmt, intra_pool_comm )
 
   CALL calculate_gkcut()
 
@@ -486,7 +519,7 @@ CONTAINS
 10   CONTINUE
   ENDDO
 
-  CALL fft_dlay_scalar( fc%dfftt, ub, lb, stw )
+  CALL fft_type_scalar( fc%dfftt, ub, lb, ncp, nkcp, ngp, ngkp, stw, stw )
 
   DEALLOCATE( stw )
 
@@ -854,14 +887,14 @@ END SUBROUTINE ggent
         
 SUBROUTINE deallocate_fft_custom(fc)
 !this subroutine deallocates all the fft custom stuff
-  USE fft_types, ONLY : fft_dlay_deallocate
+  USE fft_types, ONLY : fft_type_deallocate
 
   implicit none
 
   TYPE(fft_cus) :: fc
 
   deallocate(fc%nlt,fc%nltm)
-  call fft_dlay_deallocate(fc%dfftt)
+  call fft_type_deallocate(fc%dfftt)
   deallocate(fc%ig_l2gt,fc%ggt,fc%gt)
   deallocate(fc%ig1t,fc%ig2t,fc%ig3t)
 

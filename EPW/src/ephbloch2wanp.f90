@@ -7,7 +7,7 @@
   ! present distribution, or http://www.gnu.org/copyleft.gpl.txt .             
   !                                                                            
   !--------------------------------------------------------------------------
-  SUBROUTINE ephbloch2wanp ( nbnd, nmodes, xk, nq, irvec, wslen, &
+  SUBROUTINE ephbloch2wanp ( nbnd, nmodes, xk, nq, irvec, &
     nrk, nrr, epmatwe )
   !--------------------------------------------------------------------------
   !!
@@ -21,11 +21,9 @@
   USE elph2,         ONLY : epmatwp
   USE constants_epw, ONLY : bohr2ang, twopi, ci, czero
   USE io_epw,        ONLY : iuwanep
-#ifdef __PARA
   USE io_global,     ONLY : ionode_id
   USE mp,            ONLY : mp_barrier
   USE mp_world,      ONLY : mpime
-#endif
   implicit none
   !
   !  Input variables - note irvec is dimensioned with nrr_k 
@@ -46,8 +44,6 @@
   !
   REAL(kind=DP), INTENT(in) :: xk (3, nq)
   !! Kpoint coordinates (cartesian in units of 2piba) 
-  REAL(kind=DP), INTENT(in) :: wslen (nrr)
-  !! WS vectors length (alat units)
   ! 
   COMPLEX(kind=DP), INTENT(in) :: epmatwe (nbnd, nbnd, nrk, nmodes, nq)
   !! EP matrix in electron-wannier representation and phonon bloch representation
@@ -92,9 +88,7 @@
     !
     !  we plot: R_e, R_p, max_{m,n,nu} |g(m,n,nu;R_e,R_p)|
     !
-#ifdef __PARA
     IF (mpime.eq.ionode_id) THEN
-#endif
       IF (ir.eq.1) open(unit=iuwanep,file='decay.epmat_wanep',status='unknown')
       IF (ir.eq.1) WRITE(iuwanep, '(a)') '#  R_e,    R_p, max_{m,n,nu} |g(m,n,nu;R_e,R_p)| '
       DO ire = 1, nrk
@@ -116,9 +110,7 @@
                                 len2 * celldm (1) * bohr2ang, tmp
       ENDDO
       IF (ir.eq.nrr) close(iuwanep)
-#ifdef __PARA
     ENDIF
-#endif
     !
   ENDDO
   !
@@ -130,7 +122,7 @@
   !
   ! -----------------------------------------------------------
   !--------------------------------------------------------------------------
-  SUBROUTINE ephbloch2wanp_mem ( nbnd, nmodes, xk, nq, irvec, wslen, &
+  SUBROUTINE ephbloch2wanp_mem ( nbnd, nmodes, xk, nq, irvec, &
     nrk, nrr, epmatwe )
   !--------------------------------------------------------------------------
   !
@@ -143,11 +135,9 @@
   USE pwcom,         ONLY : at, bg, celldm
   USE constants_epw, ONLY : bohr2ang, twopi, ci, czero
   USE io_epw,        ONLY : iunepmatwe, iunepmatwp, iuwanep
-#ifdef __PARA
   USE io_global,     ONLY : ionode_id
   USE mp,            ONLY : mp_barrier
   USE mp_world,      ONLY : mpime
-#endif
   implicit none
   !
   !  input variables - note irvec is dimensioned with nrr_k 
@@ -168,8 +158,6 @@
   !
   REAL(kind=DP), INTENT(in) :: xk (3, nq)
   !! Kpoint coordinates (cartesian in units of 2piba) 
-  REAL(kind=DP), INTENT(in) :: wslen (nrr)
-  !! WS vectors length (alat units)
   ! 
   COMPLEX(kind=DP), INTENT(in) :: epmatwe (nbnd, nbnd, nrk, nmodes)
   !! EP matrix in electron-wannier representation and phonon bloch representation
@@ -223,9 +211,7 @@
     !
     !  we plot: R_e, R_p, max_{m,n,nu} |g(m,n,nu;R_e,R_p)|
     !
-#ifdef __PARA
     IF (mpime.eq.ionode_id) THEN
-#endif
       IF (ir.eq.1) open(unit=iuwanep,file='decay.epmat_wanep',status='unknown')
       IF (ir.eq.1) WRITE(iuwanep, '(a)') '#  R_e,    R_p, max_{m,n,nu} |g(m,n,nu;R_e,R_p)| '
       DO ire = 1, nrk
@@ -247,9 +233,7 @@
                                 len2 * celldm (1) * bohr2ang, tmp
       ENDDO
       IF (ir.eq.nrr) close(iuwanep)
-#ifdef __PARA
     ENDIF
-#endif
     !
   ENDDO
   !

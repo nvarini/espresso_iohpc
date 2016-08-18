@@ -45,7 +45,8 @@ SUBROUTINE setup()
   USE gvecw,              ONLY : gcutw, ecutwfc
   USE fft_base,           ONLY : dfftp
   USE fft_base,           ONLY : dffts
-  USE grid_subroutines,   ONLY : realspace_grid_init
+  USE fft_types,          ONLY : fft_type_init, fft_type_allocate
+  USE fft_base,           ONLY : smap
   USE gvecs,              ONLY : doublegrid, gcutms, dual
   USE klist,              ONLY : xk, wk, nks, nelec, degauss, lgauss, &
                                  lxkcry, nkstot, &
@@ -75,6 +76,7 @@ SUBROUTINE setup()
   USE fixed_occ,          ONLY : f_inp, tfixed_occ, one_atom_occupations
   USE funct,              ONLY : set_dft_from_name
   USE mp_pools,           ONLY : kunit
+  USE mp_bands,           ONLY : intra_bgrp_comm
   USE spin_orb,           ONLY : lspinorb, domag
   USE noncollin_module,   ONLY : noncolin, npol, m_loc, i_cons, &
                                  angle1, angle2, bfield, ux, nspin_lsda, &
@@ -105,6 +107,12 @@ SUBROUTINE setup()
   TYPE(parallel_info_type),ALLOCATABLE      :: parinfo_obj
   TYPE(general_info_type),ALLOCATABLE       :: geninfo_obj
 #endif  
+#if defined(__MPI)
+  LOGICAL :: lpara = .true.
+#else
+  LOGICAL :: lpara = .false.
+#endif
+
   !
   ! ... okvan/okpaw = .TRUE. : at least one pseudopotential is US/PAW
   !
@@ -435,14 +443,8 @@ SUBROUTINE setup()
   !
   ! ... calculate dimensions of the FFT grid
   !
-  CALL realspace_grid_init ( dfftp, at, bg, gcutm )
-  IF ( gcutms == gcutm ) THEN
-     ! ... No double grid, the two grids are the same
-     dffts%nr1 = dfftp%nr1 ; dffts%nr2 = dfftp%nr2 ; dffts%nr3 = dfftp%nr3
-     dffts%nr1x= dfftp%nr1x; dffts%nr2x= dfftp%nr2x; dffts%nr3x= dfftp%nr3x
-  ELSE
-     CALL realspace_grid_init ( dffts, at, bg, gcutms)
-  END IF
+  CALL fft_type_allocate ( dfftp, at, bg, gcutm, intra_bgrp_comm )
+  CALL fft_type_allocate ( dffts, at, bg, gcutms, intra_bgrp_comm)
   !
   !  ... generate transformation matrices for the crystal point group
   !  ... First we generate all the symmetry matrices of the Bravais lattice

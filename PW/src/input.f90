@@ -5,6 +5,10 @@
 ! in the root directory of the present distribution,
 ! or http://www.gnu.org/copyleft/gpl.txt .
 !
+!----------------------------------------------------------------------------
+! TB
+! included monopole related stuff, search for 'TB'
+!----------------------------------------------------------------------------
 !
 !----------------------------------------------------------------------------
 SUBROUTINE iosys()
@@ -75,7 +79,16 @@ SUBROUTINE iosys()
                             emaxpos_  => emaxpos, &
                             eopreg_   => eopreg, &
                             eamp_     => eamp, &
-                            forcefield
+  ! TB added monopole related variables
+                            zmon_     => zmon, &
+                            monopole_ => monopole, &
+                            relaxz_   => relaxz, &
+                            block_   => block, &
+                            block_1_   => block_1, &
+                            block_2_   => block_2, &
+                            block_height_   => block_height, &
+                            forcefield, &
+                            forcemono
   !
   USE io_files,      ONLY : input_drho, output_drho, &
                             psfile, tmp_dir, wfc_dir, &
@@ -148,6 +161,7 @@ SUBROUTINE iosys()
                             lkpoint_dir_      => lkpoint_dir, &
                             tqr_              => tqr, &
                             tq_smoothing_     => tq_smoothing, &
+                            tbeta_smoothing_  => tbeta_smoothing, &
                             io_level, ethr, lscf, lbfgs, lmd, &
                             lbands, lconstrain, restart, twfcollect, &
                             llondon, do_makov_payne, lxdm, &
@@ -206,7 +220,7 @@ SUBROUTINE iosys()
                                gdir, nppstr, wf_collect,lelfield,lorbm,efield, &
                                nberrycyc, lkpoint_dir, efield_cart, lecrpa,    &
                                vdw_table_name, memory, tqmmm,                  &
-                               efield_phase
+                               efield_phase, monopole
 
   !
   ! ... SYSTEM namelist
@@ -240,13 +254,14 @@ SUBROUTINE iosys()
                                lfcpopt, lfcpdyn, fcp_mu, fcp_mass, fcp_tempw, & 
                                fcp_relax_step, fcp_relax_crit,                &
                                space_group, uniqueb, origin_choice,           &
-                               rhombohedral
+                               rhombohedral, zmon, relaxz, block, block_1,    &
+                               block_2, block_height
   !
   ! ... ELECTRONS namelist
   !
   USE input_parameters, ONLY : electron_maxstep, mixing_mode, mixing_beta, &
                                mixing_ndim, mixing_fixed_ns, conv_thr,     &
-                               tqr, tq_smoothing,                          &
+                               tqr, tq_smoothing, tbeta_smoothing,         &
                                diago_thr_init, diago_cg_maxiter,           &
                                diago_david_ndim, diagonalization,          &
                                diago_full_acc, startingwfc, startingpot,   &
@@ -484,17 +499,47 @@ SUBROUTINE iosys()
   !
   lstres = lmovecell .OR. ( tstress .and. lscf )
   !
-  IF ( tefield .and. ( .not. nosym ) ) THEN
+  ! TB
+  ! IF ( tefield .and. ( .not. nosym ) ) THEN
+  IF ( tefield .and. ( .not. nosym ) .and. ( .not. monopole)) THEN
      nosym = .true.
      WRITE( stdout, &
             '(5x,"Presently no symmetry can be used with electric field",/)' )
   ENDIF
-  IF ( tefield .and. tstress ) THEN
+  !TB begin some checks on input
+  IF ( (monopole) .AND. ( .NOT. nosym )) THEN
+     WRITE( stdout,'(/,5x,"Presently symmetry can be used with monopole field",/)' )
+     WRITE( stdout,'(5x,"setting verbosity to high",/)' )
+     WRITE( stdout,'(5x,"CAREFULLY CHECK ALL SYMMETRIES",/)' )
+     verbosity='high'
+  ENDIF
+  IF ((zmon>1.0).OR.(zmon<0.0)) &
+     CALL errore( 'iosys', 'Position of the monopole has to be between within ]0,1[' , 1 )
+  IF ( (monopole) .AND. ((tefield).OR.(dipfield)) ) THEN
+     IF (edir .ne. 3) &
+        CALL errore( 'iosys','Using monopole and tefield/dipfield, edir must be 3', 1)
+     IF ((zmon>=emaxpos).AND.(zmon<=(emaxpos+eopreg))) &
+        CALL errore( 'iosys', 'Monopole between the 2 dipole planes not allowed' , 1 )
+     IF ((block).AND.(block_1.NE.emaxpos).AND.(block_2.NE.(emaxpos+eopreg))) THEN
+        WRITE( stdout,'(/,5x,"Neither block_1=emaxpos, nor block_2=emaxpos+eopreg, CHECK IF THIS IS WHAT YOU WANT",/)' )
+        WRITE( stdout,'(/,5x,"eopreg is nevertheless used for the smooth increase of the barrier",/)' )
+  ENDIF
+  IF ( (monopole) .AND. (block) ) THEN
+     IF ((block_1<0.0) .OR. (block_1>1.0) .OR. (block_2<0.0) .OR. (block_2>1.0)) &
+        CALL errore( 'iosys', 'Both block_1, block_2 have to be between wihtin ]0,1[' , 1 )
+     IF (block_1>=block_2) &
+        CALL errore( 'iosys', 'Wrong order of block_1, block_2, should be block_1<block_2' , 1 )
+     ENDIF
+  ENDIF
+  !TB end
+  IF ( (tefield.or.monopole) .and. tstress ) THEN !TB no stress with monopole
      lstres = .false.
      WRITE( stdout, &
-            '(5x,"Presently stress not available with electric field",/)' )
+            '(5x,"Presently stress not available with electric field and monopole",/)' )
   ENDIF
-  IF ( tefield .and. ( nspin > 2 ) ) THEN
+  !TB Why no E-field with SOC?
+  !IF ( tefield .and. ( nspin > 2 ) ) THEN
+  IF ( (tefield .and. ( nspin > 2 )) .and. (.not.monopole) ) THEN
      CALL errore( 'iosys', 'LSDA not available with electric field' , 1 )
   ENDIF
   !
@@ -1088,12 +1133,22 @@ SUBROUTINE iosys()
   real_space_ = real_space
   !
   tq_smoothing_ = tq_smoothing
+  tbeta_smoothing_ = tbeta_smoothing
   !
   title_      = title
   lkpoint_dir_=lkpoint_dir
   dt_         = dt
   tefield_    = tefield
   dipfield_   = dipfield
+  !TB start
+  monopole_   = monopole
+  zmon_    = zmon
+  relaxz_  = relaxz
+  block_   = block
+  block_1_ = block_1
+  block_2_ = block_2
+  block_height_ = block_height
+  !TB end
   prefix_     = trim( prefix )
   pseudo_dir_ = trimcheck( pseudo_dir )
   nstep_      = nstep
@@ -1365,6 +1420,7 @@ SUBROUTINE iosys()
   ENDIF
   !
   IF ( tefield ) ALLOCATE( forcefield( 3, nat_ ) )
+  IF ( monopole ) ALLOCATE( forcemono( 3, nat_ ) ) !TB monopole forces
   !
   ! ... note that read_cards_pw no longer reads cards!
   !
@@ -1410,8 +1466,8 @@ SUBROUTINE iosys()
   CALL init_start_k ( nk1, nk2, nk3, k1, k2, k3, k_points, nkstot, xk, wk )
   gamma_only = ( k_points == 'gamma' )
   !
-  IF ( real_space .AND. .NOT. gamma_only ) &
-     CALL errore ('iosys', 'Real space only with Gamma point', 1)
+!  IF ( real_space .AND. .NOT. gamma_only ) &
+!     CALL errore ('iosys', 'Real space only with Gamma point', 1)
   IF ( lelfield .AND. gamma_only ) &
       CALL errore( 'iosys', 'electric fields not available for k=0 only', 1 )
   !

@@ -33,25 +33,49 @@
   USE io_global,     ONLY : stdout
   USE io_epw,        ONLY : iunepmatf, linewidth_elself
   USE phcom,         ONLY : nmodes
-  USE control_lr,    ONLY : lgamma
-  USE epwcom,        ONLY : nbndsub, lrepmatf, &
-                           fsthick, eptemp, ngaussw, degaussw, &
-                           etf_mem, eps_acustic, efermi_read, fermi_energy
+  USE epwcom,        ONLY : nbndsub, lrepmatf, shortrange, &
+                            fsthick, eptemp, ngaussw, degaussw, &
+                            etf_mem, eps_acustic, efermi_read, fermi_energy
   USE pwcom,         ONLY : ef !, nelec, isk
   USE elph2,         ONLY : etf, ibndmin, ibndmax, nkqf, &
-                            epf17, wkf, nkf, nqtotf, wf, wqf, xkf, nkqtotf, &
-                            sigmar_all, sigmai_all, sigmai_mode, zi_all, efnew, nqf
+                            nkf, epf17, wkf, nqtotf, wf, wqf, xkf, nkqtotf, &
+                            sigmar_all, sigmai_all, sigmai_mode, zi_all, efnew
   USE control_flags, ONLY : iverbosity
   USE constants_epw, ONLY : ryd2mev, one, ryd2ev, two, zero, pi, ci, eps6
-#ifdef __PARA
   USE mp,            ONLY : mp_barrier, mp_sum
-  USE mp_global,     ONLY : me_pool, inter_pool_comm, my_pool_id
-#endif
+  USE mp_global,     ONLY : inter_pool_comm
+  !
   implicit none
   !
+  INTEGER, INTENT (in) :: iq
+  !! Current q-point index 
+  !
+  ! Local variables 
   INTEGER :: n
   !! Integer for the degenerate average over eigenstates
-  integer :: ik, ikk, ikq, ibnd, jbnd, imode, nrec, iq, fermicount
+  INTEGER :: ik
+  !! Counter on the k-point index 
+  INTEGER :: ikk
+  !! k-point index
+  INTEGER :: ikq
+  !! q-point index 
+  INTEGER :: ibnd
+  !! Counter on bands
+  INTEGER :: jbnd
+  !! Counter on bands
+  INTEGER :: imode
+  !! Counter on mode
+  INTEGER :: nrec
+  !! Record index for reading the e-f matrix
+  INTEGER :: fermicount
+  !! Number of states on the Fermi surface
+  INTEGER :: nksqtotf
+  !! Total number of k+q points 
+  INTEGER :: lower_bnd
+  !! Lower bounds index after k or q paral
+  INTEGER :: upper_bnd
+  !! Upper bounds index after k or q paral
+  ! 
   REAL(kind=DP) :: tmp
   !! Temporary variable to store real part of Sigma for the degenerate average
   REAL(kind=DP) :: tmp2
@@ -66,26 +90,59 @@
   !! Temporary array to store the imag-part of Sigma 
   REAL(kind=DP) :: zi_tmp(ibndmax-ibndmin+1)
   !! Temporary array to store the Z
-
-  REAL(kind=DP) :: g2, ekk, ekq, wq, ef0, wgq, wgkq, weight, dosef, eptemp0,&
-                   w0g1, w0g2, inv_wq, inv_eptemp0, g2_tmp,&
-                   inv_degaussw
-  REAL(kind=DP), external :: efermig, dos_ef, wgauss, w0gauss
-  complex(kind=DP) epf (ibndmax-ibndmin+1, ibndmax-ibndmin+1)
-  !
-  ! variables for collecting data from all pools in parallel case 
-  !
-  integer :: nksqtotf, lower_bnd, upper_bnd
-  REAL(kind=DP), ALLOCATABLE :: xkf_all(:,:), etf_all(:,:)
-  !
-  ! loop over temperatures can be introduced
-  !
-  eptemp0 = eptemp(1)
+  REAL(kind=DP) :: g2
+  !! Electron-phonon matrix elements squared in Ry^2
+  REAL(kind=DP) :: ekk
+  !! Eigen energy on the fine grid relative to the Fermi level
+  REAL(kind=DP) :: ekq
+  !! Eigen energy of k+q on the fine grid relative to the Fermi level
+  REAL(kind=DP) :: wq
+  !! Phonon frequency on the fine grid
+  REAL(kind=DP) :: ef0
+  !! Fermi energy level
+  REAL(kind=DP) :: wgq
+  !! Bose occupation factor $n_{q\nu}(T)$
+  REAL(kind=DP) :: wgkq
+  !! Fermi-Dirac occupation factor $f_{nk+q}(T)$
+  REAL(kind=DP) :: weight
+  !! Self-energy factor 
+  !!$$ N_q \Re( \frac{f_{mk+q}(T) + n_{q\nu}(T)}{ \varepsilon_{nk} - \varepsilon_{mk+q} + \omega_{q\nu} - i\delta }) $$ 
+  !!$$ + N_q \Re( \frac{1- f_{mk+q}(T) + n_{q\nu}(T)}{ \varepsilon_{nk} - \varepsilon_{mk+q} - \omega_{q\nu} - i\delta }) $$ 
+  REAL(kind=DP) :: dosef
+  !! Density of state N(Ef)
+  REAL(kind=DP) :: w0g1
+  !! Dirac delta for the imaginary part of $\Sigma$
+  REAL(kind=DP) :: w0g2
+  !! Dirac delta for the imaginary part of $\Sigma$
+  REAL(kind=DP) :: inv_wq
+  !! $frac{1}{2\omega_{q\nu}}$ defined for efficiency reasons
+  REAL(kind=DP) :: inv_eptemp0
+  !! Inverse of temperature define for efficiency reasons
+  REAL(kind=DP) :: g2_tmp
+  !! If the phonon frequency is too small discart g
+  REAL(kind=DP) :: inv_degaussw
+  !! Inverse of the smearing for efficiency reasons
+  !REAL(kind=DP), external :: efermig
+  !! Function to compute the Fermi energy 
+  REAL(kind=DP), external :: dos_ef
+  !! Function to compute the Density of States at the Fermi level
+  REAL(kind=DP), external :: wgauss
+  !! Fermi-Dirac distribution function (when -99)
+  REAL(kind=DP), external :: w0gauss
+  !! This function computes the derivative of the Fermi-Dirac function
+  !! It is therefore an approximation for a delta function
+  REAL(kind=DP), ALLOCATABLE :: xkf_all(:,:)
+  !! Collect k-point coordinate from all pools in parallel case
+  REAL(kind=DP), ALLOCATABLE :: etf_all(:,:)
+  !! Collect eigenenergies from all pools in parallel case
+  !  
+  COMPLEX(kind=DP) epf (ibndmax-ibndmin+1, ibndmax-ibndmin+1)
+  !! Electron-phonon matrix element on the fine grid. 
   !
   ! SP: Define the inverse so that we can efficiently multiply instead of
   ! dividing
   ! 
-  inv_eptemp0 = 1.0/eptemp0
+  inv_eptemp0 = 1.0/eptemp
   inv_degaussw = 1.0/degaussw
   !
   IF ( iq .eq. 1 ) THEN
@@ -97,24 +154,24 @@
      IF ( fsthick .lt. 1.d3 ) &
         WRITE(stdout, '(/5x,a,f10.6,a)' ) 'Fermi Surface thickness = ', fsthick * ryd2ev, ' eV'
      WRITE(stdout, '(/5x,a,f10.6,a)' ) &
-           'Golden Rule strictly enforced with T = ',eptemp0 * ryd2ev, ' eV'
+           'Golden Rule strictly enforced with T = ',eptemp * ryd2ev, ' eV'
      !
   ENDIF
   !
   ! Fermi level and corresponding DOS
   !
-   IF ( efermi_read ) THEN
-      !
-      ef0 = fermi_energy
-      !
-   ELSE
-      !
-      ef0 = efnew
-      !ef0 = efermig(etf,nbndsub,nkqf,nelec,wkf,degaussw,ngaussw,0,isk)
-      ! if some bands are skipped (nbndskip.neq.0), nelec has already been recalculated 
-      ! in ephwann_shuffle
-      !
-   ENDIF
+  IF ( efermi_read ) THEN
+    !
+    ef0 = fermi_energy
+    !
+  ELSE
+    !
+    ef0 = efnew
+    !ef0 = efermig(etf,nbndsub,nkqf,nelec,wkf,degaussw,ngaussw,0,isk)
+    ! if some bands are skipped (nbndskip.neq.0), nelec has already been recalculated 
+    ! in ephwann_shuffle
+    !
+  ENDIF
   !
   dosef = dos_ef (ngaussw, degaussw, ef0, etf, wkf, nkqf, nbndsub)
   !   N(Ef) in the equation for lambda is the DOS per spin
@@ -152,13 +209,8 @@
   fermicount = 0 
   DO ik = 1, nkf
      !
-     IF (lgamma) THEN
-        ikk = ik
-        ikq = ik
-     ELSE
-        ikk = 2 * ik - 1
-        ikq = ikk + 1
-     ENDIF
+     ikk = 2 * ik - 1
+     ikq = ikk + 1
      !
      ! here we must have ef, not ef0, to be consistent with ephwann_shuffle
      ! (but in this case they are the same)
@@ -207,7 +259,13 @@
                  ! with hbar = 1 and M already contained in the eigenmodes
                  ! g2 is Ry^2, wkf must already account for the spin factor
                  !
-                 g2 = (abs(epf (jbnd, ibnd))**two)*inv_wq*g2_tmp
+                 IF ( shortrange) THEN
+                   ! SP: The abs has to be removed. Indeed the epf can be a pure imaginary 
+                   !     number, in which case its square will be a negative number. 
+                   g2 = (epf (jbnd, ibnd)**two)*inv_wq*g2_tmp
+                 ELSE
+                   g2 = (abs(epf (jbnd, ibnd))**two)*inv_wq*g2_tmp
+                 ENDIF        
                  !
                  ! There is a sign error for wq in Eq. 9 of Comp. Phys. Comm. 181, 2140 (2010). - RM
                  ! The sign was corrected according to Eq. (7.282) page 489 from Mahan's book 
@@ -269,7 +327,7 @@
      xkf_all(:,:) = zero
      etf_all(:,:) = zero
      !
-#ifdef __PARA
+#ifdef __MPI
      !
      ! note that poolgather2 works with the doubled grid (k and k+q)
      !
@@ -413,7 +471,6 @@
   100 FORMAT(5x,'Gaussian Broadening: ',f10.6,' eV, ngauss=',i4)
   101 FORMAT(5x,'DOS =',f10.6,' states/spin/eV/Unit Cell at Ef=',f10.6,' eV')
   102 FORMAT(5x,'E( ',i3,' )=',f9.4,' eV   Re[Sigma]=',f15.6,' meV Im[Sigma]=',f15.6,' meV     Z=',f15.6,' lam=',f15.6)
-  103 FORMAT(5x,'k( ',i7,' )=',f9.4,' eV   Re[Sigma]=',f15.6,' meV Im[Sigma]=',f15.6,' meV     Z=',f15.6)
   !
   RETURN
   !
@@ -423,36 +480,34 @@
   !-----------------------------------------------------------------------
   SUBROUTINE selfen_elec_k ( ik )
   !-----------------------------------------------------------------------
-  !
-  !  Compute the imaginary part of the electron self energy due to electron-
-  !  phonon interaction in the Migdal approximation. This corresponds to 
-  !  the electron linewidth (half width). The phonon frequency is taken into
-  !  account in the energy selection rule.
-  !
-  !  Use matrix elements, electronic eigenvalues and phonon frequencies
-  !  from ep-wannier interpolation
-  !
+  !!
+  !!  Compute the imaginary part of the electron self energy due to electron-
+  !!  phonon interaction in the Migdal approximation. This corresponds to 
+  !!  the electron linewidth (half width). The phonon frequency is taken into
+  !!  account in the energy selection rule.
+  !!
+  !!  Use matrix elements, electronic eigenvalues and phonon frequencies
+  !!  from ep-wannier interpolation
+  !!
   !-----------------------------------------------------------------------
   USE kinds,         ONLY : DP
   USE io_global,     ONLY : stdout
   USE io_epw,        ONLY : iunepmatf, linewidth_elself
   USE phcom,         ONLY : nmodes
-  USE control_lr,    ONLY : lgamma
-  USE epwcom,        ONLY : nbndsub, lrepmatf, &
+  USE epwcom,        ONLY : nbndsub, lrepmatf, shortrange, &
                            fsthick, eptemp, ngaussw, degaussw, &
                            etf_mem, eps_acustic, efermi_read, fermi_energy
   USE pwcom,         ONLY : ef !, nelec, isk
   USE elph2,         ONLY : etf, ibndmin, ibndmax, nkqf, etf_k, &
-                            epf17, wkf, nkf, nqtotf, wf, wqf, xkf, nkqtotf, &
+                            epf17, wkf, nqtotf, wf, wqf, xkf, nkqtotf, &
                             sigmar_all, sigmai_all, sigmai_mode, zi_all, efnew, nqf
   USE constants_epw, ONLY : ryd2mev, one, ryd2ev, two, zero, pi, ci, eps6
   USE control_flags, ONLY : iverbosity
-#ifdef __PARA
   USE mp,            ONLY : mp_barrier, mp_sum, mp_bcast
-  USE mp_global,     ONLY : me_pool, inter_pool_comm, my_pool_id
+  USE mp_global,     ONLY : inter_pool_comm
   USE mp_world,      ONLY : mpime
   USE io_global,     ONLY : ionode_id
-#endif
+  !
   implicit none
   !
   INTEGER :: n
@@ -473,23 +528,19 @@
   REAL(kind=DP) :: zi_tmp(ibndmax-ibndmin+1)
   !! Temporary array to store the Z
   complex(kind=DP) epf (ibndmax-ibndmin+1, ibndmax-ibndmin+1)
-  REAL(kind=DP) :: g2, ekk, ekq, wq, ef0, wgq, wgkq, weight, dosef, eptemp0,&
+  REAL(kind=DP) :: g2, ekk, ekq, wq, ef0, wgq, wgkq, weight, dosef, &
                    w0g1, w0g2, inv_wq, inv_eptemp0, g2_tmp,&
                    inv_degaussw
   REAL(kind=DP), external :: efermig, dos_ef, wgauss, w0gauss, dos_ef_seq
   !
   ! variables for collecting data from all pools in parallel case 
   !
-  integer :: nksqtotf, lower_bnd, upper_bnd
-  !
-  ! loop over temperatures can be introduced
-  !
-  eptemp0 = eptemp(1)
+  integer :: nksqtotf
   !
   ! SP: Define the inverse so that we can efficiently multiply instead of
   ! dividing
   ! 
-  inv_eptemp0 = 1.0/eptemp0
+  inv_eptemp0 = 1.0/eptemp
   inv_degaussw = 1.0/degaussw
   !
   IF ( ik .eq. 1 ) THEN
@@ -501,7 +552,7 @@
      IF ( fsthick .lt. 1.d3 ) &
         WRITE(stdout, '(/5x,a,f10.6,a)' ) 'Fermi Surface thickness = ', fsthick * ryd2ev, ' eV'
      WRITE(stdout, '(/5x,a,f10.6,a)' ) &
-           'Golden Rule strictly enforced with T = ',eptemp0 * ryd2ev, ' eV'
+           'Golden Rule strictly enforced with T = ',eptemp * ryd2ev, ' eV'
      !
      WRITE(stdout,'(5x,"WARNING: only the eigenstates within the Fermi window are meaningful")')
      OPEN(unit=linewidth_elself,file='linewidth.elself')
@@ -529,17 +580,13 @@
      !
   ENDIF
   !  
-#ifdef __PARA
   IF (mpime .eq. ionode_id) THEN
-#endif
     !   N(Ef) in the equation for lambda is the DOS per spin
     !dosef = dosef / two
     dosef = dos_ef_seq (ngaussw, degaussw, ef0, etf_k, wkf, nkqf, nbndsub)/2
     !
-#ifdef __PARA
   ENDIF
   CALL mp_bcast (dosef, ionode_id, inter_pool_comm)
-#endif  
   !
   !dosef = dos_ef (ngaussw, degaussw, ef0, etf, wkf, nkqf, nbndsub)
   !   N(Ef) in the equation for lambda is the DOS per spin
@@ -574,13 +621,8 @@
   fermicount = 0 
   DO iq = 1, nqf
      !
-     IF (lgamma) THEN
-        ikk = iq
-        ikq = iq
-     ELSE
-        ikq = 2 * iq
-        ikk = ikq - 1
-     ENDIF
+     ikq = 2 * iq
+     ikk = ikq - 1
      !
      ! here we must have ef, not ef0, to be consistent with ephwann_shuffle
      ! (but in this case they are the same)
@@ -629,7 +671,13 @@
                  ! with hbar = 1 and M already contained in the eigenmodes
                  ! g2 is Ry^2, wkf must already account for the spin factor
                  !
-                 g2 = (abs(epf (jbnd, ibnd))**two)*inv_wq*g2_tmp
+                 IF ( shortrange) THEN
+                   ! SP: The abs has to be removed. Indeed the epf can be a pure imaginary 
+                   !     number, in which case its square will be a negative number. 
+                   g2 = (epf (jbnd, ibnd)**two)*inv_wq*g2_tmp
+                 ELSE
+                   g2 = (abs(epf (jbnd, ibnd))**two)*inv_wq*g2_tmp
+                 ENDIF
                  !
                  ! There is a sign error for wq in Eq. 9 of Comp. Phys. Comm. 181, 2140 (2010). - RM
                  ! The sign was corrected according to Eq. (7.282) page 489 from Mahan's book 
@@ -681,8 +729,6 @@
      !
   ENDDO ! end loop on q
   !
-#ifdef __PARA
-  !
   ! collect contributions from all pools (sum over k-points)
   ! this finishes the integral over the BZ  (k)
   !
@@ -692,8 +738,6 @@
   CALL mp_sum(zi_all,inter_pool_comm)
   CALL mp_sum(fermicount, inter_pool_comm)
   CALL mp_barrier(inter_pool_comm)
-  !
-#endif  
   !
   ! Average over degenerate eigenstates:
   WRITE(stdout,'(5x,"Average over degenerate eigenstates is performed")')
@@ -774,7 +818,6 @@
   100 FORMAT(5x,'Gaussian Broadening: ',f10.6,' eV, ngauss=',i4)
   101 FORMAT(5x,'DOS =',f10.6,' states/spin/eV/Unit Cell at Ef=',f10.6,' eV')
   102 FORMAT(5x,'E( ',i3,' )=',f9.4,' eV   Re[Sigma]=',f15.6,' meV Im[Sigma]=',f15.6,' meV     Z=',f15.6,' lam=',f15.6)
-  103 FORMAT(5x,'k( ',i7,' )=',f9.4,' eV   Re[Sigma]=',f15.6,' meV Im[Sigma]=',f15.6,' meV     Z=',f15.6)
   !
   RETURN
   !

@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:44:29 
+     Program PHONON v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:59:21 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -130,29 +130,29 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     0.47s CPU         0.47s WALL
+     PHONON       :     0.46s CPU         0.46s WALL
 
 
      Electric Fields Calculation
 
       iter #   1 total cpu time :     0.9 secs   av.it.:   5.5
-      thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  8.877E-07
+      thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  8.876E-07
 
       iter #   2 total cpu time :     1.2 secs   av.it.:   9.3
-      thresh= 9.422E-05 alpha_mix =  0.700 |ddv_scf|^2 =  3.368E-08
+      thresh= 9.421E-05 alpha_mix =  0.700 |ddv_scf|^2 =  3.365E-08
 
       iter #   3 total cpu time :     1.4 secs   av.it.:   9.2
-      thresh= 1.835E-05 alpha_mix =  0.700 |ddv_scf|^2 =  3.540E-10
+      thresh= 1.834E-05 alpha_mix =  0.700 |ddv_scf|^2 =  3.539E-10
 
       iter #   4 total cpu time :     1.6 secs   av.it.:   9.3
-      thresh= 1.881E-06 alpha_mix =  0.700 |ddv_scf|^2 =  1.514E-12
+      thresh= 1.881E-06 alpha_mix =  0.700 |ddv_scf|^2 =  1.517E-12
 
      Maximum CPU time exceeded
 
      max_seconds     =       1.00
-     elapsed seconds =       1.18
+     elapsed seconds =       1.20
  
-     PHONON       :     1.57s CPU         1.61s WALL
+     PHONON       :     1.57s CPU         1.63s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -163,7 +163,7 @@
      init_us_1    :      0.01s CPU      0.01s WALL (       1 calls)
  
      DIELECTRIC CONSTANT AND EFFECTIVE CHARGES:
-     solve_e      :      1.10s CPU      1.14s WALL (       1 calls)
+     solve_e      :      1.11s CPU      1.16s WALL (       1 calls)
  
      DYNAMICAL MATRIX:
      dynmat0      :      0.01s CPU      0.01s WALL (       1 calls)
@@ -176,17 +176,17 @@
      dynmat_us    :      0.01s CPU      0.01s WALL (       1 calls)
  
  
-     ortho        :      0.00s CPU      0.00s WALL (     150 calls)
-     cgsolve      :      0.84s CPU      0.86s WALL (     150 calls)
+     ortho        :      0.01s CPU      0.01s WALL (     150 calls)
+     cgsolve      :      0.84s CPU      0.87s WALL (     150 calls)
      incdrhoscf   :      0.06s CPU      0.06s WALL (     120 calls)
      dv_of_drho   :      0.00s CPU      0.00s WALL (      12 calls)
      mix_pot      :      0.00s CPU      0.01s WALL (       4 calls)
  
  
-     cgsolve      :      0.84s CPU      0.86s WALL (     150 calls)
-     ch_psi       :      0.80s CPU      0.83s WALL (    1814 calls)
+     cgsolve      :      0.84s CPU      0.87s WALL (     150 calls)
+     ch_psi       :      0.79s CPU      0.83s WALL (    1814 calls)
  
-     ch_psi       :      0.80s CPU      0.83s WALL (    1814 calls)
+     ch_psi       :      0.79s CPU      0.83s WALL (    1814 calls)
      last         :      0.07s CPU      0.07s WALL (    1814 calls)
  
      add_vuspsi   :      0.02s CPU      0.02s WALL (    1814 calls)
@@ -196,16 +196,16 @@
  
       General routines
      calbec       :      0.07s CPU      0.07s WALL (    3758 calls)
-     fft          :      0.01s CPU      0.01s WALL (      40 calls)
-     fftw         :      0.67s CPU      0.67s WALL (   14600 calls)
+     fft          :      0.00s CPU      0.01s WALL (      40 calls)
+     fftw         :      0.67s CPU      0.68s WALL (   14602 calls)
      davcio       :      0.01s CPU      0.01s WALL (     356 calls)
      write_rec    :      0.00s CPU      0.01s WALL (       4 calls)
  
  
-     PHONON       :     1.57s CPU         1.61s WALL
+     PHONON       :     1.57s CPU         1.63s WALL
 
  
-   This run was terminated on:  11:44:31  28Jul2016            
+   This run was terminated on:  16:59:23  18Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -10,7 +10,7 @@
   </HEADER>
   <CONTROL>
     <PP_CHECK_FLAG type="logical" size="1">
-T
+F
     </PP_CHECK_FLAG>
     <LKPOINT_DIR type="logical" size="1">
 T
@@ -21,6 +21,12 @@ F
     <BETA_REAL_SPACE type="logical" size="1">
 F
     </BETA_REAL_SPACE>
+    <TQ_SMOOTHING type="logical" size="1">
+F
+    </TQ_SMOOTHING>
+    <TBETA_SMOOTHING type="logical" size="1">
+F
+    </TBETA_SMOOTHING>
   </CONTROL>
   <CELL>
     <NON-PERIODIC_CELL_CORRECTION type="character" size="1" len="4">
@@ -806,6 +812,27 @@ F
     <FIELD_AMPLITUDE type="real" size="1">
  0.000000000000000E+000
     </FIELD_AMPLITUDE>
+    <MONOPOLE_PLANE type="logical" size="1">
+F
+    </MONOPOLE_PLANE>
+    <MONOPOLE_POS type="real" size="1">
+ 5.000000000000000E-001
+    </MONOPOLE_POS>
+    <RELAX_Z type="logical" size="1">
+F
+    </RELAX_Z>
+    <BLOCK type="logical" size="1">
+F
+    </BLOCK>
+    <BLOCK_1 type="real" size="1">
+ 4.499999880790710E-001
+    </BLOCK_1>
+    <BLOCK_2 type="real" size="1">
+ 5.500000119209290E-001
+    </BLOCK_2>
+    <BLOCK_HEIGHT type="real" size="1">
+ 0.000000000000000E+000
+    </BLOCK_HEIGHT>
   </ELECTRIC_FIELD>
   <PLANE_WAVES>
     <UNITS_FOR_CUTOFF UNITS="Hartree"/>
@@ -871,6 +898,9 @@ F
     <DFT type="character" size="1" len="20">
  SLA  PZ   NOGX NOGC
     </DFT>
+    <ACFDT_IN_PW type="logical" size="1">
+F
+    </ACFDT_IN_PW>
     <ACFDT_IN_PW type="logical" size="1">
 F
     </ACFDT_IN_PW>
@@ -985,7 +1015,7 @@ F
     <UNITS_FOR_K-POINTS UNITS="2 pi / a"/>
     <UNITS_FOR_ENERGIES UNITS="Hartree"/>
     <FERMI_ENERGY type="real" size="1">
- 2.189072996200194E-001
+ 2.186637926662516E-001
     </FERMI_ENERGY>
   </BAND_STRUCTURE_INFO>
   <EIGENVALUES>
@@ -1108,111 +1138,51 @@ F
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        335
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00001/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00001/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.1>
     <K-POINT.2>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        338
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00002/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00002/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.2>
     <K-POINT.3>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        337
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00003/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00003/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.3>
     <K-POINT.4>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        343
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00004/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00004/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.4>
     <K-POINT.5>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        341
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00005/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00005/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.5>
     <K-POINT.6>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        340
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00006/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00006/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.6>
     <K-POINT.7>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        347
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00007/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00007/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.7>
     <K-POINT.8>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        344
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00008/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00008/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.8>
     <K-POINT.9>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        350
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00009/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00009/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.9>
     <K-POINT.10>
       <NUMBER_OF_GK-VECTORS type="integer" size="1">
        343
       </NUMBER_OF_GK-VECTORS>
-      <GK-VECTORS iotk_link="./K00010/gkvectors.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </GK-VECTORS>
-      <WFC iotk_link="./K00010/evc.dat">
-        <!--This is a link to the file indicated in the iotk_link attribute-->
-      </WFC>
     </K-POINT.10>
   </EIGENVECTORS>
 </Root>

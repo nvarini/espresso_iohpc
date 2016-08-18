@@ -330,13 +330,12 @@ CONTAINS
                                     me_bgrp, me_pool
     USE mp,                  ONLY : mp_sum
     USE realus,              ONLY : tg_psic
-    USE fft_base,            ONLY : dffts
+    USE fft_base,            ONLY : dffts, dtgs
     USE fft_parallel,        ONLY : tg_gather
 
     IMPLICIT NONE
     !
     INTEGER :: ibnd_start_gamma, ibnd_end_gamma
-    LOGICAL :: use_tg
     INTEGER :: v_siz, incr, ioff, idx
     REAL(DP), ALLOCATABLE :: tg_rho(:)
     !
@@ -344,14 +343,13 @@ CONTAINS
     IF (MOD(ibnd_start, 2)==0) ibnd_start_gamma = ibnd_start + 1
     ibnd_end_gamma = MAX(ibnd_end, ibnd_start_gamma)
     !
-    use_tg = dffts%have_task_groups
     incr = 2
     !
-    IF ( dffts%have_task_groups ) THEN
+    IF ( dtgs%have_task_groups ) THEN
        !
-       v_siz =  dffts%tg_nnr * dffts%nogrp
+       v_siz =  dtgs%tg_nnr * dtgs%nogrp
        !
-       incr = 2 * dffts%nogrp
+       incr = 2 * dtgs%nogrp
        !
        ALLOCATE( tg_rho( v_siz ) )
        tg_rho= 0.0_DP
@@ -364,17 +362,17 @@ CONTAINS
        !
        CALL invfft_orbital_gamma(evc1(:,:,1),ibnd,nbnd)
        !
-       IF (dffts%have_task_groups) THEN
+       IF (dtgs%have_task_groups) THEN
           !
           ! Now the first proc of the group holds the first two bands
-          ! of the 2*dffts%nogrp bands that we are processing at the same time,
+          ! of the 2*dtgs%nogrp bands that we are processing at the same time,
           ! the second proc. holds the third and fourth band
           ! and so on.
           !
           ! Compute the proper factor for each band
           !
-          DO idx = 1, dffts%nogrp
-             IF( dffts%nolist( idx ) == me_bgrp ) EXIT
+          DO idx = 1, dtgs%nogrp
+             IF( dtgs%nolist( idx ) == me_bgrp ) EXIT
           ENDDO
           !
           ! Remember two bands are packed in a single array :
@@ -397,7 +395,7 @@ CONTAINS
              w2 = w1
           END IF
           !
-          DO ir = 1, dffts%tg_npp( me_bgrp + 1 ) * dffts%nr1x * dffts%nr2x
+          DO ir = 1, dtgs%tg_npp( me_bgrp + 1 ) * dffts%nr1x * dffts%nr2x
              tg_rho(ir) = tg_rho(ir) &
                   + 2.0d0*(w1*real(tg_revc0(ir,ibnd,1),dp)*real(tg_psic(ir),dp)&
                   + w2*aimag(tg_revc0(ir,ibnd,1))*aimag(tg_psic(ir)))
@@ -451,16 +449,16 @@ CONTAINS
        !
     ENDDO
     !
-    IF (dffts%have_task_groups) THEN
+    IF (dtgs%have_task_groups) THEN
        !
        ! reduce the group charge
        !
-       CALL mp_sum( tg_rho, gid = dffts%ogrp_comm )
+       CALL mp_sum( tg_rho, gid = dtgs%ogrp_comm )
        !
        ioff = 0
-       DO idx = 1, dffts%nogrp
-          IF ( me_bgrp == dffts%nolist( idx ) ) EXIT
-          ioff = ioff + dffts%nr1x * dffts%nr2x * dffts%npp( dffts%nolist( idx ) + 1 )
+       DO idx = 1, dtgs%nogrp
+          IF ( me_bgrp == dtgs%nolist( idx ) ) EXIT
+          ioff = ioff + dffts%nr1x * dffts%nr2x * dffts%npp( dtgs%nolist( idx ) + 1 )
        END DO
        !
        ! copy the charge back to the processor location
@@ -566,7 +564,7 @@ CONTAINS
        !
     ENDIF
     !
-    IF ( dffts%have_task_groups ) THEN
+    IF ( dtgs%have_task_groups ) THEN
        DEALLOCATE( tg_rho )
     END IF
     !   

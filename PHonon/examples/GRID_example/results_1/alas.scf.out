@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:50: 7 
+     Program PWSCF v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:16:29 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -233,7 +233,7 @@
      Forces acting on atoms (Ry/au):
 
      atom    1 type  1   force =     0.00000000    0.00000000    0.00000000
-     atom    2 type  2   force =     0.00000000    0.00000000    0.00000000
+     atom    2 type  2   force =    -0.00000000    0.00000000   -0.00000000
 
      Total force =     0.000000     Total SCF correction =     0.000000
 
@@ -241,15 +241,15 @@
      entering subroutine stress ...
 
           total   stress  (Ry/bohr**3)                   (kbar)     P=   -5.09
-  -0.00003459   0.00000000  -0.00000000         -5.09      0.00     -0.00
-   0.00000000  -0.00003459   0.00000000          0.00     -5.09      0.00
-  -0.00000000  -0.00000000  -0.00003459         -0.00     -0.00     -5.09
+  -0.00003459  -0.00000000  -0.00000000         -5.09     -0.00     -0.00
+  -0.00000000  -0.00003459   0.00000000         -0.00     -5.09      0.00
+  -0.00000000   0.00000000  -0.00003459         -0.00      0.00     -5.09
 
 
      Writing output data file alas.save
  
-     init_run     :      0.02s CPU      0.03s WALL (       1 calls)
-     electrons    :      0.05s CPU      0.04s WALL (       1 calls)
+     init_run     :      0.03s CPU      0.03s WALL (       1 calls)
+     electrons    :      0.04s CPU      0.04s WALL (       1 calls)
      forces       :      0.00s CPU      0.00s WALL (       1 calls)
      stress       :      0.00s CPU      0.00s WALL (       1 calls)
 
@@ -283,12 +283,12 @@
      fftw         :      0.02s CPU      0.02s WALL (     454 calls)
  
      Parallel routines
-     fft_scatter  :      0.00s CPU      0.01s WALL (     492 calls)
+     fft_scatter  :      0.01s CPU      0.01s WALL (     492 calls)
  
      PWSCF        :     0.13s CPU         0.15s WALL
 
  
-   This run was terminated on:  11:50: 8  28Jul2016            
+   This run was terminated on:  11:16:29   3Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

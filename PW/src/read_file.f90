@@ -6,6 +6,11 @@
 ! or http://www.gnu.org/copyleft/gpl.txt .
 !
 !----------------------------------------------------------------------------
+! TB
+! included allocation of the force field of the monopole, search for 'TB'
+!----------------------------------------------------------------------------
+!
+!----------------------------------------------------------------------------
 SUBROUTINE read_file()
   !----------------------------------------------------------------------------
   !
@@ -76,6 +81,11 @@ SUBROUTINE read_file()
   !
   CALL init_igk ( npwx, ngm, g, gcutw ) 
   !
+  ! ... Allocate and compute k+G indices and number of plane waves
+  ! ... FIXME: should be read from file, not re-computed
+  !
+  CALL init_igk ( npwx, ngm, g, gcutw ) 
+  !
   ! ... Read orbitals, write them in 'distributed' form to iunwfc
   !
 #ifdef __XSD 
@@ -138,11 +148,11 @@ SUBROUTINE read_xml_file_internal(withbs)
   USE wvfct,                ONLY : nbnd, nbndx, et, wg
   USE symm_base,            ONLY : irt, d1, d2, d3, checkallsym, nsym
   USE ktetra,               ONLY : tetra, ntetra 
-  USE extfield,             ONLY : forcefield, tefield
+  USE extfield,             ONLY : forcefield, tefield, monopole, forcemono
   USE cellmd,               ONLY : cell_factor, lmovecell
   USE fft_base,             ONLY : dfftp
   USE fft_interfaces,       ONLY : fwfft
-  USE grid_subroutines,     ONLY : realspace_grid_init
+  USE fft_types,            ONLY : fft_type_allocate
   USE recvec_subs,          ONLY : ggen
   USE gvect,                ONLY : gg, ngm, g, gcutm, &
                                    eigts1, eigts2, eigts3, nl, gstart
@@ -172,6 +182,7 @@ SUBROUTINE read_xml_file_internal(withbs)
   USE funct,                ONLY : get_inlc, get_dft_name
   USE kernel_table,         ONLY : initialize_kernel_table
   USE esm,                  ONLY : do_comp_esm, esm_init
+  USE mp_bands,             ONLY : intra_bgrp_comm
   !
   IMPLICIT NONE
 
@@ -248,13 +259,14 @@ SUBROUTINE read_xml_file_internal(withbs)
   ALLOCATE( extfor(  3, nat ) )
   !
   IF ( tefield ) ALLOCATE( forcefield( 3, nat ) )
+  IF ( monopole ) ALLOCATE( forcemono( 3, nat ) ) ! TB
   !
   ALLOCATE( irt( 48, nat ) )
   ALLOCATE( tetra( 4, MAX( ntetra, 1 ) ) )
   !
   CALL set_dimensions()
-  CALL realspace_grid_init ( dfftp, at, bg, gcutm )
-  CALL realspace_grid_init ( dffts, at, bg, gcutms)
+  CALL fft_type_allocate ( dfftp, at, bg, gcutm, intra_bgrp_comm )
+  CALL fft_type_allocate ( dffts, at, bg, gcutms, intra_bgrp_comm)
   !
   ! ... check whether LSDA
   !
@@ -354,6 +366,7 @@ SUBROUTINE read_xml_file_internal(withbs)
   ! ... allocate memory for G- and R-space fft arrays
   !
   CALL pre_init()
+  CALL data_structure ( gamma_only )
   CALL allocate_fft()
   CALL ggen ( gamma_only, at, bg ) 
   IF (do_comp_esm) THEN

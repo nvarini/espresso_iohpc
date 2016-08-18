@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:36:37 
+     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:51:30 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -44,8 +44,8 @@
      Parallelization info
      --------------------
      sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
-     Min         132      93     30                 4555     2471     520
-     Max         133      94     31                 4556     2472     525
+     Min         132      93     30                 4553     2471     520
+     Max         133      94     31                 4558     2472     525
      Sum         265     187     61                 9111     4943    1045
  
 
@@ -122,17 +122,9 @@
 
      Smooth grid:     4943 G-vectors     FFT dimensions: (  18,  18,  45)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.04 Mb     (     321,    8)
-        NL pseudopotentials             0.16 Mb     (     321,   32)
-        Each V/rho on FFT grid          0.16 Mb     (   10800)
-        Each G-vector array             0.03 Mb     (    4555)
-        G-vector shells                 0.00 Mb     (     525)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.16 Mb     (     321,   32)
-        Each subspace H/S matrix        0.02 Mb     (      32,   32)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (      32,    8)
-        Arrays for rho mixing           1.32 Mb     (   10800,    8)
+     Estimated max dynamical RAM per process >       3.31Mb
+
+     Estimated total allocated dynamical RAM >       6.62Mb
 
      Initial potential from superposition of free atoms
 
@@ -172,9 +164,9 @@
 
      total cpu time spent up to now is        0.4 secs
 
-     total energy              =     -45.81519266 Ry
-     Harris-Foulkes estimate   =     -46.05258735 Ry
-     estimated scf accuracy    <       0.42935719 Ry
+     total energy              =     -45.81525786 Ry
+     Harris-Foulkes estimate   =     -46.05258521 Ry
+     estimated scf accuracy    <       0.42921637 Ry
 
      iteration #  2     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -182,115 +174,105 @@
 
      total cpu time spent up to now is        0.5 secs
 
-     total energy              =     -45.87726867 Ry
-     Harris-Foulkes estimate   =     -45.87592992 Ry
-     estimated scf accuracy    <       0.00525380 Ry
+     total energy              =     -45.87725711 Ry
+     Harris-Foulkes estimate   =     -45.87591687 Ry
+     estimated scf accuracy    <       0.00525677 Ry
 
      iteration #  3     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  3.28E-05,  avg # of iterations =  2.5
+     ethr =  3.29E-05,  avg # of iterations =  2.5
 
      total cpu time spent up to now is        0.6 secs
 
-     total energy              =     -45.87811449 Ry
-     Harris-Foulkes estimate   =     -45.87792618 Ry
-     estimated scf accuracy    <       0.00039835 Ry
+     total energy              =     -45.87811510 Ry
+     Harris-Foulkes estimate   =     -45.87792841 Ry
+     estimated scf accuracy    <       0.00040147 Ry
 
      iteration #  4     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  2.49E-06,  avg # of iterations =  1.7
+     ethr =  2.51E-06,  avg # of iterations =  1.7
 
      total cpu time spent up to now is        0.7 secs
 
-     total energy              =     -45.87815425 Ry
-     Harris-Foulkes estimate   =     -45.87815229 Ry
-     estimated scf accuracy    <       0.00000359 Ry
+     total energy              =     -45.87815419 Ry
+     Harris-Foulkes estimate   =     -45.87815296 Ry
+     estimated scf accuracy    <       0.00000491 Ry
 
      iteration #  5     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  2.24E-08,  avg # of iterations =  3.5
+     ethr =  3.07E-08,  avg # of iterations =  3.3
 
      total cpu time spent up to now is        0.8 secs
 
-     total energy              =     -45.87815730 Ry
-     Harris-Foulkes estimate   =     -45.87815725 Ry
-     estimated scf accuracy    <       0.00000033 Ry
+     total energy              =     -45.87815718 Ry
+     Harris-Foulkes estimate   =     -45.87815722 Ry
+     estimated scf accuracy    <       0.00000063 Ry
 
      iteration #  6     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  2.05E-09,  avg # of iterations =  3.3
+     ethr =  3.94E-09,  avg # of iterations =  3.3
 
      total cpu time spent up to now is        0.9 secs
 
-     total energy              =     -45.87815732 Ry
-     Harris-Foulkes estimate   =     -45.87815748 Ry
-     estimated scf accuracy    <       0.00000034 Ry
+     total energy              =     -45.87815724 Ry
+     Harris-Foulkes estimate   =     -45.87815760 Ry
+     estimated scf accuracy    <       0.00000079 Ry
 
      iteration #  7     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  2.05E-09,  avg # of iterations =  2.7
+     ethr =  3.94E-09,  avg # of iterations =  2.7
 
      total cpu time spent up to now is        1.0 secs
 
      total energy              =     -45.87815739 Ry
      Harris-Foulkes estimate   =     -45.87815740 Ry
-     estimated scf accuracy    <       0.00000002 Ry
+     estimated scf accuracy    <       0.00000001 Ry
 
      iteration #  8     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  1.10E-10,  avg # of iterations =  2.7
+     ethr =  8.22E-11,  avg # of iterations =  2.5
 
      total cpu time spent up to now is        1.1 secs
 
      total energy              =     -45.87815739 Ry
      Harris-Foulkes estimate   =     -45.87815739 Ry
-     estimated scf accuracy    <          4.9E-10 Ry
+     estimated scf accuracy    <          4.3E-10 Ry
 
      iteration #  9     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  3.04E-12,  avg # of iterations =  3.3
+     ethr =  2.71E-12,  avg # of iterations =  3.5
 
      total cpu time spent up to now is        1.2 secs
 
      total energy              =     -45.87815739 Ry
-     Harris-Foulkes estimate   =     -45.87815739 Ry
-     estimated scf accuracy    <          3.8E-10 Ry
+     Harris-Foulkes estimate   =     -45.87815740 Ry
+     estimated scf accuracy    <          4.3E-10 Ry
 
      iteration # 10     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  2.35E-12,  avg # of iterations =  2.7
+     ethr =  2.71E-12,  avg # of iterations =  2.5
 
      total cpu time spent up to now is        1.3 secs
 
      total energy              =     -45.87815739 Ry
      Harris-Foulkes estimate   =     -45.87815739 Ry
-     estimated scf accuracy    <          1.6E-12 Ry
+     estimated scf accuracy    <          8.7E-12 Ry
 
      iteration # 11     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  2.7
+     ethr =  1.00E-13,  avg # of iterations =  1.8
 
      total cpu time spent up to now is        1.4 secs
 
      total energy              =     -45.87815739 Ry
      Harris-Foulkes estimate   =     -45.87815739 Ry
-     estimated scf accuracy    <          4.9E-12 Ry
+     estimated scf accuracy    <          1.8E-12 Ry
 
      iteration # 12     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
+     ethr =  1.00E-13,  avg # of iterations =  1.3
 
      total cpu time spent up to now is        1.4 secs
-
-     total energy              =     -45.87815739 Ry
-     Harris-Foulkes estimate   =     -45.87815739 Ry
-     estimated scf accuracy    <          1.4E-12 Ry
-
-     iteration # 13     ecut=    30.00 Ry     beta=0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is        1.5 secs
 
      End of self-consistent calculation
 
@@ -322,64 +304,66 @@
 
 !    total energy              =     -45.87815739 Ry
      Harris-Foulkes estimate   =     -45.87815739 Ry
-     estimated scf accuracy    <          6.0E-13 Ry
+     estimated scf accuracy    <          7.4E-15 Ry
 
      The total energy is the sum of the following terms:
 
-     one-electron contribution =      -7.16846337 Ry
-     hartree contribution      =      11.99234894 Ry
-     xc contribution           =     -14.43286556 Ry
+     one-electron contribution =      -7.16846365 Ry
+     hartree contribution      =      11.99234931 Ry
+     xc contribution           =     -14.43286565 Ry
      ewald contribution        =     -36.26917740 Ry
 
-     convergence has been achieved in  13 iterations
+     convergence has been achieved in  12 iterations
 
      Writing output data file graphite.save
  
      init_run     :      0.12s CPU      0.13s WALL (       1 calls)
-     electrons    :      1.17s CPU      1.19s WALL (       1 calls)
+     electrons    :      1.10s CPU      1.12s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
      potinit      :      0.04s CPU      0.04s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.54s CPU      0.54s WALL (      13 calls)
-     sum_band     :      0.15s CPU      0.15s WALL (      13 calls)
-     v_of_rho     :      0.47s CPU      0.48s WALL (      14 calls)
-     newd         :      0.03s CPU      0.04s WALL (      14 calls)
-     mix_rho      :      0.01s CPU      0.01s WALL (      13 calls)
+     c_bands      :      0.50s CPU      0.51s WALL (      12 calls)
+     sum_band     :      0.14s CPU      0.14s WALL (      12 calls)
+     v_of_rho     :      0.45s CPU      0.45s WALL (      13 calls)
+     newd         :      0.03s CPU      0.03s WALL (      13 calls)
+     mix_rho      :      0.01s CPU      0.01s WALL (      12 calls)
 
      Called by c_bands:
-     init_us_2    :      0.02s CPU      0.02s WALL (     162 calls)
-     cegterg      :      0.48s CPU      0.49s WALL (      78 calls)
+     init_us_2    :      0.02s CPU      0.02s WALL (     150 calls)
+     cegterg      :      0.45s CPU      0.46s WALL (      72 calls)
 
      Called by sum_band:
-     sum_band:bec :      0.00s CPU      0.00s WALL (      78 calls)
-     addusdens    :      0.04s CPU      0.04s WALL (      13 calls)
+     sum_band:bec :      0.00s CPU      0.00s WALL (      72 calls)
+     addusdens    :      0.04s CPU      0.04s WALL (      12 calls)
 
      Called by *egterg:
-     h_psi        :      0.39s CPU      0.40s WALL (     270 calls)
-     s_psi        :      0.02s CPU      0.02s WALL (     270 calls)
-     g_psi        :      0.00s CPU      0.00s WALL (     186 calls)
-     cdiaghg      :      0.05s CPU      0.05s WALL (     264 calls)
+     h_psi        :      0.36s CPU      0.37s WALL (     253 calls)
+     s_psi        :      0.01s CPU      0.02s WALL (     253 calls)
+     g_psi        :      0.00s CPU      0.00s WALL (     175 calls)
+     cdiaghg      :      0.05s CPU      0.05s WALL (     247 calls)
 
      Called by h_psi:
-     add_vuspsi   :      0.02s CPU      0.02s WALL (     270 calls)
+     h_psi:pot    :      0.36s CPU      0.37s WALL (     253 calls)
+     h_psi:calbec :      0.02s CPU      0.02s WALL (     253 calls)
+     add_vuspsi   :      0.02s CPU      0.02s WALL (     253 calls)
 
      General routines
-     calbec       :      0.03s CPU      0.03s WALL (     348 calls)
-     fft          :      0.17s CPU      0.17s WALL (     919 calls)
-     ffts         :      0.00s CPU      0.00s WALL (      27 calls)
-     fftw         :      0.38s CPU      0.37s WALL (    4258 calls)
-     interpolate  :      0.01s CPU      0.01s WALL (      27 calls)
+     calbec       :      0.03s CPU      0.03s WALL (     325 calls)
+     fft          :      0.15s CPU      0.16s WALL (     853 calls)
+     ffts         :      0.00s CPU      0.00s WALL (      25 calls)
+     fftw         :      0.34s CPU      0.35s WALL (    4002 calls)
+     interpolate  :      0.01s CPU      0.01s WALL (      25 calls)
  
      Parallel routines
-     fft_scatter  :      0.14s CPU      0.14s WALL (    5204 calls)
+     fft_scatter  :      0.12s CPU      0.13s WALL (    4880 calls)
  
-     PWSCF        :     1.78s CPU         1.97s WALL
+     PWSCF        :     1.66s CPU         1.88s WALL
 
  
-   This run was terminated on:  11:36:39  28Jul2016            
+   This run was terminated on:  16:51:32  18Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

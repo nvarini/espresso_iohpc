@@ -76,7 +76,7 @@ module hdf5_qe
 
 
 
-   if(hyperslab .eq. .true. ) then
+   if(hyperslab .eqv. .true. ) then
 
         CALL h5pcreate_f(H5P_FILE_ACCESS_F, hdf5desc%plist_id, error) ! Properties for file creation
         CALL h5pset_fapl_mpio_f(hdf5desc%plist_id, hdf5desc%comm, info, error) ! Stores MPI IO communicator information to the file access property list
@@ -88,7 +88,7 @@ module hdf5_qe
         CALL h5pclose_f(hdf5desc%plist_id, error)
    else
 
-    if(write.eq..true.)then
+    if(write .eqv. .true.)then
       if(kpoint.eq.1)then
         !CALL h5pcreate_f(H5P_FILE_ACCESS_F, hdf5desc%plist_id, error)
         !CALL h5pset_fapl_mpio_f(hdf5desc%plist_id, hdf5desc%comm, info, error)
@@ -135,10 +135,9 @@ module hdf5_qe
 
    implicit none
    type(HDF5_type), intent(inout) :: hdf5desc
-   complex(kind=dp), intent(inout) :: data(:,:)
+   complex(kind=dp), target, intent(inout) :: data(:,:)
    integer, intent(in) :: kpoint
-   !INTEGER, ALLOCATABLE :: data (:,:)  ! Data to write
-   integer :: error 
+   integer :: error, datadim1, datadim2 
    real(kind=dp)   :: tmp
    integer(HID_T)     :: complex_id, double_id
    integer(HSIZE_T)   :: double_size, complex_size
@@ -147,7 +146,6 @@ module hdf5_qe
    write(kstring,'(I0)') kpoint
    kstring=trim('KPOINT')//kstring
 
-   
    
    CALL h5gopen_f(hdf5desc%file_id,kstring,hdf5desc%group_id,error)
    CALL h5dopen_f(hdf5desc%group_id, hdf5desc%dsetname, hdf5desc%dset_id, error)
@@ -175,7 +173,7 @@ module hdf5_qe
 
   subroutine  read_data_hdf5(hdf5desc, data, kpoint)
    type(HDF5_type), intent(inout) :: hdf5desc
-   complex(kind=dp), intent(inout) :: data(:,:)
+   complex(kind=dp),target, intent(inout) :: data(:,:)
    integer,intent(in) :: kpoint
    integer :: error
    TYPE(C_PTR) :: f_ptr
@@ -285,7 +283,7 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) :: dsetname
-    real(kind=DP), intent(in) :: var(:)
+    real(kind=DP), target, intent(in) :: var(:)
     INTEGER(HID_T) :: dspace_id, dset_id, dtype_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -307,7 +305,7 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) :: dsetname
-    real(kind=DP), intent(in) :: var(:)
+    real(kind=DP), target, intent(in) :: var(:)
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -331,7 +329,7 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) :: kpoint
-    real(kind=DP), intent(in) :: var(:)
+    real(kind=DP), target, intent(in) :: var(:)
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -358,7 +356,7 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) ::  kpoint
-    real(kind=DP), intent(inout) :: var(:)
+    real(kind=DP), target, intent(inout) :: var(:)
     INTEGER(HID_T) :: dtype_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -389,7 +387,7 @@ module hdf5_qe
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) :: dsetname
     integer, intent(in), optional ::  kpoint
-    complex(kind=DP), intent(in) :: var(:)
+    complex(kind=DP), target, intent(in) :: var(:)
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -423,7 +421,7 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in) :: dsetname, kpoint
-    complex(kind=DP), intent(inout) :: var(:)
+    complex(kind=DP), target ,intent(inout) :: var(:)
     INTEGER(HID_T) :: dtype_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -458,7 +456,7 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in), optional :: kpoint
-    integer, intent(in) :: var(:,:)
+    integer, target, intent(in) :: var(:,:)
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -497,8 +495,8 @@ module hdf5_qe
     implicit none
     type(HDF5_type), intent(inout) :: hdf5desc
     integer, intent(in), optional :: kpoint
-    real(kind=DP), intent(in) :: xk(:)
-    integer, intent(in) :: igwk(:), mill_g(:,:)
+    real(kind=DP), target, intent(in) :: xk(:)
+    integer, target, intent(in) :: igwk(:), mill_g(:,:)
     INTEGER(HID_T) :: dspace_id, dset_id     ! Dataspace identifier
     integer :: error
     INTEGER(HSIZE_T), DIMENSION(1) :: counts
@@ -597,7 +595,7 @@ module hdf5_qe
     
     filename=trim(tmp_dir) //TRIM(prefix) //".wfchdf5"
     call initialize_hdf5_array(hdf5desc,comm,npwx,nbnd)
-    if(write.eq..true.)then
+    if(write .eqv. .true.)then
       CALL setup_file_property_hdf5(hdf5desc, filename,.true.,.true.,kpoint)
     else
       CALL setup_file_property_hdf5(hdf5desc, filename,.false.,.false.,kpoint)

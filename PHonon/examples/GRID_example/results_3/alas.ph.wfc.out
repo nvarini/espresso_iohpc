@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:51:42 
+     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:18: 6 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -1554,26 +1554,26 @@
      Writing output data file alas.save
  
      init_run     :      0.15s CPU      0.15s WALL (       7 calls)
-     electrons    :      1.33s CPU      1.38s WALL (       7 calls)
+     electrons    :      1.31s CPU      1.36s WALL (       7 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       7 calls)
      potinit      :      0.01s CPU      0.01s WALL (       7 calls)
 
      Called by electrons:
-     c_bands      :      1.33s CPU      1.38s WALL (       7 calls)
+     c_bands      :      1.31s CPU      1.36s WALL (       7 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       8 calls)
 
      Called by c_bands:
-     init_us_2    :      0.01s CPU      0.01s WALL (     156 calls)
-     cegterg      :      1.07s CPU      1.10s WALL (     156 calls)
+     init_us_2    :      0.00s CPU      0.01s WALL (     156 calls)
+     cegterg      :      1.06s CPU      1.09s WALL (     156 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.91s CPU      0.93s WALL (    2094 calls)
+     h_psi        :      0.89s CPU      0.92s WALL (    2094 calls)
      g_psi        :      0.01s CPU      0.01s WALL (    1782 calls)
-     cdiaghg      :      0.20s CPU      0.17s WALL (    1938 calls)
+     cdiaghg      :      0.20s CPU      0.16s WALL (    1938 calls)
 
      Called by h_psi:
      add_vuspsi   :      0.03s CPU      0.02s WALL (    2094 calls)
@@ -1581,13 +1581,13 @@
      General routines
      calbec       :      0.04s CPU      0.04s WALL (    2094 calls)
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
-     fftw         :      0.75s CPU      0.76s WALL (   16220 calls)
+     fftw         :      0.73s CPU      0.75s WALL (   16220 calls)
      davcio       :      0.00s CPU      0.00s WALL (     156 calls)
  
      Parallel routines
-     fft_scatter  :      0.18s CPU      0.20s WALL (   16244 calls)
+     fft_scatter  :      0.17s CPU      0.19s WALL (   16244 calls)
  
-     PHONON       :     2.44s CPU         2.52s WALL
+     PHONON       :     2.43s CPU         2.50s WALL
 
      INITIALIZATION: 
  
@@ -1611,14 +1611,14 @@
       General routines
      calbec       :      0.04s CPU      0.04s WALL (    2094 calls)
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
-     fftw         :      0.75s CPU      0.76s WALL (   16220 calls)
+     fftw         :      0.73s CPU      0.75s WALL (   16220 calls)
      davcio       :      0.00s CPU      0.00s WALL (     156 calls)
  
  
-     PHONON       :     2.44s CPU         2.52s WALL
+     PHONON       :     2.43s CPU         2.50s WALL
 
  
-   This run was terminated on:  11:51:45  28Jul2016            
+   This run was terminated on:  11:18: 8   3Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -22,7 +22,7 @@ SUBROUTINE init_run()
   USE paw_init,           ONLY : paw_post_init
 #endif
   USE bp,                 ONLY : allocate_bp_efield, bp_global_map
-  USE fft_base,           ONLY : dffts
+  USE fft_base,           ONLY : dffts, dtgs
   USE funct,              ONLY : dft_is_hybrid
   USE recvec_subs,        ONLY : ggen
   USE wannier_new,        ONLY : use_wannier    
@@ -52,13 +52,22 @@ SUBROUTINE init_run()
  
 
   !
+  ! ... determine the data structure for fft arrays
+  !
+  CALL data_structure( gamma_only )
+
+  !
+  IF ( dft_is_hybrid() .AND. dtgs%have_task_groups ) &
+     CALL errore ('init_run', '-ntg option incompatible with EXX',1)
+  !
+  ! ... print a summary and a memory estimate before starting allocating
+  !
+  CALL summary()
+  CALL memory_report()
+  !
   ! ... allocate memory for G- and R-space fft arrays
   !
   CALL allocate_fft()
-
-  !
-  IF ( dft_is_hybrid() .AND. dffts%have_task_groups ) &
-     CALL errore ('init_run', '-ntg option incompatible with EXX',1)
   !
   ! ... generate reciprocal-lattice vectors and fft indices
   !
@@ -75,8 +84,6 @@ SUBROUTINE init_run()
   !
   CALL sym_rho_init (gamma_only )
   !
-  CALL summary()
-  !
   ! ... allocate memory for all other arrays (potentials, wavefunctions etc)
   !
   CALL allocate_nlpot()
@@ -90,8 +97,6 @@ SUBROUTINE init_run()
   CALL bp_global_map()
   !
   call plugin_initbase()
-  !
-  CALL memory_report()
   !
   ALLOCATE( et( nbnd, nkstot ) , wg( nbnd, nkstot ), btype( nbnd, nkstot ) )
   !

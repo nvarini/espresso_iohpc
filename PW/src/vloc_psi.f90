@@ -16,7 +16,7 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
   USE kinds,   ONLY : DP
   USE gvecs, ONLY : nls, nlsm
   USE mp_bands,      ONLY : me_bgrp
-  USE fft_base,      ONLY : dffts
+  USE fft_base,      ONLY : dffts, dtgs
   USE fft_parallel,  ONLY : tg_gather
   USE fft_interfaces,ONLY : fwfft, invfft
   USE wavefunctions_module,  ONLY: psic
@@ -47,19 +47,18 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
   ! The following is dirty trick to prevent usage of task groups if
   ! the number of bands is smaller than the number of task groups 
   ! 
-  use_tg = dffts%have_task_groups
-  dffts%have_task_groups  = dffts%have_task_groups .and. ( m >= dffts%nogrp )
+  use_tg = dtgs%have_task_groups .and. ( m >= dtgs%nogrp )
   !
-  IF( dffts%have_task_groups ) THEN
+  IF( use_tg ) THEN
      !
-     v_siz =  dffts%tg_nnr * dffts%nogrp
+     v_siz =  dtgs%tg_nnr * dtgs%nogrp
      !
      ALLOCATE( tg_v   ( v_siz ) )
      ALLOCATE( tg_psic( v_siz ) )
      !
-     CALL tg_gather( dffts, v, tg_v )
+     CALL tg_gather( dffts, dtgs, v, tg_v )
      !
-     incr = 2 * dffts%nogrp
+     incr = 2 * dtgs%nogrp
      !
   ENDIF
   !
@@ -67,12 +66,12 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
   !
   DO ibnd = 1, m, incr
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
         tg_psic = (0.d0, 0.d0)
         ioff   = 0
         !
-        DO idx = 1, 2*dffts%nogrp, 2
+        DO idx = 1, 2*dtgs%nogrp, 2
            IF( idx + ibnd - 1 < m ) THEN
               DO j = 1, n
                  tg_psic(nls (j)+ioff) =        psi(j,idx+ibnd-1) + &
@@ -87,7 +86,7 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
               ENDDO
            ENDIF
 
-           ioff = ioff + dffts%tg_nnr
+           ioff = ioff + dtgs%tg_nnr
 
         ENDDO
         !
@@ -113,15 +112,15 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
      !   product with the potential v on the smooth grid
      !   back to reciprocal space
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
-        CALL invfft ('Wave', tg_psic, dffts)
+        CALL invfft ('Wave', tg_psic, dffts, dtgs)
         !
-        DO j = 1, dffts%nr1x*dffts%nr2x*dffts%tg_npp( me_bgrp + 1 )
+        DO j = 1, dffts%nr1x*dffts%nr2x*dtgs%tg_npp( me_bgrp + 1 )
            tg_psic (j) = tg_psic (j) * tg_v(j)
         ENDDO
         !
-        CALL fwfft ('Wave', tg_psic, dffts)
+        CALL fwfft ('Wave', tg_psic, dffts, dtgs)
         !
      ELSE
         !
@@ -137,11 +136,11 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
      !
      !   addition to the total product
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
         ioff   = 0
         !
-        DO idx = 1, 2*dffts%nogrp, 2
+        DO idx = 1, 2*dtgs%nogrp, 2
            !
            IF( idx + ibnd - 1 < m ) THEN
               DO j = 1, n
@@ -185,13 +184,12 @@ SUBROUTINE vloc_psi_gamma(lda, n, m, psi, v, hpsi)
      !
   ENDDO
   !
-  IF( dffts%have_task_groups ) THEN
+  IF( use_tg ) THEN
      !
      DEALLOCATE( tg_psic )
      DEALLOCATE( tg_v )
      !
   ENDIF
-  dffts%have_task_groups = use_tg
   !
   RETURN
 END SUBROUTINE vloc_psi_gamma
@@ -208,7 +206,7 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
   USE wvfct, ONLY : current_k
   USE klist, ONLY : igk_k
   USE mp_bands,      ONLY : me_bgrp
-  USE fft_base,      ONLY : dffts
+  USE fft_base,      ONLY : dffts, dtgs
   USE fft_parallel,  ONLY : tg_gather
   USE fft_interfaces,ONLY : fwfft, invfft
   USE wavefunctions_module,  ONLY: psic
@@ -236,20 +234,19 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
   ! The following is dirty trick to prevent usage of task groups if
   ! the number of bands is smaller than the number of task groups 
   ! 
-  use_tg = dffts%have_task_groups
-  dffts%have_task_groups  = dffts%have_task_groups .and. ( m >= dffts%nogrp )
+  use_tg = dtgs%have_task_groups .and. ( m >= dtgs%nogrp )
   !
   incr = 1
   !
-  IF( dffts%have_task_groups ) THEN
+  IF( use_tg ) THEN
      !
-     v_siz =  dffts%tg_nnr * dffts%nogrp
+     v_siz =  dtgs%tg_nnr * dtgs%nogrp
      !
      ALLOCATE( tg_v   ( v_siz ) )
      ALLOCATE( tg_psic( v_siz ) )
      !
-     CALL tg_gather( dffts, v, tg_v )
-     incr = dffts%nogrp
+     CALL tg_gather( dffts, dtgs, v, tg_v )
+     incr = dtgs%nogrp
      !
   ENDIF
   !
@@ -257,12 +254,12 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
   !
   DO ibnd = 1, m, incr
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
         tg_psic = (0.d0, 0.d0)
         ioff   = 0
         !
-        DO idx = 1, dffts%nogrp
+        DO idx = 1, dtgs%nogrp
 
            IF( idx + ibnd - 1 <= m ) THEN
 !$omp parallel do
@@ -272,11 +269,11 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
 !$omp end parallel do
            ENDIF
 
-           ioff = ioff + dffts%tg_nnr
+           ioff = ioff + dtgs%tg_nnr
 
         ENDDO
         !
-        CALL  invfft ('Wave', tg_psic, dffts)
+        CALL  invfft ('Wave', tg_psic, dffts, dtgs)
         !
      ELSE
         !
@@ -291,15 +288,15 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
      !   product with the potential v on the smooth grid
      !   back to reciprocal space
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
 !$omp parallel do
-        DO j = 1, dffts%nr1x*dffts%nr2x*dffts%tg_npp( me_bgrp + 1 )
+        DO j = 1, dffts%nr1x*dffts%nr2x*dtgs%tg_npp( me_bgrp + 1 )
            tg_psic (j) = tg_psic (j) * tg_v(j)
         ENDDO
 !$omp end parallel do
         !
-        CALL fwfft ('Wave',  tg_psic, dffts)
+        CALL fwfft ('Wave',  tg_psic, dffts, dtgs)
         !
      ELSE
         !
@@ -315,11 +312,11 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
      !
      !   addition to the total product
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
         ioff   = 0
         !
-        DO idx = 1, dffts%nogrp
+        DO idx = 1, dtgs%nogrp
            !
            IF( idx + ibnd - 1 <= m ) THEN
 !$omp parallel do
@@ -344,13 +341,12 @@ SUBROUTINE vloc_psi_k(lda, n, m, psi, v, hpsi)
      !
   ENDDO
   !
-  IF( dffts%have_task_groups ) THEN
+  IF( use_tg ) THEN
      !
      DEALLOCATE( tg_psic )
      DEALLOCATE( tg_v )
      !
   ENDIF
-  dffts%have_task_groups = use_tg
   !
   RETURN
 END SUBROUTINE vloc_psi_k
@@ -367,7 +363,7 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
   USE wvfct, ONLY : current_k
   USE klist, ONLY : igk_k
   USE mp_bands,      ONLY : me_bgrp
-  USE fft_base,      ONLY : dffts, dfftp
+  USE fft_base,      ONLY : dffts, dfftp, dtgs
   USE fft_parallel,  ONLY : tg_gather
   USE fft_interfaces,ONLY : fwfft, invfft
   USE lsda_mod,      ONLY : nspin
@@ -397,36 +393,35 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
   ! The following is dirty trick to prevent usage of task groups if
   ! the number of bands is smaller than the number of task groups 
   ! 
-  use_tg = dffts%have_task_groups
-  dffts%have_task_groups  = dffts%have_task_groups .and. ( m >= dffts%nogrp )
+  use_tg = dtgs%have_task_groups .and. ( m >= dtgs%nogrp )
   !
-  IF( dffts%have_task_groups ) THEN
-     v_siz = dffts%tg_nnr * dffts%nogrp
+  IF( use_tg ) THEN
+     v_siz = dtgs%tg_nnr * dtgs%nogrp
      IF (domag) THEN
         ALLOCATE( tg_v( v_siz, 4 ) )
         DO is=1,nspin
-           CALL tg_gather( dffts, v(:,is), tg_v(:,is) )
+           CALL tg_gather( dffts, dtgs, v(:,is), tg_v(:,is) )
         ENDDO
      ELSE
         ALLOCATE( tg_v( v_siz, 1 ) )
-        CALL tg_gather( dffts, v(:,1), tg_v(:,1) )
+        CALL tg_gather( dffts, dtgs, v(:,1), tg_v(:,1) )
      ENDIF
      ALLOCATE( tg_psic( v_siz, npol ) )
-     incr = dffts%nogrp
+     incr = dtgs%nogrp
   ENDIF
   !
   ! the local potential V_Loc psi. First the psi in real space
   !
   DO ibnd = 1, m, incr
 
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
         DO ipol = 1, npol
            !
            tg_psic(:,ipol) = ( 0.D0, 0.D0 )
            ioff   = 0
            !
-           DO idx = 1, dffts%nogrp
+           DO idx = 1, dtgs%nogrp
               !
               IF( idx + ibnd - 1 <= m ) THEN
                  DO j = 1, n
@@ -435,11 +430,11 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
                  ENDDO
               ENDIF
 
-              ioff = ioff + dffts%tg_nnr
+              ioff = ioff + dtgs%tg_nnr
 
            ENDDO
            !
-           CALL invfft ('Wave', tg_psic(:,ipol), dffts)
+           CALL invfft ('Wave', tg_psic(:,ipol), dffts, dtgs)
            !
         ENDDO
         !
@@ -456,9 +451,9 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
      !
      !   product with the potential v = (vltot+vr) on the smooth grid
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         IF (domag) THEN
-           DO j=1, dffts%nr1x*dffts%nr2x*dffts%tg_npp( me_bgrp + 1 )
+           DO j=1, dffts%nr1x*dffts%nr2x*dtgs%tg_npp( me_bgrp + 1 )
               sup = tg_psic(j,1) * (tg_v(j,1)+tg_v(j,4)) + &
                     tg_psic(j,2) * (tg_v(j,2)-(0.d0,1.d0)*tg_v(j,3))
               sdwn = tg_psic(j,2) * (tg_v(j,1)-tg_v(j,4)) + &
@@ -467,7 +462,7 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
               tg_psic(j,2)=sdwn
            ENDDO
         ELSE
-           DO j=1, dffts%nr1x*dffts%nr2x*dffts%tg_npp( me_bgrp + 1 )
+           DO j=1, dffts%nr1x*dffts%nr2x*dtgs%tg_npp( me_bgrp + 1 )
               tg_psic(j,:) = tg_psic(j,:) * tg_v(j,1)
            ENDDO
         ENDIF
@@ -490,15 +485,15 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
      !
      !   back to reciprocal space
      !
-     IF( dffts%have_task_groups ) THEN
+     IF( use_tg ) THEN
         !
         DO ipol = 1, npol
 
-           CALL fwfft ('Wave', tg_psic(:,ipol), dffts)
+           CALL fwfft ('Wave', tg_psic(:,ipol), dffts, dtgs)
            !
            ioff   = 0
            !
-           DO idx = 1, dffts%nogrp
+           DO idx = 1, dtgs%nogrp
               !
               IF( idx + ibnd - 1 <= m ) THEN
                  DO j = 1, n
@@ -532,13 +527,12 @@ SUBROUTINE vloc_psi_nc (lda, n, m, psi, v, hpsi)
 
   ENDDO
 
-  IF( dffts%have_task_groups ) THEN
+  IF( use_tg ) THEN
      !
      DEALLOCATE( tg_v )
      DEALLOCATE( tg_psic )
      !
   ENDIF
-  dffts%have_task_groups = use_tg
   !
   RETURN
 END SUBROUTINE vloc_psi_nc

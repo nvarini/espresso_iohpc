@@ -21,33 +21,36 @@ MODULE fft_interfaces
      !! and to the "box-grid" version **invfft_b**, used only in CP 
      !! (the latter has an additional argument)
      
-     SUBROUTINE invfft_x( grid_type, f, dfft )
-       USE fft_types,  ONLY: fft_dlay_descriptor
+     SUBROUTINE invfft_x( grid_type, f, dfft, dtgs )
+       USE fft_types,  ONLY: fft_type_descriptor
+       USE task_groups,   ONLY: task_groups_descriptor
        IMPLICIT NONE
        INTEGER, PARAMETER :: DP = selected_real_kind(14,200)
        CHARACTER(LEN=*),  INTENT(IN) :: grid_type
-       TYPE(fft_dlay_descriptor), INTENT(IN) :: dfft
+       TYPE(fft_type_descriptor), INTENT(IN) :: dfft
+       TYPE(task_groups_descriptor), OPTIONAL, INTENT(IN) :: dtgs
        COMPLEX(DP) :: f(:)
      END SUBROUTINE invfft_x
      !
-     SUBROUTINE invfft_b( grid_type, f, dfft, ia )
-       USE fft_types,  ONLY: fft_dlay_descriptor
+     SUBROUTINE invfft_b( f, dfft, ia )
+       USE fft_smallbox_type,  ONLY: fft_box_descriptor
        IMPLICIT NONE
        INTEGER, PARAMETER :: DP = selected_real_kind(14,200)
        INTEGER, INTENT(IN) :: ia
-       CHARACTER(LEN=*),  INTENT(IN) :: grid_type
-       TYPE(fft_dlay_descriptor), INTENT(IN) :: dfft
+       TYPE(fft_box_descriptor), INTENT(IN) :: dfft
        COMPLEX(DP) :: f(:)
      END SUBROUTINE invfft_b
   END INTERFACE
 
   INTERFACE fwfft
-     SUBROUTINE fwfft_x( grid_type, f, dfft )
-       USE fft_types,  ONLY: fft_dlay_descriptor
+     SUBROUTINE fwfft_x( grid_type, f, dfft, dtgs )
+       USE fft_types,  ONLY: fft_type_descriptor
+       USE task_groups,   ONLY: task_groups_descriptor
        IMPLICIT NONE
        INTEGER, PARAMETER :: DP = selected_real_kind(14,200)
        CHARACTER(LEN=*), INTENT(IN) :: grid_type
-       TYPE(fft_dlay_descriptor), INTENT(IN) :: dfft
+       TYPE(fft_type_descriptor), INTENT(IN) :: dfft
+       TYPE(task_groups_descriptor), OPTIONAL, INTENT(IN) :: dtgs
        COMPLEX(DP) :: f(:)
      END SUBROUTINE fwfft_x
   END INTERFACE
@@ -56,7 +59,7 @@ END MODULE fft_interfaces
 !=---------------------------------------------------------------------------=!
 !
 !=---------------------------------------------------------------------------=!
-SUBROUTINE invfft_x( grid_type, f, dfft )
+SUBROUTINE invfft_x( grid_type, f, dfft, dtgs )
   !! Compute G-space to R-space for a specific grid type
   !! 
   !! **grid_type = 'Dense'** : 
@@ -87,15 +90,17 @@ SUBROUTINE invfft_x( grid_type, f, dfft )
   USE fft_scalar,    ONLY: cfft3d, cfft3ds
   USE fft_smallbox,  ONLY: cft_b, cft_b_omp
   USE fft_parallel,  ONLY: tg_cft3s
-  USE fft_types,     ONLY: fft_dlay_descriptor
+  USE fft_types,     ONLY: fft_type_descriptor
+  USE task_groups,   ONLY: task_groups_descriptor
 
   IMPLICIT NONE
 
   INTEGER, PARAMETER :: DP = selected_real_kind(14,200)
 
-  TYPE(fft_dlay_descriptor), INTENT(IN) :: dfft
+  TYPE(fft_type_descriptor), INTENT(IN) :: dfft
   CHARACTER(LEN=*), INTENT(IN) :: grid_type
   COMPLEX(DP) :: f(:)
+  TYPE(task_groups_descriptor), OPTIONAL, INTENT(IN) :: dtgs
   !
   IF( grid_type == 'Dense' ) THEN
      CALL start_clock( 'fft' )
@@ -103,8 +108,6 @@ SUBROUTINE invfft_x( grid_type, f, dfft )
      CALL start_clock( 'ffts' )
   ELSE IF( grid_type == 'Wave' ) THEN
      CALL start_clock('fftw')
-  ELSE IF( grid_type == 'Box' ) THEN
-     CALL fftx_error__( ' invfft ', ' incorrect CALL for Box fft ', 1 )
   ELSE IF( grid_type == 'Custom' ) THEN
      CALL start_clock('fftc')
   ELSE IF( grid_type == 'CustomWave' ) THEN
@@ -119,7 +122,11 @@ SUBROUTINE invfft_x( grid_type, f, dfft )
        grid_type == 'Custom' ) THEN
      CALL tg_cft3s( f, dfft, 1 )
   ELSE IF( grid_type == 'Wave' .OR. grid_type == 'CustomWave' ) THEN
-     CALL tg_cft3s( f, dfft, 2, dfft%have_task_groups )
+     IF( PRESENT( dtgs ) ) THEN
+        CALL tg_cft3s( f, dfft, 2, dtgs )
+     ELSE
+        CALL tg_cft3s( f, dfft, 2 )
+     END IF
   END IF
 
 #else
@@ -162,7 +169,7 @@ END SUBROUTINE invfft_x
 !=---------------------------------------------------------------------------=!
 !
 !=---------------------------------------------------------------------------=!
-SUBROUTINE fwfft_x( grid_type, f, dfft )
+SUBROUTINE fwfft_x( grid_type, f, dfft, dtgs )
   !! Compute R-space to G-space for a specific grid type
   !! 
   !! **grid_type = 'Dense'**
@@ -192,15 +199,17 @@ SUBROUTINE fwfft_x( grid_type, f, dfft )
   
   USE fft_scalar,    ONLY: cfft3d, cfft3ds
   USE fft_parallel,  ONLY: tg_cft3s
-  USE fft_types,     ONLY: fft_dlay_descriptor
+  USE fft_types,     ONLY: fft_type_descriptor
+  USE task_groups,   ONLY: task_groups_descriptor
 
   IMPLICIT NONE
 
   INTEGER, PARAMETER :: DP = selected_real_kind(14,200)
 
-  TYPE(fft_dlay_descriptor), INTENT(IN) :: dfft
+  TYPE(fft_type_descriptor), INTENT(IN) :: dfft
   CHARACTER(LEN=*), INTENT(IN) :: grid_type
   COMPLEX(DP) :: f(:)
+  TYPE(task_groups_descriptor), OPTIONAL, INTENT(IN) :: dtgs
 
   IF( grid_type == 'Dense' ) THEN
      CALL start_clock( 'fft' )
@@ -222,7 +231,11 @@ SUBROUTINE fwfft_x( grid_type, f, dfft )
       grid_type == 'Custom' ) THEN
      CALL tg_cft3s(f,dfft,-1)
   ELSE IF( grid_type == 'Wave' .OR. grid_type == 'CustomWave' ) THEN
-     CALL tg_cft3s(f,dfft,-2, dfft%have_task_groups )
+     IF( PRESENT( dtgs ) ) THEN
+        CALL tg_cft3s(f,dfft,-2, dtgs )
+     ELSE
+        CALL tg_cft3s(f,dfft,-2 )
+     END IF
   END IF
 
 #else 
@@ -265,7 +278,7 @@ END SUBROUTINE fwfft_x
 !=---------------------------------------------------------------------------=!
 !
 !=---------------------------------------------------------------------------=!
-SUBROUTINE invfft_b( grid_type, f, dfft, ia )
+SUBROUTINE invfft_b( f, dfft, ia )
   !! Not-so-parallel 3d fft for box grid, implemented ONLY for sign=1
   !!
   !! ComputeG-space to R-space, $$ output = \sum_G f(G)exp(+iG*R) $$
@@ -286,26 +299,22 @@ SUBROUTINE invfft_b( grid_type, f, dfft, ia )
   USE fft_scalar,    ONLY: cfft3d, cfft3ds
   USE fft_smallbox,  ONLY: cft_b, cft_b_omp
   USE fft_parallel,  ONLY: tg_cft3s
-  USE fft_types,     ONLY: fft_dlay_descriptor
+  USE fft_smallbox_type, ONLY: fft_box_descriptor
   
   IMPLICIT NONE
 
   INTEGER, PARAMETER :: DP = selected_real_kind(14,200)
   
-  TYPE(fft_dlay_descriptor), INTENT(IN) :: dfft
+  TYPE(fft_box_descriptor), INTENT(IN) :: dfft
 ! Removed the 'OPTIONAL' attribute. When present, the specific interfaces
 ! 'invfft_x' and 'invfft_b' cannot be disambiguated when the generic interface
 ! call is made. This is a violation the Fortran standard. The Cray compiler
 ! errors out on this, while the Intel only issues a warning. --rbw
 ! INTEGER, OPTIONAL, INTENT(IN) :: ia
   INTEGER, INTENT(IN) :: ia
-  CHARACTER(LEN=*), INTENT(IN) :: grid_type
   COMPLEX(DP) :: f(:)
   !
   INTEGER :: imin3, imax3, np3
-
-  IF( grid_type /= 'Box' ) &
-       CALL fftx_error__( ' invfft ', ' inconsistent call for Box fft ', 1 )
 
   ! clocks called inside a parallel region do not work properly!
   ! in the future we probably need a thread safe version of the clock

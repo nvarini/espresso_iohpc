@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:16: 4 
+     Program PHONON v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:31: 2 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -123,7 +123,7 @@
 
 
      Alpha used in Ewald sum =   0.8000
-     PHONON       :     0.44s CPU         0.46s WALL
+     PHONON       :     0.43s CPU         0.44s WALL
 
 
      Electric Fields Calculation
@@ -131,7 +131,7 @@
       iter #   1 total cpu time :     1.0 secs   av.it.:   5.8
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  4.790E-07
 
-      iter #   2 total cpu time :     1.3 secs   av.it.:   9.3
+      iter #   2 total cpu time :     1.2 secs   av.it.:   9.3
       thresh= 6.921E-05 alpha_mix =  0.700 |ddv_scf|^2 =  4.014E-08
 
       iter #   3 total cpu time :     1.5 secs   av.it.:   9.3
@@ -144,7 +144,7 @@
       thresh= 3.721E-07 alpha_mix =  0.700 |ddv_scf|^2 =  2.413E-14
 
       iter #   6 total cpu time :     2.3 secs   av.it.:   8.8
-      thresh= 1.553E-08 alpha_mix =  0.700 |ddv_scf|^2 =  1.436E-15
+      thresh= 1.553E-08 alpha_mix =  0.700 |ddv_scf|^2 =  1.437E-15
 
       iter #   7 total cpu time :     2.6 secs   av.it.:   9.3
       thresh= 3.790E-09 alpha_mix =  0.700 |ddv_scf|^2 =  3.975E-18
@@ -153,30 +153,30 @@
 
           Dielectric constant in cartesian axis 
 
-          (      23.239736358       0.000000000       0.000000000 )
-          (       0.000000000      23.239736358      -0.000000000 )
-          (       0.000000000      -0.000000000      23.239736358 )
+          (      23.239805996       0.000000000       0.000000000 )
+          (       0.000000000      23.239805996      -0.000000000 )
+          (       0.000000000      -0.000000000      23.239805996 )
 
           Effective charges (d Force / dE) in cartesian axis
 
            atom      1   Si 
-      Ex  (       -1.07989       -0.00000       -0.00000 )
-      Ey  (       -0.00000       -1.07989        0.00000 )
-      Ez  (        0.00000        0.00000       -1.07989 )
+      Ex  (       -1.07990        0.00000        0.00000 )
+      Ey  (        0.00000       -1.07990       -0.00000 )
+      Ez  (        0.00000       -0.00000       -1.07990 )
            atom      2   Si 
-      Ex  (       -1.07989       -0.00000       -0.00000 )
-      Ey  (       -0.00000       -1.07989        0.00000 )
-      Ez  (       -0.00000        0.00000       -1.07989 )
+      Ex  (       -1.07990        0.00000        0.00000 )
+      Ey  (        0.00000       -1.07990       -0.00000 )
+      Ez  (        0.00000        0.00000       -1.07990 )
 
 
      Representation #  1 modes #   1  2  3
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :     2.9 secs   av.it.:   4.7
+      iter #   1 total cpu time :     2.8 secs   av.it.:   4.7
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  1.100E-07
 
-      iter #   2 total cpu time :     3.2 secs   av.it.:   9.5
+      iter #   2 total cpu time :     3.1 secs   av.it.:   9.5
       thresh= 3.317E-05 alpha_mix =  0.700 |ddv_scf|^2 =  2.383E-09
 
       iter #   3 total cpu time :     3.4 secs   av.it.:   9.3
@@ -209,7 +209,7 @@
       iter #   3 total cpu time :     5.1 secs   av.it.:   9.3
       thresh= 6.108E-06 alpha_mix =  0.700 |ddv_scf|^2 =  1.794E-10
 
-      iter #   4 total cpu time :     5.4 secs   av.it.:   8.5
+      iter #   4 total cpu time :     5.3 secs   av.it.:   8.5
       thresh= 1.339E-06 alpha_mix =  0.700 |ddv_scf|^2 =  8.513E-14
 
       iter #   5 total cpu time :     5.6 secs   av.it.:   9.2
@@ -228,32 +228,32 @@
 
           Dielectric constant in cartesian axis 
 
-          (      23.239736358       0.000000000       0.000000000 )
-          (       0.000000000      23.239736358      -0.000000000 )
-          (       0.000000000      -0.000000000      23.239736358 )
+          (      23.239805996       0.000000000       0.000000000 )
+          (       0.000000000      23.239805996      -0.000000000 )
+          (       0.000000000      -0.000000000      23.239805996 )
 
           Effective charges (d Force / dE) in cartesian axis
 
            atom      1   Si 
-      Ex  (       -1.07989       -0.00000       -0.00000 )
-      Ey  (       -0.00000       -1.07989        0.00000 )
-      Ez  (        0.00000        0.00000       -1.07989 )
+      Ex  (       -1.07990        0.00000        0.00000 )
+      Ey  (        0.00000       -1.07990       -0.00000 )
+      Ez  (        0.00000       -0.00000       -1.07990 )
            atom      2   Si 
-      Ex  (       -1.07989       -0.00000       -0.00000 )
-      Ey  (       -0.00000       -1.07989        0.00000 )
-      Ez  (       -0.00000        0.00000       -1.07989 )
+      Ex  (       -1.07990        0.00000        0.00000 )
+      Ey  (        0.00000       -1.07990       -0.00000 )
+      Ez  (        0.00000        0.00000       -1.07990 )
 
      Diagonalizing the dynamical matrix
 
      q = (    0.000000000   0.000000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =       0.307252 [THz] =      10.248831 [cm-1]
-     freq (    2) =       0.307252 [THz] =      10.248831 [cm-1]
-     freq (    3) =       0.307252 [THz] =      10.248831 [cm-1]
-     freq (    4) =      15.082900 [THz] =     503.111380 [cm-1]
-     freq (    5) =      15.082900 [THz] =     503.111380 [cm-1]
-     freq (    6) =      15.082900 [THz] =     503.111380 [cm-1]
+     freq (    1) =       0.306988 [THz] =      10.240013 [cm-1]
+     freq (    2) =       0.306988 [THz] =      10.240013 [cm-1]
+     freq (    3) =       0.306988 [THz] =      10.240013 [cm-1]
+     freq (    4) =      15.082888 [THz] =     503.110997 [cm-1]
+     freq (    5) =      15.082888 [THz] =     503.110997 [cm-1]
+     freq (    6) =      15.082888 [THz] =     503.110997 [cm-1]
  **************************************************************************
 
      Mode symmetry, O_h (m-3m)  point group:
@@ -261,10 +261,10 @@
      freq (  1 -  3) =         10.2  [cm-1]   --> T_1u G_15  G_4- I  
      freq (  4 -  6) =        503.1  [cm-1]   --> T_2g G_25' G_5+ R  
  
-     PHONON       :     5.81s CPU         5.95s WALL
+     PHONON       :     5.76s CPU         5.94s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.02s CPU      0.02s WALL (       1 calls)
+     phq_setup    :      0.01s CPU      0.02s WALL (       1 calls)
      phq_init     :      0.02s CPU      0.02s WALL (       1 calls)
  
      phq_init     :      0.02s CPU      0.02s WALL (       1 calls)
@@ -272,17 +272,17 @@
      init_us_1    :      0.02s CPU      0.02s WALL (       1 calls)
  
      DIELECTRIC CONSTANT AND EFFECTIVE CHARGES:
-     solve_e      :      2.11s CPU      2.15s WALL (       1 calls)
+     solve_e      :      2.10s CPU      2.15s WALL (       1 calls)
      dielec       :      0.00s CPU      0.00s WALL (       1 calls)
      zstar_eu     :      0.04s CPU      0.04s WALL (       1 calls)
  
      DYNAMICAL MATRIX:
      dynmat0      :      0.01s CPU      0.01s WALL (       1 calls)
-     phqscf       :      3.21s CPU      3.29s WALL (       1 calls)
-     dynmatrix    :      0.01s CPU      0.01s WALL (       1 calls)
+     phqscf       :      3.19s CPU      3.28s WALL (       1 calls)
+     dynmatrix    :      0.00s CPU      0.02s WALL (       1 calls)
  
-     phqscf       :      3.21s CPU      3.29s WALL (       1 calls)
-     solve_linter :      3.20s CPU      3.28s WALL (       2 calls)
+     phqscf       :      3.19s CPU      3.28s WALL (       1 calls)
+     solve_linter :      3.18s CPU      3.27s WALL (       2 calls)
      drhodv       :      0.01s CPU      0.01s WALL (       2 calls)
  
      dynmat0      :      0.01s CPU      0.01s WALL (       1 calls)
@@ -291,15 +291,15 @@
  
      dynmat_us    :      0.00s CPU      0.00s WALL (       1 calls)
  
-     phqscf       :      3.21s CPU      3.29s WALL (       1 calls)
-     solve_linter :      3.20s CPU      3.28s WALL (       2 calls)
+     phqscf       :      3.19s CPU      3.28s WALL (       1 calls)
+     solve_linter :      3.18s CPU      3.27s WALL (       2 calls)
  
-     solve_linter :      3.20s CPU      3.28s WALL (       2 calls)
+     solve_linter :      3.18s CPU      3.27s WALL (       2 calls)
      dvqpsi_us    :      0.07s CPU      0.07s WALL (      24 calls)
      ortho        :      0.01s CPU      0.01s WALL (     120 calls)
-     cgsolve      :      3.27s CPU      3.32s WALL (     120 calls)
-     incdrhoscf   :      0.32s CPU      0.34s WALL (     114 calls)
-     vpsifft      :      0.16s CPU      0.17s WALL (      60 calls)
+     cgsolve      :      3.22s CPU      3.31s WALL (     120 calls)
+     incdrhoscf   :      0.32s CPU      0.33s WALL (     114 calls)
+     vpsifft      :      0.16s CPU      0.16s WALL (      60 calls)
      dv_of_drho   :      0.09s CPU      0.09s WALL (      57 calls)
      mix_pot      :      0.04s CPU      0.05s WALL (      19 calls)
      psymdvscf    :      0.85s CPU      0.85s WALL (      12 calls)
@@ -307,30 +307,30 @@
      dvqpsi_us    :      0.07s CPU      0.07s WALL (      24 calls)
      dvqpsi_us_on :      0.01s CPU      0.01s WALL (      24 calls)
  
-     cgsolve      :      3.27s CPU      3.32s WALL (     120 calls)
-     ch_psi       :      3.19s CPU      3.25s WALL (    1233 calls)
+     cgsolve      :      3.22s CPU      3.31s WALL (     120 calls)
+     ch_psi       :      3.14s CPU      3.24s WALL (    1233 calls)
  
-     ch_psi       :      3.19s CPU      3.25s WALL (    1233 calls)
+     ch_psi       :      3.14s CPU      3.24s WALL (    1233 calls)
      last         :      0.16s CPU      0.17s WALL (    1233 calls)
  
-     add_vuspsi   :      0.05s CPU      0.06s WALL (    1233 calls)
+     add_vuspsi   :      0.05s CPU      0.05s WALL (    1233 calls)
  
-     incdrhoscf   :      0.32s CPU      0.34s WALL (     114 calls)
+     incdrhoscf   :      0.32s CPU      0.33s WALL (     114 calls)
  
  
       General routines
-     calbec       :      0.12s CPU      0.13s WALL (    2540 calls)
-     fft          :      0.07s CPU      0.07s WALL (     644 calls)
+     calbec       :      0.11s CPU      0.13s WALL (    2540 calls)
+     fft          :      0.06s CPU      0.07s WALL (     644 calls)
      ffts         :      0.00s CPU      0.00s WALL (      36 calls)
-     fftw         :      3.03s CPU      3.01s WALL (   43584 calls)
-     davcio       :      0.02s CPU      0.03s WALL (     522 calls)
-     write_rec    :      0.02s CPU      0.04s WALL (      21 calls)
+     fftw         :      3.00s CPU      2.98s WALL (   43584 calls)
+     davcio       :      0.03s CPU      0.04s WALL (     522 calls)
+     write_rec    :      0.03s CPU      0.04s WALL (      21 calls)
  
  
-     PHONON       :     5.81s CPU         5.95s WALL
+     PHONON       :     5.76s CPU         5.94s WALL
 
  
-   This run was terminated on:  11:16:10  28Jul2016            
+   This run was terminated on:  16:31: 8  18Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

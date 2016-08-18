@@ -1,0 +1,26 @@
+ &control
+    calculation='scf',
+    restart_mode='from_scratch',
+    prefix='H2O_pbc',
+    pseudo_dir = '/home/nvarini/espresso_hdf5/espresso/pseudo/',
+    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/',
+    tprnfor = .TRUE.
+ /
+ &system
+    ibrav = 6, celldm(1) =20.0, celldm(3) = 1.200 
+    nat= 3, ntyp= 2,
+    ecutwfc = 25.0, ecutrho = 200.0,
+    occupations='smearing', smearing='gaussian', degauss=0.03,
+    assume_isolated = 'esm', esm_bc='pbc'
+ /
+ &electrons
+    mixing_beta = 0.3
+ /
+ATOMIC_SPECIES
+ H  1.00794  H.pbe-van_ak.UPF 
+ O  55.847   O.pbe-van_ak.UPF  
+ATOMIC_POSITIONS
+O        0.000000000   0.500000000   0.000000000    0   0   0
+H        0.043138813   0.431028632   0.043078297    0   0   0
+H        0.036635422   0.576406407   0.035949164
+K_POINTS gamma

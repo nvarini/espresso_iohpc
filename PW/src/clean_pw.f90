@@ -5,6 +5,9 @@
 ! in the root directory of the present distribution,
 ! or http://www.gnu.org/copyleft/gpl.txt .
 !
+! TB
+! included deallocation of forcefield of monopole 'forcemono'
+!
 !----------------------------------------------------------------------
 SUBROUTINE clean_pw( lflag )
   !----------------------------------------------------------------------
@@ -29,7 +32,7 @@ SUBROUTINE clean_pw( lflag )
   USE klist,                ONLY : deallocate_igk
   USE gvect,                ONLY : ig_l2g
   USE vlocal,               ONLY : strf, vloc
-  USE wvfct,                ONLY : igk, g2kin, et, wg, btype
+  USE wvfct,                ONLY : g2kin, et, wg, btype
   USE force_mod,            ONLY : force
   USE scf,                  ONLY : rho, v, vltot, rho_core, rhog_core, &
                                    vrs, kedtau, destroy_scf_type, vnew
@@ -41,10 +44,10 @@ SUBROUTINE clean_pw( lflag )
   USE uspp_param,           ONLY : upf
   USE m_gth,                ONLY : deallocate_gth
   USE ldaU,                 ONLY : deallocate_ldaU
-  USE extfield,             ONLY : forcefield
+  USE extfield,             ONLY : forcefield, forcemono
   USE fft_base,             ONLY : dfftp, dffts  
-  USE stick_base,           ONLY : sticks_deallocate
-  USE fft_types,            ONLY : fft_dlay_deallocate
+  USE fft_base,             ONLY : pstickdealloc
+  USE fft_types,            ONLY : fft_type_deallocate
   USE spin_orb,             ONLY : lspinorb, fcoef
   USE noncollin_module,     ONLY : deallocate_noncol
   USE dynamics_module,      ONLY : deallocate_dyn_vars
@@ -84,6 +87,7 @@ SUBROUTINE clean_pw( lflag )
      !
      IF ( ALLOCATED( force ) )      DEALLOCATE( force )
      IF ( ALLOCATED( forcefield ) ) DEALLOCATE( forcefield )
+     IF ( ALLOCATED( forcemono ) )  DEALLOCATE( forcemono )
      IF ( ALLOCATED( irt ) )        DEALLOCATE( irt )
      !
      CALL dealloca_london()
@@ -142,7 +146,6 @@ SUBROUTINE clean_pw( lflag )
   !
   ! ... arrays allocated in allocate_nlpot.f90 ( and never deallocated )
   !
-  IF ( ALLOCATED( igk ) )        DEALLOCATE( igk )
   IF ( ALLOCATED( g2kin ) )      DEALLOCATE( g2kin )
   IF ( ALLOCATED( qrad ) )       DEALLOCATE( qrad )
   IF ( ALLOCATED( tab ) )        DEALLOCATE( tab )
@@ -153,7 +156,7 @@ SUBROUTINE clean_pw( lflag )
   !
   CALL deallocate_igk ( )
   CALL deallocate_uspp() 
-  CALL deallocate_gth(.true.) 
+  CALL deallocate_gth( lflag ) 
   CALL deallocate_noncol() 
   !
   ! ... arrays allocated in init_run.f90 ( and never deallocated )
@@ -169,12 +172,12 @@ SUBROUTINE clean_pw( lflag )
   !
   ! ... fft structures allocated in data_structure.f90  
   !
-  CALL fft_dlay_deallocate( dfftp )
-  CALL fft_dlay_deallocate( dffts )
+  CALL fft_type_deallocate( dfftp )
+  CALL fft_type_deallocate( dffts )
   !
   ! ... stick-owner matrix allocated in sticks_base
   !
-  CALL sticks_deallocate()
+  CALL pstickdealloc()
   !
   ! ... arrays allocated for dynamics
   !

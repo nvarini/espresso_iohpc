@@ -1,0 +1,37 @@
+ &control
+    calculation = 'scf'
+    prefix='Fe',
+    pseudo_dir = '/home/nvarini/espresso_hdf5/espresso/pseudo/',
+    outdir='/home/nvarini/espresso_hdf5/espresso/tempdir/'
+ /
+ &system    
+    ibrav=  3, 
+    celldm(1) =5.42, 
+    nat=  1, 
+    ntyp= 1,
+    noncolin=.true.
+    lspinorb=.true.
+    starting_magnetization(1)=0.5,
+    occupations='smearing',
+    smearing='mp',
+    degauss=0.01,
+    ecutwfc=60.0, 
+    ecutrho=400.0,
+    angle1(1)=90.0
+    angle2(1)=0.0    
+    lda_plus_u=.true.
+    lda_plus_u_kind=1
+    Hubbard_U(1)=2.2
+    Hubbard_J(1,1)=1.75
+    Hubbard_J(2,1)=0.0
+ /
+ &electrons
+    conv_thr =  1.0d-10
+!    diagonalization='cg'
+ /
+ATOMIC_SPECIES
+Fe  0.0    Fe.rel-pbe-spn-rrkjus_psl.0.2.1.UPF
+ATOMIC_POSITIONS
+Fe  0.0000000   0.00000000   0.0  
+K_POINTS AUTOMATIC
+8 8 8 1 1 1 

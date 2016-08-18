@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:12: 0 
+     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:29:47 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -37,8 +37,8 @@
      Parallelization info
      --------------------
      sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
-     Min         237     111     36                 3426     1110     205
-     Max         238     112     37                 3429     1119     206
+     Min         237     111     36                 3426     1114     205
+     Max         238     112     37                 3429     1115     206
      Sum         475     223     73                 6855     2229     411
  
 
@@ -109,17 +109,9 @@
 
      Smooth grid:     2229 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.08 Mb     (     284,   18)
-        NL pseudopotentials             0.06 Mb     (     142,   26)
-        Each V/rho on FFT grid          0.16 Mb     (   10206)
-        Each G-vector array             0.03 Mb     (    3429)
-        G-vector shells                 0.00 Mb     (     119)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.31 Mb     (     284,   72)
-        Each subspace H/S matrix        0.08 Mb     (      72,   72)
-        Each <psi_i|beta_j> matrix      0.01 Mb     (      26,   2,   18)
-        Arrays for rho mixing           1.25 Mb     (   10206,    8)
+     Estimated max dynamical RAM per process >       7.44Mb
+
+     Estimated total allocated dynamical RAM >      14.89Mb
 
      Check: negative/imaginary core charge=   -0.000004    0.000000
 
@@ -136,19 +128,19 @@
 
      iteration #  1     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  1.00E-02,  avg # of iterations =  5.5
+     ethr =  1.00E-02,  avg # of iterations =  5.0
 
      Threshold (ethr) on eigenvalues was too large:
      Diagonalizing with lowered threshold
 
      Davidson diagonalization with overlap
-     ethr =  2.54E-05,  avg # of iterations =  2.5
+     ethr =  2.53E-05,  avg # of iterations =  3.0
 
      total cpu time spent up to now is        0.7 secs
 
-     total energy              =     -69.50302385 Ry
-     Harris-Foulkes estimate   =     -69.50464095 Ry
-     estimated scf accuracy    <       0.00285863 Ry
+     total energy              =     -69.50302080 Ry
+     Harris-Foulkes estimate   =     -69.50464187 Ry
+     estimated scf accuracy    <       0.00286353 Ry
 
      iteration #  2     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -156,19 +148,19 @@
 
      total cpu time spent up to now is        0.8 secs
 
-     total energy              =     -69.50359628 Ry
-     Harris-Foulkes estimate   =     -69.50389886 Ry
-     estimated scf accuracy    <       0.00051970 Ry
+     total energy              =     -69.50359546 Ry
+     Harris-Foulkes estimate   =     -69.50390011 Ry
+     estimated scf accuracy    <       0.00052305 Ry
 
      iteration #  3     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  5.20E-06,  avg # of iterations =  2.0
+     ethr =  5.23E-06,  avg # of iterations =  2.0
 
      total cpu time spent up to now is        0.9 secs
 
-     total energy              =     -69.50371006 Ry
-     Harris-Foulkes estimate   =     -69.50371596 Ry
-     estimated scf accuracy    <       0.00002203 Ry
+     total energy              =     -69.50371008 Ry
+     Harris-Foulkes estimate   =     -69.50371592 Ry
+     estimated scf accuracy    <       0.00002200 Ry
 
      iteration #  4     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
@@ -182,7 +174,7 @@
 
      iteration #  5     ecut=    30.00 Ry     beta=0.70
      Davidson diagonalization with overlap
-     ethr =  2.20E-10,  avg # of iterations =  3.0
+     ethr =  2.42E-10,  avg # of iterations =  3.0
 
      total cpu time spent up to now is        1.1 secs
 
@@ -192,7 +184,7 @@
 
      9.3170   9.3170  13.3104  13.3104  13.5795  13.5795  14.7740  14.7740
     16.0687  16.0687  16.6619  16.6619  31.1505  31.1505  35.9702  35.9702
-    39.8080  39.8080
+    39.8080  39.8081
 
           k = 0.2500-0.2500 0.7500 (   283 PWs)   bands (ev):
 
@@ -204,13 +196,13 @@
 
 !    total energy              =     -69.50371199 Ry
      Harris-Foulkes estimate   =     -69.50371200 Ry
-     estimated scf accuracy    <          4.9E-09 Ry
+     estimated scf accuracy    <          5.1E-09 Ry
 
      The total energy is the sum of the following terms:
 
-     one-electron contribution =      17.02511326 Ry
-     hartree contribution      =       3.82830146 Ry
-     xc contribution           =     -28.56279914 Ry
+     one-electron contribution =      17.02511107 Ry
+     hartree contribution      =       3.82830582 Ry
+     xc contribution           =     -28.56280130 Ry
      ewald contribution        =     -61.79059399 Ry
      smearing contrib. (-TS)   =      -0.00373359 Ry
 
@@ -225,61 +217,63 @@
 
      entering subroutine stress ...
 
-          total   stress  (Ry/bohr**3)                   (kbar)     P=  -23.04
-  -0.00015664  -0.00000000  -0.00000000        -23.04     -0.00     -0.00
-  -0.00000000  -0.00015664   0.00000000         -0.00    -23.04      0.00
-  -0.00000000   0.00000000  -0.00015664         -0.00      0.00    -23.04
+          total   stress  (Ry/bohr**3)                   (kbar)     P=  -23.03
+  -0.00015655   0.00000000   0.00000000        -23.03      0.00      0.00
+   0.00000000  -0.00015655  -0.00000000          0.00    -23.03     -0.00
+   0.00000000  -0.00000000  -0.00015655          0.00     -0.00    -23.03
 
 
      Writing output data file platinum.save
  
-     init_run     :      0.46s CPU      0.47s WALL (       1 calls)
-     electrons    :      0.51s CPU      0.53s WALL (       1 calls)
+     init_run     :      0.45s CPU      0.46s WALL (       1 calls)
+     electrons    :      0.53s CPU      0.54s WALL (       1 calls)
      forces       :      0.03s CPU      0.03s WALL (       1 calls)
-     stress       :      0.13s CPU      0.14s WALL (       1 calls)
+     stress       :      0.14s CPU      0.14s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.21s CPU      0.22s WALL (       6 calls)
+     c_bands      :      0.22s CPU      0.22s WALL (       6 calls)
      sum_band     :      0.18s CPU      0.19s WALL (       6 calls)
      v_of_rho     :      0.01s CPU      0.01s WALL (       6 calls)
-     newd         :      0.11s CPU      0.12s WALL (       6 calls)
+     newd         :      0.12s CPU      0.12s WALL (       6 calls)
      mix_rho      :      0.01s CPU      0.01s WALL (       6 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      30 calls)
-     cegterg      :      0.19s CPU      0.20s WALL (      12 calls)
+     cegterg      :      0.21s CPU      0.21s WALL (      12 calls)
 
      Called by sum_band:
      sum_band:bec :      0.01s CPU      0.01s WALL (      12 calls)
      addusdens    :      0.12s CPU      0.13s WALL (       6 calls)
 
      Called by *egterg:
-     h_psi        :      0.14s CPU      0.15s WALL (      46 calls)
+     h_psi        :      0.15s CPU      0.15s WALL (      46 calls)
      s_psi        :      0.01s CPU      0.01s WALL (      46 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      32 calls)
      cdiaghg      :      0.04s CPU      0.04s WALL (      42 calls)
 
      Called by h_psi:
+     h_psi:pot    :      0.15s CPU      0.15s WALL (      46 calls)
+     h_psi:calbec :      0.01s CPU      0.01s WALL (      46 calls)
      add_vuspsi   :      0.01s CPU      0.01s WALL (      46 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (      68 calls)
      fft          :      0.03s CPU      0.03s WALL (     149 calls)
      ffts         :      0.00s CPU      0.00s WALL (      48 calls)
-     fftw         :      0.12s CPU      0.13s WALL (    2860 calls)
+     fftw         :      0.13s CPU      0.13s WALL (    2872 calls)
      interpolate  :      0.01s CPU      0.01s WALL (      48 calls)
  
      Parallel routines
-     fft_scatter  :      0.04s CPU      0.05s WALL (    3057 calls)
+     fft_scatter  :      0.04s CPU      0.05s WALL (    3069 calls)
  
-     PWSCF        :     1.25s CPU         1.30s WALL
+     PWSCF        :     1.28s CPU         1.30s WALL
 
  
-   This run was terminated on:  11:12: 1  28Jul2016            
+   This run was terminated on:  16:29:48  18Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

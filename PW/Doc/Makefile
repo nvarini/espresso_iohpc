@@ -1,5 +1,5 @@
-HELPDOC=../../dev-tools/helpdoc
-
+VERSION = svn
+HELPDOC = ../../dev-tools/helpdoc --version $(VERSION)
 LATEX   = pdflatex
 LATEX2HTML = latex2html
 
@@ -60,7 +60,7 @@ link_input_xx:
 	echo ; \
 	fi) ; fi)
 
-INPUT_PW.html: %.html: %.def
+INPUT_PW.html: %.html: %.def input_xx.xsl
 	$(HELPDOC) $<
 INPUT_PW.txt: %.txt: %.def
 	$(HELPDOC) $<

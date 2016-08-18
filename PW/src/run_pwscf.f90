@@ -120,7 +120,12 @@ SUBROUTINE run_pwscf ( exit_status )
 #endif
         ! workaround for the case of a single k-point
         twfcollect = .FALSE.
-        CALL punch( 'config' )
+#if defined __HDF5
+        filename_hdf5 = trim(tmp_dir)//"evc.hdf5_" // trim(nd_nmbr)
+        CALL punch('config', filename_hdf5, evc_hdf5_write)
+#else
+        CALL punch('config')
+#endif
         RETURN
      ENDIF
      !

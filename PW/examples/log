@@ -361,8 +361,8 @@ of silicon and of a few small molecules using hybrid functionals.
   running o2 molecule.. done
   cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
 
-N2 :  -221.043
-O2 :  -121.856
+N2 :  -221.042
+O2 :  -121.855
 CO :  -253.242
 
   Exchange and correlation is:  hse ...
@@ -380,8 +380,8 @@ CO :  -253.242
   cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
 
 N2 :  -220.508
-O2 :  -121.74
-CO :  -253.169
+O2 :  -121.739
+CO :  -253.17
 
   Exchange and correlation is:  gaupbe ...
   running oxygen atom.. done
@@ -397,8 +397,8 @@ CO :  -253.169
   running o2 molecule.. done
   cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
 
-N2 :  -220.332
-O2 :  -120.538
+N2 :  -220.325
+O2 :  -120.539
 CO :  -252.053
 
 /home/nvarini/espresso_hdf5/espresso/PW/examples/EXX_example : done
@@ -440,8 +440,8 @@ using the three available sets of boundary conditions.
 
   running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
 
-  running the calculation for H2O without ESM...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+  running the calculation for H2O without ESM...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
 Error condition encountered during test: exit status = 1
 Aborting
 
@@ -478,8 +478,8 @@ by editing the script and addind/modifying the variable called BOX_SIZE_LIST
   cleaning /home/nvarini/espresso_hdf5/espresso/tempdir... done
 
  eigenvalues of N atom
-16    -19.9150  -8.2866  -8.2866  -8.2866
-16    -15.3304  -4.1270  -4.1270  -4.1270
+16    -19.9149  -8.2866  -8.2866  -8.2866
+16    -15.3303  -4.1270  -4.1269  -4.1269
 
  to be compared with the reference values
 12    -19.8776  -8.2463  -8.2463  -8.2463

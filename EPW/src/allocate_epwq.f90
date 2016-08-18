@@ -12,13 +12,13 @@
   !----------------------------------------------------------------------- 
   subroutine allocate_epwq
   !-----------------------------------------------------------------------
-  !
-  ! dynamical allocation of arrays: quantities needed for the linear
-  ! response problem
-  !
-  ! RM - Nov/Dec 2014 
-  ! Imported the noncolinear case implemented by xlzhang
-  !
+  !!
+  !! Dynamical allocation of arrays: quantities needed for the linear
+  !! response problem
+  !!
+  !! RM - Nov/Dec 2014 
+  !! Imported the noncolinear case implemented by xlzhang
+  !!
   USE ions_base,    ONLY : nat, ntyp => nsp
   USE pwcom,        ONLY : npwx, nbnd, ngm, nspin, nks
   USE noncollin_module, ONLY : noncolin, npol
@@ -41,7 +41,7 @@
 ! SP creation of ffts
   USE units_ph,     ONLY : this_dvkb3_is_on_file, this_pcxpsi_is_on_file
   USE modes,        ONLY : u, npert, name_rap_mode, num_rap_mode
-  USE fft_base,     ONLY : dffts
+  USE fft_base,     ONLY : dtgs
   USE klist,        ONLY : nks
 
   implicit none
@@ -72,8 +72,10 @@
   ALLOCATE (vlocq ( ngm, ntyp))    
 ! SP: nrxx is not used in QE 5 ==> tg_nnr is the maximum among nnr
 !     This SHOULD have the same dim as nrxx had.
-!  ALLOCATE (dmuxc ( nrxx, nspin, nspin))    
-  ALLOCATE (dmuxc ( dffts%tg_nnr, nspin, nspin))    
+!  ALLOCATE (dmuxc ( nrxx, nspin, nspin))  
+! SP: Again a new change in QE (03/08/2016)  
+!  ALLOCATE (dmuxc ( dffts%tg_nnr, nspin, nspin))    
+  ALLOCATE (dmuxc ( dtgs%tg_nnr, nspin, nspin))    
   !
   ALLOCATE (eigqts ( nat))    
   ALLOCATE (rtau ( 3, 48, nat))    

@@ -53,11 +53,12 @@ SUBROUTINE punch( what, filename, hdf5desc )
   ! ... if wavefunctions are stored in "distributed" format,
   ! ... save here wavefunctions to file if never saved before
   !
+  write(mpime+100,*) what
   IF ( .NOT. twfcollect .AND. nks == 1 ) THEN
 #if defined __HDF5
     IF(present(filename)) THEN
       IF (io_level < 1) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )
-      CALL save_buffer ( evc, nwordwfc, iunwfc, nks, filename, hdf5desc, 23 )
+      CALL save_buffer ( evc, nwordwfc, iunwfc, nks, filename, hdf5desc )
       IF (io_level < 1) CLOSE ( UNIT=iunwfc, STATUS='keep' )
     ELSE
       IF (io_level < 1) CALL diropn( iunwfc, 'wfc', 2*nwordwfc, exst )

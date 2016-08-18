@@ -1,5 +1,5 @@
 
-     Program Q2R v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:47:55 
+     Program Q2R v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:59:53 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -26,9 +26,9 @@
      reading grid info from file alas.dyn0    
   reading force constants from file alas.dyn1
  macroscopic fields = T
-  13.74420   0.00000   0.00000
-   0.00000  13.74420   0.00000
-   0.00000   0.00000  13.74420
+  13.74422   0.00000   0.00000
+   0.00000  13.74422   0.00000
+   0.00000   0.00000  13.74422
   na=            1
    1.88265   0.00000   0.00000
    0.00000   1.88265   0.00000
@@ -121,10 +121,10 @@
 
       fft-check success (sum of imaginary terms < 10^-12)
  
-     Q2R          :     0.01s CPU         0.02s WALL
+     Q2R          :     0.02s CPU         0.02s WALL
 
  
-   This run was terminated on:  11:47:55  28Jul2016            
+   This run was terminated on:  16:59:53  18Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

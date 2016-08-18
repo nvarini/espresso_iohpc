@@ -9,21 +9,20 @@
   !-----------------------------------------------------------------------
   subroutine nesting_fn_q (iq )
   !-----------------------------------------------------------------------
-  !
-  !  compute the imaginary part of the phonon self energy due to electron-
-  !  phonon interaction in the Migdal approximation. This corresponds to 
-  !  the phonon linewidth (half width). The phonon frequency is taken into
-  !  account in the energy selection rule.
-  !
-  !  Use matrix elements, electronic eigenvalues and phonon frequencies
-  !  from ep-wannier interpolation. 
-  !
+  !!
+  !!  compute the imaginary part of the phonon self energy due to electron-
+  !!  phonon interaction in the Migdal approximation. This corresponds to 
+  !!  the phonon linewidth (half width). The phonon frequency is taken into
+  !!  account in the energy selection rule.
+  !!
+  !!  Use matrix elements, electronic eigenvalues and phonon frequencies
+  !!  from ep-wannier interpolation. 
+  !!
   !-----------------------------------------------------------------------
   USE kinds,     only : DP
   USE io_global, ONLY : stdout
   use epwcom,    only : nbndsub, fsthick, &
                         eptemp, ngaussw, degaussw,     &
-                        etf_mem, &
                         nsmear, delta_smear, efermi_read, fermi_energy
   use pwcom,     only : nelec, ef, isk
   use elph2,     only : ibndmax, ibndmin, etf, &
@@ -33,17 +32,15 @@
 #ifdef __NAG
   USE f90_unix_io,  ONLY : flush
 #endif
-#ifdef __PARA
   use mp,        only : mp_barrier,mp_sum
-  use mp_global, only : me_pool,inter_pool_comm,my_pool_id
-#endif
+  use mp_global, only : inter_pool_comm
   !
   implicit none
   !
-  integer :: ik, ikk, ikq, ibnd, jbnd, nrec, iq, fermicount, ismear
+  integer :: ik, ikk, ikq, ibnd, jbnd, iq, fermicount, ismear
   real(kind=DP) :: ekk, ekq, ef0, &
-     weight, w0g1, w0g2, w0gauss, wgauss, dosef, dos_ef, gamma, &
-     degaussw0, eptemp0
+     weight, w0g1, w0g2, w0gauss, dosef, dos_ef, gamma, &
+     degaussw0
   !
   real(kind=DP), external :: efermig
   !
@@ -57,7 +54,7 @@
           WRITE(stdout, '(/5x,a,f10.6,a)' ) &
           'Fermi Surface thickness = ', fsthick * ryd2ev, ' eV'
      WRITE(stdout, '(/5x,a,f10.6,a)' ) &
-          'Golden Rule strictly enforced with T = ',eptemp(1) * ryd2ev, ' eV'
+          'Golden Rule strictly enforced with T = ',eptemp * ryd2ev, ' eV'
   ENDIF
   !
   ! SP: The Gamma function needs to be put to 0 for each q
@@ -67,7 +64,6 @@
   DO ismear = 1, nsmear
   !
   degaussw0 = (ismear-1)*delta_smear+degaussw
-  eptemp0 = (ismear-1)*delta_smear+eptemp(1)
   !
   ! Fermi level and corresponding DOS
   !
@@ -83,10 +79,10 @@
   !   N(Ef) in the equation for lambda is the DOS per spin
   dosef = dosef / two
   !
-IF (iq.eq.1) then
-  WRITE (stdout, 100) degaussw0 * ryd2ev, ngaussw
-  WRITE (stdout, 101) dosef / ryd2ev, ef0 * ryd2ev
-ENDIF
+  IF (iq.eq.1) then
+    WRITE (stdout, 100) degaussw0 * ryd2ev, ngaussw
+    WRITE (stdout, 101) dosef / ryd2ev, ef0 * ryd2ev
+  ENDIF
   !
   !
   CALL start_clock('nesting')
@@ -133,15 +129,12 @@ ENDIF
      ENDIF ! endif fsthick
      !
   ENDDO ! loop on k
-#ifdef __PARA
   !
   ! collect contributions from all pools (sum over k-points)
   ! this finishes the integral over the BZ  (k)
   !
   CALL mp_sum(gamma,inter_pool_comm) 
   CALL mp_sum(fermicount, inter_pool_comm)
-  !
-#endif
   !
   WRITE(stdout,'(/5x,"iq = ",i5," coord.: ", 3f9.5, " wt: ", f9.5)') iq, xqf(:,iq) , wqf(iq)
   WRITE(stdout,'(5x,a)') repeat('-',67)
@@ -167,41 +160,37 @@ ENDIF
   !-----------------------------------------------------------------------
   subroutine nesting_fn_k ( ik )
   !-----------------------------------------------------------------------
-  !
-  !  Compute the imaginary part of the phonon self energy due to electron-
-  !  phonon interaction in the Migdal approximation. This corresponds to 
-  !  the phonon linewidth (half width). The phonon frequency is taken into
-  !  account in the energy selection rule.
-  !
+  !!
+  !!  Compute the imaginary part of the phonon self energy due to electron-
+  !!  phonon interaction in the Migdal approximation. This corresponds to 
+  !!  the phonon linewidth (half width). The phonon frequency is taken into
+  !!  account in the energy selection rule.
+  !!
   !-----------------------------------------------------------------------
   USE kinds,     only : DP
   USE io_global, ONLY : stdout
   use epwcom,    only : nbndsub, fsthick, &
                         eptemp, ngaussw, degaussw,     &
-                        etf_mem, &
                         nsmear, delta_smear, efermi_read, fermi_energy
   use pwcom,     only : nelec, ef, isk
   use elph2,     only : ibndmax, ibndmin, etf, etf_k, &
                         wkf, xqf, wqf, nkqf, nqf, nqtotf, &
-                        nkf, nkqtotf, xqf, gamma_nest
+                        nkqtotf, xqf, gamma_nest
   USE constants_epw, ONLY : ryd2ev, two, pi, zero
 #ifdef __NAG
   USE f90_unix_io,  ONLY : flush
 #endif
-#ifdef __PARA
   use mp,        only : mp_barrier,mp_sum, mp_bcast
-  use mp_global, only : me_pool,inter_pool_comm,my_pool_id
+  use mp_global, only : inter_pool_comm
   USE mp_world,  ONLY : mpime
   USE io_global, ONLY : ionode_id
-#endif
   !
   implicit none
   !
-  integer :: ik, ikk, ikq, ibnd, jbnd, nrec, iq, fermicount, ismear, &
+  integer :: ik, ikk, ikq, ibnd, jbnd, iq, fermicount, ismear, &
              lower_bnd, upper_bnd
   real(kind=DP) :: ekk, ekq, ef0, &
-     weight, w0g1, w0g2, w0gauss, wgauss, dosef, dos_ef,  &
-     degaussw0, eptemp0
+     weight, w0g1, w0g2, w0gauss, dosef, degaussw0
   real(kind=DP), external :: efermig_seq, dos_ef_seq
   REAL(kind=DP), ALLOCATABLE :: xqf_all(:,:), wqf_all(:,:)
   !
@@ -217,7 +206,7 @@ ENDIF
           WRITE(stdout, '(/5x,a,f10.6,a)' ) &
           'Fermi Surface thickness = ', fsthick * ryd2ev, ' eV'
      WRITE(stdout, '(/5x,a,f10.6,a)' ) &
-          'Golden Rule strictly enforced with T = ',eptemp(1) * ryd2ev, ' eV'
+          'Golden Rule strictly enforced with T = ',eptemp * ryd2ev, ' eV'
      IF ( .not. ALLOCATED (gamma_nest) )    ALLOCATE( gamma_nest (nqtotf,nsmear) )
      gamma_nest(:,:)   = zero
   ENDIF
@@ -226,7 +215,6 @@ ENDIF
   DO ismear = 1, nsmear
     !
     degaussw0 = (ismear-1)*delta_smear+degaussw
-    eptemp0 = (ismear-1)*delta_smear+eptemp(1)
     !
     ! Fermi level and corresponding DOS
     !
@@ -235,26 +223,18 @@ ENDIF
     IF ( efermi_read ) THEN
        ef0 = fermi_energy 
     ELSE
-#ifdef __PARA
        IF (mpime .eq. ionode_id) THEN
-#endif
-       ef0 = efermig_seq(etf_k, nbndsub, nkqf, nelec, wkf, degaussw0, ngaussw, 0, isk)
-#ifdef __PARA
+         ef0 = efermig_seq(etf_k, nbndsub, nkqf, nelec, wkf, degaussw0, ngaussw, 0, isk)
        ENDIF
        CALL mp_bcast (ef0, ionode_id, inter_pool_comm)
-#endif 
     ENDIF
     !
-#ifdef __PARA
     IF (mpime .eq. ionode_id) THEN
-#endif
       dosef = dos_ef_seq (ngaussw, degaussw0, ef0, etf_k, wkf, nkqf, nbndsub)
       !   N(Ef) in the equation for lambda is the DOS per spin
       dosef = dosef / two
-#ifdef __PARA
     ENDIF
     CALL mp_bcast (dosef, ionode_id, inter_pool_comm)
-#endif
     !
     IF (ik.eq.1) then
       WRITE (stdout, 100) degaussw0 * ryd2ev, ngaussw
@@ -319,7 +299,7 @@ ENDIF
     xqf_all(:,:) = zero
     wqf_all(:,:) = zero
     ! 
-#ifdef __PARA
+#ifdef __MPI
     !
     ! note that poolgather2 works with the doubled grid (k and k+q)
     !

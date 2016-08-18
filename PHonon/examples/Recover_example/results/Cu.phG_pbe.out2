@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:45: 0 
+     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:11:23 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -135,7 +135,7 @@
      Representation     1      3 modes -T_1u G_15  G_4-  To be done
 
 
-     PHONON       :     2.01s CPU         2.08s WALL
+     PHONON       :     2.06s CPU         2.10s WALL
 
 
 
@@ -143,26 +143,26 @@
 
      Self-consistent Calculation
  
-     Pert. #  1: Fermi energy shift (Ry) =     5.1699E-26    -6.1224E-41
-     Pert. #  2: Fermi energy shift (Ry) =     1.9387E-26    -3.0612E-41
-     Pert. #  3: Fermi energy shift (Ry) =     3.4466E-26    -1.5306E-40
+     Pert. #  1: Fermi energy shift (Ry) =     1.7233E-26    -6.1224E-41
+     Pert. #  2: Fermi energy shift (Ry) =     0.0000E+00    -3.0612E-41
+     Pert. #  3: Fermi energy shift (Ry) =    -1.7233E-26    -1.5306E-40
 
-      iter #   3 total cpu time :     5.0 secs   av.it.:  10.0
+      iter #   3 total cpu time :     5.1 secs   av.it.:  10.0
       thresh= 1.681E-05 alpha_mix =  0.700 |ddv_scf|^2 =  2.381E-09
  
-     Pert. #  1: Fermi energy shift (Ry) =    -1.7233E-26    -7.6530E-42
-     Pert. #  2: Fermi energy shift (Ry) =     4.3082E-27     3.8265E-42
-     Pert. #  3: Fermi energy shift (Ry) =     0.0000E+00     0.0000E+00
+     Pert. #  1: Fermi energy shift (Ry) =     1.7233E-26    -7.6530E-42
+     Pert. #  2: Fermi energy shift (Ry) =     1.0771E-26     3.8265E-42
+     Pert. #  3: Fermi energy shift (Ry) =    -1.7233E-26     0.0000E+00
 
-      iter #   4 total cpu time :     7.9 secs   av.it.:   8.0
+      iter #   4 total cpu time :     8.0 secs   av.it.:   8.0
       thresh= 4.879E-06 alpha_mix =  0.700 |ddv_scf|^2 =  4.227E-13
  
-     Pert. #  1: Fermi energy shift (Ry) =     0.0000E+00     6.1224E-41
-     Pert. #  2: Fermi energy shift (Ry) =    -3.0158E-26     7.6530E-42
-     Pert. #  3: Fermi energy shift (Ry) =    -3.4466E-26    -4.5918E-41
+     Pert. #  1: Fermi energy shift (Ry) =     3.4466E-26     0.0000E+00
+     Pert. #  2: Fermi energy shift (Ry) =    -3.8774E-26    -2.2959E-41
+     Pert. #  3: Fermi energy shift (Ry) =     0.0000E+00     4.5918E-41
 
-      iter #   5 total cpu time :    10.7 secs   av.it.:   9.2
-      thresh= 6.501E-08 alpha_mix =  0.700 |ddv_scf|^2 =  5.499E-15
+      iter #   5 total cpu time :    10.8 secs   av.it.:   9.2
+      thresh= 6.501E-08 alpha_mix =  0.700 |ddv_scf|^2 =  5.497E-15
 
      End of self-consistent calculation
 
@@ -177,16 +177,16 @@
      q = (    0.000000000   0.000000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =      -0.112043 [THz] =      -3.737339 [cm-1]
-     freq (    2) =      -0.112043 [THz] =      -3.737339 [cm-1]
-     freq (    3) =      -0.112043 [THz] =      -3.737339 [cm-1]
+     freq (    1) =      -0.111462 [THz] =      -3.717967 [cm-1]
+     freq (    2) =      -0.111462 [THz] =      -3.717967 [cm-1]
+     freq (    3) =      -0.111462 [THz] =      -3.717967 [cm-1]
  **************************************************************************
 
      Mode symmetry, O_h (m-3m)  point group:
 
      freq (  1 -  3) =         -3.7  [cm-1]   --> T_1u G_15  G_4- I  
  
-     PHONON       :    10.61s CPU        10.81s WALL
+     PHONON       :    10.62s CPU        10.89s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.10s CPU      0.10s WALL (       1 calls)
@@ -195,65 +195,65 @@
      phq_init     :      0.59s CPU      0.60s WALL (       1 calls)
      set_drhoc    :      0.34s CPU      0.34s WALL (       1 calls)
      init_vloc    :      0.00s CPU      0.00s WALL (       1 calls)
-     init_us_1    :      0.38s CPU      0.38s WALL (       1 calls)
+     init_us_1    :      0.39s CPU      0.40s WALL (       1 calls)
      newd         :      0.03s CPU      0.03s WALL (       1 calls)
      drho         :      0.11s CPU      0.12s WALL (       1 calls)
  
      DYNAMICAL MATRIX:
-     phqscf       :      8.59s CPU      8.73s WALL (       1 calls)
+     phqscf       :      8.57s CPU      8.79s WALL (       1 calls)
      dynmatrix    :      0.00s CPU      0.00s WALL (       1 calls)
  
-     phqscf       :      8.59s CPU      8.73s WALL (       1 calls)
-     solve_linter :      8.58s CPU      8.71s WALL (       1 calls)
+     phqscf       :      8.57s CPU      8.79s WALL (       1 calls)
+     solve_linter :      8.56s CPU      8.77s WALL (       1 calls)
      drhodv       :      0.01s CPU      0.01s WALL (       1 calls)
  
  
  
-     phqscf       :      8.59s CPU      8.73s WALL (       1 calls)
-     solve_linter :      8.58s CPU      8.71s WALL (       1 calls)
+     phqscf       :      8.57s CPU      8.79s WALL (       1 calls)
+     solve_linter :      8.56s CPU      8.77s WALL (       1 calls)
  
-     solve_linter :      8.58s CPU      8.71s WALL (       1 calls)
+     solve_linter :      8.56s CPU      8.77s WALL (       1 calls)
      ortho        :      0.01s CPU      0.01s WALL (      90 calls)
-     cgsolve      :      0.78s CPU      0.81s WALL (      90 calls)
+     cgsolve      :      0.79s CPU      0.81s WALL (      90 calls)
      incdrhoscf   :      0.05s CPU      0.05s WALL (      90 calls)
      addusddens   :      0.23s CPU      0.23s WALL (       4 calls)
-     vpsifft      :      0.04s CPU      0.05s WALL (      90 calls)
+     vpsifft      :      0.05s CPU      0.05s WALL (      90 calls)
      dv_of_drho   :      0.12s CPU      0.14s WALL (       9 calls)
      mix_pot      :      0.03s CPU      0.06s WALL (       3 calls)
      ef_shift     :      0.02s CPU      0.02s WALL (       4 calls)
      localdos     :      0.05s CPU      0.05s WALL (       1 calls)
-     psymdvscf    :      1.44s CPU      1.44s WALL (       3 calls)
-     newdq        :      0.39s CPU      0.39s WALL (       3 calls)
-     adddvscf     :      0.00s CPU      0.00s WALL (      90 calls)
+     psymdvscf    :      1.46s CPU      1.47s WALL (       3 calls)
+     newdq        :      0.34s CPU      0.34s WALL (       3 calls)
+     adddvscf     :      0.01s CPU      0.00s WALL (      90 calls)
      drhodvus     :      0.00s CPU      0.00s WALL (       1 calls)
  
  
-     cgsolve      :      0.78s CPU      0.81s WALL (      90 calls)
-     ch_psi       :      0.75s CPU      0.79s WALL (    1016 calls)
+     cgsolve      :      0.79s CPU      0.81s WALL (      90 calls)
+     ch_psi       :      0.76s CPU      0.78s WALL (    1016 calls)
  
-     ch_psi       :      0.75s CPU      0.79s WALL (    1016 calls)
+     ch_psi       :      0.76s CPU      0.78s WALL (    1016 calls)
      last         :      0.06s CPU      0.07s WALL (    1016 calls)
  
      add_vuspsi   :      0.02s CPU      0.02s WALL (    1016 calls)
  
      incdrhoscf   :      0.05s CPU      0.05s WALL (      90 calls)
-     addusdbec    :      0.00s CPU      0.01s WALL (     120 calls)
+     addusdbec    :      0.01s CPU      0.01s WALL (     120 calls)
  
      drhodvus     :      0.00s CPU      0.00s WALL (       1 calls)
  
       General routines
      calbec       :      0.07s CPU      0.06s WALL (    2412 calls)
-     fft          :      0.19s CPU      0.20s WALL (     225 calls)
+     fft          :      0.18s CPU      0.20s WALL (     225 calls)
      ffts         :      0.00s CPU      0.01s WALL (      89 calls)
-     fftw         :      0.44s CPU      0.49s WALL (   12041 calls)
+     fftw         :      0.46s CPU      0.49s WALL (   12041 calls)
      davcio       :      0.01s CPU      0.03s WALL (     393 calls)
-     write_rec    :      0.01s CPU      0.03s WALL (       4 calls)
+     write_rec    :      0.00s CPU      0.03s WALL (       4 calls)
  
  
-     PHONON       :    10.61s CPU        10.81s WALL
+     PHONON       :    10.62s CPU        10.89s WALL
 
  
-   This run was terminated on:  11:45:11  28Jul2016            
+   This run was terminated on:  11:11:33   3Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program DYNMAT v.5.4.0 (svn rev. 12620M) starts on 28Jul2016 at 11:25:28 
+     Program DYNMAT v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:40:16 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -25,35 +25,35 @@
      Reading Dynamical Matrix from file dmat.co2
      ...Force constants read
      ...epsilon and Z* read
-     Acoustic Sum Rule: || Z*(ASR) - Z*(orig)|| =    4.846185E-01
-     Acoustic Sum Rule: ||dyn(ASR) - dyn(orig)||=    1.349952E+00
+     Acoustic Sum Rule: || Z*(ASR) - Z*(orig)|| =    4.846100E-01
+     Acoustic Sum Rule: ||dyn(ASR) - dyn(orig)||=    1.344721E+00
      A direction for q was not specified:TO-LO splitting will be absent
-     Max |d(i,j)-d*(j,i)| =  0.000273
-     Max |d(i,j)-d*(j,i)|/|d(i,j)|:   0.1771%
+     Max |d(i,j)-d*(j,i)| =  0.000272
+     Max |d(i,j)-d*(j,i)|/|d(i,j)|:   0.1768%
 
      Polarizability (A^3 units)
      multiply by 0.971500 for Clausius-Mossotti correction
-         3.208298    1.105310   -0.000272
-         1.105310    3.208298   -0.000272
-         0.000035    0.000035    2.126484
+         3.208339    1.105333   -0.000272
+         1.105333    3.208339   -0.000272
+         0.000036    0.000036    2.126503
 
      IR activities are in (D/A)^2/amu units
 
 # mode   [cm-1]    [THz]      IR
-    1   -851.18  -25.5176    0.0287
-    2    -27.74   -0.8315    0.0000
+    1   -849.30  -25.4614    0.0284
+    2    -27.68   -0.8297    0.0000
     3      0.09    0.0027    0.0000
-    4     19.57    0.5867    0.0000
-    5     80.45    2.4119    0.0000
-    6    591.78   17.7410    0.0449
-    7    622.35   18.6577    0.4203
-    8   1323.43   39.6755    0.0028
-    9   2354.53   70.5871   13.0956
+    4     19.53    0.5855    0.0000
+    5     80.28    2.4068    0.0000
+    6    590.62   17.7064    0.0445
+    7    622.18   18.6525    0.4203
+    8   1323.26   39.6703    0.0029
+    9   2354.42   70.5836   13.0966
  
-     DYNMAT       :     0.01s CPU         0.01s WALL
+     DYNMAT       :     0.00s CPU         0.01s WALL
 
  
-   This run was terminated on:  11:25:28  28Jul2016            
+   This run was terminated on:  16:40:16  18Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

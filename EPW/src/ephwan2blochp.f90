@@ -10,57 +10,52 @@
   !---------------------------------------------------------------------------
   subroutine ephwan2blochp ( nmodes, xxq, irvec, ndegen, nrr_q, cuf, epmatf, nbnd, nrr_k )
   !---------------------------------------------------------------------------
-  !
-  ! even though this is for phonons, I use the same notations
-  ! adopted for the electronic case (nmodes->nmodes etc)
-  !
+  !!
+  !! even though this is for phonons, I use the same notations
+  !! adopted for the electronic case (nmodes->nmodes etc)
+  !!
   USE kinds,         only : DP
   USE epwcom,        only : parallel_k, parallel_q, etf_mem
-  USE io_epw,        only : iunepmatwp
   USE elph2,         only : epmatwp
   USE constants_epw, ONLY : twopi, ci, czero
-  USE io_global,     ONLY : ionode
   USE io_files,      ONLY : prefix, tmp_dir
-#ifdef __PARA 
-  USE mp_global,     ONLY : inter_pool_comm, intra_pool_comm, mp_sum
+  USE io_epw,        ONLY : iunepmatwp
+  USE mp_global,     ONLY : mp_sum
   USE mp_world,      ONLY : world_comm
   USE parallel_include
-#endif
   implicit none
   !
   !  input variables
   !
-  integer :: nmodes, nrr_q, irvec ( 3, nrr_q), ndegen (nrr_q), nbnd, nrr_k
-  ! number of bands (possibly in tyhe optimal subspace)
-  ! number of WS points
-  ! coordinates of WS points
-  ! degeneracy of WS points
-  ! n of bands
-  ! n of electronic WS points
-  complex(kind=DP), allocatable :: epmatw ( :,:,:,:)
-  complex(kind=DP) :: cuf (nmodes, nmodes)  
-  ! e-p matrix in Wanner representation
-  ! rotation matrix U(k)
-  real(kind=DP) :: xxq(3)
-  ! kpoint for the interpolation (WARNING: this must be in crystal coord!)
-  !
-  !  output variables
-  !
-  complex(kind=DP) :: epmatf (nbnd, nbnd, nrr_k, nmodes)
-  ! e-p matrix in Bloch representation, fine grid
-  !
-  ! work variables 
+  INTEGER, INTENT (in) :: nmodes
+  !! Total number of modes
+  INTEGER, INTENT (in) :: nrr_q
+  !! Number of WS points
+  INTEGER, INTENT (in) :: irvec ( 3, nrr_q)
+  !! Coordinates of WS points
+  INTEGER, INTENT (in) :: ndegen (nrr_q)
+  !! Number of degeneracy of WS points
+  INTEGER, INTENT (in) :: nbnd
+  !! Number of bands
+  INTEGER, INTENT (in) ::  nrr_k
+  !! Number of electronic WS points
+  REAL(kind=DP) :: xxq(3)
+  !! Kpoint for the interpolation (WARNING: this must be in crystal coord!)
+  COMPLEX(kind=DP), INTENT (in) :: cuf (nmodes, nmodes)
+  !! e-p matrix in Wanner representation
+  COMPLEX(kind=DP), INTENT (out) :: epmatf (nbnd, nbnd, nrr_k, nmodes)
+  !! e-p matrix in Bloch representation, fine grid
+  ! 
+  ! Local variables 
   !
   character (len=256) :: filint
-  character (len=256) :: string 
-  logical :: exst
-  integer :: ibnd, jbnd, ir, ire, ir_start, ir_stop, imode,iunepmatwp2,ierr, i
-  integer ::  ip , test !, my_id
+  integer :: ir, ir_start, ir_stop, iunepmatwp2, ierr
   integer(kind=8) ::  lrepmatw,  lrepmatw2
   real(kind=DP) :: rdotk
   complex(kind=DP) :: eptmp( nbnd, nbnd, nrr_k, nmodes)
   complex(kind=DP) :: cfac(nrr_q)
-  complex(kind=DP):: aux( nbnd*nbnd*nrr_k*nmodes )
+  !complex(kind=DP):: aux( nbnd*nbnd*nrr_k*nmodes )
+  complex(kind=DP), allocatable :: epmatw ( :,:,:,:)
   !
   CALL start_clock('ephW2Bp')
   !----------------------------------------------------------
@@ -81,7 +76,7 @@
      CALL errore ('ephwan2blochp', 'Problem with parallel_k/q scheme', nrr_q)
   ENDIF
   !
-#ifdef __PARA
+#ifdef __MPI
   IF (.NOT. etf_mem) then
     ! Check for directory given by "outdir"
     !      
@@ -91,7 +86,7 @@
     IF( parallel_q ) CALL errore( 'ephwan2blochp', 'q-parallel+etf_mem=.false. is not supported',1 ) 
     !CALL MPI_COMM_RANK(world_comm,my_id,ierr)
   ENDIF
-#endif
+#endif  
   !
   eptmp = czero
   cfac(:) = czero
@@ -120,7 +115,7 @@
     lrepmatw2   = 2 * nbnd * nbnd * nrr_k * nmodes
     ! 
     DO ir = ir_start, ir_stop
-#ifdef __PARA
+#ifdef __MPI
       ! DEBUG: print*,'Process ',my_id,' do ',ir,'/ ',ir_stop
       !
       !  Direct read of epmatwp for this ir
@@ -160,13 +155,13 @@
     DEALLOCATE(epmatw)
   ENDIF
   !
-#ifdef __PARA
+#ifdef __MPI
   IF (parallel_k) CALL mp_sum(eptmp, world_comm)
   IF (.NOT. etf_mem) then
     CALL MPI_FILE_CLOSE(iunepmatwp2,ierr)
     IF( ierr /= 0 ) CALL errore( 'ephwan2blochp', 'error in MPI_FILE_CLOSE',1 )
   ENDIF  
-#endif
+#endif  
   !
   !----------------------------------------------------------
   !  STEP 4: un-rotate to Bloch space, fine grid
