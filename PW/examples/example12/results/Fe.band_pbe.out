@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:17:22 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:37:41 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -258,7 +258,7 @@ N of occupied +U levels =    7.186952
 
      ethr =  6.25E-13,  avg # of iterations = 25.1
 
-     total cpu time spent up to now is       25.9 secs
+     total cpu time spent up to now is       26.7 secs
 
      End of band structure calculation
 
@@ -750,54 +750,54 @@ N of occupied +U levels =    7.186952
 
      Writing output data file Fe.save
  
-     init_run     :      0.85s CPU      0.87s WALL (       1 calls)
-     electrons    :     23.75s CPU     23.99s WALL (       1 calls)
+     init_run     :      0.84s CPU      0.87s WALL (       1 calls)
+     electrons    :     24.47s CPU     24.79s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.11s CPU      0.11s WALL (       1 calls)
-     potinit      :      0.04s CPU      0.05s WALL (       1 calls)
+     potinit      :      0.04s CPU      0.04s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     23.75s CPU     23.99s WALL (       1 calls)
+     c_bands      :     24.46s CPU     24.78s WALL (       1 calls)
      v_of_rho     :      0.03s CPU      0.03s WALL (       1 calls)
      newd         :      0.09s CPU      0.10s WALL (       1 calls)
 
      Called by c_bands:
      init_us_2    :      0.03s CPU      0.03s WALL (     162 calls)
-     cegterg      :     22.10s CPU     22.27s WALL (     123 calls)
+     cegterg      :     21.91s CPU     22.13s WALL (     123 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :     13.58s CPU     13.76s WALL (    2238 calls)
-     s_psi        :      0.68s CPU      0.66s WALL (    2319 calls)
+     h_psi        :     13.50s CPU     13.70s WALL (    2238 calls)
+     s_psi        :      0.67s CPU      0.65s WALL (    2319 calls)
      g_psi        :      0.21s CPU      0.22s WALL (    2034 calls)
-     cdiaghg      :      4.79s CPU      4.78s WALL (    2115 calls)
+     cdiaghg      :      4.72s CPU      4.73s WALL (    2115 calls)
 
      Called by h_psi:
-     h_psi:pot    :     12.94s CPU     13.09s WALL (    2238 calls)
-     h_psi:calbec :      0.49s CPU      0.47s WALL (    2238 calls)
-     add_vuspsi   :      0.62s CPU      0.62s WALL (    2238 calls)
-     vhpsi        :      0.59s CPU      0.58s WALL (    2238 calls)
+     h_psi:pot    :     12.88s CPU     13.06s WALL (    2238 calls)
+     h_psi:calbec :      0.48s CPU      0.46s WALL (    2238 calls)
+     add_vuspsi   :      0.63s CPU      0.63s WALL (    2238 calls)
+     vhpsi        :      0.58s CPU      0.57s WALL (    2238 calls)
 
      General routines
-     calbec       :      0.52s CPU      0.50s WALL (    2319 calls)
+     calbec       :      0.51s CPU      0.49s WALL (    2319 calls)
      fft          :      0.01s CPU      0.01s WALL (      31 calls)
      ffts         :      0.00s CPU      0.00s WALL (       4 calls)
-     fftw         :      8.75s CPU      9.08s WALL (  122444 calls)
+     fftw         :      8.68s CPU      9.07s WALL (  122444 calls)
      interpolate  :      0.00s CPU      0.00s WALL (       4 calls)
      davcio       :      0.03s CPU      0.04s WALL (     243 calls)
  
      Parallel routines
-     fft_scatter  :      1.70s CPU      2.33s WALL (  122479 calls)
+     fft_scatter  :      1.71s CPU      2.40s WALL (  122479 calls)
 
      Hubbard U routines
-     vhpsi        :      0.59s CPU      0.58s WALL (    2238 calls)
+     vhpsi        :      0.58s CPU      0.57s WALL (    2238 calls)
  
-     PWSCF        :    25.80s CPU        26.10s WALL
+     PWSCF        :    26.51s CPU        26.89s WALL
 
  
-   This run was terminated on:  16:17:48  18Aug2016            
+   This run was terminated on:  14:38: 8  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

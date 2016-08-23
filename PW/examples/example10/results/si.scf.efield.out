@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:14:15 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:34:36 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -234,7 +234,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        6.6 secs
 
      total energy              =     -62.94975154 Ry
      Harris-Foulkes estimate   =     -62.99978773 Ry
@@ -267,7 +267,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is        8.4 secs
+     total cpu time spent up to now is        8.3 secs
 
      total energy              =     -62.94850201 Ry
      Harris-Foulkes estimate   =     -62.95595227 Ry
@@ -333,7 +333,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is       13.2 secs
+     total cpu time spent up to now is       13.1 secs
 
      total energy              =     -62.95344425 Ry
      Harris-Foulkes estimate   =     -62.95348979 Ry
@@ -366,7 +366,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is       15.3 secs
+     total cpu time spent up to now is       15.2 secs
 
      total energy              =     -62.95346044 Ry
      Harris-Foulkes estimate   =     -62.95346088 Ry
@@ -399,7 +399,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is       17.8 secs
+     total cpu time spent up to now is       17.6 secs
 
      total energy              =     -62.95346151 Ry
      Harris-Foulkes estimate   =     -62.95346145 Ry
@@ -432,7 +432,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is       19.8 secs
+     total cpu time spent up to now is       19.7 secs
 
      total energy              =     -62.95346155 Ry
      Harris-Foulkes estimate   =     -62.95346155 Ry
@@ -465,7 +465,7 @@ Ionic Dipole on Cartesian axes
            2   115.173552519665     
            3   115.173552519665     
 
-     total cpu time spent up to now is       22.3 secs
+     total cpu time spent up to now is       22.1 secs
 
      End of self-consistent calculation
 
@@ -801,50 +801,50 @@ Ionic Dipole on Cartesian axes
 
      Writing output data file silicon.save
  
-     init_run     :      0.55s CPU      0.57s WALL (       1 calls)
-     electrons    :     21.47s CPU     21.74s WALL (       1 calls)
+     init_run     :      0.54s CPU      0.56s WALL (       1 calls)
+     electrons    :     21.28s CPU     21.55s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      0.50s CPU      0.51s WALL (       1 calls)
+     wfcinit      :      0.49s CPU      0.51s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     16.17s CPU     16.39s WALL (       9 calls)
-     sum_band     :      1.93s CPU      1.93s WALL (       9 calls)
+     c_bands      :     16.11s CPU     16.28s WALL (       9 calls)
+     sum_band     :      1.86s CPU      1.91s WALL (       9 calls)
      v_of_rho     :      0.08s CPU      0.08s WALL (       9 calls)
      mix_rho      :      0.01s CPU      0.01s WALL (       9 calls)
 
      Called by c_bands:
-     init_us_2    :      0.33s CPU      0.33s WALL (    1197 calls)
-     cegterg      :     15.37s CPU     15.59s WALL (     567 calls)
+     init_us_2    :      0.33s CPU      0.32s WALL (    1197 calls)
+     cegterg      :     15.32s CPU     15.48s WALL (     567 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :     11.42s CPU     11.62s WALL (    2353 calls)
+     h_psi        :     11.37s CPU     11.54s WALL (    2353 calls)
      g_psi        :      0.21s CPU      0.21s WALL (    1723 calls)
-     cdiaghg      :      1.69s CPU      1.69s WALL (    2227 calls)
+     cdiaghg      :      1.68s CPU      1.68s WALL (    2227 calls)
 
      Called by h_psi:
-     h_psi:pot    :     11.38s CPU     11.54s WALL (    2353 calls)
-     h_psi:calbec :      0.74s CPU      0.71s WALL (    2353 calls)
-     add_vuspsi   :      0.63s CPU      0.64s WALL (    2353 calls)
+     h_psi:pot    :     11.34s CPU     11.46s WALL (    2353 calls)
+     h_psi:calbec :      0.74s CPU      0.70s WALL (    2353 calls)
+     add_vuspsi   :      0.62s CPU      0.63s WALL (    2353 calls)
 
      General routines
-     calbec       :      0.74s CPU      0.71s WALL (    2353 calls)
-     fft          :      0.03s CPU      0.03s WALL (     100 calls)
-     fftw         :     10.66s CPU     10.44s WALL (   67878 calls)
+     calbec       :      0.74s CPU      0.70s WALL (    2353 calls)
+     fft          :      0.02s CPU      0.03s WALL (     100 calls)
+     fftw         :     10.63s CPU     10.33s WALL (   67878 calls)
  
      Parallel routines
-     fft_scatter  :      2.45s CPU      2.60s WALL (   67978 calls)
+     fft_scatter  :      2.40s CPU      2.49s WALL (   67978 calls)
 
      Electric-field routines
-     c_phase_fiel :      3.28s CPU      3.33s WALL (      24 calls)
+     c_phase_fiel :      3.23s CPU      3.27s WALL (      24 calls)
  
-     PWSCF        :    22.20s CPU        22.52s WALL
+     PWSCF        :    22.01s CPU        22.32s WALL
 
  
-   This run was terminated on:  16:14:38  18Aug2016            
+   This run was terminated on:  14:34:58  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

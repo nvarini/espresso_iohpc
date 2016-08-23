@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:21: 5 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:16:32 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -139,24 +139,24 @@
      Representation     2      3 modes -T_2  G_15 P_4  Done
 
 
-     PHONON       :     0.56s CPU         0.56s WALL
+     PHONON       :     0.56s CPU         0.57s WALL
 
 
           Dielectric constant in cartesian axis 
 
-          (      13.744199422       0.000000000       0.000000000 )
-          (       0.000000000      13.744199422      -0.000000000 )
-          (       0.000000000       0.000000000      13.744199422 )
+          (      13.744216098       0.000000000      -0.000000000 )
+          (       0.000000000      13.744216098       0.000000000 )
+          (      -0.000000000       0.000000000      13.744216098 )
 
           Effective charges (d Force / dE) in cartesian axis
 
            atom      1   Al 
-      Ex  (        1.88265        0.00000       -0.00000 )
-      Ey  (        0.00000        1.88265       -0.00000 )
-      Ez  (        0.00000       -0.00000        1.88265 )
+      Ex  (        1.88265        0.00000        0.00000 )
+      Ey  (        0.00000        1.88265        0.00000 )
+      Ez  (        0.00000        0.00000        1.88265 )
            atom      2   As 
-      Ex  (       -3.23374       -0.00000       -0.00000 )
-      Ey  (        0.00000       -3.23374       -0.00000 )
+      Ex  (       -3.23374        0.00000        0.00000 )
+      Ey  (        0.00000       -3.23374        0.00000 )
       Ez  (        0.00000        0.00000       -3.23374 )
  
      Number of q in the star =    1
@@ -165,48 +165,48 @@
 
           Dielectric constant in cartesian axis 
 
-          (      13.744199422       0.000000000       0.000000000 )
-          (       0.000000000      13.744199422      -0.000000000 )
-          (       0.000000000       0.000000000      13.744199422 )
+          (      13.744216098       0.000000000      -0.000000000 )
+          (       0.000000000      13.744216098       0.000000000 )
+          (      -0.000000000       0.000000000      13.744216098 )
 
           Effective charges (d Force / dE) in cartesian axis
 
            atom      1   Al 
-      Ex  (        1.88265        0.00000       -0.00000 )
-      Ey  (        0.00000        1.88265       -0.00000 )
-      Ez  (        0.00000       -0.00000        1.88265 )
+      Ex  (        1.88265        0.00000        0.00000 )
+      Ey  (        0.00000        1.88265        0.00000 )
+      Ez  (        0.00000        0.00000        1.88265 )
            atom      2   As 
-      Ex  (       -3.23374       -0.00000       -0.00000 )
-      Ey  (        0.00000       -3.23374       -0.00000 )
+      Ex  (       -3.23374        0.00000        0.00000 )
+      Ey  (        0.00000       -3.23374        0.00000 )
       Ez  (        0.00000        0.00000       -3.23374 )
 
           Effective charges (d P / du) in cartesian axis 
 
            atom      1   Al 
       Px  (        1.88284       -0.00000       -0.00000 )
-      Py  (        0.00000        1.88284        0.00000 )
-      Pz  (       -0.00000        0.00000        1.88284 )
+      Py  (       -0.00000        1.88284       -0.00000 )
+      Pz  (       -0.00000       -0.00000        1.88284 )
            atom      2   As 
-      Px  (       -3.23835       -0.00000        0.00000 )
-      Py  (        0.00000       -3.23835        0.00000 )
-      Pz  (       -0.00000        0.00000       -3.23835 )
+      Px  (       -3.23836       -0.00000        0.00000 )
+      Py  (       -0.00000       -3.23836       -0.00000 )
+      Pz  (        0.00000       -0.00000       -3.23836 )
 
      Diagonalizing the dynamical matrix
 
      q = (    0.000000000   0.000000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =       0.169589 [THz] =       5.656886 [cm-1]
-     freq (    2) =       0.169589 [THz] =       5.656886 [cm-1]
-     freq (    3) =       0.169589 [THz] =       5.656886 [cm-1]
-     freq (    4) =      11.258814 [THz] =     375.553598 [cm-1]
-     freq (    5) =      11.258814 [THz] =     375.553598 [cm-1]
-     freq (    6) =      11.258814 [THz] =     375.553598 [cm-1]
+     freq (    1) =       0.169172 [THz] =       5.642962 [cm-1]
+     freq (    2) =       0.169172 [THz] =       5.642962 [cm-1]
+     freq (    3) =       0.169172 [THz] =       5.642962 [cm-1]
+     freq (    4) =      11.258821 [THz] =     375.553839 [cm-1]
+     freq (    5) =      11.258821 [THz] =     375.553839 [cm-1]
+     freq (    6) =      11.258821 [THz] =     375.553839 [cm-1]
  **************************************************************************
 
      Mode symmetry, T_d (-43m)  point group:
 
-     freq (  1 -  3) =          5.7  [cm-1]   --> T_2  G_15 P_4   I+R
+     freq (  1 -  3) =          5.6  [cm-1]   --> T_2  G_15 P_4   I+R
      freq (  4 -  6) =        375.6  [cm-1]   --> T_2  G_15 P_4   I+R
 
      Calculation of q =   -0.2500000   0.2500000  -0.2500000
@@ -302,16 +302,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     165,    4)
-        NL pseudopotentials             0.02 Mb     (     165,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     165,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -397,7 +390,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.59s CPU         0.60s WALL
+     PHONON       :     0.60s CPU         0.60s WALL
 
  
      Number of q in the star =    4
@@ -417,17 +410,17 @@
      q = (   -0.250000000   0.250000000  -0.250000000 ) 
 
  **************************************************************************
-     freq (    1) =       1.761295 [THz] =      58.750469 [cm-1]
-     freq (    2) =       1.761295 [THz] =      58.750469 [cm-1]
-     freq (    3) =       4.534167 [THz] =     151.243542 [cm-1]
-     freq (    4) =      11.004847 [THz] =     367.082178 [cm-1]
-     freq (    5) =      11.004847 [THz] =     367.082178 [cm-1]
-     freq (    6) =      12.136524 [THz] =     404.830850 [cm-1]
+     freq (    1) =       1.761234 [THz] =      58.748456 [cm-1]
+     freq (    2) =       1.761234 [THz] =      58.748456 [cm-1]
+     freq (    3) =       4.534231 [THz] =     151.245656 [cm-1]
+     freq (    4) =      11.004848 [THz] =     367.082226 [cm-1]
+     freq (    5) =      11.004848 [THz] =     367.082226 [cm-1]
+     freq (    6) =      12.136529 [THz] =     404.831037 [cm-1]
  **************************************************************************
 
      Mode symmetry, C_3v (3m)   point group:
 
-     freq (  1 -  2) =         58.8  [cm-1]   --> E    L_3           
+     freq (  1 -  2) =         58.7  [cm-1]   --> E    L_3           
      freq (  3 -  3) =        151.2  [cm-1]   --> A_1  L_1           
      freq (  4 -  5) =        367.1  [cm-1]   --> E    L_3           
      freq (  6 -  6) =        404.8  [cm-1]   --> A_1  L_1           
@@ -515,16 +508,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     158,    4)
-        NL pseudopotentials             0.02 Mb     (     158,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     158,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -625,12 +611,12 @@
      q = (    0.500000000  -0.500000000   0.500000000 ) 
 
  **************************************************************************
-     freq (    1) =       2.016728 [THz] =      67.270801 [cm-1]
-     freq (    2) =       2.016728 [THz] =      67.270801 [cm-1]
-     freq (    3) =       6.494424 [THz] =     216.630676 [cm-1]
-     freq (    4) =      10.940869 [THz] =     364.948110 [cm-1]
-     freq (    5) =      10.940869 [THz] =     364.948110 [cm-1]
-     freq (    6) =      11.551679 [THz] =     385.322549 [cm-1]
+     freq (    1) =       2.016599 [THz] =      67.266496 [cm-1]
+     freq (    2) =       2.016599 [THz] =      67.266496 [cm-1]
+     freq (    3) =       6.494344 [THz] =     216.628002 [cm-1]
+     freq (    4) =      10.940840 [THz] =     364.947149 [cm-1]
+     freq (    5) =      10.940840 [THz] =     364.947149 [cm-1]
+     freq (    6) =      11.551687 [THz] =     385.322803 [cm-1]
  **************************************************************************
 
      Mode symmetry, C_3v (3m)   point group:
@@ -737,16 +723,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     163,    4)
-        NL pseudopotentials             0.02 Mb     (     163,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     163,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -853,12 +832,12 @@
      q = (    0.000000000   0.500000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =       2.421154 [THz] =      80.761010 [cm-1]
-     freq (    2) =       2.421154 [THz] =      80.761010 [cm-1]
-     freq (    3) =       4.606581 [THz] =     153.659004 [cm-1]
-     freq (    4) =      10.666709 [THz] =     355.803098 [cm-1]
-     freq (    5) =      10.666709 [THz] =     355.803098 [cm-1]
-     freq (    6) =      12.371385 [THz] =     412.664970 [cm-1]
+     freq (    1) =       2.421100 [THz] =      80.759207 [cm-1]
+     freq (    2) =       2.421100 [THz] =      80.759207 [cm-1]
+     freq (    3) =       4.606416 [THz] =     153.653486 [cm-1]
+     freq (    4) =      10.666714 [THz] =     355.803293 [cm-1]
+     freq (    5) =      10.666714 [THz] =     355.803293 [cm-1]
+     freq (    6) =      12.371373 [THz] =     412.664575 [cm-1]
  **************************************************************************
 
      Mode symmetry, C_2v (mm2)  point group:
@@ -983,16 +962,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     165,    4)
-        NL pseudopotentials             0.02 Mb     (     165,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     165,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -1118,22 +1090,22 @@
      q = (    0.750000000  -0.250000000   0.750000000 ) 
 
  **************************************************************************
-     freq (    1) =     -22.449441 [THz] =    -748.832752 [cm-1]
-     freq (    2) =     -20.795343 [THz] =    -693.657963 [cm-1]
-     freq (    3) =     -17.765355 [THz] =    -592.588461 [cm-1]
-     freq (    4) =     -14.982780 [THz] =    -499.771760 [cm-1]
-     freq (    5) =     -14.975539 [THz] =    -499.530224 [cm-1]
-     freq (    6) =      31.116303 [THz] =    1037.928130 [cm-1]
+     freq (    1) =     -19.923963 [THz] =    -664.591873 [cm-1]
+     freq (    2) =     -18.338517 [THz] =    -611.707092 [cm-1]
+     freq (    3) =     -17.316622 [THz] =    -577.620341 [cm-1]
+     freq (    4) =     -14.443340 [THz] =    -481.777956 [cm-1]
+     freq (    5) =     -13.699744 [THz] =    -456.974277 [cm-1]
+     freq (    6) =     -11.376061 [THz] =    -379.464534 [cm-1]
  **************************************************************************
 
      Mode symmetry, C_s (m)     point group:
 
-     freq (  1 -  1) =       -748.8  [cm-1]   --> A'                 
-     freq (  2 -  2) =       -693.7  [cm-1]   --> A'                 
-     freq (  3 -  3) =       -592.6  [cm-1]   --> A''                
-     freq (  4 -  4) =       -499.8  [cm-1]   --> A'                 
-     freq (  5 -  5) =       -499.5  [cm-1]   --> A''                
-     freq (  6 -  6) =       1037.9  [cm-1]   --> A'                 
+     freq (  1 -  1) =       -664.6  [cm-1]   --> A'                 
+     freq (  2 -  2) =       -611.7  [cm-1]   --> A'                 
+     freq (  3 -  3) =       -577.6  [cm-1]   --> A''                
+     freq (  4 -  4) =       -481.8  [cm-1]   --> A''                
+     freq (  5 -  5) =       -457.0  [cm-1]   --> A'                 
+     freq (  6 -  6) =       -379.5  [cm-1]   --> A'                 
 
      Calculation of q =    0.5000000   0.0000000   0.5000000
  
@@ -1248,16 +1220,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     162,    4)
-        NL pseudopotentials             0.02 Mb     (     162,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     162,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -1370,19 +1335,19 @@
      q = (    0.500000000   0.000000000   0.500000000 ) 
 
  **************************************************************************
-     freq (    1) =       2.515004 [THz] =      83.891487 [cm-1]
-     freq (    2) =       3.826457 [THz] =     127.636867 [cm-1]
-     freq (    3) =       5.423919 [THz] =     180.922459 [cm-1]
-     freq (    4) =      10.719301 [THz] =     357.557401 [cm-1]
-     freq (    5) =      10.737645 [THz] =     358.169285 [cm-1]
-     freq (    6) =      11.303117 [THz] =     377.031394 [cm-1]
+     freq (    1) =       2.514964 [THz] =      83.890178 [cm-1]
+     freq (    2) =       3.826432 [THz] =     127.636034 [cm-1]
+     freq (    3) =       5.425107 [THz] =     180.962087 [cm-1]
+     freq (    4) =      10.719384 [THz] =     357.560176 [cm-1]
+     freq (    5) =      10.737648 [THz] =     358.169383 [cm-1]
+     freq (    6) =      11.303312 [THz] =     377.037890 [cm-1]
  **************************************************************************
 
      Mode symmetry, C_s (m)     point group:
 
      freq (  1 -  1) =         83.9  [cm-1]   --> A''                
      freq (  2 -  2) =        127.6  [cm-1]   --> A'                 
-     freq (  3 -  3) =        180.9  [cm-1]   --> A'                 
+     freq (  3 -  3) =        181.0  [cm-1]   --> A'                 
      freq (  4 -  4) =        357.6  [cm-1]   --> A'                 
      freq (  5 -  5) =        358.2  [cm-1]   --> A''                
      freq (  6 -  6) =        377.0  [cm-1]   --> A'                 
@@ -1466,16 +1431,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     172,    4)
-        NL pseudopotentials             0.02 Mb     (     172,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     172,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -1561,7 +1519,7 @@
      Representation     4      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     0.78s CPU         0.80s WALL
+     PHONON       :     0.77s CPU         0.79s WALL
 
  
      Number of q in the star =    3
@@ -1575,20 +1533,20 @@
      q = (    0.000000000  -1.000000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =     -57.766871 [THz] =   -1926.895403 [cm-1]
-     freq (    2) =     -57.766871 [THz] =   -1926.895403 [cm-1]
-     freq (    3) =     -23.643532 [THz] =    -788.663349 [cm-1]
-     freq (    4) =     -18.752925 [THz] =    -625.530249 [cm-1]
-     freq (    5) =     -18.752925 [THz] =    -625.530249 [cm-1]
-     freq (    6) =     -12.235141 [THz] =    -408.120363 [cm-1]
+     freq (    1) =     -22.937066 [THz] =    -765.098158 [cm-1]
+     freq (    2) =     -22.937066 [THz] =    -765.098158 [cm-1]
+     freq (    3) =     -22.291856 [THz] =    -743.576275 [cm-1]
+     freq (    4) =     -11.119988 [THz] =    -370.922874 [cm-1]
+     freq (    5) =      23.111602 [THz] =     770.920046 [cm-1]
+     freq (    6) =      23.111602 [THz] =     770.920046 [cm-1]
  **************************************************************************
 
      Mode symmetry, D_2d (-42m) point group:
 
-     freq (  1 -  2) =      -1926.9  [cm-1]   --> E    X_5  W_3      
-     freq (  3 -  3) =       -788.7  [cm-1]   --> A_1  X_1  W_1      
-     freq (  4 -  5) =       -625.5  [cm-1]   --> E    X_5  W_3      
-     freq (  6 -  6) =       -408.1  [cm-1]   --> B_2  X_3  W_2      
+     freq (  1 -  2) =       -765.1  [cm-1]   --> E    X_5  W_3      
+     freq (  3 -  3) =       -743.6  [cm-1]   --> A_1  X_1  W_1      
+     freq (  4 -  4) =       -370.9  [cm-1]   --> B_2  X_3  W_2      
+     freq (  5 -  6) =        770.9  [cm-1]   --> E    X_5  W_3      
 
      Calculation of q =   -0.5000000  -1.0000000   0.0000000
  
@@ -1679,16 +1637,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     182,    4)
-        NL pseudopotentials             0.02 Mb     (     182,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     182,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/_ph0/alas.save/charge-density.hdf5
@@ -1778,7 +1729,7 @@
      Representation     6      1 modes -E*   W_2  Done
 
 
-     PHONON       :     0.82s CPU         0.83s WALL
+     PHONON       :     0.81s CPU         0.83s WALL
 
  
      Number of q in the star =    6
@@ -1795,22 +1746,22 @@
      q = (   -0.500000000  -1.000000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =     -80.898106 [THz] =   -2698.470338 [cm-1]
-     freq (    2) =     -35.306559 [THz] =   -1177.700026 [cm-1]
-     freq (    3) =     -20.010372 [THz] =    -667.474151 [cm-1]
-     freq (    4) =     -18.499919 [THz] =    -617.090881 [cm-1]
-     freq (    5) =     -15.796170 [THz] =    -526.903526 [cm-1]
-     freq (    6) =      19.154330 [THz] =     638.919666 [cm-1]
+     freq (    1) =     -23.020656 [THz] =    -767.886440 [cm-1]
+     freq (    2) =     -19.695621 [THz] =    -656.975197 [cm-1]
+     freq (    3) =     -19.232113 [THz] =    -641.514231 [cm-1]
+     freq (    4) =     -18.003612 [THz] =    -600.535844 [cm-1]
+     freq (    5) =      12.104212 [THz] =     403.753058 [cm-1]
+     freq (    6) =      18.815487 [THz] =     627.617096 [cm-1]
  **************************************************************************
 
      Mode symmetry, S_4 (-4)    point group:
 
-     freq (  1 -  1) =      -2698.5  [cm-1]   --> B    W_3           
-     freq (  2 -  2) =      -1177.7  [cm-1]   --> A    W_1           
-     freq (  3 -  3) =       -667.5  [cm-1]   --> E*   W_2           
-     freq (  4 -  4) =       -617.1  [cm-1]   --> B    W_3           
-     freq (  5 -  5) =       -526.9  [cm-1]   --> E    W_4           
-     freq (  6 -  6) =        638.9  [cm-1]   --> E*   W_2           
+     freq (  1 -  1) =       -767.9  [cm-1]   --> A    W_1           
+     freq (  2 -  2) =       -657.0  [cm-1]   --> E    W_4           
+     freq (  3 -  3) =       -641.5  [cm-1]   --> E*   W_2           
+     freq (  4 -  4) =       -600.5  [cm-1]   --> B    W_3           
+     freq (  5 -  5) =        403.8  [cm-1]   --> E*   W_2           
+     freq (  6 -  6) =        627.6  [cm-1]   --> B    W_3           
  
      init_run     :      0.15s CPU      0.15s WALL (       7 calls)
 
@@ -1835,17 +1786,17 @@
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      24 calls)
  
-     PHONON       :     0.82s CPU         0.84s WALL
+     PHONON       :     0.81s CPU         0.84s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.05s CPU      0.05s WALL (       8 calls)
+     phq_setup    :      0.04s CPU      0.04s WALL (       8 calls)
  
      init_vloc    :      0.00s CPU      0.00s WALL (       8 calls)
      init_us_1    :      0.07s CPU      0.07s WALL (       8 calls)
  
      DYNAMICAL MATRIX:
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
-     dynmatrix    :      0.02s CPU      0.02s WALL (       8 calls)
+     dynmatrix    :      0.01s CPU      0.02s WALL (       8 calls)
  
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
  
@@ -1864,10 +1815,10 @@
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
  
  
-     PHONON       :     0.82s CPU         0.84s WALL
+     PHONON       :     0.81s CPU         0.84s WALL
 
  
-   This run was terminated on:  11:21: 6   3Aug2016            
+   This run was terminated on:  16:16:32  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

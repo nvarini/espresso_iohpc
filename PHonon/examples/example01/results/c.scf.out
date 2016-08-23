@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:27:41 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:38: 5 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -247,8 +247,8 @@
 
      Writing output data file carbon.save
  
-     init_run     :      0.18s CPU      0.18s WALL (       1 calls)
-     electrons    :      0.17s CPU      0.17s WALL (       1 calls)
+     init_run     :      0.17s CPU      0.18s WALL (       1 calls)
+     electrons    :      0.16s CPU      0.17s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
@@ -293,7 +293,7 @@
      PWSCF        :     0.45s CPU         0.48s WALL
 
  
-   This run was terminated on:  16:27:42  18Aug2016            
+   This run was terminated on:  15:38: 5  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

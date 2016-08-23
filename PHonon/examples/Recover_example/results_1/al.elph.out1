@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:59:36 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16: 9:33 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -128,7 +128,7 @@
      Starting wfc are    4 atomic +    2 random wfc
 
      Band Structure Calculation
-     Calculation restarted from kpoint #    87
+     Calculation restarted from kpoint #    90
      Davidson diagonalization with overlap
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

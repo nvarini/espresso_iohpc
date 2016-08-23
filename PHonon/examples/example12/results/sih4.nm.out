@@ -1,5 +1,5 @@
 
-     Program PHCG v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:36:17 
+     Program PHCG v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:46:36 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -124,30 +124,30 @@ H        0.128530744  -0.128530744  -0.128530744
      omega( 15) = 82.471662 [THz] =2750.958530 [cm-1]
  **************************************************************************
  
-     PHCG         :     0.48s CPU         0.50s WALL
+     PHCG         :     0.45s CPU         0.48s WALL
 
-     cg_readin    :      0.32s CPU      0.32s WALL (       1 calls)
+     cg_readin    :      0.31s CPU      0.32s WALL (       1 calls)
      init_vloc    :      0.00s CPU      0.00s WALL (       2 calls)
-     fft          :      0.03s CPU      0.03s WALL (     232 calls)
+     fft          :      0.02s CPU      0.03s WALL (     232 calls)
      fft_scatter  :      0.03s CPU      0.03s WALL (    1498 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
      v_xc         :      0.00s CPU      0.00s WALL (       1 calls)
      v_h          :      0.00s CPU      0.00s WALL (       1 calls)
      init_us_1    :      0.01s CPU      0.01s WALL (       2 calls)
-     cg_setup     :      0.00s CPU      0.01s WALL (       1 calls)
+     cg_setup     :      0.01s CPU      0.01s WALL (       1 calls)
      init_us_2    :      0.00s CPU      0.00s WALL (       1 calls)
-     dvpsi_e      :      0.02s CPU      0.02s WALL (       3 calls)
+     dvpsi_e      :      0.01s CPU      0.02s WALL (       3 calls)
      stres_us31   :      0.00s CPU      0.00s WALL (       3 calls)
      stres_us32   :      0.00s CPU      0.00s WALL (       3 calls)
      stres_us33   :      0.00s CPU      0.00s WALL (       3 calls)
      stres_us34   :      0.00s CPU      0.00s WALL (       3 calls)
      calbec       :      0.00s CPU      0.00s WALL (     318 calls)
-     cgsolve      :      0.12s CPU      0.12s WALL (       9 calls)
-     h_h          :      0.02s CPU      0.01s WALL (      45 calls)
-     fftw         :      0.09s CPU      0.09s WALL (    1266 calls)
+     cgsolve      :      0.10s CPU      0.12s WALL (       9 calls)
+     h_h          :      0.01s CPU      0.01s WALL (      45 calls)
+     fftw         :      0.08s CPU      0.09s WALL (    1266 calls)
      add_vuspsi   :      0.00s CPU      0.00s WALL (     132 calls)
      solve_e      :      0.05s CPU      0.05s WALL (       1 calls)
-     a_h          :      0.10s CPU      0.10s WALL (      87 calls)
+     a_h          :      0.09s CPU      0.10s WALL (      87 calls)
      dgradcorr    :      0.00s CPU      0.00s WALL (      87 calls)
      dielec       :      0.00s CPU      0.00s WALL (       1 calls)
      dvpsi_kb     :      0.03s CPU      0.03s WALL (      54 calls)
@@ -155,4 +155,4 @@ H        0.128530744  -0.128530744  -0.128530744
      dynmat_init  :      0.00s CPU      0.00s WALL (       1 calls)
      rhod2vkb     :      0.00s CPU      0.00s WALL (       1 calls)
      drhodv       :      0.02s CPU      0.02s WALL (       3 calls)
-     rdiaghg      :      0.00s CPU      0.01s WALL (       1 calls)
+     rdiaghg      :      0.00s CPU      0.00s WALL (       1 calls)

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:17:48 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:38: 8 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -500,7 +500,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.41312, renormalised to   10.00000
 
-     total cpu time spent up to now is        0.6 secs
+     total cpu time spent up to now is        0.8 secs
 
      per-process dynamical memory:     3.7 Mb
 
@@ -510,7 +510,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  4.2
 
-     total cpu time spent up to now is        0.7 secs
+     total cpu time spent up to now is        0.9 secs
 
           k = 0.0000 0.0000 0.1520     band energies (ev):
 
@@ -572,7 +572,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  8.24E-06,  avg # of iterations =  3.1
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        1.0 secs
 
           k = 0.0000 0.0000 0.1520     band energies (ev):
 
@@ -634,7 +634,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  6.79E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        1.0 secs
 
           k = 0.0000 0.0000 0.1520     band energies (ev):
 
@@ -696,7 +696,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  1.49E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.9 secs
+     total cpu time spent up to now is        1.1 secs
 
           k = 0.0000 0.0000 0.1520     band energies (ev):
 
@@ -758,7 +758,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  4.69E-07,  avg # of iterations =  2.6
 
-     total cpu time spent up to now is        0.9 secs
+     total cpu time spent up to now is        1.2 secs
 
           k = 0.0000 0.0000 0.1520     band energies (ev):
 
@@ -820,7 +820,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  1.12E-08,  avg # of iterations =  2.2
 
-     total cpu time spent up to now is        1.0 secs
+     total cpu time spent up to now is        1.2 secs
 
           k = 0.0000 0.0000 0.1520     band energies (ev):
 
@@ -882,7 +882,7 @@ As      -0.288386158  -0.288386157  -0.288386157
      Davidson diagonalization with overlap
      ethr =  2.01E-09,  avg # of iterations =  1.1
 
-     total cpu time spent up to now is        1.0 secs
+     total cpu time spent up to now is        1.3 secs
 
      End of self-consistent calculation
 
@@ -992,7 +992,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.76053, renormalised to   10.00000
 
-     total cpu time spent up to now is        1.2 secs
+     total cpu time spent up to now is        1.8 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -1002,7 +1002,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  4.9
 
-     total cpu time spent up to now is        1.3 secs
+     total cpu time spent up to now is        2.0 secs
 
           k = 0.0000 0.0000 0.1490     band energies (ev):
 
@@ -1064,7 +1064,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  2.69E-05,  avg # of iterations =  3.1
 
-     total cpu time spent up to now is        1.4 secs
+     total cpu time spent up to now is        2.0 secs
 
           k = 0.0000 0.0000 0.1490     band energies (ev):
 
@@ -1126,7 +1126,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  2.44E-05,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.4 secs
+     total cpu time spent up to now is        2.1 secs
 
           k = 0.0000 0.0000 0.1490     band energies (ev):
 
@@ -1188,7 +1188,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  5.68E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.5 secs
+     total cpu time spent up to now is        2.1 secs
 
           k = 0.0000 0.0000 0.1490     band energies (ev):
 
@@ -1250,7 +1250,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  1.89E-06,  avg # of iterations =  2.2
 
-     total cpu time spent up to now is        1.5 secs
+     total cpu time spent up to now is        2.2 secs
 
           k = 0.0000 0.0000 0.1490     band energies (ev):
 
@@ -1312,7 +1312,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  6.52E-08,  avg # of iterations =  2.5
 
-     total cpu time spent up to now is        1.6 secs
+     total cpu time spent up to now is        2.3 secs
 
           k = 0.0000 0.0000 0.1490     band energies (ev):
 
@@ -1374,7 +1374,7 @@ As      -0.284850372  -0.284850369  -0.284850369
      Davidson diagonalization with overlap
      ethr =  4.28E-09,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is        1.7 secs
+     total cpu time spent up to now is        2.3 secs
 
      End of self-consistent calculation
 
@@ -1484,7 +1484,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.24592, renormalised to   10.00000
 
-     total cpu time spent up to now is        1.8 secs
+     total cpu time spent up to now is        2.4 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -1494,7 +1494,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  5.1
 
-     total cpu time spent up to now is        1.9 secs
+     total cpu time spent up to now is        2.6 secs
 
           k = 0.0000 0.0000 0.1453     band energies (ev):
 
@@ -1556,7 +1556,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  3.71E-06,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        2.6 secs
 
           k = 0.0000 0.0000 0.1453     band energies (ev):
 
@@ -1618,7 +1618,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  2.06E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        2.7 secs
 
           k = 0.0000 0.0000 0.1453     band energies (ev):
 
@@ -1680,7 +1680,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  3.61E-07,  avg # of iterations =  1.5
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.7 secs
 
           k = 0.0000 0.0000 0.1453     band energies (ev):
 
@@ -1742,7 +1742,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  1.96E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.8 secs
 
           k = 0.0000 0.0000 0.1453     band energies (ev):
 
@@ -1804,7 +1804,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  2.00E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.9 secs
 
           k = 0.0000 0.0000 0.1453     band energies (ev):
 
@@ -1866,7 +1866,7 @@ As      -0.280297030  -0.280297024  -0.280297024
      Davidson diagonalization with overlap
      ethr =  1.16E-09,  avg # of iterations =  1.5
 
-     total cpu time spent up to now is        2.3 secs
+     total cpu time spent up to now is        2.9 secs
 
      End of self-consistent calculation
 
@@ -1976,7 +1976,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.27084, renormalised to   10.00000
 
-     total cpu time spent up to now is        2.4 secs
+     total cpu time spent up to now is        3.1 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -1986,7 +1986,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  5.3
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        3.2 secs
 
           k = 0.0000 0.0000 0.1413     band energies (ev):
 
@@ -2048,7 +2048,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  5.23E-06,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        3.3 secs
 
           k = 0.0000 0.0000 0.1413     band energies (ev):
 
@@ -2110,7 +2110,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  2.41E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        3.3 secs
 
           k = 0.0000 0.0000 0.1413     band energies (ev):
 
@@ -2172,7 +2172,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  3.57E-07,  avg # of iterations =  1.3
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        3.4 secs
 
           k = 0.0000 0.0000 0.1413     band energies (ev):
 
@@ -2234,7 +2234,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  2.64E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        2.8 secs
+     total cpu time spent up to now is        3.4 secs
 
           k = 0.0000 0.0000 0.1413     band energies (ev):
 
@@ -2296,7 +2296,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  2.83E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.8 secs
+     total cpu time spent up to now is        3.5 secs
 
           k = 0.0000 0.0000 0.1413     band energies (ev):
 
@@ -2358,7 +2358,7 @@ As      -0.275314619  -0.275314612  -0.275314612
      Davidson diagonalization with overlap
      ethr =  1.45E-09,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        2.9 secs
+     total cpu time spent up to now is        3.5 secs
 
      End of self-consistent calculation
 
@@ -2468,7 +2468,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.21755, renormalised to   10.00000
 
-     total cpu time spent up to now is        3.0 secs
+     total cpu time spent up to now is        3.7 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -2478,7 +2478,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  4.2
 
-     total cpu time spent up to now is        3.1 secs
+     total cpu time spent up to now is        3.8 secs
 
           k = 0.0000 0.0000 0.1374     band energies (ev):
 
@@ -2540,7 +2540,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      Davidson diagonalization with overlap
      ethr =  1.40E-06,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        3.2 secs
+     total cpu time spent up to now is        3.9 secs
 
           k = 0.0000 0.0000 0.1374     band energies (ev):
 
@@ -2602,7 +2602,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      Davidson diagonalization with overlap
      ethr =  1.40E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.2 secs
+     total cpu time spent up to now is        3.9 secs
 
           k = 0.0000 0.0000 0.1374     band energies (ev):
 
@@ -2664,7 +2664,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      Davidson diagonalization with overlap
      ethr =  6.84E-07,  avg # of iterations =  1.4
 
-     total cpu time spent up to now is        3.3 secs
+     total cpu time spent up to now is        4.0 secs
 
           k = 0.0000 0.0000 0.1374     band energies (ev):
 
@@ -2726,7 +2726,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      Davidson diagonalization with overlap
      ethr =  4.13E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        3.4 secs
+     total cpu time spent up to now is        4.0 secs
 
           k = 0.0000 0.0000 0.1374     band energies (ev):
 
@@ -2788,7 +2788,7 @@ As      -0.275523714  -0.275523707  -0.275523707
      Davidson diagonalization with overlap
      ethr =  2.03E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.4 secs
+     total cpu time spent up to now is        4.1 secs
 
      End of self-consistent calculation
 
@@ -2899,7 +2899,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.64810, renormalised to   10.00000
 
-     total cpu time spent up to now is        3.5 secs
+     total cpu time spent up to now is        4.2 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -2909,7 +2909,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  4.2
 
-     total cpu time spent up to now is        3.6 secs
+     total cpu time spent up to now is        4.3 secs
 
           k = 0.0000-0.0000 0.1406     band energies (ev):
 
@@ -2971,7 +2971,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  6.21E-06,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        3.7 secs
+     total cpu time spent up to now is        4.4 secs
 
           k = 0.0000-0.0000 0.1406     band energies (ev):
 
@@ -3033,7 +3033,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  5.62E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        4.4 secs
 
           k = 0.0000-0.0000 0.1406     band energies (ev):
 
@@ -3095,7 +3095,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  1.13E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        4.5 secs
 
           k = 0.0000-0.0000 0.1406     band energies (ev):
 
@@ -3157,7 +3157,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  2.45E-07,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        3.9 secs
+     total cpu time spent up to now is        4.6 secs
 
           k = 0.0000-0.0000 0.1406     band energies (ev):
 
@@ -3219,7 +3219,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  8.97E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        4.6 secs
 
           k = 0.0000-0.0000 0.1406     band energies (ev):
 
@@ -3281,7 +3281,7 @@ As      -0.275480513  -0.275480506  -0.275480506
      Davidson diagonalization with overlap
      ethr =  4.83E-09,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        4.7 secs
 
      End of self-consistent calculation
 
@@ -3391,7 +3391,7 @@ As      -0.275302275  -0.275302268  -0.275302268
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.82418, renormalised to   10.00000
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.8 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -3401,7 +3401,7 @@ As      -0.275302275  -0.275302268  -0.275302268
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.7
 
-     total cpu time spent up to now is        4.2 secs
+     total cpu time spent up to now is        4.9 secs
 
           k = 0.0000-0.0000 0.1408     band energies (ev):
 
@@ -3463,7 +3463,7 @@ As      -0.275302275  -0.275302268  -0.275302268
      Davidson diagonalization with overlap
      ethr =  1.89E-06,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        4.3 secs
+     total cpu time spent up to now is        5.0 secs
 
           k = 0.0000-0.0000 0.1408     band energies (ev):
 
@@ -3525,7 +3525,7 @@ As      -0.275302275  -0.275302268  -0.275302268
      Davidson diagonalization with overlap
      ethr =  1.53E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.4 secs
+     total cpu time spent up to now is        5.0 secs
 
           k = 0.0000-0.0000 0.1408     band energies (ev):
 
@@ -3587,7 +3587,7 @@ As      -0.275302275  -0.275302268  -0.275302268
      Davidson diagonalization with overlap
      ethr =  2.65E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.4 secs
+     total cpu time spent up to now is        5.1 secs
 
           k = 0.0000-0.0000 0.1408     band energies (ev):
 
@@ -3649,7 +3649,7 @@ As      -0.275302275  -0.275302268  -0.275302268
      Davidson diagonalization with overlap
      ethr =  7.41E-08,  avg # of iterations =  2.7
 
-     total cpu time spent up to now is        4.5 secs
+     total cpu time spent up to now is        5.1 secs
 
      End of self-consistent calculation
 
@@ -3759,7 +3759,7 @@ As      -0.274941605  -0.274941598  -0.274941598
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.79701, renormalised to   10.00000
 
-     total cpu time spent up to now is        4.6 secs
+     total cpu time spent up to now is        5.3 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -3769,7 +3769,7 @@ As      -0.274941605  -0.274941598  -0.274941598
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.8
 
-     total cpu time spent up to now is        4.7 secs
+     total cpu time spent up to now is        5.4 secs
 
           k = 0.0000-0.0000 0.1411     band energies (ev):
 
@@ -3831,7 +3831,7 @@ As      -0.274941605  -0.274941598  -0.274941598
      Davidson diagonalization with overlap
      ethr =  2.40E-06,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        4.8 secs
+     total cpu time spent up to now is        5.5 secs
 
           k = 0.0000-0.0000 0.1411     band energies (ev):
 
@@ -3893,7 +3893,7 @@ As      -0.274941605  -0.274941598  -0.274941598
      Davidson diagonalization with overlap
      ethr =  2.14E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.8 secs
+     total cpu time spent up to now is        5.5 secs
 
           k = 0.0000-0.0000 0.1411     band energies (ev):
 
@@ -3955,7 +3955,7 @@ As      -0.274941605  -0.274941598  -0.274941598
      Davidson diagonalization with overlap
      ethr =  3.58E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.9 secs
+     total cpu time spent up to now is        5.6 secs
 
           k = 0.0000-0.0000 0.1411     band energies (ev):
 
@@ -4017,7 +4017,7 @@ As      -0.274941605  -0.274941598  -0.274941598
      Davidson diagonalization with overlap
      ethr =  1.10E-07,  avg # of iterations =  2.7
 
-     total cpu time spent up to now is        5.0 secs
+     total cpu time spent up to now is        5.6 secs
 
      End of self-consistent calculation
 
@@ -4127,7 +4127,7 @@ As      -0.274352908  -0.274352900  -0.274352900
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.06882, renormalised to   10.00000
 
-     total cpu time spent up to now is        5.1 secs
+     total cpu time spent up to now is        5.8 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -4137,7 +4137,7 @@ As      -0.274352908  -0.274352900  -0.274352900
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.6
 
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        5.8 secs
 
           k = 0.0000-0.0000 0.1415     band energies (ev):
 
@@ -4199,7 +4199,7 @@ As      -0.274352908  -0.274352900  -0.274352900
      Davidson diagonalization with overlap
      ethr =  3.71E-07,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        5.9 secs
 
           k = 0.0000-0.0000 0.1415     band energies (ev):
 
@@ -4261,7 +4261,7 @@ As      -0.274352908  -0.274352900  -0.274352900
      Davidson diagonalization with overlap
      ethr =  1.97E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        6.0 secs
 
           k = 0.0000-0.0000 0.1415     band energies (ev):
 
@@ -4323,7 +4323,7 @@ As      -0.274352908  -0.274352900  -0.274352900
      Davidson diagonalization with overlap
      ethr =  2.48E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.4 secs
+     total cpu time spent up to now is        6.0 secs
 
           k = 0.0000-0.0000 0.1415     band energies (ev):
 
@@ -4385,7 +4385,7 @@ As      -0.274352908  -0.274352900  -0.274352900
      Davidson diagonalization with overlap
      ethr =  3.99E-09,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        5.4 secs
+     total cpu time spent up to now is        6.1 secs
 
      End of self-consistent calculation
 
@@ -4495,7 +4495,7 @@ As      -0.273623434  -0.273623426  -0.273623426
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.96572, renormalised to   10.00000
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        6.2 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -4505,7 +4505,7 @@ As      -0.273623434  -0.273623426  -0.273623426
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.4
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        6.3 secs
 
           k = 0.0000-0.0000 0.1420     band energies (ev):
 
@@ -4567,7 +4567,7 @@ As      -0.273623434  -0.273623426  -0.273623426
      Davidson diagonalization with overlap
      ethr =  1.03E-07,  avg # of iterations =  2.7
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        6.4 secs
 
           k = 0.0000-0.0000 0.1420     band energies (ev):
 
@@ -4629,7 +4629,7 @@ As      -0.273623434  -0.273623426  -0.273623426
      Davidson diagonalization with overlap
      ethr =  8.10E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        6.4 secs
 
           k = 0.0000-0.0000 0.1420     band energies (ev):
 
@@ -4691,7 +4691,7 @@ As      -0.273623434  -0.273623426  -0.273623426
      Davidson diagonalization with overlap
      ethr =  1.19E-08,  avg # of iterations =  2.2
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        6.5 secs
 
           k = 0.0000-0.0000 0.1420     band energies (ev):
 
@@ -4753,7 +4753,7 @@ As      -0.273623434  -0.273623426  -0.273623426
      Davidson diagonalization with overlap
      ethr =  2.16E-09,  avg # of iterations =  1.7
 
-     total cpu time spent up to now is        5.9 secs
+     total cpu time spent up to now is        6.5 secs
 
      End of self-consistent calculation
 
@@ -4863,7 +4863,7 @@ As      -0.272811079  -0.272811071  -0.272811071
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.95565, renormalised to   10.00000
 
-     total cpu time spent up to now is        6.0 secs
+     total cpu time spent up to now is        6.7 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -4873,7 +4873,7 @@ As      -0.272811079  -0.272811071  -0.272811071
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.5
 
-     total cpu time spent up to now is        6.1 secs
+     total cpu time spent up to now is        6.8 secs
 
           k = 0.0000-0.0000 0.1425     band energies (ev):
 
@@ -4935,7 +4935,7 @@ As      -0.272811079  -0.272811071  -0.272811071
      Davidson diagonalization with overlap
      ethr =  1.30E-07,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        6.2 secs
+     total cpu time spent up to now is        6.8 secs
 
           k = 0.0000-0.0000 0.1425     band energies (ev):
 
@@ -4997,7 +4997,7 @@ As      -0.272811079  -0.272811071  -0.272811071
      Davidson diagonalization with overlap
      ethr =  1.24E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        6.2 secs
+     total cpu time spent up to now is        6.9 secs
 
           k = 0.0000-0.0000 0.1425     band energies (ev):
 
@@ -5059,7 +5059,7 @@ As      -0.272811079  -0.272811071  -0.272811071
      Davidson diagonalization with overlap
      ethr =  2.07E-08,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        6.3 secs
+     total cpu time spent up to now is        6.9 secs
 
           k = 0.0000-0.0000 0.1425     band energies (ev):
 
@@ -5121,7 +5121,7 @@ As      -0.272811079  -0.272811071  -0.272811071
      Davidson diagonalization with overlap
      ethr =  1.01E-09,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is        6.3 secs
+     total cpu time spent up to now is        7.0 secs
 
      End of self-consistent calculation
 
@@ -5231,7 +5231,7 @@ As      -0.271976692  -0.271976682  -0.271976682
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.94431, renormalised to   10.00000
 
-     total cpu time spent up to now is        6.5 secs
+     total cpu time spent up to now is        7.1 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -5241,7 +5241,7 @@ As      -0.271976692  -0.271976682  -0.271976682
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.6
 
-     total cpu time spent up to now is        6.6 secs
+     total cpu time spent up to now is        7.2 secs
 
           k = 0.0000 0.0000 0.1432     band energies (ev):
 
@@ -5303,7 +5303,7 @@ As      -0.271976692  -0.271976682  -0.271976682
      Davidson diagonalization with overlap
      ethr =  1.63E-07,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        6.6 secs
+     total cpu time spent up to now is        7.3 secs
 
           k = 0.0000 0.0000 0.1432     band energies (ev):
 
@@ -5365,7 +5365,7 @@ As      -0.271976692  -0.271976682  -0.271976682
      Davidson diagonalization with overlap
      ethr =  1.63E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        7.4 secs
 
           k = 0.0000 0.0000 0.1432     band energies (ev):
 
@@ -5427,7 +5427,7 @@ As      -0.271976692  -0.271976682  -0.271976682
      Davidson diagonalization with overlap
      ethr =  3.20E-08,  avg # of iterations =  1.4
 
-     total cpu time spent up to now is        6.7 secs
+     total cpu time spent up to now is        7.4 secs
 
           k = 0.0000 0.0000 0.1432     band energies (ev):
 
@@ -5489,7 +5489,7 @@ As      -0.271976692  -0.271976682  -0.271976682
      Davidson diagonalization with overlap
      ethr =  1.38E-09,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        6.8 secs
+     total cpu time spent up to now is        7.5 secs
 
      End of self-consistent calculation
 
@@ -5599,7 +5599,7 @@ As      -0.272003794  -0.272003784  -0.272003784
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.93418, renormalised to   10.00000
 
-     total cpu time spent up to now is        6.9 secs
+     total cpu time spent up to now is        7.6 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -5609,7 +5609,7 @@ As      -0.272003794  -0.272003784  -0.272003784
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  3.1
 
-     total cpu time spent up to now is        7.0 secs
+     total cpu time spent up to now is        7.7 secs
 
           k = 0.0000 0.0000 0.1438     band energies (ev):
 
@@ -5671,7 +5671,7 @@ As      -0.272003794  -0.272003784  -0.272003784
      Davidson diagonalization with overlap
      ethr =  1.54E-07,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        7.1 secs
+     total cpu time spent up to now is        7.8 secs
 
           k = 0.0000 0.0000 0.1438     band energies (ev):
 
@@ -5733,7 +5733,7 @@ As      -0.272003794  -0.272003784  -0.272003784
      Davidson diagonalization with overlap
      ethr =  1.54E-07,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        7.1 secs
+     total cpu time spent up to now is        7.8 secs
 
           k = 0.0000 0.0000 0.1438     band energies (ev):
 
@@ -5795,7 +5795,7 @@ As      -0.272003794  -0.272003784  -0.272003784
      Davidson diagonalization with overlap
      ethr =  3.42E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        7.2 secs
+     total cpu time spent up to now is        7.9 secs
 
           k = 0.0000 0.0000 0.1438     band energies (ev):
 
@@ -5857,7 +5857,7 @@ As      -0.272003794  -0.272003784  -0.272003784
      Davidson diagonalization with overlap
      ethr =  9.45E-09,  avg # of iterations =  2.7
 
-     total cpu time spent up to now is        7.3 secs
+     total cpu time spent up to now is        7.9 secs
 
      End of self-consistent calculation
 
@@ -5968,7 +5968,7 @@ As      -0.272043511  -0.272043502  -0.272043502
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.01774, renormalised to   10.00000
 
-     total cpu time spent up to now is        7.4 secs
+     total cpu time spent up to now is        8.1 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -5984,7 +5984,7 @@ As      -0.272043511  -0.272043502  -0.272043502
      Davidson diagonalization with overlap
      ethr =  1.51E-08,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        7.5 secs
+     total cpu time spent up to now is        8.2 secs
 
           k = 0.0000 0.0000 0.1436     band energies (ev):
 
@@ -6046,7 +6046,7 @@ As      -0.272043511  -0.272043502  -0.272043502
      Davidson diagonalization with overlap
      ethr =  1.29E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        7.6 secs
+     total cpu time spent up to now is        8.2 secs
 
           k = 0.0000 0.0000 0.1436     band energies (ev):
 
@@ -6108,7 +6108,7 @@ As      -0.272043511  -0.272043502  -0.272043502
      Davidson diagonalization with overlap
      ethr =  1.29E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        7.6 secs
+     total cpu time spent up to now is        8.3 secs
 
           k = 0.0000 0.0000 0.1436     band energies (ev):
 
@@ -6170,7 +6170,7 @@ As      -0.272043511  -0.272043502  -0.272043502
      Davidson diagonalization with overlap
      ethr =  2.73E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        7.7 secs
+     total cpu time spent up to now is        8.3 secs
 
      End of self-consistent calculation
 
@@ -6281,7 +6281,7 @@ As      -0.272099878  -0.272099869  -0.272099869
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.00006, renormalised to   10.00000
 
-     total cpu time spent up to now is        7.8 secs
+     total cpu time spent up to now is        8.5 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -6297,7 +6297,7 @@ As      -0.272099878  -0.272099869  -0.272099869
      Davidson diagonalization with overlap
      ethr =  2.20E-09,  avg # of iterations =  3.2
 
-     total cpu time spent up to now is        7.9 secs
+     total cpu time spent up to now is        8.6 secs
 
           k = 0.0000 0.0000 0.1436     band energies (ev):
 
@@ -6359,7 +6359,7 @@ As      -0.272099878  -0.272099869  -0.272099869
      Davidson diagonalization with overlap
      ethr =  1.04E-09,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        8.0 secs
+     total cpu time spent up to now is        8.6 secs
 
      End of self-consistent calculation
 
@@ -6470,7 +6470,7 @@ As      -0.272166664  -0.272166655  -0.272166655
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.00025, renormalised to   10.00000
 
-     total cpu time spent up to now is        8.1 secs
+     total cpu time spent up to now is        8.8 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -6486,7 +6486,7 @@ As      -0.272166664  -0.272166655  -0.272166655
      Davidson diagonalization with overlap
      ethr =  1.90E-09,  avg # of iterations =  3.6
 
-     total cpu time spent up to now is        8.2 secs
+     total cpu time spent up to now is        8.9 secs
 
      End of self-consistent calculation
 
@@ -6597,7 +6597,7 @@ As      -0.272237534  -0.272237525  -0.272237525
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.00144, renormalised to   10.00000
 
-     total cpu time spent up to now is        8.4 secs
+     total cpu time spent up to now is        9.0 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -6613,7 +6613,7 @@ As      -0.272237534  -0.272237525  -0.272237525
      Davidson diagonalization with overlap
      ethr =  1.76E-10,  avg # of iterations =  4.0
 
-     total cpu time spent up to now is        8.5 secs
+     total cpu time spent up to now is        9.2 secs
 
      End of self-consistent calculation
 
@@ -6724,7 +6724,7 @@ As      -0.272235153  -0.272235144  -0.272235144
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.00219, renormalised to   10.00000
 
-     total cpu time spent up to now is        8.6 secs
+     total cpu time spent up to now is        9.3 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -6740,7 +6740,7 @@ As      -0.272235153  -0.272235144  -0.272235144
      Davidson diagonalization with overlap
      ethr =  1.98E-10,  avg # of iterations =  3.4
 
-     total cpu time spent up to now is        8.8 secs
+     total cpu time spent up to now is        9.4 secs
 
      End of self-consistent calculation
 
@@ -6848,49 +6848,49 @@ End final coordinates
      Writing output data file pwscf.save
  
      init_run     :      0.06s CPU      0.07s WALL (       1 calls)
-     electrons    :      6.23s CPU      6.36s WALL (      19 calls)
-     update_pot   :      0.66s CPU      0.67s WALL (      18 calls)
-     forces       :      0.29s CPU      0.29s WALL (      19 calls)
-     stress       :      0.52s CPU      0.52s WALL (      19 calls)
+     electrons    :      6.23s CPU      6.55s WALL (      19 calls)
+     update_pot   :      0.65s CPU      0.75s WALL (      18 calls)
+     forces       :      0.28s CPU      0.29s WALL (      19 calls)
+     stress       :      0.55s CPU      0.55s WALL (      19 calls)
 
      Called by init_run:
-     wfcinit      :      0.02s CPU      0.02s WALL (       1 calls)
+     wfcinit      :      0.01s CPU      0.02s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      5.21s CPU      5.33s WALL (      96 calls)
-     sum_band     :      0.88s CPU      0.89s WALL (      96 calls)
+     c_bands      :      5.23s CPU      5.31s WALL (      96 calls)
+     sum_band     :      0.87s CPU      0.88s WALL (      96 calls)
      v_of_rho     :      0.07s CPU      0.07s WALL (     109 calls)
      mix_rho      :      0.03s CPU      0.03s WALL (      96 calls)
 
      Called by c_bands:
      init_us_2    :      0.12s CPU      0.12s WALL (    2310 calls)
-     cegterg      :      5.07s CPU      5.19s WALL (     960 calls)
+     cegterg      :      5.09s CPU      5.17s WALL (     960 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      3.85s CPU      3.95s WALL (    3135 calls)
+     h_psi        :      3.86s CPU      3.94s WALL (    3135 calls)
      g_psi        :      0.04s CPU      0.05s WALL (    2165 calls)
-     cdiaghg      :      0.64s CPU      0.63s WALL (    2885 calls)
+     cdiaghg      :      0.65s CPU      0.63s WALL (    2885 calls)
 
      Called by h_psi:
-     h_psi:pot    :      3.84s CPU      3.92s WALL (    3135 calls)
+     h_psi:pot    :      3.84s CPU      3.91s WALL (    3135 calls)
      h_psi:calbec :      0.12s CPU      0.11s WALL (    3135 calls)
      add_vuspsi   :      0.06s CPU      0.07s WALL (    3135 calls)
 
      General routines
      calbec       :      0.15s CPU      0.14s WALL (    4085 calls)
      fft          :      0.05s CPU      0.06s WALL (     542 calls)
-     fftw         :      3.92s CPU      3.93s WALL (   55034 calls)
+     fftw         :      3.95s CPU      3.94s WALL (   55034 calls)
  
      Parallel routines
      fft_scatter  :      0.98s CPU      1.01s WALL (   55576 calls)
  
-     PWSCF        :     8.64s CPU         8.86s WALL
+     PWSCF        :     8.63s CPU         9.53s WALL
 
  
-   This run was terminated on:  16:17:57  18Aug2016            
+   This run was terminated on:  14:38:17  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

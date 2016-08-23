@@ -168,8 +168,7 @@ END SUBROUTINE rgd_blk
 !
 !
 !-------------------------------------------------------------------------------
-!SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe)
-SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe,epmatl, epmats)
+SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe)
 !-------------------------------------------------------------------------------
   !!
   !! Compute the long range term for the e-ph vertex
@@ -223,7 +222,7 @@ SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe,epmatl
   !! phonon eigenvec associated with q
   COMPLEX (kind=DP), INTENT (inout) :: epmat(nmodes)
   !! e-ph matrix elements 
-  COMPLEX (kind=DP), INTENT (in) :: bmat
+  COMPLEX (kind=DP), INTENT (in) :: bmat 
   !! Overlap matrix elements $$<U_{mk+q}|U_{nk}>$$
   !
   ! work variables
@@ -233,8 +232,7 @@ SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe,epmatl
        arg, zaq,       &
        g1, g2, g3, gmax, alph, geg
   integer :: na, ipol, im, m1,m2,m3, nrx1,nrx2,nrx3
-  complex(dp) :: fac, facqd, facq, epmatl(nmodes), epmats(nmodes), matsq
-  !real(dp) :: matsq
+  complex(dp) :: fac, facqd, facq, epmatl(nmodes), matsq
   !
   IF (abs(signe) /= 1.0) &
        CALL errore ('rgd_blk',' wrong value for signe ',1)
@@ -264,7 +262,6 @@ SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe,epmatl
   ENDIF
   !
   epmatl(:) = czero   
-  epmats(:) = czero   
   !
   DO m1 = -nrx1,nrx1
     DO m2 = -nrx2,nrx2
@@ -289,12 +286,8 @@ SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe,epmatl
           DO ipol=1,3
             zaq=g1*zeu(1,ipol,na)+g2*zeu(2,ipol,na)+g3*zeu(3,ipol,na)
             !
-            DO im=1,nmodes
-               epmat(im) = epmat(im) +   &
-                     facq * zaq * uq(3*(na-1)+ipol,im)*bmat
-               epmatl(im) = epmatl(im)  +   &
-                    facq * zaq * uq(3*(na-1)+ipol,im)*bmat
-            ENDDO
+            epmat = epmat + facq * zaq * uq(3*(na-1)+ipol,:)*bmat
+            epmatl = epmatl + facq * zaq * uq(3*(na-1)+ipol,:)*bmat
             !
           ENDDO !ipol
         ENDDO !nat
@@ -312,15 +305,9 @@ SUBROUTINE rgd_blk_epw(nq1,nq2,nq3,q,uq,epmat,nmodes,epsil,zeu,bmat,signe,epmatl
   ! will get a pure real number.
   ! In any case, when g_s will be squared both will become real numbers. 
   IF (shortrange) THEN
-    DO im=1,nmodes      
-      !epmat(im) = epmat(im)*conjg(epmat(im)) - epmatl(im)*conjg(epmatl(im))
-      !matsq = epmat(im)*conjg(epmat(im)) - epmatl(im)*conjg(epmatl(im))
-      epmat(im) = ZSQRT(epmat(im)*conjg(epmat(im)) - epmatl(im)*conjg(epmatl(im)))
-      !epmats(im) = CMPLX(SQRT(matsq), 0.0_DP, kind=DP)
-      !epmats(im) = CMPLX(SQRT(ABS(matsq)), 0.0_DP, kind=DP)
-    ENDDO
+    !epmat = ZSQRT(epmat*conjg(epmat) - epmatl*conjg(epmatl))
+    epmat = SQRT(epmat*conjg(epmat) - epmatl*conjg(epmatl))
   ENDIF        
-  !print*,'epmats(:) ',SUM(epmat(:)*conjg(epmat(:)))
   !
   !
 END SUBROUTINE rgd_blk_epw

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:22:41 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:42:58 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -192,7 +192,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  4.90E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        1.5 secs
+     total cpu time spent up to now is        1.4 secs
 
      End of self-consistent calculation
 
@@ -236,7 +236,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  8.20E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        4.9 secs
+     total cpu time spent up to now is        4.8 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -252,7 +252,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  6.93E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        6.0 secs
+     total cpu time spent up to now is        5.9 secs
 
           k = 0.0000 0.0000 0.0000     band energies (ev):
 
@@ -268,7 +268,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  1.07E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        6.9 secs
+     total cpu time spent up to now is        6.8 secs
 
      End of self-consistent calculation
 
@@ -292,7 +292,7 @@ EXX: grid of k+q points same as grid of k-points
 
      EXX: now go back to refine exchange calculation
 
-     total cpu time spent up to now is        7.2 secs
+     total cpu time spent up to now is        7.1 secs
 
      per-process dynamical memory:    52.1 Mb
 
@@ -308,7 +308,7 @@ EXX: grid of k+q points same as grid of k-points
      Davidson diagonalization with overlap
      ethr =  4.49E-08,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        9.0 secs
+     total cpu time spent up to now is        8.9 secs
 
      End of self-consistent calculation
 
@@ -341,56 +341,56 @@ EXX: grid of k+q points same as grid of k-points
 
      Writing output data file n2.save
  
-     init_run     :      0.32s CPU      0.35s WALL (       1 calls)
-     electrons    :      7.83s CPU      8.00s WALL (       3 calls)
-     forces       :      0.23s CPU      0.24s WALL (       1 calls)
+     init_run     :      0.34s CPU      0.35s WALL (       1 calls)
+     electrons    :      7.76s CPU      7.93s WALL (       3 calls)
+     forces       :      0.24s CPU      0.24s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
-     potinit      :      0.15s CPU      0.17s WALL (       1 calls)
+     potinit      :      0.16s CPU      0.17s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      6.10s CPU      6.21s WALL (      10 calls)
-     sum_band     :      0.24s CPU      0.25s WALL (      10 calls)
-     v_of_rho     :      1.68s CPU      1.74s WALL (      11 calls)
+     c_bands      :      6.05s CPU      6.14s WALL (      10 calls)
+     sum_band     :      0.24s CPU      0.24s WALL (      10 calls)
+     v_of_rho     :      1.69s CPU      1.74s WALL (      11 calls)
      mix_rho      :      0.06s CPU      0.07s WALL (      10 calls)
 
      Called by c_bands:
      init_us_2    :      0.04s CPU      0.04s WALL (      26 calls)
-     regterg      :      6.05s CPU      6.15s WALL (      10 calls)
+     regterg      :      5.99s CPU      6.08s WALL (      10 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      6.00s CPU      6.09s WALL (      37 calls)
+     h_psi        :      5.94s CPU      6.02s WALL (      37 calls)
      g_psi        :      0.01s CPU      0.01s WALL (      26 calls)
      rdiaghg      :      0.01s CPU      0.01s WALL (      33 calls)
 
      Called by h_psi:
-     h_psi:pot    :      0.77s CPU      0.78s WALL (      37 calls)
-     h_psi:calbec :      0.01s CPU      0.01s WALL (      37 calls)
+     h_psi:pot    :      0.75s CPU      0.76s WALL (      37 calls)
+     h_psi:calbec :      0.02s CPU      0.02s WALL (      37 calls)
      add_vuspsi   :      0.01s CPU      0.01s WALL (      37 calls)
 
      General routines
      calbec       :      0.02s CPU      0.02s WALL (      46 calls)
      fft          :      0.54s CPU      0.56s WALL (     128 calls)
-     fftw         :      0.77s CPU      0.78s WALL (     284 calls)
-     fftc         :      3.55s CPU      3.57s WALL (     843 calls)
-     fftcw        :      0.61s CPU      0.62s WALL (     218 calls)
+     fftw         :      0.75s CPU      0.76s WALL (     284 calls)
+     fftc         :      3.52s CPU      3.54s WALL (     843 calls)
+     fftcw        :      0.61s CPU      0.61s WALL (     218 calls)
  
      Parallel routines
-     fft_scatter  :      1.57s CPU      1.59s WALL (    1473 calls)
+     fft_scatter  :      1.60s CPU      1.62s WALL (    1473 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.06s CPU      0.06s WALL (       3 calls)
-     vexx         :      5.23s CPU      5.30s WALL (      19 calls)
-     exxenergy    :      0.60s CPU      0.60s WALL (       5 calls)
+     vexx         :      5.19s CPU      5.26s WALL (      19 calls)
+     exxenergy    :      0.58s CPU      0.59s WALL (       5 calls)
  
-     PWSCF        :     9.30s CPU         9.54s WALL
+     PWSCF        :     9.26s CPU         9.46s WALL
 
  
-   This run was terminated on:  16:22:50  18Aug2016            
+   This run was terminated on:  14:43: 8  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

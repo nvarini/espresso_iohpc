@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:59:52 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16: 9:46 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -137,7 +137,7 @@
      Representation     2      3 modes -T_2  G_15 P_4  Done
 
 
-     PHONON       :     0.55s CPU         0.56s WALL
+     PHONON       :     0.55s CPU         0.57s WALL
 
 
           Dielectric constant in cartesian axis 
@@ -1052,7 +1052,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.69s CPU         0.72s WALL
+     PHONON       :     0.70s CPU         0.72s WALL
 
  
      Number of q in the star =   12
@@ -1310,7 +1310,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.73s CPU         0.78s WALL
+     PHONON       :     0.74s CPU         0.76s WALL
 
  
      Number of q in the star =   12
@@ -1517,7 +1517,7 @@
      Representation     4      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     0.76s CPU         0.81s WALL
+     PHONON       :     0.78s CPU         0.79s WALL
 
  
      Number of q in the star =    3
@@ -1727,7 +1727,7 @@
      Representation     6      1 modes -E*   W_2  Done
 
 
-     PHONON       :     0.80s CPU         0.85s WALL
+     PHONON       :     0.82s CPU         0.83s WALL
 
  
      Number of q in the star =    6
@@ -1761,7 +1761,7 @@
      freq (  5 -  5) =        355.1  [cm-1]   --> E    W_4           
      freq (  6 -  6) =        358.9  [cm-1]   --> E*   W_2           
  
-     init_run     :      0.15s CPU      0.16s WALL (       7 calls)
+     init_run     :      0.15s CPU      0.15s WALL (       7 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       7 calls)
@@ -1784,17 +1784,17 @@
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      24 calls)
  
-     PHONON       :     0.80s CPU         0.86s WALL
+     PHONON       :     0.82s CPU         0.84s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.04s CPU      0.05s WALL (       8 calls)
+     phq_setup    :      0.04s CPU      0.04s WALL (       8 calls)
  
      init_vloc    :      0.00s CPU      0.00s WALL (       8 calls)
      init_us_1    :      0.07s CPU      0.07s WALL (       8 calls)
  
      DYNAMICAL MATRIX:
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
-     dynmatrix    :      0.01s CPU      0.03s WALL (       8 calls)
+     dynmatrix    :      0.02s CPU      0.02s WALL (       8 calls)
  
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
  
@@ -1813,10 +1813,10 @@
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
  
  
-     PHONON       :     0.80s CPU         0.86s WALL
+     PHONON       :     0.82s CPU         0.84s WALL
 
  
-   This run was terminated on:  16:59:53  18Aug2016            
+   This run was terminated on:  16: 9:47  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

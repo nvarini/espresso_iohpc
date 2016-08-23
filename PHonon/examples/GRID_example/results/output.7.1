@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:16:18 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:11:48 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -134,16 +134,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     160,    4)
-        NL pseudopotentials             0.02 Mb     (     160,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     160,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/7.1/_ph0/alas.save/charge-density.hdf5
@@ -270,7 +263,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     0.48s CPU         0.48s WALL
+     PHONON       :     0.46s CPU         0.49s WALL
 
 
 
@@ -284,17 +277,17 @@
       iter #   2 total cpu time :     0.5 secs   av.it.:   8.7
       thresh= 1.238E-03 alpha_mix =  0.700 |ddv_scf|^2 =  2.475E-04
 
-      iter #   3 total cpu time :     0.6 secs   av.it.:   8.0
-      thresh= 1.573E-03 alpha_mix =  0.700 |ddv_scf|^2 =  2.933E-09
+      iter #   3 total cpu time :     0.6 secs   av.it.:   8.3
+      thresh= 1.573E-03 alpha_mix =  0.700 |ddv_scf|^2 =  2.934E-09
 
       iter #   4 total cpu time :     0.6 secs   av.it.:   8.7
-      thresh= 5.416E-06 alpha_mix =  0.700 |ddv_scf|^2 =  1.226E-10
+      thresh= 5.417E-06 alpha_mix =  0.700 |ddv_scf|^2 =  1.226E-10
 
       iter #   5 total cpu time :     0.6 secs   av.it.:   8.3
-      thresh= 1.107E-06 alpha_mix =  0.700 |ddv_scf|^2 =  6.502E-12
+      thresh= 1.107E-06 alpha_mix =  0.700 |ddv_scf|^2 =  6.511E-12
 
       iter #   6 total cpu time :     0.6 secs   av.it.:   8.3
-      thresh= 2.550E-07 alpha_mix =  0.700 |ddv_scf|^2 =  6.589E-15
+      thresh= 2.552E-07 alpha_mix =  0.700 |ddv_scf|^2 =  6.582E-15
 
      End of self-consistent calculation
 
@@ -303,7 +296,7 @@
      Not diagonalizing because representation    2 is not done
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      0.06s CPU      0.06s WALL (       1 calls)
+     electrons    :      0.05s CPU      0.05s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
@@ -320,24 +313,26 @@
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.10s CPU      0.11s WALL (     247 calls)
+     h_psi        :      0.10s CPU      0.10s WALL (     247 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      70 calls)
      cdiaghg      :      0.01s CPU      0.01s WALL (      76 calls)
 
      Called by h_psi:
+     h_psi:pot    :      0.10s CPU      0.10s WALL (     247 calls)
+     h_psi:calbec :      0.01s CPU      0.01s WALL (     247 calls)
      add_vuspsi   :      0.00s CPU      0.00s WALL (     247 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (     454 calls)
      fft          :      0.00s CPU      0.00s WALL (      25 calls)
      ffts         :      0.00s CPU      0.00s WALL (       9 calls)
-     fftw         :      0.10s CPU      0.10s WALL (    2134 calls)
+     fftw         :      0.09s CPU      0.10s WALL (    2138 calls)
      davcio       :      0.00s CPU      0.00s WALL (      98 calls)
  
      Parallel routines
-     fft_scatter  :      0.02s CPU      0.03s WALL (    2168 calls)
+     fft_scatter  :      0.02s CPU      0.03s WALL (    2172 calls)
  
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.61s CPU         0.64s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -353,7 +348,7 @@
      dynmatrix    :      0.00s CPU      0.00s WALL (       1 calls)
  
      phqscf       :      0.15s CPU      0.16s WALL (       1 calls)
-     solve_linter :      0.15s CPU      0.16s WALL (       1 calls)
+     solve_linter :      0.15s CPU      0.15s WALL (       1 calls)
      drhodv       :      0.00s CPU      0.00s WALL (       1 calls)
  
      dynmat0      :      0.00s CPU      0.00s WALL (       1 calls)
@@ -363,9 +358,9 @@
      dynmat_us    :      0.00s CPU      0.00s WALL (       1 calls)
  
      phqscf       :      0.15s CPU      0.16s WALL (       1 calls)
-     solve_linter :      0.15s CPU      0.16s WALL (       1 calls)
+     solve_linter :      0.15s CPU      0.15s WALL (       1 calls)
  
-     solve_linter :      0.15s CPU      0.16s WALL (       1 calls)
+     solve_linter :      0.15s CPU      0.15s WALL (       1 calls)
      dvqpsi_us    :      0.00s CPU      0.00s WALL (       3 calls)
      ortho        :      0.00s CPU      0.00s WALL (      18 calls)
      cgsolve      :      0.08s CPU      0.08s WALL (      18 calls)
@@ -393,15 +388,15 @@
      calbec       :      0.01s CPU      0.01s WALL (     454 calls)
      fft          :      0.00s CPU      0.00s WALL (      25 calls)
      ffts         :      0.00s CPU      0.00s WALL (       9 calls)
-     fftw         :      0.10s CPU      0.10s WALL (    2134 calls)
+     fftw         :      0.09s CPU      0.10s WALL (    2138 calls)
      davcio       :      0.00s CPU      0.00s WALL (      98 calls)
      write_rec    :      0.01s CPU      0.01s WALL (       7 calls)
  
  
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.61s CPU         0.64s WALL
 
  
-   This run was terminated on:  11:16:19   3Aug2016            
+   This run was terminated on:  16:11:48  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

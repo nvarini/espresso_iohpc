@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:38:24 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:48:41 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -134,7 +134,7 @@ Warning: card / ignored
 
      negative rho (up, down):  3.908E-03 0.000E+00
 
-     total cpu time spent up to now is        1.4 secs
+     total cpu time spent up to now is        1.3 secs
 
      total energy              =     -74.76867487 Ry
      Harris-Foulkes estimate   =     -74.91470745 Ry
@@ -146,7 +146,7 @@ Warning: card / ignored
 
      negative rho (up, down):  2.359E-03 0.000E+00
 
-     total cpu time spent up to now is        1.9 secs
+     total cpu time spent up to now is        1.8 secs
 
      total energy              =     -74.80472621 Ry
      Harris-Foulkes estimate   =     -74.94964139 Ry
@@ -158,7 +158,7 @@ Warning: card / ignored
 
      negative rho (up, down):  2.768E-04 0.000E+00
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        2.3 secs
 
      total energy              =     -74.86657617 Ry
      Harris-Foulkes estimate   =     -74.86758105 Ry
@@ -170,7 +170,7 @@ Warning: card / ignored
 
      negative rho (up, down):  1.972E-05 0.000E+00
 
-     total cpu time spent up to now is        3.0 secs
+     total cpu time spent up to now is        2.8 secs
 
      total energy              =     -74.86714654 Ry
      Harris-Foulkes estimate   =     -74.86724820 Ry
@@ -182,7 +182,7 @@ Warning: card / ignored
 
      negative rho (up, down):  2.554E-07 0.000E+00
 
-     total cpu time spent up to now is        3.5 secs
+     total cpu time spent up to now is        3.3 secs
 
      total energy              =     -74.86721779 Ry
      Harris-Foulkes estimate   =     -74.86721769 Ry
@@ -194,7 +194,7 @@ Warning: card / ignored
 
      negative rho (up, down):  4.464E-08 0.000E+00
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        3.9 secs
 
      total energy              =     -74.86721865 Ry
      Harris-Foulkes estimate   =     -74.86721939 Ry
@@ -204,7 +204,7 @@ Warning: card / ignored
      Davidson diagonalization with overlap
      ethr =  1.19E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        4.6 secs
+     total cpu time spent up to now is        4.3 secs
 
      total energy              =     -74.86721901 Ry
      Harris-Foulkes estimate   =     -74.86721906 Ry
@@ -214,7 +214,7 @@ Warning: card / ignored
      Davidson diagonalization with overlap
      ethr =  1.30E-09,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        5.1 secs
+     total cpu time spent up to now is        4.8 secs
 
      End of self-consistent calculation
 
@@ -239,47 +239,47 @@ Warning: card / ignored
 
      Writing output data file CO2.save
  
-     init_run     :      0.64s CPU      0.68s WALL (       1 calls)
-     electrons    :      4.26s CPU      4.33s WALL (       1 calls)
+     init_run     :      0.60s CPU      0.65s WALL (       1 calls)
+     electrons    :      3.97s CPU      4.04s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      0.12s CPU      0.13s WALL (       1 calls)
-     potinit      :      0.24s CPU      0.26s WALL (       1 calls)
+     wfcinit      :      0.12s CPU      0.12s WALL (       1 calls)
+     potinit      :      0.22s CPU      0.25s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      2.04s CPU      2.05s WALL (       8 calls)
-     sum_band     :      0.64s CPU      0.64s WALL (       8 calls)
-     v_of_rho     :      1.50s CPU      1.52s WALL (       9 calls)
-     mix_rho      :      0.23s CPU      0.28s WALL (       8 calls)
+     c_bands      :      1.88s CPU      1.90s WALL (       8 calls)
+     sum_band     :      0.59s CPU      0.59s WALL (       8 calls)
+     v_of_rho     :      1.41s CPU      1.43s WALL (       9 calls)
+     mix_rho      :      0.22s CPU      0.26s WALL (       8 calls)
 
      Called by c_bands:
      init_us_2    :      0.03s CPU      0.03s WALL (      17 calls)
-     cegterg      :      2.02s CPU      2.03s WALL (       8 calls)
+     cegterg      :      1.86s CPU      1.88s WALL (       8 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      1.84s CPU      1.85s WALL (      32 calls)
+     h_psi        :      1.69s CPU      1.70s WALL (      32 calls)
      g_psi        :      0.03s CPU      0.03s WALL (      23 calls)
      cdiaghg      :      0.01s CPU      0.01s WALL (      31 calls)
 
      Called by h_psi:
-     h_psi:pot    :      1.82s CPU      1.83s WALL (      32 calls)
+     h_psi:pot    :      1.68s CPU      1.69s WALL (      32 calls)
      h_psi:calbec :      0.02s CPU      0.02s WALL (      32 calls)
-     add_vuspsi   :      0.03s CPU      0.03s WALL (      32 calls)
+     add_vuspsi   :      0.03s CPU      0.02s WALL (      32 calls)
 
      General routines
      calbec       :      0.02s CPU      0.02s WALL (      32 calls)
-     fft          :      0.66s CPU      0.67s WALL (      98 calls)
-     fftw         :      1.78s CPU      1.78s WALL (     482 calls)
+     fft          :      0.58s CPU      0.59s WALL (      98 calls)
+     fftw         :      1.65s CPU      1.67s WALL (     482 calls)
  
      Parallel routines
-     fft_scatter  :      0.67s CPU      0.67s WALL (     580 calls)
+     fft_scatter  :      0.56s CPU      0.56s WALL (     580 calls)
  
-     PWSCF        :     5.08s CPU         5.24s WALL
+     PWSCF        :     4.73s CPU         4.87s WALL
 
  
-   This run was terminated on:  16:38:30  18Aug2016            
+   This run was terminated on:  15:48:46  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -43,15 +43,10 @@ MODULE io_files
   CHARACTER(LEN=5 ), PARAMETER :: crash_file  = 'CRASH'
   CHARACTER (LEN=261) :: exit_file = 'os.EXIT' ! file required for a soft exit  
   !
-  CHARACTER (LEN=9),  PARAMETER :: xmlpun_base = 'data-file'
-  CHARACTER (LEN=13), PARAMETER :: xmlpun      = xmlpun_base // '.xml'
+  CHARACTER (LEN=13), PARAMETER :: xmlpun      = 'data-file.xml'
   !
 #ifdef __XSD
-  CHARACTER (LEN=16),  PARAMETER :: xmlpun_schema_base = 'data-file-schema'
-  CHARACTER (LEN=20),  PARAMETER :: xmlpun_schema      = xmlpun_schema_base // '.xml'
-  !
-  CHARACTER (LEN=3),  PARAMETER :: xmlinp_schema_base = 'qes'
-  CHARACTER (LEN=7), PARAMETER :: xmlinp_schema      = xmlpun_schema_base // '.xml'
+  CHARACTER (LEN=20), PARAMETER :: xmlpun_schema = 'data-file-schema.xml'
 #endif
   !
   ! ... The units where various variables are saved
@@ -59,10 +54,6 @@ MODULE io_files
   !
   INTEGER :: iunres      =  1 ! unit for the restart of the run
   INTEGER :: iunpun      =  4 ! unit for saving the final results (data-file.xml)
-#ifdef __XSD
-  INTEGER :: iunpun_xsd  = 41 ! unit for saving the final results (data-file-schema.xml)
-  INTEGER :: iuninp_xsd  = 42 ! unit for reading the xml input written according to the xsd schema
-#endif
   INTEGER :: iunwfc      = 10 ! unit with wavefunctions
   INTEGER :: iunoldwfc   = 11 ! unit with old wavefunctions
   INTEGER :: iunoldwfc2  = 12 ! as above at step -2

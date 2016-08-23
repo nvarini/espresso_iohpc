@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:22:33 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:42:51 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -421,56 +421,56 @@ EXX: grid of k+q points same as grid of k-points
 
      Writing output data file n.save
  
-     init_run     :      0.59s CPU      0.61s WALL (       1 calls)
-     electrons    :      5.17s CPU      5.28s WALL (       3 calls)
-     forces       :      0.38s CPU      0.39s WALL (       1 calls)
+     init_run     :      0.59s CPU      0.60s WALL (       1 calls)
+     electrons    :      5.18s CPU      5.29s WALL (       3 calls)
+     forces       :      0.38s CPU      0.38s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.03s CPU      0.03s WALL (       1 calls)
-     potinit      :      0.31s CPU      0.33s WALL (       1 calls)
+     potinit      :      0.31s CPU      0.32s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      2.73s CPU      2.76s WALL (       9 calls)
-     sum_band     :      0.31s CPU      0.32s WALL (       9 calls)
-     v_of_rho     :      2.58s CPU      2.62s WALL (       9 calls)
-     mix_rho      :      0.07s CPU      0.09s WALL (       9 calls)
+     c_bands      :      2.75s CPU      2.77s WALL (       9 calls)
+     sum_band     :      0.32s CPU      0.32s WALL (       9 calls)
+     v_of_rho     :      2.57s CPU      2.62s WALL (       9 calls)
+     mix_rho      :      0.08s CPU      0.09s WALL (       9 calls)
 
      Called by c_bands:
      init_us_2    :      0.06s CPU      0.06s WALL (      50 calls)
-     regterg      :      2.67s CPU      2.69s WALL (      18 calls)
+     regterg      :      2.68s CPU      2.71s WALL (      18 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      2.65s CPU      2.67s WALL (      48 calls)
+     h_psi        :      2.65s CPU      2.68s WALL (      48 calls)
      g_psi        :      0.01s CPU      0.01s WALL (      28 calls)
-     rdiaghg      :      0.00s CPU      0.01s WALL (      38 calls)
+     rdiaghg      :      0.00s CPU      0.00s WALL (      38 calls)
 
      Called by h_psi:
-     h_psi:pot    :      0.59s CPU      0.60s WALL (      48 calls)
+     h_psi:pot    :      0.60s CPU      0.61s WALL (      48 calls)
      h_psi:calbec :      0.01s CPU      0.01s WALL (      48 calls)
-     add_vuspsi   :      0.00s CPU      0.01s WALL (      48 calls)
+     add_vuspsi   :      0.01s CPU      0.01s WALL (      48 calls)
 
      General routines
      calbec       :      0.02s CPU      0.01s WALL (      66 calls)
-     fft          :      0.84s CPU      0.87s WALL (     202 calls)
-     fftw         :      0.60s CPU      0.61s WALL (     228 calls)
+     fft          :      0.85s CPU      0.87s WALL (     202 calls)
+     fftw         :      0.62s CPU      0.62s WALL (     228 calls)
      fftc         :      1.30s CPU      1.31s WALL (     315 calls)
-     fftcw        :      0.45s CPU      0.45s WALL (     164 calls)
+     fftcw        :      0.45s CPU      0.46s WALL (     164 calls)
  
      Parallel routines
-     fft_scatter  :      0.89s CPU      0.91s WALL (     909 calls)
+     fft_scatter  :      0.89s CPU      0.90s WALL (     909 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.07s CPU      0.08s WALL (       3 calls)
-     vexx         :      2.06s CPU      2.07s WALL (      23 calls)
+     vexx         :      2.05s CPU      2.07s WALL (      23 calls)
      exxenergy    :      0.39s CPU      0.40s WALL (       5 calls)
  
-     PWSCF        :     6.99s CPU         7.19s WALL
+     PWSCF        :     7.03s CPU         7.20s WALL
 
  
-   This run was terminated on:  16:22:40  18Aug2016            
+   This run was terminated on:  14:42:58  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:20: 3 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:40:22 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -333,7 +333,7 @@
      Davidson diagonalization with overlap
      ethr =  1.73E-06,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.0 secs
 
      total energy              =     -15.85944851 Ry
      Harris-Foulkes estimate   =     -16.74353574 Ry
@@ -343,7 +343,7 @@
      Davidson diagonalization with overlap
      ethr =  7.28E-08,  avg # of iterations =  1.4
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        2.6 secs
 
      End of self-consistent calculation
 
@@ -423,7 +423,7 @@
      Davidson diagonalization with overlap
      ethr =  7.33E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.3 secs
+     total cpu time spent up to now is        4.2 secs
 
      End of self-consistent calculation
 
@@ -562,54 +562,54 @@
      Writing output data file silicon.save
  
      init_run     :      0.02s CPU      0.02s WALL (       1 calls)
-     electrons    :      5.07s CPU      5.20s WALL (       4 calls)
+     electrons    :      5.07s CPU      5.17s WALL (       4 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      5.01s CPU      5.14s WALL (      12 calls)
-     sum_band     :      0.04s CPU      0.04s WALL (      12 calls)
+     c_bands      :      5.01s CPU      5.11s WALL (      12 calls)
+     sum_band     :      0.03s CPU      0.04s WALL (      12 calls)
      v_of_rho     :      0.02s CPU      0.02s WALL (      12 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (      12 calls)
 
      Called by c_bands:
      init_us_2    :      0.01s CPU      0.01s WALL (     320 calls)
-     cegterg      :      5.00s CPU      5.13s WALL (     120 calls)
+     cegterg      :      5.00s CPU      5.10s WALL (     120 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      4.91s CPU      5.05s WALL (     366 calls)
+     h_psi        :      4.91s CPU      5.02s WALL (     366 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     236 calls)
      cdiaghg      :      0.06s CPU      0.06s WALL (     306 calls)
 
      Called by h_psi:
      h_psi:pot    :      0.14s CPU      0.16s WALL (     366 calls)
      h_psi:calbec :      0.01s CPU      0.01s WALL (     366 calls)
-     add_vuspsi   :      0.01s CPU      0.00s WALL (     366 calls)
+     add_vuspsi   :      0.00s CPU      0.00s WALL (     366 calls)
 
      General routines
      calbec       :      0.01s CPU      0.01s WALL (     436 calls)
      fft          :      0.00s CPU      0.01s WALL (     129 calls)
      fftw         :      0.14s CPU      0.16s WALL (    5826 calls)
-     fftc         :      3.31s CPU      3.54s WALL (   97792 calls)
+     fftc         :      3.24s CPU      3.50s WALL (   97792 calls)
      fftcw        :      0.09s CPU      0.09s WALL (    3216 calls)
  
      Parallel routines
-     fft_scatter  :      1.39s CPU      1.42s WALL (  106963 calls)
+     fft_scatter  :      1.32s CPU      1.39s WALL (  106963 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
-     exxinit      :      0.07s CPU      0.07s WALL (       4 calls)
-     vexx         :      4.77s CPU      4.89s WALL (     207 calls)
-     exxenergy    :      0.56s CPU      0.57s WALL (       7 calls)
+     exxinit      :      0.07s CPU      0.08s WALL (       4 calls)
+     vexx         :      4.77s CPU      4.86s WALL (     207 calls)
+     exxenergy    :      0.55s CPU      0.56s WALL (       7 calls)
  
-     PWSCF        :     5.81s CPU         5.96s WALL
+     PWSCF        :     5.79s CPU         5.92s WALL
 
  
-   This run was terminated on:  16:20: 9  18Aug2016            
+   This run was terminated on:  14:40:28  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

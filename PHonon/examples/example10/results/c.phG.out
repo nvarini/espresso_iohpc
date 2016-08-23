@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:31: 9 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:41:29 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -146,7 +146,7 @@
 
 
      Alpha used in Ewald sum =   2.8000
-     PHONON       :     0.95s CPU         0.98s WALL
+     PHONON       :     0.96s CPU         0.99s WALL
 
 
      Electric Fields Calculation
@@ -214,7 +214,7 @@
       iter #   1 total cpu time :    17.3 secs   av.it.:   6.8
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  1.925E-08
 
-      iter #   2 total cpu time :    18.9 secs   av.it.:  12.6
+      iter #   2 total cpu time :    18.8 secs   av.it.:  12.6
       thresh= 1.387E-05 alpha_mix =  0.700 |ddv_scf|^2 =  5.089E-11
 
       iter #   3 total cpu time :    20.4 secs   av.it.:  12.3
@@ -269,7 +269,7 @@
      freq (  1 -  3) =         18.1  [cm-1]   --> T_2  G_15 P_4   I+R
      freq (  4 -  6) =       1282.3  [cm-1]   --> T_2  G_15 P_4   I+R
  
-     PHONON       :    22.49s CPU        23.47s WALL
+     PHONON       :    22.39s CPU        23.41s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.02s CPU      0.02s WALL (       1 calls)
@@ -284,18 +284,18 @@
      cmpt_qdipol  :      0.00s CPU      0.00s WALL (       1 calls)
  
      DIELECTRIC CONSTANT AND EFFECTIVE CHARGES:
-     solve_e      :      7.01s CPU      7.34s WALL (       1 calls)
+     solve_e      :      7.02s CPU      7.31s WALL (       1 calls)
      dielec       :      0.00s CPU      0.00s WALL (       1 calls)
      zstar_eu     :      0.63s CPU      0.64s WALL (       1 calls)
  
      DYNAMICAL MATRIX:
      dynmat0      :      0.03s CPU      0.03s WALL (       1 calls)
-     phqscf       :     13.89s CPU     14.47s WALL (       1 calls)
-     dynmatrix    :      0.01s CPU      0.02s WALL (       1 calls)
+     phqscf       :     13.77s CPU     14.45s WALL (       1 calls)
+     dynmatrix    :      0.01s CPU      0.01s WALL (       1 calls)
  
-     phqscf       :     13.89s CPU     14.47s WALL (       1 calls)
-     solve_linter :     13.86s CPU     14.43s WALL (       2 calls)
-     drhodv       :      0.02s CPU      0.03s WALL (       2 calls)
+     phqscf       :     13.77s CPU     14.45s WALL (       1 calls)
+     solve_linter :     13.73s CPU     14.41s WALL (       2 calls)
+     drhodv       :      0.03s CPU      0.03s WALL (       2 calls)
  
      dynmat0      :      0.03s CPU      0.03s WALL (       1 calls)
      dynmat_us    :      0.03s CPU      0.03s WALL (       1 calls)
@@ -304,51 +304,51 @@
      dynmat_us    :      0.03s CPU      0.03s WALL (       1 calls)
      addusdynmat  :      0.00s CPU      0.00s WALL (       1 calls)
  
-     phqscf       :     13.89s CPU     14.47s WALL (       1 calls)
-     solve_linter :     13.86s CPU     14.43s WALL (       2 calls)
+     phqscf       :     13.77s CPU     14.45s WALL (       1 calls)
+     solve_linter :     13.73s CPU     14.41s WALL (       2 calls)
  
-     solve_linter :     13.86s CPU     14.43s WALL (       2 calls)
-     dvqpsi_us    :      0.32s CPU      0.32s WALL (     240 calls)
-     ortho        :      0.09s CPU      0.10s WALL (     900 calls)
-     cgsolve      :     15.54s CPU     16.08s WALL (     900 calls)
+     solve_linter :     13.73s CPU     14.41s WALL (       2 calls)
+     dvqpsi_us    :      0.32s CPU      0.33s WALL (     240 calls)
+     ortho        :      0.08s CPU      0.10s WALL (     900 calls)
+     cgsolve      :     15.50s CPU     16.15s WALL (     900 calls)
      incdrhoscf   :      1.15s CPU      1.20s WALL (     900 calls)
-     addusddens   :      0.14s CPU      0.14s WALL (      12 calls)
-     vpsifft      :      0.51s CPU      0.54s WALL (     480 calls)
-     dv_of_drho   :      0.06s CPU      0.07s WALL (      45 calls)
-     mix_pot      :      0.09s CPU      0.18s WALL (      14 calls)
+     addusddens   :      0.13s CPU      0.14s WALL (      12 calls)
+     vpsifft      :      0.50s CPU      0.54s WALL (     480 calls)
+     dv_of_drho   :      0.05s CPU      0.06s WALL (      45 calls)
+     mix_pot      :      0.09s CPU      0.19s WALL (      14 calls)
      psymdvscf    :      0.50s CPU      0.52s WALL (      10 calls)
      newdq        :      0.19s CPU      0.19s WALL (      14 calls)
      adddvscf     :      0.05s CPU      0.04s WALL (     660 calls)
      drhodvus     :      0.00s CPU      0.00s WALL (       2 calls)
  
-     dvqpsi_us    :      0.32s CPU      0.32s WALL (     240 calls)
+     dvqpsi_us    :      0.32s CPU      0.33s WALL (     240 calls)
      dvqpsi_us_on :      0.08s CPU      0.07s WALL (     240 calls)
  
-     cgsolve      :     15.54s CPU     16.08s WALL (     900 calls)
-     ch_psi       :     15.10s CPU     15.68s WALL (   12341 calls)
+     cgsolve      :     15.50s CPU     16.15s WALL (     900 calls)
+     ch_psi       :     15.07s CPU     15.74s WALL (   12341 calls)
  
-     ch_psi       :     15.10s CPU     15.68s WALL (   12341 calls)
-     last         :      1.21s CPU      1.27s WALL (   12341 calls)
+     ch_psi       :     15.07s CPU     15.74s WALL (   12341 calls)
+     last         :      1.22s CPU      1.27s WALL (   12341 calls)
  
-     add_vuspsi   :      0.28s CPU      0.32s WALL (   12341 calls)
+     add_vuspsi   :      0.29s CPU      0.32s WALL (   12341 calls)
  
      incdrhoscf   :      1.15s CPU      1.20s WALL (     900 calls)
  
      drhodvus     :      0.00s CPU      0.00s WALL (       2 calls)
  
       General routines
-     calbec       :      0.96s CPU      0.93s WALL (   30282 calls)
-     fft          :      0.17s CPU      0.19s WALL (     898 calls)
+     calbec       :      0.93s CPU      0.91s WALL (   30282 calls)
+     fft          :      0.16s CPU      0.19s WALL (     898 calls)
      ffts         :      0.02s CPU      0.03s WALL (     634 calls)
-     fftw         :     10.64s CPU     11.36s WALL (  407652 calls)
-     davcio       :      0.07s CPU      0.20s WALL (    4042 calls)
-     write_rec    :      0.02s CPU      0.07s WALL (      16 calls)
+     fftw         :     10.77s CPU     11.44s WALL (  407652 calls)
+     davcio       :      0.07s CPU      0.15s WALL (    4042 calls)
+     write_rec    :      0.03s CPU      0.07s WALL (      16 calls)
  
  
-     PHONON       :    22.49s CPU        23.47s WALL
+     PHONON       :    22.39s CPU        23.41s WALL
 
  
-   This run was terminated on:  16:31:33  18Aug2016            
+   This run was terminated on:  15:41:53  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

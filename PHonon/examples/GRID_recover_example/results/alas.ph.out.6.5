@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:19:37 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:15: 5 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -168,16 +168,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     162,    4)
-        NL pseudopotentials             0.02 Mb     (     162,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     162,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/6.5/_ph0/alas.save/charge-density.hdf5
@@ -442,7 +435,7 @@
      Compute atoms:     1,
 
 
-     PHONON       :     0.79s CPU         0.83s WALL
+     PHONON       :     0.81s CPU         0.88s WALL
 
 
 
@@ -450,15 +443,15 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :     0.9 secs   av.it.:   4.7
-      thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  6.758E-07
+      iter #   1 total cpu time :     1.0 secs   av.it.:   4.8
+      thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  6.754E-07
 
      Maximum CPU time exceeded
 
      max_seconds     =       0.50
-     elapsed seconds =       0.64
+     elapsed seconds =       0.67
  
-     PHONON       :     0.88s CPU         0.93s WALL
+     PHONON       :     0.91s CPU         0.97s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -506,15 +499,15 @@
      calbec       :      0.02s CPU      0.02s WALL (     872 calls)
      fft          :      0.00s CPU      0.00s WALL (       9 calls)
      ffts         :      0.00s CPU      0.00s WALL (      20 calls)
-     fftw         :      0.24s CPU      0.25s WALL (    5352 calls)
+     fftw         :      0.24s CPU      0.24s WALL (    5354 calls)
      davcio       :      0.00s CPU      0.00s WALL (      82 calls)
      write_rec    :      0.00s CPU      0.00s WALL (       1 calls)
  
  
-     PHONON       :     0.88s CPU         0.93s WALL
+     PHONON       :     0.91s CPU         0.97s WALL
 
  
-   This run was terminated on:  11:19:38   3Aug2016            
+   This run was terminated on:  16:15: 6  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

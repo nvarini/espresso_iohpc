@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:19:33 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:15: 1 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -168,16 +168,9 @@
 
      Dense  grid:     2445 G-vectors     FFT dimensions: (  20,  20,  20)
 
-     Largest allocated arrays     est. size (Mb)     dimensions
-        Kohn-Sham Wavefunctions         0.01 Mb     (     162,    4)
-        NL pseudopotentials             0.02 Mb     (     162,    8)
-        Each V/rho on FFT grid          0.06 Mb     (    4000)
-        Each G-vector array             0.01 Mb     (    1224)
-        G-vector shells                 0.00 Mb     (      61)
-     Largest temporary arrays     est. size (Mb)     dimensions
-        Auxiliary wavefunctions         0.04 Mb     (     162,   16)
-        Each subspace H/S matrix        0.00 Mb     (      16,   16)
-        Each <psi_i|beta_j> matrix      0.00 Mb     (       8,    4)
+     Estimated max dynamical RAM per process >       0.51Mb
+
+     Estimated total allocated dynamical RAM >       1.02Mb
 
      The potential is recalculated from file :
      /home/nvarini/espresso_hdf5/espresso/tempdir/6.1/_ph0/alas.save/charge-density.hdf5
@@ -444,7 +437,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     0.84s CPU         0.85s WALL
+     PHONON       :     0.83s CPU         0.85s WALL
 
 
 
@@ -458,9 +451,9 @@
      Maximum CPU time exceeded
 
      max_seconds     =       0.50
-     elapsed seconds =       0.68
+     elapsed seconds =       0.66
  
-     PHONON       :     0.94s CPU         0.97s WALL
+     PHONON       :     0.94s CPU         0.96s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -489,7 +482,7 @@
      solve_linter :      0.10s CPU      0.11s WALL (       3 calls)
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      20 calls)
      ortho        :      0.00s CPU      0.00s WALL (      20 calls)
-     cgsolve      :      0.06s CPU      0.07s WALL (      20 calls)
+     cgsolve      :      0.07s CPU      0.07s WALL (      20 calls)
      incdrhoscf   :      0.01s CPU      0.01s WALL (      20 calls)
      dv_of_drho   :      0.00s CPU      0.00s WALL (       1 calls)
      mix_pot      :      0.00s CPU      0.00s WALL (       1 calls)
@@ -498,30 +491,30 @@
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      20 calls)
      dvqpsi_us_on :      0.00s CPU      0.00s WALL (      20 calls)
  
-     cgsolve      :      0.06s CPU      0.07s WALL (      20 calls)
-     ch_psi       :      0.06s CPU      0.07s WALL (     149 calls)
+     cgsolve      :      0.07s CPU      0.07s WALL (      20 calls)
+     ch_psi       :      0.06s CPU      0.07s WALL (     150 calls)
  
-     ch_psi       :      0.06s CPU      0.07s WALL (     149 calls)
-     last         :      0.00s CPU      0.01s WALL (     149 calls)
+     ch_psi       :      0.06s CPU      0.07s WALL (     150 calls)
+     last         :      0.01s CPU      0.01s WALL (     150 calls)
  
-     add_vuspsi   :      0.01s CPU      0.01s WALL (     697 calls)
+     add_vuspsi   :      0.01s CPU      0.01s WALL (     698 calls)
  
      incdrhoscf   :      0.01s CPU      0.01s WALL (      20 calls)
  
  
       General routines
-     calbec       :      0.02s CPU      0.02s WALL (    1046 calls)
+     calbec       :      0.02s CPU      0.02s WALL (    1048 calls)
      fft          :      0.00s CPU      0.00s WALL (      10 calls)
      ffts         :      0.00s CPU      0.00s WALL (      20 calls)
-     fftw         :      0.26s CPU      0.26s WALL (    5588 calls)
+     fftw         :      0.26s CPU      0.26s WALL (    5594 calls)
      davcio       :      0.00s CPU      0.00s WALL (      82 calls)
      write_rec    :      0.00s CPU      0.00s WALL (       1 calls)
  
  
-     PHONON       :     0.94s CPU         0.97s WALL
+     PHONON       :     0.94s CPU         0.96s WALL
 
  
-   This run was terminated on:  11:19:34   3Aug2016            
+   This run was terminated on:  16:15: 2  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

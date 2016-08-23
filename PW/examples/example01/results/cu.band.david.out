@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16: 9:52 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:30:12 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -269,26 +269,26 @@
      Writing output data file cu.save
  
      init_run     :      0.19s CPU      0.19s WALL (       1 calls)
-     electrons    :      0.28s CPU      0.29s WALL (       1 calls)
+     electrons    :      0.29s CPU      0.29s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.28s CPU      0.29s WALL (       1 calls)
+     c_bands      :      0.29s CPU      0.29s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
-     newd         :      0.00s CPU      0.01s WALL (       1 calls)
+     newd         :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      28 calls)
-     cegterg      :      0.24s CPU      0.25s WALL (      30 calls)
+     cegterg      :      0.25s CPU      0.25s WALL (      30 calls)
 
      Called by sum_band:
 
      Called by *egterg:
      h_psi        :      0.14s CPU      0.14s WALL (     412 calls)
-     s_psi        :      0.00s CPU      0.00s WALL (     412 calls)
+     s_psi        :      0.01s CPU      0.00s WALL (     412 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     354 calls)
      cdiaghg      :      0.10s CPU      0.09s WALL (     382 calls)
 
@@ -308,10 +308,10 @@
      Parallel routines
      fft_scatter  :      0.03s CPU      0.03s WALL (    3676 calls)
  
-     PWSCF        :     0.77s CPU         0.79s WALL
+     PWSCF        :     0.78s CPU         0.80s WALL
 
  
-   This run was terminated on:  16: 9:53  18Aug2016            
+   This run was terminated on:  14:30:13  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

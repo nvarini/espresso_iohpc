@@ -1,6 +1,12 @@
-HELPDOC=../../dev-tools/helpdoc
+VERSION = svn
+HELPDOC = ../../dev-tools/helpdoc --version $(VERSION)
 
+HTMLS = INPUT_Lanczos.html \
+	INPUT_Davidson.html \
+	INPUT_EELS.html \
+	INPUT_Spectrum.html
 
+TXTS = $(HTMLS:.html=.txt)
 
 doc:  all
 all:  defs
@@ -12,11 +18,7 @@ clean:
 	- rm -f ../../Doc/INPUT_{Spectrum,Lanczos,Davidson,EELS}.*
 
 
-defs: link_input_xx INPUT_Lanczos.html INPUT_Lanczos.txt \
-                    INPUT_Davidson.html INPUT_Davidson.txt \
-                    INPUT_EELS.html INPUT_EELS.txt \
-                    INPUT_Spectrum.html INPUT_Spectrum.txt \
-                    link_on_main_doc
+defs: link_input_xx $(HTMLS) $(TXTS) link_on_main_doc
 
 link_input_xx:
 	@(if test ! -f input_xx.xsl; then \
@@ -28,26 +30,11 @@ link_input_xx:
 	echo ; \
 	fi) ; fi)
 
-INPUT_Lanczos.html: %.html: %.def
-	$(HELPDOC) $<
-INPUT_Lanczos.txt: %.txt: %.def
+$(HTMLS): %.html: %.def input_xx.xsl
 	$(HELPDOC) $<
 
-INPUT_Davidson.html: %.html: %.def
+$(TXTS): %.txt: %.def
 	$(HELPDOC) $<
-INPUT_Davidson.txt: %.txt: %.def
-	$(HELPDOC) $<
-
-INPUT_EELS.html: %.html: %.def
-	$(HELPDOC) $<
-INPUT_EELS.txt: %.txt: %.def
-	$(HELPDOC) $<
-
-INPUT_Spectrum.html: %.html: %.def
-	$(HELPDOC) $<
-INPUT_Spectrum.txt: %.txt: %.def
-	$(HELPDOC) $<
-
 
 link_on_main_doc:
 	-@( cd ../../Doc ; \

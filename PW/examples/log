@@ -440,8 +440,8 @@ using the three available sets of boundary conditions.
 
   running pw.x     as: mpirun -np 2 /home/nvarini/espresso_hdf5/espresso/bin/pw.x  -nk 1 -nd 1 -nb 1 -nt 1 
 
-  running the calculation for H2O without ESM...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
-application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+  running the calculation for H2O without ESM...application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
 Error condition encountered during test: exit status = 1
 Aborting
 

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:14: 7 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:34:27 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -687,8 +687,8 @@ N of occupied +U levels =   13.531922
 
      Writing output data file feo_af.save
  
-     init_run     :      1.09s CPU      1.12s WALL (       1 calls)
-     electrons    :      4.84s CPU      4.95s WALL (       1 calls)
+     init_run     :      1.10s CPU      1.12s WALL (       1 calls)
+     electrons    :      4.82s CPU      4.86s WALL (       1 calls)
      forces       :      0.17s CPU      0.17s WALL (       1 calls)
      stress       :      0.63s CPU      0.63s WALL (       1 calls)
 
@@ -698,9 +698,9 @@ N of occupied +U levels =   13.531922
 
      Called by electrons:
      c_bands      :      2.63s CPU      2.65s WALL (       9 calls)
-     sum_band     :      1.60s CPU      1.60s WALL (       9 calls)
+     sum_band     :      1.58s CPU      1.59s WALL (       9 calls)
      v_of_rho     :      0.18s CPU      0.18s WALL (      10 calls)
-     newd         :      0.40s CPU      0.41s WALL (      10 calls)
+     newd         :      0.39s CPU      0.41s WALL (      10 calls)
      mix_rho      :      0.05s CPU      0.05s WALL (       9 calls)
 
      Called by c_bands:
@@ -712,27 +712,27 @@ N of occupied +U levels =   13.531922
      addusdens    :      0.96s CPU      0.96s WALL (       9 calls)
 
      Called by *egterg:
-     h_psi        :      2.15s CPU      2.17s WALL (     261 calls)
+     h_psi        :      2.16s CPU      2.18s WALL (     261 calls)
      s_psi        :      0.07s CPU      0.07s WALL (     349 calls)
      g_psi        :      0.01s CPU      0.01s WALL (     181 calls)
-     cdiaghg      :      0.22s CPU      0.21s WALL (     253 calls)
+     cdiaghg      :      0.21s CPU      0.21s WALL (     253 calls)
 
      Called by h_psi:
-     h_psi:pot    :      2.12s CPU      2.13s WALL (     261 calls)
+     h_psi:pot    :      2.12s CPU      2.14s WALL (     261 calls)
      h_psi:calbec :      0.06s CPU      0.05s WALL (     261 calls)
      add_vuspsi   :      0.05s CPU      0.05s WALL (     261 calls)
      vhpsi        :      0.03s CPU      0.03s WALL (     261 calls)
 
      General routines
-     calbec       :      0.23s CPU      0.21s WALL (    2098 calls)
-     fft          :      0.20s CPU      0.20s WALL (     170 calls)
+     calbec       :      0.22s CPU      0.21s WALL (    2098 calls)
+     fft          :      0.19s CPU      0.19s WALL (     170 calls)
      ffts         :      0.01s CPU      0.01s WALL (      38 calls)
-     fftw         :      2.02s CPU      2.02s WALL (    8404 calls)
+     fftw         :      2.01s CPU      2.03s WALL (    8404 calls)
      interpolate  :      0.06s CPU      0.06s WALL (      38 calls)
      davcio       :      0.00s CPU      0.00s WALL (       8 calls)
  
      Parallel routines
-     fft_scatter  :      0.38s CPU      0.42s WALL (    8612 calls)
+     fft_scatter  :      0.37s CPU      0.40s WALL (    8612 calls)
 
      Hubbard U routines
      new_ns       :      0.01s CPU      0.01s WALL (       9 calls)
@@ -740,10 +740,10 @@ N of occupied +U levels =   13.531922
      force_hub    :      0.04s CPU      0.04s WALL (       1 calls)
      stres_hub    :      0.27s CPU      0.27s WALL (       1 calls)
  
-     PWSCF        :     6.88s CPU         7.04s WALL
+     PWSCF        :     6.88s CPU         6.95s WALL
 
  
-   This run was terminated on:  16:14:14  18Aug2016            
+   This run was terminated on:  14:34:34  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

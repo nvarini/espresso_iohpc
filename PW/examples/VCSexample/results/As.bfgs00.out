@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:18: 7 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:38:27 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -534,7 +534,7 @@ As      -0.277418353  -0.277418345  -0.277418345
      Davidson diagonalization with overlap
      ethr =  4.26E-08,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        1.6 secs
+     total cpu time spent up to now is        1.7 secs
 
      total energy              =     -25.49507155 Ry
      Harris-Foulkes estimate   =     -25.49507156 Ry
@@ -554,7 +554,7 @@ As      -0.277418353  -0.277418345  -0.277418345
      Davidson diagonalization with overlap
      ethr =  1.54E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.7 secs
+     total cpu time spent up to now is        1.8 secs
 
      End of self-consistent calculation
 
@@ -996,7 +996,7 @@ As      -0.271453358  -0.271453346  -0.271453346
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge    9.80507, renormalised to   10.00000
 
-     total cpu time spent up to now is        2.8 secs
+     total cpu time spent up to now is        2.9 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -1006,7 +1006,7 @@ As      -0.271453358  -0.271453346  -0.271453346
      Davidson diagonalization with overlap
      ethr =  1.00E-06,  avg # of iterations =  4.0
 
-     total cpu time spent up to now is        2.9 secs
+     total cpu time spent up to now is        3.0 secs
 
      total energy              =     -25.49911435 Ry
      Harris-Foulkes estimate   =     -25.38518988 Ry
@@ -1056,7 +1056,7 @@ As      -0.271453358  -0.271453346  -0.271453346
      Davidson diagonalization with overlap
      ethr =  5.85E-10,  avg # of iterations =  1.9
 
-     total cpu time spent up to now is        3.2 secs
+     total cpu time spent up to now is        3.3 secs
 
      total energy              =     -25.49942170 Ry
      Harris-Foulkes estimate   =     -25.49942173 Ry
@@ -1210,7 +1210,7 @@ As      -0.271769117  -0.271769105  -0.271769105
      Davidson diagonalization with overlap
      ethr =  8.00E-08,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.6 secs
+     total cpu time spent up to now is        3.7 secs
 
      total energy              =     -25.49948475 Ry
      Harris-Foulkes estimate   =     -25.49948517 Ry
@@ -1230,7 +1230,7 @@ As      -0.271769117  -0.271769105  -0.271769105
      Davidson diagonalization with overlap
      ethr =  2.43E-09,  avg # of iterations =  2.8
 
-     total cpu time spent up to now is        3.7 secs
+     total cpu time spent up to now is        3.8 secs
 
      End of self-consistent calculation
 
@@ -1520,7 +1520,7 @@ As      -0.272096370  -0.272096358  -0.272096358
      Davidson diagonalization with overlap
      ethr =  4.94E-09,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        4.4 secs
+     total cpu time spent up to now is        4.5 secs
 
      total energy              =     -25.49950420 Ry
      Harris-Foulkes estimate   =     -25.50573559 Ry
@@ -1855,7 +1855,7 @@ As      -0.272274617  -0.272274605  -0.272274605
      NEW-OLD atomic charge density approx. for the potential
      extrapolated charge   10.01594, renormalised to   10.00000
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        5.4 secs
 
      per-process dynamical memory:     4.0 Mb
 
@@ -1881,7 +1881,7 @@ As      -0.272274617  -0.272274605  -0.272274605
      Davidson diagonalization with overlap
      ethr =  8.04E-09,  avg # of iterations =  3.0
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        5.6 secs
 
      total energy              =     -25.49951631 Ry
      Harris-Foulkes estimate   =     -25.49951672 Ry
@@ -1901,7 +1901,7 @@ As      -0.272274617  -0.272274605  -0.272274605
      Davidson diagonalization with overlap
      ethr =  2.62E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        5.7 secs
 
      total energy              =     -25.49951624 Ry
      Harris-Foulkes estimate   =     -25.49951628 Ry
@@ -2308,7 +2308,7 @@ End final coordinates
      Davidson diagonalization with overlap
      ethr =  3.65E-07,  avg # of iterations =  2.1
 
-     total cpu time spent up to now is        6.6 secs
+     total cpu time spent up to now is        6.7 secs
 
      total energy              =     -25.50089941 Ry
      Harris-Foulkes estimate   =     -25.50089945 Ry
@@ -2417,50 +2417,50 @@ End final coordinates
 
      Writing output data file pwscf.save
  
-     init_run     :      0.13s CPU      0.12s WALL (       2 calls)
-     electrons    :      4.99s CPU      5.26s WALL (      13 calls)
-     update_pot   :      0.40s CPU      0.41s WALL (      11 calls)
-     forces       :      0.19s CPU      0.20s WALL (      13 calls)
+     init_run     :      0.12s CPU      0.12s WALL (       2 calls)
+     electrons    :      4.97s CPU      5.08s WALL (      13 calls)
+     update_pot   :      0.44s CPU      0.44s WALL (      11 calls)
+     forces       :      0.19s CPU      0.19s WALL (      13 calls)
      stress       :      0.35s CPU      0.35s WALL (      13 calls)
 
      Called by init_run:
-     wfcinit      :      0.04s CPU      0.04s WALL (       2 calls)
+     wfcinit      :      0.03s CPU      0.04s WALL (       2 calls)
      potinit      :      0.02s CPU      0.02s WALL (       2 calls)
 
      Called by electrons:
-     c_bands      :      4.17s CPU      4.26s WALL (      78 calls)
-     sum_band     :      0.71s CPU      0.72s WALL (      78 calls)
-     v_of_rho     :      0.06s CPU      0.06s WALL (      85 calls)
-     mix_rho      :      0.02s CPU      0.03s WALL (      78 calls)
+     c_bands      :      4.16s CPU      4.24s WALL (      78 calls)
+     sum_band     :      0.70s CPU      0.72s WALL (      78 calls)
+     v_of_rho     :      0.05s CPU      0.06s WALL (      85 calls)
+     mix_rho      :      0.02s CPU      0.02s WALL (      78 calls)
 
      Called by c_bands:
-     init_us_2    :      0.11s CPU      0.09s WALL (    1840 calls)
-     cegterg      :      4.05s CPU      4.14s WALL (     780 calls)
+     init_us_2    :      0.10s CPU      0.09s WALL (    1840 calls)
+     cegterg      :      4.04s CPU      4.13s WALL (     780 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      3.09s CPU      3.17s WALL (    2564 calls)
+     h_psi        :      3.09s CPU      3.16s WALL (    2564 calls)
      g_psi        :      0.03s CPU      0.04s WALL (    1764 calls)
-     cdiaghg      :      0.52s CPU      0.51s WALL (    2374 calls)
+     cdiaghg      :      0.50s CPU      0.50s WALL (    2374 calls)
 
      Called by h_psi:
-     h_psi:pot    :      3.08s CPU      3.15s WALL (    2564 calls)
+     h_psi:pot    :      3.08s CPU      3.14s WALL (    2564 calls)
      h_psi:calbec :      0.10s CPU      0.09s WALL (    2564 calls)
-     add_vuspsi   :      0.05s CPU      0.06s WALL (    2564 calls)
+     add_vuspsi   :      0.05s CPU      0.05s WALL (    2564 calls)
 
      General routines
-     calbec       :      0.11s CPU      0.11s WALL (    3214 calls)
+     calbec       :      0.12s CPU      0.11s WALL (    3214 calls)
      fft          :      0.04s CPU      0.05s WALL (     415 calls)
-     fftw         :      3.14s CPU      3.17s WALL (   44038 calls)
+     fftw         :      3.15s CPU      3.17s WALL (   44038 calls)
  
      Parallel routines
-     fft_scatter  :      0.80s CPU      0.83s WALL (   44453 calls)
+     fft_scatter  :      0.83s CPU      0.83s WALL (   44453 calls)
  
-     PWSCF        :     6.66s CPU         8.13s WALL
+     PWSCF        :     6.68s CPU         6.86s WALL
 
  
-   This run was terminated on:  16:18:15  18Aug2016            
+   This run was terminated on:  14:38:34  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

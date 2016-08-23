@@ -1,5 +1,5 @@
 
-     Program MATDYN v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:37: 2 
+     Program MATDYN v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:47:20 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -29,10 +29,10 @@
      Z* not found in file Al444.fc, TO-LO splitting at q=0 will be absent!
      A direction for q was not specified:TO-LO splitting will be absent
  
-     MATDYN       :     0.02s CPU         0.04s WALL
+     MATDYN       :     0.02s CPU         0.03s WALL
 
  
-   This run was terminated on:  16:37: 2  18Aug2016            
+   This run was terminated on:  15:47:20  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

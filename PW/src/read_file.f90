@@ -29,11 +29,12 @@ SUBROUTINE read_file()
                                    init_realspace_vars,real_space
   USE dfunct,               ONLY : newd
   USE ldaU,                 ONLY : lda_plus_u, U_projection
-  USE pw_restart,           ONLY : pw_readfile
 #ifdef __XSD 
-  USE pw_restart,           ONLY :  read_collected_to_evc
+  USE pw_restart_new,       ONLY : read_collected_to_evc
   USE control_flags,        ONLY : twfcollect
   USE io_files,             ONLY : tmp_dir, prefix
+#else
+  USE pw_restart,           ONLY : pw_readfile
 #endif
   USE control_flags,        ONLY : io_level
   USE klist,                ONLY : init_igk
@@ -164,11 +165,12 @@ SUBROUTINE read_xml_file_internal(withbs)
   USE vlocal,               ONLY : strf
   USE io_files,             ONLY : tmp_dir, prefix, iunpun, nwordwfc, iunwfc
   USE noncollin_module,     ONLY : noncolin, npol, nspin_lsda, nspin_mag, nspin_gga
-  USE pw_restart,           ONLY : pw_readfile
 #ifdef __XSD
-  USE pw_restart,           ONLY :  pw_readschema_file, init_vars_from_schema 
+  USE pw_restart_new,       ONLY :  pw_readschema_file, init_vars_from_schema 
   USE qes_types_module,     ONLY :  output_type, input_type, parallel_info_type, general_info_type
   USE qes_libs_module,      ONLY :  qes_reset_output, qes_reset_input, qes_reset_general_info, qes_reset_parallel_info 
+#else
+  USE pw_restart,           ONLY : pw_readfile
 #endif
   USE io_rho_xml,           ONLY : read_rho
   USE read_pseudo_mod,      ONLY : readpp
@@ -211,7 +213,7 @@ SUBROUTINE read_xml_file_internal(withbs)
   ! ... first we get the version of the qexml file
   !     if not already read
   CALL init_vars_from_schema ( 'header', ierr, output_obj, input_obj, parinfo_obj, geninfo_obj )
-  CALL errore( 'read_xml_file ', 'unable to determine qexml version', ABS(ierr) )
+  CALL errore( 'read_xml_file ', 'unable to determine determine schema version', ABS(ierr) )
 #else
   ! ... first we get the version of the qexml file
   !     if not already read

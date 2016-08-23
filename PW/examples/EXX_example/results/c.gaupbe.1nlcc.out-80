@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:22:28 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:42:46 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -325,7 +325,7 @@ EXX: grid of k+q points same as grid of k-points
      Writing output data file c.save
  
      init_run     :      0.59s CPU      0.62s WALL (       1 calls)
-     electrons    :      3.25s CPU      3.33s WALL (       2 calls)
+     electrons    :      3.27s CPU      3.33s WALL (       2 calls)
      forces       :      0.39s CPU      0.40s WALL (       1 calls)
 
      Called by init_run:
@@ -333,19 +333,19 @@ EXX: grid of k+q points same as grid of k-points
      potinit      :      0.32s CPU      0.34s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      1.48s CPU      1.50s WALL (       5 calls)
+     c_bands      :      1.49s CPU      1.50s WALL (       5 calls)
      sum_band     :      0.18s CPU      0.18s WALL (       5 calls)
      v_of_rho     :      2.12s CPU      2.16s WALL (       7 calls)
-     mix_rho      :      0.05s CPU      0.07s WALL (       5 calls)
+     mix_rho      :      0.06s CPU      0.07s WALL (       5 calls)
 
      Called by c_bands:
-     init_us_2    :      0.04s CPU      0.04s WALL (      30 calls)
-     regterg      :      1.44s CPU      1.46s WALL (      10 calls)
+     init_us_2    :      0.03s CPU      0.04s WALL (      30 calls)
+     regterg      :      1.46s CPU      1.47s WALL (      10 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      1.44s CPU      1.46s WALL (      29 calls)
+     h_psi        :      1.45s CPU      1.46s WALL (      29 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      17 calls)
      rdiaghg      :      0.00s CPU      0.00s WALL (      25 calls)
 
@@ -358,22 +358,22 @@ EXX: grid of k+q points same as grid of k-points
      calbec       :      0.01s CPU      0.01s WALL (      43 calls)
      fft          :      0.65s CPU      0.67s WALL (     154 calls)
      fftw         :      0.36s CPU      0.36s WALL (     132 calls)
-     fftc         :      0.68s CPU      0.69s WALL (     163 calls)
+     fftc         :      0.68s CPU      0.68s WALL (     163 calls)
      fftcw        :      0.24s CPU      0.25s WALL (      89 calls)
  
      Parallel routines
-     fft_scatter  :      0.54s CPU      0.55s WALL (     538 calls)
+     fft_scatter  :      0.53s CPU      0.54s WALL (     538 calls)
 
      EXX routines
      exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
      exxinit      :      0.05s CPU      0.06s WALL (       2 calls)
-     vexx         :      1.08s CPU      1.10s WALL (      13 calls)
-     exxenergy    :      0.20s CPU      0.20s WALL (       3 calls)
+     vexx         :      1.10s CPU      1.11s WALL (      13 calls)
+     exxenergy    :      0.19s CPU      0.20s WALL (       3 calls)
  
-     PWSCF        :     4.90s CPU         5.08s WALL
+     PWSCF        :     4.92s CPU         5.09s WALL
 
  
-   This run was terminated on:  16:22:33  18Aug2016            
+   This run was terminated on:  14:42:51  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

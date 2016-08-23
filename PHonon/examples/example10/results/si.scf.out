@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:31: 1 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:41:21 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -158,7 +158,7 @@
      Davidson diagonalization with overlap
      ethr =  6.43E-07,  avg # of iterations =  3.5
 
-     total cpu time spent up to now is        0.3 secs
+     total cpu time spent up to now is        0.2 secs
 
      total energy              =     -15.74074838 Ry
      Harris-Foulkes estimate   =     -15.74074837 Ry
@@ -218,7 +218,7 @@
      Writing output data file Si_pbe.save
  
      init_run     :      0.07s CPU      0.08s WALL (       1 calls)
-     electrons    :      0.22s CPU      0.22s WALL (       1 calls)
+     electrons    :      0.21s CPU      0.22s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
@@ -237,7 +237,7 @@
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.13s CPU      0.13s WALL (      51 calls)
+     h_psi        :      0.12s CPU      0.13s WALL (      51 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      33 calls)
      cdiaghg      :      0.01s CPU      0.01s WALL (      47 calls)
 
@@ -249,15 +249,15 @@
      General routines
      calbec       :      0.00s CPU      0.00s WALL (      51 calls)
      fft          :      0.01s CPU      0.01s WALL (     137 calls)
-     fftw         :      0.12s CPU      0.12s WALL (    1776 calls)
+     fftw         :      0.11s CPU      0.12s WALL (    1776 calls)
  
      Parallel routines
      fft_scatter  :      0.03s CPU      0.03s WALL (    1913 calls)
  
-     PWSCF        :     0.38s CPU         0.41s WALL
+     PWSCF        :     0.37s CPU         0.39s WALL
 
  
-   This run was terminated on:  16:31: 2  18Aug2016            
+   This run was terminated on:  15:41:22  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

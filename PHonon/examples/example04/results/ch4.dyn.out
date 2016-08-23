@@ -1,5 +1,5 @@
 
-     Program DYNMAT v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:29:39 
+     Program DYNMAT v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:39:59 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -52,10 +52,10 @@
    14   3054.98   91.5861    0.3192
    15   3054.98   91.5861    0.3192
  
-     DYNMAT       :     0.04s CPU         0.07s WALL
+     DYNMAT       :     0.03s CPU         0.04s WALL
 
  
-   This run was terminated on:  16:29:39  18Aug2016            
+   This run was terminated on:  15:39:59  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

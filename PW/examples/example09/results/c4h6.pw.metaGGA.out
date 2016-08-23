@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:14:14 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:34:34 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -344,19 +344,19 @@
      Writing output data file pwscf.save
      Warning: cannot save meta-gga kinetic terms: not implemented.
  
-     init_run     :      0.10s CPU      0.11s WALL (       1 calls)
+     init_run     :      0.11s CPU      0.11s WALL (       1 calls)
      electrons    :      0.93s CPU      0.93s WALL (       1 calls)
      forces       :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.01s CPU      0.01s WALL (       1 calls)
-     potinit      :      0.02s CPU      0.03s WALL (       1 calls)
+     potinit      :      0.03s CPU      0.03s WALL (       1 calls)
 
      Called by electrons:
      c_bands      :      0.46s CPU      0.46s WALL (      17 calls)
-     sum_band     :      0.08s CPU      0.08s WALL (      17 calls)
-     v_of_rho     :      0.37s CPU      0.36s WALL (      18 calls)
-     mix_rho      :      0.03s CPU      0.04s WALL (      17 calls)
+     sum_band     :      0.09s CPU      0.09s WALL (      17 calls)
+     v_of_rho     :      0.36s CPU      0.36s WALL (      18 calls)
+     mix_rho      :      0.03s CPU      0.03s WALL (      17 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      35 calls)
@@ -377,17 +377,17 @@
 
      General routines
      calbec       :      0.00s CPU      0.00s WALL (      78 calls)
-     fft          :      0.05s CPU      0.06s WALL (     250 calls)
+     fft          :      0.06s CPU      0.06s WALL (     250 calls)
      fftw         :      0.43s CPU      0.43s WALL (    3368 calls)
      interpolate  :      0.00s CPU      0.00s WALL (      18 calls)
  
      Parallel routines
-     fft_scatter  :      0.10s CPU      0.11s WALL (    3618 calls)
+     fft_scatter  :      0.11s CPU      0.11s WALL (    3618 calls)
  
-     PWSCF        :     1.11s CPU         1.13s WALL
+     PWSCF        :     1.13s CPU         1.31s WALL
 
  
-   This run was terminated on:  16:14:15  18Aug2016            
+   This run was terminated on:  14:34:36  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

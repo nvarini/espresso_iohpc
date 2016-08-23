@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12650M) starts on  3Aug2016 at 11:19:48 
+     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:15:17 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -141,24 +141,24 @@
      Compute atoms:     1,
 
 
-     PHONON       :     0.33s CPU         0.34s WALL
+     PHONON       :     0.34s CPU         0.35s WALL
 
 
           Dielectric constant in cartesian axis 
 
-          (      13.744199422      -0.000000000       0.000000000 )
-          (      -0.000000000      13.744199422      -0.000000000 )
-          (       0.000000000      -0.000000000      13.744199422 )
+          (      13.744216098      -0.000000000      -0.000000000 )
+          (      -0.000000000      13.744216098       0.000000000 )
+          (      -0.000000000       0.000000000      13.744216098 )
 
           Effective charges (d Force / dE) in cartesian axis
 
            atom      1   Al 
-      Ex  (        1.88265        0.00000       -0.00000 )
-      Ey  (        0.00000        1.88265        0.00000 )
-      Ez  (        0.00000        0.00000        1.88265 )
+      Ex  (        1.88265       -0.00000        0.00000 )
+      Ey  (        0.00000        1.88265       -0.00000 )
+      Ez  (       -0.00000       -0.00000        1.88265 )
            atom      2   As 
-      Ex  (       -3.23374        0.00000       -0.00000 )
-      Ey  (        0.00000       -3.23374       -0.00000 )
+      Ex  (       -3.23374       -0.00000       -0.00000 )
+      Ey  (       -0.00000       -3.23374       -0.00000 )
       Ez  (       -0.00000       -0.00000       -3.23374 )
 
 
@@ -173,7 +173,7 @@
       thresh= 5.487E-07 alpha_mix =  0.700 |ddv_scf|^2 =  1.286E-12
 
       iter #   5 total cpu time :     0.5 secs   av.it.:   9.5
-      thresh= 1.134E-07 alpha_mix =  0.700 |ddv_scf|^2 =  4.666E-16
+      thresh= 1.134E-07 alpha_mix =  0.700 |ddv_scf|^2 =  4.667E-16
 
      End of self-consistent calculation
 
@@ -181,7 +181,7 @@
 
      Not diagonalizing because representation    0 is not done
  
-     PHONON       :     0.51s CPU         0.54s WALL
+     PHONON       :     0.52s CPU         0.54s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
@@ -194,33 +194,33 @@
      DIELECTRIC CONSTANT AND EFFECTIVE CHARGES:
  
      DYNAMICAL MATRIX:
-     phqscf       :      0.18s CPU      0.20s WALL (       1 calls)
+     phqscf       :      0.18s CPU      0.19s WALL (       1 calls)
      dynmatrix    :      0.00s CPU      0.00s WALL (       1 calls)
  
-     phqscf       :      0.18s CPU      0.20s WALL (       1 calls)
+     phqscf       :      0.18s CPU      0.19s WALL (       1 calls)
      solve_linter :      0.18s CPU      0.19s WALL (       1 calls)
      drhodv       :      0.00s CPU      0.00s WALL (       1 calls)
      add_zstar_ue :      0.00s CPU      0.00s WALL (       1 calls)
  
  
  
-     phqscf       :      0.18s CPU      0.20s WALL (       1 calls)
+     phqscf       :      0.18s CPU      0.19s WALL (       1 calls)
      solve_linter :      0.18s CPU      0.19s WALL (       1 calls)
  
      solve_linter :      0.18s CPU      0.19s WALL (       1 calls)
      ortho        :      0.00s CPU      0.00s WALL (      18 calls)
-     cgsolve      :      0.09s CPU      0.10s WALL (      18 calls)
+     cgsolve      :      0.09s CPU      0.09s WALL (      18 calls)
      incdrhoscf   :      0.01s CPU      0.01s WALL (      18 calls)
      vpsifft      :      0.01s CPU      0.01s WALL (      18 calls)
      dv_of_drho   :      0.00s CPU      0.00s WALL (       9 calls)
-     mix_pot      :      0.00s CPU      0.01s WALL (       3 calls)
+     mix_pot      :      0.00s CPU      0.00s WALL (       3 calls)
      psymdvscf    :      0.06s CPU      0.06s WALL (       3 calls)
  
  
-     cgsolve      :      0.09s CPU      0.10s WALL (      18 calls)
-     ch_psi       :      0.09s CPU      0.09s WALL (     192 calls)
+     cgsolve      :      0.09s CPU      0.09s WALL (      18 calls)
+     ch_psi       :      0.08s CPU      0.09s WALL (     192 calls)
  
-     ch_psi       :      0.09s CPU      0.09s WALL (     192 calls)
+     ch_psi       :      0.08s CPU      0.09s WALL (     192 calls)
      last         :      0.01s CPU      0.01s WALL (     192 calls)
  
      add_vuspsi   :      0.00s CPU      0.00s WALL (     192 calls)
@@ -230,17 +230,17 @@
  
       General routines
      calbec       :      0.01s CPU      0.01s WALL (     416 calls)
-     fft          :      0.01s CPU      0.01s WALL (      30 calls)
+     fft          :      0.00s CPU      0.00s WALL (      30 calls)
      ffts         :      0.00s CPU      0.00s WALL (       6 calls)
      fftw         :      0.08s CPU      0.08s WALL (    1716 calls)
      davcio       :      0.00s CPU      0.00s WALL (     102 calls)
      write_rec    :      0.00s CPU      0.01s WALL (       4 calls)
  
  
-     PHONON       :     0.51s CPU         0.54s WALL
+     PHONON       :     0.52s CPU         0.54s WALL
 
  
-   This run was terminated on:  11:19:49   3Aug2016            
+   This run was terminated on:  16:15:18  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

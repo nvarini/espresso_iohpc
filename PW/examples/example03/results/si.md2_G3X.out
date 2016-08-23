@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12782M) starts on 18Aug2016 at 16:10:34 
+     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:30:56 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -157,7 +157,7 @@
      Davidson diagonalization with overlap
      ethr =  1.22E-06,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        0.1 secs
+     total cpu time spent up to now is        0.0 secs
 
      total energy              =     -15.54395039 Ry
      Harris-Foulkes estimate   =     -15.54395125 Ry
@@ -305,7 +305,7 @@ Si       0.123046180   0.123046178   0.123046180
      first order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        0.2 secs
+     total cpu time spent up to now is        0.1 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -467,7 +467,7 @@ Si       0.123182489   0.123182484   0.123182490
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        0.3 secs
+     total cpu time spent up to now is        0.2 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -483,7 +483,7 @@ Si       0.123182489   0.123182484   0.123182490
      Davidson diagonalization with overlap
      ethr =  7.72E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.3 secs
+     total cpu time spent up to now is        0.2 secs
 
      total energy              =     -15.54411144 Ry
      Harris-Foulkes estimate   =     -15.54411143 Ry
@@ -493,7 +493,7 @@ Si       0.123182489   0.123182484   0.123182490
      Davidson diagonalization with overlap
      ethr =  7.89E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.3 secs
+     total cpu time spent up to now is        0.2 secs
 
      End of self-consistent calculation
 
@@ -645,7 +645,7 @@ Si       0.123402394   0.123402385   0.123402397
      Davidson diagonalization with overlap
      ethr =  1.77E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.4 secs
+     total cpu time spent up to now is        0.3 secs
 
      total energy              =     -15.54428338 Ry
      Harris-Foulkes estimate   =     -15.54428335 Ry
@@ -655,7 +655,7 @@ Si       0.123402394   0.123402385   0.123402397
      Davidson diagonalization with overlap
      ethr =  1.79E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.4 secs
+     total cpu time spent up to now is        0.3 secs
 
      total energy              =     -15.54428338 Ry
      Harris-Foulkes estimate   =     -15.54428338 Ry
@@ -665,7 +665,7 @@ Si       0.123402394   0.123402385   0.123402397
      Davidson diagonalization with overlap
      ethr =  1.38E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.4 secs
+     total cpu time spent up to now is        0.3 secs
 
      End of self-consistent calculation
 
@@ -827,7 +827,7 @@ Si       0.123695441   0.123695429   0.123695445
      Davidson diagonalization with overlap
      ethr =  3.01E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.5 secs
+     total cpu time spent up to now is        0.4 secs
 
      total energy              =     -15.54447702 Ry
      Harris-Foulkes estimate   =     -15.54447697 Ry
@@ -837,7 +837,7 @@ Si       0.123695441   0.123695429   0.123695445
      Davidson diagonalization with overlap
      ethr =  3.04E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.5 secs
+     total cpu time spent up to now is        0.4 secs
 
      total energy              =     -15.54447703 Ry
      Harris-Foulkes estimate   =     -15.54447702 Ry
@@ -847,7 +847,7 @@ Si       0.123695441   0.123695429   0.123695445
      Davidson diagonalization with overlap
      ethr =  2.34E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.5 secs
+     total cpu time spent up to now is        0.4 secs
 
      End of self-consistent calculation
 
@@ -1009,7 +1009,7 @@ Si       0.124047846   0.124047832   0.124047851
      Davidson diagonalization with overlap
      ethr =  4.16E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.6 secs
+     total cpu time spent up to now is        0.5 secs
 
      total energy              =     -15.54465685 Ry
      Harris-Foulkes estimate   =     -15.54465678 Ry
@@ -1019,7 +1019,7 @@ Si       0.124047846   0.124047832   0.124047851
      Davidson diagonalization with overlap
      ethr =  4.21E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.6 secs
+     total cpu time spent up to now is        0.5 secs
 
      total energy              =     -15.54465686 Ry
      Harris-Foulkes estimate   =     -15.54465685 Ry
@@ -1029,7 +1029,7 @@ Si       0.124047846   0.124047832   0.124047851
      Davidson diagonalization with overlap
      ethr =  3.25E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.6 secs
+     total cpu time spent up to now is        0.5 secs
 
      End of self-consistent calculation
 
@@ -1191,7 +1191,7 @@ Si       0.124443257   0.124443241   0.124443263
      Davidson diagonalization with overlap
      ethr =  5.07E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.7 secs
+     total cpu time spent up to now is        0.6 secs
 
      total energy              =     -15.54479071 Ry
      Harris-Foulkes estimate   =     -15.54479062 Ry
@@ -1201,7 +1201,7 @@ Si       0.124443257   0.124443241   0.124443263
      Davidson diagonalization with overlap
      ethr =  5.11E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.7 secs
+     total cpu time spent up to now is        0.6 secs
 
      total energy              =     -15.54479072 Ry
      Harris-Foulkes estimate   =     -15.54479071 Ry
@@ -1211,7 +1211,7 @@ Si       0.124443257   0.124443241   0.124443263
      Davidson diagonalization with overlap
      ethr =  3.96E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.7 secs
+     total cpu time spent up to now is        0.6 secs
 
      End of self-consistent calculation
 
@@ -1373,7 +1373,7 @@ Si       0.124863610   0.124863593   0.124863618
      Davidson diagonalization with overlap
      ethr =  5.55E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        0.7 secs
 
      total energy              =     -15.54485554 Ry
      Harris-Foulkes estimate   =     -15.54485544 Ry
@@ -1383,7 +1383,7 @@ Si       0.124863610   0.124863593   0.124863618
      Davidson diagonalization with overlap
      ethr =  5.59E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        0.7 secs
 
      total energy              =     -15.54485555 Ry
      Harris-Foulkes estimate   =     -15.54485554 Ry
@@ -1393,7 +1393,7 @@ Si       0.124863610   0.124863593   0.124863618
      Davidson diagonalization with overlap
      ethr =  4.36E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        0.7 secs
 
      End of self-consistent calculation
 
@@ -1555,7 +1555,7 @@ Si       0.125290036   0.125290018   0.125290043
      Davidson diagonalization with overlap
      ethr =  5.55E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.9 secs
+     total cpu time spent up to now is        0.8 secs
 
      total energy              =     -15.54484117 Ry
      Harris-Foulkes estimate   =     -15.54484107 Ry
@@ -1565,7 +1565,7 @@ Si       0.125290036   0.125290018   0.125290043
      Davidson diagonalization with overlap
      ethr =  5.59E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.9 secs
+     total cpu time spent up to now is        0.8 secs
 
      total energy              =     -15.54484119 Ry
      Harris-Foulkes estimate   =     -15.54484117 Ry
@@ -1575,7 +1575,7 @@ Si       0.125290036   0.125290018   0.125290043
      Davidson diagonalization with overlap
      ethr =  4.38E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        0.9 secs
+     total cpu time spent up to now is        0.8 secs
 
      End of self-consistent calculation
 
@@ -1747,7 +1747,7 @@ Si       0.125703729   0.125703712   0.125703737
      Davidson diagonalization with overlap
      ethr =  5.10E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.0 secs
+     total cpu time spent up to now is        0.9 secs
 
      total energy              =     -15.54475149 Ry
      Harris-Foulkes estimate   =     -15.54475148 Ry
@@ -1757,7 +1757,7 @@ Si       0.125703729   0.125703712   0.125703737
      Davidson diagonalization with overlap
      ethr =  4.02E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.0 secs
+     total cpu time spent up to now is        0.9 secs
 
      End of self-consistent calculation
 
@@ -1929,7 +1929,7 @@ Si       0.126086772   0.126086756   0.126086779
      Davidson diagonalization with overlap
      ethr =  4.24E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.1 secs
+     total cpu time spent up to now is        1.0 secs
 
      total energy              =     -15.54460308 Ry
      Harris-Foulkes estimate   =     -15.54460307 Ry
@@ -1939,7 +1939,7 @@ Si       0.126086772   0.126086756   0.126086779
      Davidson diagonalization with overlap
      ethr =  3.35E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.1 secs
+     total cpu time spent up to now is        1.0 secs
 
      End of self-consistent calculation
 
@@ -2111,7 +2111,7 @@ Si       0.126422853   0.126422839   0.126422860
      Davidson diagonalization with overlap
      ethr =  3.14E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.2 secs
+     total cpu time spent up to now is        1.1 secs
 
      total energy              =     -15.54442194 Ry
      Harris-Foulkes estimate   =     -15.54442193 Ry
@@ -2121,7 +2121,7 @@ Si       0.126422853   0.126422839   0.126422860
      Davidson diagonalization with overlap
      ethr =  2.50E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.2 secs
+     total cpu time spent up to now is        1.1 secs
 
      End of self-consistent calculation
 
@@ -2303,7 +2303,7 @@ Si       0.126697879   0.126697868   0.126697885
      Davidson diagonalization with overlap
      ethr =  1.60E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.3 secs
+     total cpu time spent up to now is        1.2 secs
 
      End of self-consistent calculation
 
@@ -2682,7 +2682,7 @@ Si       0.127051261   0.127051257   0.127051263
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        1.5 secs
+     total cpu time spent up to now is        1.4 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -2698,7 +2698,7 @@ Si       0.127051261   0.127051257   0.127051263
      Davidson diagonalization with overlap
      ethr =  9.54E-11,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.5 secs
+     total cpu time spent up to now is        1.4 secs
 
      End of self-consistent calculation
 
@@ -2840,7 +2840,7 @@ Si       0.127043780   0.127043781   0.127043782
      Davidson diagonalization with overlap
      ethr =  2.27E-11,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        1.6 secs
+     total cpu time spent up to now is        1.5 secs
 
      End of self-consistent calculation
 
@@ -3057,7 +3057,7 @@ Si       0.126871332   0.126871338   0.126871331
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        1.7 secs
+     total cpu time spent up to now is        1.6 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -3219,7 +3219,7 @@ Si       0.126655708   0.126655717   0.126655705
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        1.8 secs
+     total cpu time spent up to now is        1.7 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -3235,7 +3235,7 @@ Si       0.126655708   0.126655717   0.126655705
      Davidson diagonalization with overlap
      ethr =  1.59E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.8 secs
+     total cpu time spent up to now is        1.7 secs
 
      total energy              =     -15.54426890 Ry
      Harris-Foulkes estimate   =     -15.54426886 Ry
@@ -3401,7 +3401,7 @@ Si       0.126369390   0.126369403   0.126369386
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        1.9 secs
+     total cpu time spent up to now is        1.8 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -3417,7 +3417,7 @@ Si       0.126369390   0.126369403   0.126369386
      Davidson diagonalization with overlap
      ethr =  2.72E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.9 secs
+     total cpu time spent up to now is        1.8 secs
 
      total energy              =     -15.54445390 Ry
      Harris-Foulkes estimate   =     -15.54445384 Ry
@@ -3427,7 +3427,7 @@ Si       0.126369390   0.126369403   0.126369386
      Davidson diagonalization with overlap
      ethr =  2.76E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.9 secs
+     total cpu time spent up to now is        1.8 secs
 
      total energy              =     -15.54445390 Ry
      Harris-Foulkes estimate   =     -15.54445390 Ry
@@ -3583,7 +3583,7 @@ Si       0.126024250   0.126024265   0.126024245
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        1.9 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -3599,7 +3599,7 @@ Si       0.126024250   0.126024265   0.126024245
      Davidson diagonalization with overlap
      ethr =  3.86E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        1.9 secs
 
      total energy              =     -15.54463154 Ry
      Harris-Foulkes estimate   =     -15.54463146 Ry
@@ -3609,7 +3609,7 @@ Si       0.126024250   0.126024265   0.126024245
      Davidson diagonalization with overlap
      ethr =  3.90E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        1.9 secs
 
      total energy              =     -15.54463155 Ry
      Harris-Foulkes estimate   =     -15.54463154 Ry
@@ -3765,7 +3765,7 @@ Si       0.125634797   0.125634813   0.125634790
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.0 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -3781,7 +3781,7 @@ Si       0.125634797   0.125634813   0.125634790
      Davidson diagonalization with overlap
      ethr =  4.83E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.0 secs
 
      total energy              =     -15.54477154 Ry
      Harris-Foulkes estimate   =     -15.54477145 Ry
@@ -3791,7 +3791,7 @@ Si       0.125634797   0.125634813   0.125634790
      Davidson diagonalization with overlap
      ethr =  4.86E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.0 secs
 
      total energy              =     -15.54477156 Ry
      Harris-Foulkes estimate   =     -15.54477155 Ry
@@ -3801,7 +3801,7 @@ Si       0.125634797   0.125634813   0.125634790
      Davidson diagonalization with overlap
      ethr =  3.83E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.1 secs
+     total cpu time spent up to now is        2.0 secs
 
      End of self-consistent calculation
 
@@ -3947,7 +3947,7 @@ Si       0.125217661   0.125217679   0.125217654
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.1 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -3963,7 +3963,7 @@ Si       0.125217661   0.125217679   0.125217654
      Davidson diagonalization with overlap
      ethr =  5.46E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.1 secs
 
      total energy              =     -15.54484923 Ry
      Harris-Foulkes estimate   =     -15.54484913 Ry
@@ -3973,7 +3973,7 @@ Si       0.125217661   0.125217679   0.125217654
      Davidson diagonalization with overlap
      ethr =  5.49E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.1 secs
 
      total energy              =     -15.54484925 Ry
      Harris-Foulkes estimate   =     -15.54484924 Ry
@@ -3983,7 +3983,7 @@ Si       0.125217661   0.125217679   0.125217654
      Davidson diagonalization with overlap
      ethr =  4.30E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.1 secs
 
      End of self-consistent calculation
 
@@ -4129,7 +4129,7 @@ Si       0.124790966   0.124790984   0.124790959
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.3 secs
+     total cpu time spent up to now is        2.2 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -4145,7 +4145,7 @@ Si       0.124790966   0.124790984   0.124790959
      Davidson diagonalization with overlap
      ethr =  5.64E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.3 secs
+     total cpu time spent up to now is        2.2 secs
 
      total energy              =     -15.54484998 Ry
      Harris-Foulkes estimate   =     -15.54484988 Ry
@@ -4155,7 +4155,7 @@ Si       0.124790966   0.124790984   0.124790959
      Davidson diagonalization with overlap
      ethr =  5.66E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.3 secs
+     total cpu time spent up to now is        2.2 secs
 
      total energy              =     -15.54485000 Ry
      Harris-Foulkes estimate   =     -15.54484998 Ry
@@ -4165,7 +4165,7 @@ Si       0.124790966   0.124790984   0.124790959
      Davidson diagonalization with overlap
      ethr =  4.40E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.3 secs
+     total cpu time spent up to now is        2.2 secs
 
      End of self-consistent calculation
 
@@ -4311,7 +4311,7 @@ Si       0.124373585   0.124373601   0.124373577
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.4 secs
+     total cpu time spent up to now is        2.3 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -4327,7 +4327,7 @@ Si       0.124373585   0.124373601   0.124373577
      Davidson diagonalization with overlap
      ethr =  5.31E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.4 secs
+     total cpu time spent up to now is        2.3 secs
 
      total energy              =     -15.54477229 Ry
      Harris-Foulkes estimate   =     -15.54477220 Ry
@@ -4337,7 +4337,7 @@ Si       0.124373585   0.124373601   0.124373577
      Davidson diagonalization with overlap
      ethr =  5.33E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.4 secs
+     total cpu time spent up to now is        2.3 secs
 
      total energy              =     -15.54477230 Ry
      Harris-Foulkes estimate   =     -15.54477229 Ry
@@ -4347,7 +4347,7 @@ Si       0.124373585   0.124373601   0.124373577
      Davidson diagonalization with overlap
      ethr =  4.13E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.4 secs
+     total cpu time spent up to now is        2.3 secs
 
      End of self-consistent calculation
 
@@ -4493,7 +4493,7 @@ Si       0.123984311   0.123984327   0.123984304
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        2.4 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -4509,7 +4509,7 @@ Si       0.123984311   0.123984327   0.123984304
      Davidson diagonalization with overlap
      ethr =  4.49E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        2.4 secs
 
      total energy              =     -15.54462867 Ry
      Harris-Foulkes estimate   =     -15.54462860 Ry
@@ -4519,7 +4519,7 @@ Si       0.123984311   0.123984327   0.123984304
      Davidson diagonalization with overlap
      ethr =  4.55E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        2.4 secs
 
      total energy              =     -15.54462869 Ry
      Harris-Foulkes estimate   =     -15.54462868 Ry
@@ -4529,7 +4529,7 @@ Si       0.123984311   0.123984327   0.123984304
      Davidson diagonalization with overlap
      ethr =  3.51E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.5 secs
+     total cpu time spent up to now is        2.4 secs
 
      End of self-consistent calculation
 
@@ -4675,7 +4675,7 @@ Si       0.123640976   0.123640990   0.123640970
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        2.5 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -4691,7 +4691,7 @@ Si       0.123640976   0.123640990   0.123640970
      Davidson diagonalization with overlap
      ethr =  3.41E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        2.5 secs
 
      total energy              =     -15.54444408 Ry
      Harris-Foulkes estimate   =     -15.54444402 Ry
@@ -4701,7 +4701,7 @@ Si       0.123640976   0.123640990   0.123640970
      Davidson diagonalization with overlap
      ethr =  3.45E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        2.5 secs
 
      total energy              =     -15.54444409 Ry
      Harris-Foulkes estimate   =     -15.54444408 Ry
@@ -4711,7 +4711,7 @@ Si       0.123640976   0.123640990   0.123640970
      Davidson diagonalization with overlap
      ethr =  2.65E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        2.5 secs
 
      End of self-consistent calculation
 
@@ -4857,7 +4857,7 @@ Si       0.123359552   0.123359563   0.123359546
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        2.6 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -4873,7 +4873,7 @@ Si       0.123359552   0.123359563   0.123359546
      Davidson diagonalization with overlap
      ethr =  2.17E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        2.6 secs
 
      total energy              =     -15.54425168 Ry
      Harris-Foulkes estimate   =     -15.54425165 Ry
@@ -4883,7 +4883,7 @@ Si       0.123359552   0.123359563   0.123359546
      Davidson diagonalization with overlap
      ethr =  2.22E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        2.6 secs
 
      total energy              =     -15.54425169 Ry
      Harris-Foulkes estimate   =     -15.54425168 Ry
@@ -4893,7 +4893,7 @@ Si       0.123359552   0.123359563   0.123359546
      Davidson diagonalization with overlap
      ethr =  1.71E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.7 secs
+     total cpu time spent up to now is        2.6 secs
 
      End of self-consistent calculation
 
@@ -5039,7 +5039,7 @@ Si       0.123153305   0.123153313   0.123153301
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        2.8 secs
+     total cpu time spent up to now is        2.7 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -5055,7 +5055,7 @@ Si       0.123153305   0.123153313   0.123153301
      Davidson diagonalization with overlap
      ethr =  1.06E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.8 secs
+     total cpu time spent up to now is        2.7 secs
 
      total energy              =     -15.54408690 Ry
      Harris-Foulkes estimate   =     -15.54408688 Ry
@@ -5065,7 +5065,7 @@ Si       0.123153305   0.123153313   0.123153301
      Davidson diagonalization with overlap
      ethr =  1.10E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.8 secs
+     total cpu time spent up to now is        2.7 secs
 
      End of self-consistent calculation
 
@@ -5217,7 +5217,7 @@ Si       0.123032063   0.123032068   0.123032060
      Davidson diagonalization with overlap
      ethr =  2.95E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.9 secs
+     total cpu time spent up to now is        2.8 secs
 
      total energy              =     -15.54398056 Ry
      Harris-Foulkes estimate   =     -15.54398055 Ry
@@ -5227,7 +5227,7 @@ Si       0.123032063   0.123032068   0.123032060
      Davidson diagonalization with overlap
      ethr =  3.03E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.9 secs
+     total cpu time spent up to now is        2.8 secs
 
      End of self-consistent calculation
 
@@ -5424,7 +5424,7 @@ Si       0.123021118   0.123021117   0.123021117
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        3.0 secs
+     total cpu time spent up to now is        2.9 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -5440,7 +5440,7 @@ Si       0.123021118   0.123021117   0.123021117
      Davidson diagonalization with overlap
      ethr =  3.84E-11,  avg # of iterations =  2.8
 
-     total cpu time spent up to now is        3.0 secs
+     total cpu time spent up to now is        2.9 secs
 
      End of self-consistent calculation
 
@@ -5576,7 +5576,7 @@ Si       0.123128266   0.123128262   0.123128267
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        3.1 secs
+     total cpu time spent up to now is        3.0 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -5592,7 +5592,7 @@ Si       0.123128266   0.123128262   0.123128267
      Davidson diagonalization with overlap
      ethr =  5.07E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.1 secs
+     total cpu time spent up to now is        3.0 secs
 
      total energy              =     -15.54406551 Ry
      Harris-Foulkes estimate   =     -15.54406550 Ry
@@ -5602,7 +5602,7 @@ Si       0.123128266   0.123128262   0.123128267
      Davidson diagonalization with overlap
      ethr =  5.27E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.1 secs
+     total cpu time spent up to now is        3.0 secs
 
      End of self-consistent calculation
 
@@ -5754,7 +5754,7 @@ Si       0.123321605   0.123321597   0.123321607
      Davidson diagonalization with overlap
      ethr =  1.40E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.2 secs
+     total cpu time spent up to now is        3.1 secs
 
      total energy              =     -15.54422288 Ry
      Harris-Foulkes estimate   =     -15.54422286 Ry
@@ -5764,7 +5764,7 @@ Si       0.123321605   0.123321597   0.123321607
      Davidson diagonalization with overlap
      ethr =  1.43E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.2 secs
+     total cpu time spent up to now is        3.1 secs
 
      End of self-consistent calculation
 
@@ -5926,7 +5926,7 @@ Si       0.123591912   0.123591901   0.123591916
      Davidson diagonalization with overlap
      ethr =  2.56E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.3 secs
+     total cpu time spent up to now is        3.2 secs
 
      total energy              =     -15.54441321 Ry
      Harris-Foulkes estimate   =     -15.54441317 Ry
@@ -5936,7 +5936,7 @@ Si       0.123591912   0.123591901   0.123591916
      Davidson diagonalization with overlap
      ethr =  2.62E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.3 secs
+     total cpu time spent up to now is        3.2 secs
 
      total energy              =     -15.54441322 Ry
      Harris-Foulkes estimate   =     -15.54441321 Ry
@@ -5946,7 +5946,7 @@ Si       0.123591912   0.123591901   0.123591916
      Davidson diagonalization with overlap
      ethr =  2.05E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.3 secs
+     total cpu time spent up to now is        3.2 secs
 
      End of self-consistent calculation
 
@@ -6108,7 +6108,7 @@ Si       0.123926428   0.123926415   0.123926433
      Davidson diagonalization with overlap
      ethr =  3.80E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.4 secs
+     total cpu time spent up to now is        3.3 secs
 
      total energy              =     -15.54460138 Ry
      Harris-Foulkes estimate   =     -15.54460132 Ry
@@ -6118,7 +6118,7 @@ Si       0.123926428   0.123926415   0.123926433
      Davidson diagonalization with overlap
      ethr =  3.84E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.4 secs
+     total cpu time spent up to now is        3.3 secs
 
      total energy              =     -15.54460139 Ry
      Harris-Foulkes estimate   =     -15.54460138 Ry
@@ -6128,7 +6128,7 @@ Si       0.123926428   0.123926415   0.123926433
      Davidson diagonalization with overlap
      ethr =  2.96E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.4 secs
+     total cpu time spent up to now is        3.3 secs
 
      End of self-consistent calculation
 
@@ -6290,7 +6290,7 @@ Si       0.124309556   0.124309541   0.124309562
      Davidson diagonalization with overlap
      ethr =  4.81E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.5 secs
+     total cpu time spent up to now is        3.4 secs
 
      total energy              =     -15.54475341 Ry
      Harris-Foulkes estimate   =     -15.54475333 Ry
@@ -6300,7 +6300,7 @@ Si       0.124309556   0.124309541   0.124309562
      Davidson diagonalization with overlap
      ethr =  4.85E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.5 secs
+     total cpu time spent up to now is        3.4 secs
 
      total energy              =     -15.54475343 Ry
      Harris-Foulkes estimate   =     -15.54475342 Ry
@@ -6310,7 +6310,7 @@ Si       0.124309556   0.124309541   0.124309562
      Davidson diagonalization with overlap
      ethr =  3.75E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.5 secs
+     total cpu time spent up to now is        3.4 secs
 
      End of self-consistent calculation
 
@@ -6472,7 +6472,7 @@ Si       0.124723701   0.124723684   0.124723708
      Davidson diagonalization with overlap
      ethr =  5.44E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.6 secs
+     total cpu time spent up to now is        3.5 secs
 
      total energy              =     -15.54484274 Ry
      Harris-Foulkes estimate   =     -15.54484265 Ry
@@ -6482,7 +6482,7 @@ Si       0.124723701   0.124723684   0.124723708
      Davidson diagonalization with overlap
      ethr =  5.48E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.6 secs
+     total cpu time spent up to now is        3.5 secs
 
      total energy              =     -15.54484275 Ry
      Harris-Foulkes estimate   =     -15.54484274 Ry
@@ -6492,7 +6492,7 @@ Si       0.124723701   0.124723684   0.124723708
      Davidson diagonalization with overlap
      ethr =  4.27E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.6 secs
+     total cpu time spent up to now is        3.5 secs
 
      End of self-consistent calculation
 
@@ -6638,7 +6638,7 @@ Si       0.125150162   0.125150144   0.125150169
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        3.7 secs
+     total cpu time spent up to now is        3.6 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -6654,7 +6654,7 @@ Si       0.125150162   0.125150144   0.125150169
      Davidson diagonalization with overlap
      ethr =  5.62E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.7 secs
+     total cpu time spent up to now is        3.6 secs
 
      total energy              =     -15.54485469 Ry
      Harris-Foulkes estimate   =     -15.54485459 Ry
@@ -6664,7 +6664,7 @@ Si       0.125150162   0.125150144   0.125150169
      Davidson diagonalization with overlap
      ethr =  5.65E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.7 secs
+     total cpu time spent up to now is        3.6 secs
 
      total energy              =     -15.54485470 Ry
      Harris-Foulkes estimate   =     -15.54485469 Ry
@@ -6674,7 +6674,7 @@ Si       0.125150162   0.125150144   0.125150169
      Davidson diagonalization with overlap
      ethr =  4.40E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.7 secs
+     total cpu time spent up to now is        3.6 secs
 
      End of self-consistent calculation
 
@@ -6820,7 +6820,7 @@ Si       0.125570020   0.125570003   0.125570028
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        3.7 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -6836,7 +6836,7 @@ Si       0.125570020   0.125570003   0.125570028
      Davidson diagonalization with overlap
      ethr =  5.27E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        3.7 secs
 
      total energy              =     -15.54478854 Ry
      Harris-Foulkes estimate   =     -15.54478845 Ry
@@ -6846,7 +6846,7 @@ Si       0.125570020   0.125570003   0.125570028
      Davidson diagonalization with overlap
      ethr =  5.31E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        3.7 secs
 
      total energy              =     -15.54478856 Ry
      Harris-Foulkes estimate   =     -15.54478855 Ry
@@ -6856,7 +6856,7 @@ Si       0.125570020   0.125570003   0.125570028
      Davidson diagonalization with overlap
      ethr =  4.17E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.8 secs
+     total cpu time spent up to now is        3.7 secs
 
      End of self-consistent calculation
 
@@ -7002,7 +7002,7 @@ Si       0.125964985   0.125964969   0.125964993
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        3.9 secs
+     total cpu time spent up to now is        3.8 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7018,7 +7018,7 @@ Si       0.125964985   0.125964969   0.125964993
      Davidson diagonalization with overlap
      ethr =  4.51E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.9 secs
+     total cpu time spent up to now is        3.8 secs
 
      total energy              =     -15.54465700 Ry
      Harris-Foulkes estimate   =     -15.54465692 Ry
@@ -7028,7 +7028,7 @@ Si       0.125964985   0.125964969   0.125964993
      Davidson diagonalization with overlap
      ethr =  4.56E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.9 secs
+     total cpu time spent up to now is        3.8 secs
 
      total energy              =     -15.54465701 Ry
      Harris-Foulkes estimate   =     -15.54465700 Ry
@@ -7038,7 +7038,7 @@ Si       0.125964985   0.125964969   0.125964993
      Davidson diagonalization with overlap
      ethr =  3.60E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        3.9 secs
+     total cpu time spent up to now is        3.8 secs
 
      End of self-consistent calculation
 
@@ -7184,7 +7184,7 @@ Si       0.126318145   0.126318131   0.126318153
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        3.9 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7200,7 +7200,7 @@ Si       0.126318145   0.126318131   0.126318153
      Davidson diagonalization with overlap
      ethr =  3.46E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        3.9 secs
 
      total energy              =     -15.54448342 Ry
      Harris-Foulkes estimate   =     -15.54448336 Ry
@@ -7210,7 +7210,7 @@ Si       0.126318145   0.126318131   0.126318153
      Davidson diagonalization with overlap
      ethr =  3.51E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        3.9 secs
 
      total energy              =     -15.54448343 Ry
      Harris-Foulkes estimate   =     -15.54448342 Ry
@@ -7220,7 +7220,7 @@ Si       0.126318145   0.126318131   0.126318153
      Davidson diagonalization with overlap
      ethr =  2.80E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        3.9 secs
 
      End of self-consistent calculation
 
@@ -7275,7 +7275,7 @@ Si       0.126474304   0.126474291   0.126474311
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        4.0 secs
+     total cpu time spent up to now is        3.9 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7366,7 +7366,7 @@ Si       0.126614620   0.126614608   0.126614626
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.0 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7382,7 +7382,7 @@ Si       0.126614620   0.126614608   0.126614626
      Davidson diagonalization with overlap
      ethr =  2.34E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.0 secs
 
      total energy              =     -15.54429752 Ry
      Harris-Foulkes estimate   =     -15.54429748 Ry
@@ -7392,7 +7392,7 @@ Si       0.126614620   0.126614608   0.126614626
      Davidson diagonalization with overlap
      ethr =  2.37E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.0 secs
 
      total energy              =     -15.54429753 Ry
      Harris-Foulkes estimate   =     -15.54429753 Ry
@@ -7402,7 +7402,7 @@ Si       0.126614620   0.126614608   0.126614626
      Davidson diagonalization with overlap
      ethr =  1.89E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.0 secs
 
      End of self-consistent calculation
 
@@ -7457,7 +7457,7 @@ Si       0.126737638   0.126737628   0.126737644
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.0 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7548,7 +7548,7 @@ Si       0.126842090   0.126842081   0.126842095
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        4.2 secs
+     total cpu time spent up to now is        4.1 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7564,7 +7564,7 @@ Si       0.126842090   0.126842081   0.126842095
      Davidson diagonalization with overlap
      ethr =  1.28E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.2 secs
+     total cpu time spent up to now is        4.1 secs
 
      total energy              =     -15.54413034 Ry
      Harris-Foulkes estimate   =     -15.54413032 Ry
@@ -7574,7 +7574,7 @@ Si       0.126842090   0.126842081   0.126842095
      Davidson diagonalization with overlap
      ethr =  1.31E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.2 secs
+     total cpu time spent up to now is        4.1 secs
 
      End of self-consistent calculation
 
@@ -7629,7 +7629,7 @@ Si       0.126926899   0.126926891   0.126926903
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        4.7 secs
+     total cpu time spent up to now is        4.1 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7645,7 +7645,7 @@ Si       0.126926899   0.126926891   0.126926903
      Davidson diagonalization with overlap
      ethr =  8.38E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.7 secs
+     total cpu time spent up to now is        4.1 secs
 
      total energy              =     -15.54406261 Ry
      Harris-Foulkes estimate   =     -15.54406259 Ry
@@ -7655,7 +7655,7 @@ Si       0.126926899   0.126926891   0.126926903
      Davidson diagonalization with overlap
      ethr =  8.41E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        4.7 secs
+     total cpu time spent up to now is        4.2 secs
 
      End of self-consistent calculation
 
@@ -7710,7 +7710,7 @@ Si       0.126991198   0.126991192   0.126991202
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.0 secs
+     total cpu time spent up to now is        4.2 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7726,7 +7726,7 @@ Si       0.126991198   0.126991192   0.126991202
      Davidson diagonalization with overlap
      ethr =  4.74E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.0 secs
+     total cpu time spent up to now is        4.2 secs
 
      total energy              =     -15.54400930 Ry
      Harris-Foulkes estimate   =     -15.54400929 Ry
@@ -7736,7 +7736,7 @@ Si       0.126991198   0.126991192   0.126991202
      Davidson diagonalization with overlap
      ethr =  4.81E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.0 secs
+     total cpu time spent up to now is        4.2 secs
 
      End of self-consistent calculation
 
@@ -7791,7 +7791,7 @@ Si       0.127034335   0.127034331   0.127034338
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.1 secs
+     total cpu time spent up to now is        4.2 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7807,7 +7807,7 @@ Si       0.127034335   0.127034331   0.127034338
      Davidson diagonalization with overlap
      ethr =  2.13E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.1 secs
+     total cpu time spent up to now is        4.2 secs
 
      total energy              =     -15.54397260 Ry
      Harris-Foulkes estimate   =     -15.54397260 Ry
@@ -7817,7 +7817,7 @@ Si       0.127034335   0.127034331   0.127034338
      Davidson diagonalization with overlap
      ethr =  2.15E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.1 secs
+     total cpu time spent up to now is        4.2 secs
 
      End of self-consistent calculation
 
@@ -7872,7 +7872,7 @@ Si       0.127055871   0.127055868   0.127055873
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        4.3 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7888,7 +7888,7 @@ Si       0.127055871   0.127055868   0.127055873
      Davidson diagonalization with overlap
      ethr =  5.25E-11,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        4.3 secs
 
      End of self-consistent calculation
 
@@ -7943,7 +7943,7 @@ Si       0.127055586   0.127055585   0.127055588
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        4.3 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -7959,7 +7959,7 @@ Si       0.127055586   0.127055585   0.127055588
      Davidson diagonalization with overlap
      ethr =  1.75E-13,  avg # of iterations =  2.8
 
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        4.3 secs
 
      End of self-consistent calculation
 
@@ -8014,7 +8014,7 @@ Si       0.127033487   0.127033488   0.127033488
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        4.4 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8030,7 +8030,7 @@ Si       0.127033487   0.127033488   0.127033488
      Davidson diagonalization with overlap
      ethr =  1.85E-10,  avg # of iterations =  3.5
 
-     total cpu time spent up to now is        5.3 secs
+     total cpu time spent up to now is        4.4 secs
 
      End of self-consistent calculation
 
@@ -8085,7 +8085,7 @@ Si       0.126989800   0.126989804   0.126989801
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        4.4 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8101,7 +8101,7 @@ Si       0.126989800   0.126989804   0.126989801
      Davidson diagonalization with overlap
      ethr =  2.24E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        4.4 secs
 
      total energy              =     -15.54401048 Ry
      Harris-Foulkes estimate   =     -15.54401047 Ry
@@ -8111,7 +8111,7 @@ Si       0.126989800   0.126989804   0.126989801
      Davidson diagonalization with overlap
      ethr =  2.23E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        4.4 secs
 
      End of self-consistent calculation
 
@@ -8166,7 +8166,7 @@ Si       0.126924970   0.126924975   0.126924969
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        4.4 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8182,7 +8182,7 @@ Si       0.126924970   0.126924975   0.126924969
      Davidson diagonalization with overlap
      ethr =  4.84E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        4.5 secs
 
      total energy              =     -15.54406418 Ry
      Harris-Foulkes estimate   =     -15.54406417 Ry
@@ -8192,7 +8192,7 @@ Si       0.126924970   0.126924975   0.126924969
      Davidson diagonalization with overlap
      ethr =  4.96E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.5 secs
+     total cpu time spent up to now is        4.5 secs
 
      End of self-consistent calculation
 
@@ -8247,7 +8247,7 @@ Si       0.126839656   0.126839663   0.126839655
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.5 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8263,7 +8263,7 @@ Si       0.126839656   0.126839663   0.126839655
      Davidson diagonalization with overlap
      ethr =  8.45E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.5 secs
 
      total energy              =     -15.54413224 Ry
      Harris-Foulkes estimate   =     -15.54413223 Ry
@@ -8273,7 +8273,7 @@ Si       0.126839656   0.126839663   0.126839655
      Davidson diagonalization with overlap
      ethr =  8.59E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.5 secs
 
      End of self-consistent calculation
 
@@ -8328,7 +8328,7 @@ Si       0.126734733   0.126734741   0.126734730
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.5 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8344,7 +8344,7 @@ Si       0.126734733   0.126734741   0.126734730
      Davidson diagonalization with overlap
      ethr =  1.28E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.5 secs
 
      total energy              =     -15.54421189 Ry
      Harris-Foulkes estimate   =     -15.54421186 Ry
@@ -8354,7 +8354,7 @@ Si       0.126734733   0.126734741   0.126734730
      Davidson diagonalization with overlap
      ethr =  1.30E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.5 secs
 
      End of self-consistent calculation
 
@@ -8409,7 +8409,7 @@ Si       0.126611277   0.126611287   0.126611274
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.6 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8425,7 +8425,7 @@ Si       0.126611277   0.126611287   0.126611274
      Davidson diagonalization with overlap
      ethr =  1.78E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        4.6 secs
 
      total energy              =     -15.54429982 Ry
      Harris-Foulkes estimate   =     -15.54429979 Ry
@@ -8435,7 +8435,7 @@ Si       0.126611277   0.126611287   0.126611274
      Davidson diagonalization with overlap
      ethr =  1.80E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.6 secs
 
      total energy              =     -15.54429983 Ry
      Harris-Foulkes estimate   =     -15.54429982 Ry
@@ -8445,7 +8445,7 @@ Si       0.126611277   0.126611287   0.126611274
      Davidson diagonalization with overlap
      ethr =  1.43E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.6 secs
 
      End of self-consistent calculation
 
@@ -8500,7 +8500,7 @@ Si       0.126470559   0.126470570   0.126470555
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.6 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8516,7 +8516,7 @@ Si       0.126470559   0.126470570   0.126470555
      Davidson diagonalization with overlap
      ethr =  2.33E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.6 secs
 
      total energy              =     -15.54439240 Ry
      Harris-Foulkes estimate   =     -15.54439236 Ry
@@ -8526,7 +8526,7 @@ Si       0.126470559   0.126470570   0.126470555
      Davidson diagonalization with overlap
      ethr =  2.38E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.6 secs
 
      total energy              =     -15.54439241 Ry
      Harris-Foulkes estimate   =     -15.54439240 Ry
@@ -8536,7 +8536,7 @@ Si       0.126470559   0.126470570   0.126470555
      Davidson diagonalization with overlap
      ethr =  1.91E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.6 secs
 
      End of self-consistent calculation
 
@@ -8591,7 +8591,7 @@ Si       0.126314038   0.126314051   0.126314033
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.7 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8607,7 +8607,7 @@ Si       0.126314038   0.126314051   0.126314033
      Davidson diagonalization with overlap
      ethr =  2.91E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.7 secs
+     total cpu time spent up to now is        4.7 secs
 
      total energy              =     -15.54448574 Ry
      Harris-Foulkes estimate   =     -15.54448568 Ry
@@ -8617,7 +8617,7 @@ Si       0.126314038   0.126314051   0.126314033
      Davidson diagonalization with overlap
      ethr =  2.96E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      total energy              =     -15.54448575 Ry
      Harris-Foulkes estimate   =     -15.54448574 Ry
@@ -8627,7 +8627,7 @@ Si       0.126314038   0.126314051   0.126314033
      Davidson diagonalization with overlap
      ethr =  2.35E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      End of self-consistent calculation
 
@@ -8682,7 +8682,7 @@ Si       0.126143350   0.126143364   0.126143344
      second order wave-functions extrapolation
      NEW-OLD atomic charge density approx. for the potential
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      per-process dynamical memory:     2.6 Mb
 
@@ -8698,7 +8698,7 @@ Si       0.126143350   0.126143364   0.126143344
      Davidson diagonalization with overlap
      ethr =  3.50E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      total energy              =     -15.54457588 Ry
      Harris-Foulkes estimate   =     -15.54457582 Ry
@@ -8708,7 +8708,7 @@ Si       0.126143350   0.126143364   0.126143344
      Davidson diagonalization with overlap
      ethr =  3.54E-09,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      total energy              =     -15.54457589 Ry
      Harris-Foulkes estimate   =     -15.54457588 Ry
@@ -8718,7 +8718,7 @@ Si       0.126143350   0.126143364   0.126143344
      Davidson diagonalization with overlap
      ethr =  2.79E-10,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        5.8 secs
+     total cpu time spent up to now is        4.7 secs
 
      End of self-consistent calculation
 
@@ -8780,9 +8780,9 @@ Si       0.125960289   0.125960304   0.125960283
 
      Writing output data file pwscf.save
  
-     init_run     :      0.01s CPU      0.01s WALL (       1 calls)
-     electrons    :      1.50s CPU      2.07s WALL (     100 calls)
-     update_pot   :      0.22s CPU      0.57s WALL (      99 calls)
+     init_run     :      0.02s CPU      0.01s WALL (       1 calls)
+     electrons    :      1.48s CPU      1.58s WALL (     100 calls)
+     update_pot   :      0.21s CPU      0.23s WALL (      99 calls)
      forces       :      0.06s CPU      0.07s WALL (     100 calls)
 
      Called by init_run:
@@ -8790,7 +8790,7 @@ Si       0.125960289   0.125960304   0.125960283
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      1.06s CPU      1.13s WALL (     355 calls)
+     c_bands      :      1.05s CPU      1.13s WALL (     355 calls)
      sum_band     :      0.21s CPU      0.23s WALL (     355 calls)
      v_of_rho     :      0.07s CPU      0.07s WALL (     356 calls)
      mix_rho      :      0.02s CPU      0.02s WALL (     355 calls)
@@ -8802,28 +8802,28 @@ Si       0.125960289   0.125960304   0.125960283
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.70s CPU      0.75s WALL (    3133 calls)
-     g_psi        :      0.01s CPU      0.01s WALL (    1709 calls)
-     cdiaghg      :      0.15s CPU      0.15s WALL (    2337 calls)
+     h_psi        :      0.70s CPU      0.76s WALL (    3133 calls)
+     g_psi        :      0.00s CPU      0.01s WALL (    1709 calls)
+     cdiaghg      :      0.16s CPU      0.14s WALL (    2337 calls)
 
      Called by h_psi:
      h_psi:pot    :      0.69s CPU      0.75s WALL (    3133 calls)
      h_psi:calbec :      0.05s CPU      0.05s WALL (    3133 calls)
-     add_vuspsi   :      0.03s CPU      0.02s WALL (    3133 calls)
+     add_vuspsi   :      0.02s CPU      0.02s WALL (    3133 calls)
 
      General routines
-     calbec       :      0.07s CPU      0.07s WALL (    5125 calls)
-     fft          :      0.05s CPU      0.07s WALL (    1821 calls)
-     fftw         :      0.69s CPU      0.74s WALL (   29586 calls)
+     calbec       :      0.06s CPU      0.07s WALL (    5125 calls)
+     fft          :      0.04s CPU      0.06s WALL (    1821 calls)
+     fftw         :      0.70s CPU      0.75s WALL (   29586 calls)
      davcio       :      0.04s CPU      0.05s WALL (    7608 calls)
  
      Parallel routines
-     fft_scatter  :      0.17s CPU      0.20s WALL (   31407 calls)
+     fft_scatter  :      0.18s CPU      0.21s WALL (   31407 calls)
  
-     PWSCF        :     4.48s CPU         5.84s WALL
+     PWSCF        :     4.45s CPU         4.78s WALL
 
  
-   This run was terminated on:  16:10:39  18Aug2016            
+   This run was terminated on:  14:31: 1  23Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
