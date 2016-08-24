@@ -1,7 +1,6 @@
 module hdf5_qe
   USE HDF5
   USE Kinds, ONLY : DP
-  USE io_global, ONLY : ionode
 
 
   TYPE HDF5_type
