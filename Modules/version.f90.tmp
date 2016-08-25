@@ -12,7 +12,7 @@ MODULE global_version
   !
   SAVE
   !
-  CHARACTER (LEN=6) :: version_number = '5.4.0'
-  CHARACTER (LEN=12) :: svn_revision = '12828M'
+  CHARACTER (LEN=6) :: version_number = '6.beta'
+  CHARACTER (LEN=12) :: svn_revision = '12834M'
   !
 END MODULE global_version

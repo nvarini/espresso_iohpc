@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:11: 0 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:36:36 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -130,7 +130,7 @@
      Representation     1      3 modes -T_1u G_15  G_4-  Done
 
 
-     PHONON       :     2.16s CPU         2.16s WALL
+     PHONON       :     2.13s CPU         2.15s WALL
 
  
      Number of q in the star =    1
@@ -689,7 +689,7 @@ Possibly too few bands at point  200  -0.75000  -0.50000   0.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     2.18s CPU         2.18s WALL
+     PHONON       :     2.15s CPU         2.17s WALL
 
  
      Number of q in the star =    6
@@ -1254,7 +1254,7 @@ Possibly too few bands at point  200  -0.50000  -0.50000   0.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     2.19s CPU         2.20s WALL
+     PHONON       :     2.17s CPU         2.18s WALL
 
  
      Number of q in the star =    6
@@ -1819,7 +1819,7 @@ Possibly too few bands at point  200  -0.25000  -0.50000   0.00000
      Representation     2      2 modes -E    G_5 D_5  Done
 
 
-     PHONON       :     2.21s CPU         2.21s WALL
+     PHONON       :     2.19s CPU         2.20s WALL
 
  
      Number of q in the star =    6
@@ -2220,7 +2220,7 @@ Possibly too few bands at point  118   1.00000   1.00000   0.50000
      Representation     2      2 modes -E_u  X_5' M_5'  Done
 
 
-     PHONON       :     2.23s CPU         2.23s WALL
+     PHONON       :     2.20s CPU         2.22s WALL
 
  
      Number of q in the star =    3
@@ -3040,7 +3040,7 @@ Possibly too few bands at point  328   1.00000  -0.25000   1.00000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.25s CPU         2.25s WALL
+     PHONON       :     2.22s CPU         2.24s WALL
 
  
      Number of q in the star =   12
@@ -3560,7 +3560,7 @@ Possibly too few bands at point  174   1.00000   0.00000   1.00000
      Representation     2      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     2.26s CPU         2.27s WALL
+     PHONON       :     2.24s CPU         2.26s WALL
 
  
      Number of q in the star =    6
@@ -4383,7 +4383,7 @@ Possibly too few bands at point  328   1.00000   0.25000   1.00000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.28s CPU         2.29s WALL
+     PHONON       :     2.26s CPU         2.28s WALL
 
  
      Number of q in the star =   12
@@ -4791,7 +4791,7 @@ Possibly too few bands at point  118   2.00000   1.00000   0.50000
      Representation     2      2 modes -E_u  X_5' M_5'  Done
 
 
-     PHONON       :     2.30s CPU         2.30s WALL
+     PHONON       :     2.27s CPU         2.29s WALL
 
  
      Number of q in the star =    3
@@ -5611,7 +5611,7 @@ Possibly too few bands at point  328   1.75000   0.75000   0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.32s CPU         2.32s WALL
+     PHONON       :     2.29s CPU         2.31s WALL
 
  
      Number of q in the star =   12
@@ -6441,7 +6441,7 @@ Possibly too few bands at point  328   1.50000   0.50000   0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.33s CPU         2.34s WALL
+     PHONON       :     2.31s CPU         2.33s WALL
 
  
      Number of q in the star =   12
@@ -7271,7 +7271,7 @@ Possibly too few bands at point  328   1.25000   0.25000   0.50000
      Representation     3      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     2.35s CPU         2.36s WALL
+     PHONON       :     2.33s CPU         2.35s WALL
 
  
      Number of q in the star =   12
@@ -7394,7 +7394,7 @@ Possibly too few bands at point  328   1.25000   0.25000   0.50000
      Representation     1      3 modes -T_1u G_15  G_4-  Done
 
 
-     PHONON       :     4.44s CPU         4.46s WALL
+     PHONON       :     4.42s CPU         4.45s WALL
 
  
      Number of q in the star =    1
@@ -8033,7 +8033,7 @@ Possibly too few bands at point  240   0.37500  -0.87500   0.12500
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     4.46s CPU         4.48s WALL
+     PHONON       :     4.44s CPU         4.47s WALL
 
  
      Number of q in the star =    8
@@ -8680,7 +8680,7 @@ Possibly too few bands at point  240   0.50000  -0.75000   0.25000
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     4.48s CPU         4.50s WALL
+     PHONON       :     4.46s CPU         4.49s WALL
 
  
      Number of q in the star =    8
@@ -9327,7 +9327,7 @@ Possibly too few bands at point  240   0.62500  -0.62500   0.37500
      Representation     2      2 modes -E    L_3  Done
 
 
-     PHONON       :     4.50s CPU         4.51s WALL
+     PHONON       :     4.47s CPU         4.51s WALL
 
  
      Number of q in the star =    8
@@ -9754,7 +9754,7 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      Representation     2      2 modes -E_u  L_3'  Done
 
 
-     PHONON       :     4.51s CPU         4.53s WALL
+     PHONON       :     4.49s CPU         4.52s WALL
 
  
      Number of q in the star =    4
@@ -9802,7 +9802,7 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      51 calls)
  
-     PHONON       :     4.51s CPU         4.53s WALL
+     PHONON       :     4.49s CPU         4.53s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.07s CPU      0.07s WALL (      17 calls)
@@ -9831,10 +9831,10 @@ Possibly too few bands at point  130   0.50000   0.00000   1.25000
      fft          :      0.00s CPU      0.00s WALL (      51 calls)
  
  
-     PHONON       :     4.51s CPU         4.53s WALL
+     PHONON       :     4.49s CPU         4.53s WALL
 
  
-   This run was terminated on:  16:11: 5  23Aug2016            
+   This run was terminated on:  11:36:41  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:16: 9 
+     Program PWSCF v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:41:46 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -240,7 +240,7 @@
 
      Writing output data file alas.save
  
-     init_run     :      0.03s CPU      0.03s WALL (       1 calls)
+     init_run     :      0.02s CPU      0.03s WALL (       1 calls)
      electrons    :      0.04s CPU      0.04s WALL (       1 calls)
      forces       :      0.00s CPU      0.00s WALL (       1 calls)
      stress       :      0.00s CPU      0.00s WALL (       1 calls)
@@ -250,14 +250,14 @@
      potinit      :      0.00s CPU      0.00s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.02s CPU      0.03s WALL (       8 calls)
+     c_bands      :      0.03s CPU      0.03s WALL (       8 calls)
      sum_band     :      0.01s CPU      0.01s WALL (       8 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       8 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (       8 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      38 calls)
-     cegterg      :      0.02s CPU      0.03s WALL (      16 calls)
+     cegterg      :      0.03s CPU      0.03s WALL (      16 calls)
 
      Called by sum_band:
 
@@ -282,7 +282,7 @@
      PWSCF        :     0.15s CPU         0.15s WALL
 
  
-   This run was terminated on:  16:16: 9  23Aug2016            
+   This run was terminated on:  11:41:47  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

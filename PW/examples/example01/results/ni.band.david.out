@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 14:30:17 
+     Program PWSCF v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 10:53:55 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -397,21 +397,21 @@
 
      Writing output data file ni.save
  
-     init_run     :      0.32s CPU      0.32s WALL (       1 calls)
-     electrons    :      0.53s CPU      0.56s WALL (       1 calls)
+     init_run     :      0.32s CPU      0.33s WALL (       1 calls)
+     electrons    :      0.55s CPU      0.57s WALL (       1 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
-     potinit      :      0.01s CPU      0.01s WALL (       1 calls)
+     potinit      :      0.00s CPU      0.01s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      0.53s CPU      0.56s WALL (       1 calls)
+     c_bands      :      0.55s CPU      0.56s WALL (       1 calls)
      v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
      newd         :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by c_bands:
      init_us_2    :      0.00s CPU      0.00s WALL (      56 calls)
-     cegterg      :      0.45s CPU      0.48s WALL (      57 calls)
+     cegterg      :      0.48s CPU      0.49s WALL (      57 calls)
 
      Called by sum_band:
 
@@ -419,7 +419,7 @@
      h_psi        :      0.26s CPU      0.28s WALL (     827 calls)
      s_psi        :      0.01s CPU      0.01s WALL (     827 calls)
      g_psi        :      0.00s CPU      0.00s WALL (     714 calls)
-     cdiaghg      :      0.18s CPU      0.18s WALL (     770 calls)
+     cdiaghg      :      0.20s CPU      0.18s WALL (     770 calls)
 
      Called by h_psi:
      h_psi:pot    :      0.26s CPU      0.28s WALL (     827 calls)
@@ -430,17 +430,17 @@
      calbec       :      0.02s CPU      0.02s WALL (     827 calls)
      fft          :      0.00s CPU      0.00s WALL (       9 calls)
      ffts         :      0.00s CPU      0.00s WALL (       2 calls)
-     fftw         :      0.19s CPU      0.21s WALL (    7532 calls)
+     fftw         :      0.19s CPU      0.20s WALL (    7532 calls)
      interpolate  :      0.00s CPU      0.00s WALL (       2 calls)
      davcio       :      0.00s CPU      0.00s WALL (      56 calls)
  
      Parallel routines
-     fft_scatter  :      0.05s CPU      0.06s WALL (    7543 calls)
+     fft_scatter  :      0.05s CPU      0.05s WALL (    7543 calls)
  
-     PWSCF        :     1.29s CPU         1.36s WALL
+     PWSCF        :     1.31s CPU         1.36s WALL
 
  
-   This run was terminated on:  14:30:18  23Aug2016            
+   This run was terminated on:  10:53:57  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

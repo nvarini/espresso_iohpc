@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:13:33 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:39: 9 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -741,7 +741,7 @@
 
      ethr =  1.25E-10,  avg # of iterations = 11.0
 
-     total cpu time spent up to now is        1.1 secs
+     total cpu time spent up to now is        1.2 secs
 
      End of band structure calculation
 
@@ -1036,7 +1036,7 @@
 
      ethr =  1.25E-10,  avg # of iterations = 11.7
 
-     total cpu time spent up to now is        1.6 secs
+     total cpu time spent up to now is        1.7 secs
 
      End of band structure calculation
 
@@ -1297,7 +1297,7 @@
 
      ethr =  1.25E-10,  avg # of iterations = 11.7
 
-     total cpu time spent up to now is        1.8 secs
+     total cpu time spent up to now is        1.9 secs
 
      End of band structure calculation
 
@@ -1432,7 +1432,7 @@
 
      ethr =  1.25E-10,  avg # of iterations = 11.8
 
-     total cpu time spent up to now is        2.0 secs
+     total cpu time spent up to now is        2.1 secs
 
      End of band structure calculation
 
@@ -1516,23 +1516,23 @@
      v_of_rho     :      0.00s CPU      0.00s WALL (       8 calls)
 
      Called by c_bands:
-     init_us_2    :      0.01s CPU      0.01s WALL (     156 calls)
-     cegterg      :      1.07s CPU      1.09s WALL (     156 calls)
+     init_us_2    :      0.00s CPU      0.01s WALL (     156 calls)
+     cegterg      :      1.07s CPU      1.10s WALL (     156 calls)
 
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.90s CPU      0.92s WALL (    2094 calls)
+     h_psi        :      0.89s CPU      0.92s WALL (    2094 calls)
      g_psi        :      0.01s CPU      0.01s WALL (    1782 calls)
-     cdiaghg      :      0.19s CPU      0.16s WALL (    1938 calls)
+     cdiaghg      :      0.20s CPU      0.16s WALL (    1938 calls)
 
      Called by h_psi:
-     h_psi:pot    :      0.89s CPU      0.92s WALL (    2094 calls)
-     h_psi:calbec :      0.05s CPU      0.05s WALL (    2094 calls)
+     h_psi:pot    :      0.88s CPU      0.92s WALL (    2094 calls)
+     h_psi:calbec :      0.04s CPU      0.05s WALL (    2094 calls)
      add_vuspsi   :      0.03s CPU      0.02s WALL (    2094 calls)
 
      General routines
-     calbec       :      0.05s CPU      0.04s WALL (    2094 calls)
+     calbec       :      0.04s CPU      0.04s WALL (    2094 calls)
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
      fftw         :      0.74s CPU      0.75s WALL (   16220 calls)
      davcio       :      0.00s CPU      0.00s WALL (     156 calls)
@@ -1540,7 +1540,7 @@
      Parallel routines
      fft_scatter  :      0.18s CPU      0.19s WALL (   16244 calls)
  
-     PHONON       :     2.42s CPU         2.51s WALL
+     PHONON       :     2.38s CPU         2.62s WALL
 
      INITIALIZATION: 
  
@@ -1562,16 +1562,16 @@
  
  
       General routines
-     calbec       :      0.05s CPU      0.04s WALL (    2094 calls)
+     calbec       :      0.04s CPU      0.04s WALL (    2094 calls)
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
      fftw         :      0.74s CPU      0.75s WALL (   16220 calls)
      davcio       :      0.00s CPU      0.00s WALL (     156 calls)
  
  
-     PHONON       :     2.42s CPU         2.51s WALL
+     PHONON       :     2.38s CPU         2.62s WALL
 
  
-   This run was terminated on:  16:13:35  23Aug2016            
+   This run was terminated on:  11:39:11  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

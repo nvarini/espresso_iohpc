@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16: 9:19 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:34:54 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -134,7 +134,7 @@
      Representation     2      3 modes -T_1u G_15  G_4-  To be done
 
 
-     PHONON       :     0.41s CPU         0.41s WALL
+     PHONON       :     0.40s CPU         0.41s WALL
 
 
      Electric Fields Calculation
@@ -251,7 +251,7 @@
      PHONON       :     2.80s CPU         2.93s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
+     phq_setup    :      0.00s CPU      0.01s WALL (       1 calls)
      phq_init     :      0.01s CPU      0.01s WALL (       1 calls)
  
      phq_init     :      0.01s CPU      0.01s WALL (       1 calls)
@@ -268,51 +268,51 @@
      dynmatrix    :      0.00s CPU      0.00s WALL (       1 calls)
  
      phqscf       :      2.14s CPU      2.25s WALL (       1 calls)
-     solve_linter :      2.12s CPU      2.23s WALL (       2 calls)
+     solve_linter :      2.13s CPU      2.23s WALL (       2 calls)
      drhodv       :      0.01s CPU      0.01s WALL (       2 calls)
  
  
  
      phqscf       :      2.14s CPU      2.25s WALL (       1 calls)
-     solve_linter :      2.12s CPU      2.23s WALL (       2 calls)
+     solve_linter :      2.13s CPU      2.23s WALL (       2 calls)
  
-     solve_linter :      2.12s CPU      2.23s WALL (       2 calls)
+     solve_linter :      2.13s CPU      2.23s WALL (       2 calls)
      dvqpsi_us    :      0.07s CPU      0.07s WALL (     120 calls)
      ortho        :      0.01s CPU      0.01s WALL (     330 calls)
-     cgsolve      :      1.50s CPU      1.59s WALL (     330 calls)
-     incdrhoscf   :      0.15s CPU      0.16s WALL (     330 calls)
+     cgsolve      :      1.50s CPU      1.56s WALL (     330 calls)
+     incdrhoscf   :      0.16s CPU      0.16s WALL (     330 calls)
      vpsifft      :      0.10s CPU      0.11s WALL (     240 calls)
      dv_of_drho   :      0.01s CPU      0.01s WALL (      33 calls)
-     mix_pot      :      0.01s CPU      0.02s WALL (      11 calls)
+     mix_pot      :      0.01s CPU      0.01s WALL (      11 calls)
      psymdvscf    :      0.40s CPU      0.40s WALL (      10 calls)
  
      dvqpsi_us    :      0.07s CPU      0.07s WALL (     120 calls)
      dvqpsi_us_on :      0.01s CPU      0.01s WALL (     120 calls)
  
-     cgsolve      :      1.50s CPU      1.59s WALL (     330 calls)
-     ch_psi       :      1.44s CPU      1.52s WALL (    3230 calls)
+     cgsolve      :      1.50s CPU      1.56s WALL (     330 calls)
+     ch_psi       :      1.43s CPU      1.49s WALL (    3230 calls)
  
-     ch_psi       :      1.44s CPU      1.52s WALL (    3230 calls)
+     ch_psi       :      1.43s CPU      1.49s WALL (    3230 calls)
      last         :      0.12s CPU      0.13s WALL (    3230 calls)
  
      add_vuspsi   :      0.03s CPU      0.04s WALL (    3230 calls)
  
-     incdrhoscf   :      0.15s CPU      0.16s WALL (     330 calls)
+     incdrhoscf   :      0.16s CPU      0.16s WALL (     330 calls)
  
  
       General routines
-     calbec       :      0.11s CPU      0.12s WALL (    6740 calls)
+     calbec       :      0.12s CPU      0.12s WALL (    6740 calls)
      fft          :      0.01s CPU      0.01s WALL (     102 calls)
      ffts         :      0.01s CPU      0.01s WALL (     132 calls)
-     fftw         :      1.33s CPU      1.38s WALL (   29408 calls)
-     davcio       :      0.01s CPU      0.02s WALL (    1342 calls)
+     fftw         :      1.33s CPU      1.35s WALL (   29408 calls)
+     davcio       :      0.02s CPU      0.05s WALL (    1342 calls)
      write_rec    :      0.02s CPU      0.02s WALL (      13 calls)
  
  
      PHONON       :     2.80s CPU         2.93s WALL
 
  
-   This run was terminated on:  16: 9:22  23Aug2016            
+   This run was terminated on:  11:34:57  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

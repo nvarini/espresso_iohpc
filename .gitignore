@@ -1,7 +1,9 @@
-*.o
-*.mod
+**.o
+**.mod
 make.sys
+make.inc
 tempdir*
-*.svn
-*.x
-*.a
+.svn
+**.x
+**.a
+**.out*

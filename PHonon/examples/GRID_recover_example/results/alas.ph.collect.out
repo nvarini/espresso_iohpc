@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:16: 8 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:41:45 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -388,7 +388,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.39s CPU         0.41s WALL
+     PHONON       :     0.40s CPU         0.41s WALL
 
  
      Number of q in the star =    4
@@ -813,7 +813,7 @@
      Representation     6      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     0.47s CPU         0.48s WALL
+     PHONON       :     0.47s CPU         0.49s WALL
 
  
      Number of q in the star =    6
@@ -1052,7 +1052,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.50s CPU         0.52s WALL
+     PHONON       :     0.51s CPU         0.52s WALL
 
  
      Number of q in the star =   12
@@ -1310,7 +1310,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.54s CPU         0.56s WALL
+     PHONON       :     0.55s CPU         0.57s WALL
 
  
      Number of q in the star =   12
@@ -1816,7 +1816,7 @@
      PHONON       :     0.62s CPU         0.64s WALL
 
  
-   This run was terminated on:  16:16: 9  23Aug2016            
+   This run was terminated on:  11:41:46  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

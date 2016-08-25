@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:11: 5 
+     Program PWSCF v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:36:41 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -279,10 +279,10 @@
      Parallel routines
      fft_scatter  :      0.01s CPU      0.01s WALL (     492 calls)
  
-     PWSCF        :     0.14s CPU         0.15s WALL
+     PWSCF        :     0.14s CPU         0.18s WALL
 
  
-   This run was terminated on:  16:11: 5  23Aug2016            
+   This run was terminated on:  11:36:41  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:40: 7 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11: 5:33 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -303,7 +303,7 @@
      PHONON       :     0.36s CPU         0.37s WALL
 
  
-   This run was terminated on:  15:40: 7  23Aug2016            
+   This run was terminated on:  11: 5:34  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

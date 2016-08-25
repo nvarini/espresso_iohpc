@@ -31,6 +31,7 @@ fcp_variables.o \
 fd_gradient.o \
 fft_base.o \
 fft_custom.o \
+fsockets.o \
 funct.o \
 generate_function.o \
 gth.o \
@@ -105,6 +106,7 @@ xc_vdW_DF.o \
 xc_rVV10.o \
 xml_input.o \
 xml_io_base.o \
+io_base.o \
 qes_module.o  \
 qes_types.o \
 qes_libs.o  \

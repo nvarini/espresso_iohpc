@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:16:32 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:42: 9 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -139,7 +139,7 @@
      Representation     2      3 modes -T_2  G_15 P_4  Done
 
 
-     PHONON       :     0.56s CPU         0.57s WALL
+     PHONON       :     0.57s CPU         0.57s WALL
 
 
           Dielectric constant in cartesian axis 
@@ -390,7 +390,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.60s CPU         0.60s WALL
+     PHONON       :     0.60s CPU         0.61s WALL
 
  
      Number of q in the star =    4
@@ -596,7 +596,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.63s CPU         0.65s WALL
 
  
      Number of q in the star =    4
@@ -815,7 +815,7 @@
      Representation     6      1 modes -B_2  D_4  S_4  Done
 
 
-     PHONON       :     0.67s CPU         0.68s WALL
+     PHONON       :     0.67s CPU         0.69s WALL
 
  
      Number of q in the star =    6
@@ -1312,7 +1312,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.74s CPU         0.76s WALL
+     PHONON       :     0.75s CPU         0.76s WALL
 
  
      Number of q in the star =   12
@@ -1519,7 +1519,7 @@
      Representation     4      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     0.77s CPU         0.79s WALL
+     PHONON       :     0.79s CPU         0.80s WALL
 
  
      Number of q in the star =    3
@@ -1533,20 +1533,20 @@
      q = (    0.000000000  -1.000000000   0.000000000 ) 
 
  **************************************************************************
-     freq (    1) =     -22.937066 [THz] =    -765.098158 [cm-1]
-     freq (    2) =     -22.937066 [THz] =    -765.098158 [cm-1]
-     freq (    3) =     -22.291856 [THz] =    -743.576275 [cm-1]
-     freq (    4) =     -11.119988 [THz] =    -370.922874 [cm-1]
-     freq (    5) =      23.111602 [THz] =     770.920046 [cm-1]
-     freq (    6) =      23.111602 [THz] =     770.920046 [cm-1]
+     freq (    1) =     -22.934836 [THz] =    -765.023769 [cm-1]
+     freq (    2) =     -22.934836 [THz] =    -765.023769 [cm-1]
+     freq (    3) =     -22.280841 [THz] =    -743.208868 [cm-1]
+     freq (    4) =     -11.116772 [THz] =    -370.815615 [cm-1]
+     freq (    5) =      23.158162 [THz] =     772.473129 [cm-1]
+     freq (    6) =      23.158162 [THz] =     772.473129 [cm-1]
  **************************************************************************
 
      Mode symmetry, D_2d (-42m) point group:
 
-     freq (  1 -  2) =       -765.1  [cm-1]   --> E    X_5  W_3      
-     freq (  3 -  3) =       -743.6  [cm-1]   --> A_1  X_1  W_1      
-     freq (  4 -  4) =       -370.9  [cm-1]   --> B_2  X_3  W_2      
-     freq (  5 -  6) =        770.9  [cm-1]   --> E    X_5  W_3      
+     freq (  1 -  2) =       -765.0  [cm-1]   --> E    X_5  W_3      
+     freq (  3 -  3) =       -743.2  [cm-1]   --> A_1  X_1  W_1      
+     freq (  4 -  4) =       -370.8  [cm-1]   --> B_2  X_3  W_2      
+     freq (  5 -  6) =        772.5  [cm-1]   --> E    X_5  W_3      
 
      Calculation of q =   -0.5000000  -1.0000000   0.0000000
  
@@ -1729,7 +1729,7 @@
      Representation     6      1 modes -E*   W_2  Done
 
 
-     PHONON       :     0.81s CPU         0.83s WALL
+     PHONON       :     0.83s CPU         0.84s WALL
 
  
      Number of q in the star =    6
@@ -1786,7 +1786,7 @@
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      24 calls)
  
-     PHONON       :     0.81s CPU         0.84s WALL
+     PHONON       :     0.83s CPU         0.84s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.04s CPU      0.04s WALL (       8 calls)
@@ -1796,7 +1796,7 @@
  
      DYNAMICAL MATRIX:
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
-     dynmatrix    :      0.01s CPU      0.02s WALL (       8 calls)
+     dynmatrix    :      0.02s CPU      0.02s WALL (       8 calls)
  
      phqscf       :      0.00s CPU      0.00s WALL (       8 calls)
  
@@ -1815,10 +1815,10 @@
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
  
  
-     PHONON       :     0.81s CPU         0.84s WALL
+     PHONON       :     0.83s CPU         0.84s WALL
 
  
-   This run was terminated on:  16:16:32  23Aug2016            
+   This run was terminated on:  11:42:10  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PWSCF v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 15:41: 6 
+     Program PWSCF v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11: 6:32 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -293,7 +293,7 @@ H       -0.115197928   0.115197928  -0.115197928
      Davidson diagonalization with overlap
      ethr =  3.69E-07,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        0.7 secs
 
      total energy              =     -15.96016925 Ry
      Harris-Foulkes estimate   =     -15.96017629 Ry
@@ -357,8 +357,8 @@ End final coordinates
      Writing output data file ch4.save
  
      init_run     :      0.28s CPU      0.29s WALL (       1 calls)
-     electrons    :      0.37s CPU      0.39s WALL (       2 calls)
-     update_pot   :      0.02s CPU      0.02s WALL (       1 calls)
+     electrons    :      0.38s CPU      0.39s WALL (       2 calls)
+     update_pot   :      0.01s CPU      0.02s WALL (       1 calls)
      forces       :      0.02s CPU      0.02s WALL (       2 calls)
 
      Called by init_run:
@@ -378,7 +378,7 @@ End final coordinates
      Called by sum_band:
 
      Called by *egterg:
-     h_psi        :      0.18s CPU      0.19s WALL (      35 calls)
+     h_psi        :      0.17s CPU      0.19s WALL (      35 calls)
      g_psi        :      0.00s CPU      0.00s WALL (      23 calls)
      cdiaghg      :      0.00s CPU      0.00s WALL (      33 calls)
 
@@ -390,15 +390,15 @@ End final coordinates
      General routines
      calbec       :      0.00s CPU      0.00s WALL (      43 calls)
      fft          :      0.05s CPU      0.06s WALL (      55 calls)
-     fftw         :      0.19s CPU      0.19s WALL (     324 calls)
+     fftw         :      0.18s CPU      0.19s WALL (     324 calls)
  
      Parallel routines
-     fft_scatter  :      0.05s CPU      0.06s WALL (     379 calls)
+     fft_scatter  :      0.05s CPU      0.05s WALL (     379 calls)
  
-     PWSCF        :     0.81s CPU         0.86s WALL
+     PWSCF        :     0.82s CPU         0.85s WALL
 
  
-   This run was terminated on:  15:41: 7  23Aug2016            
+   This run was terminated on:  11: 6:33  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

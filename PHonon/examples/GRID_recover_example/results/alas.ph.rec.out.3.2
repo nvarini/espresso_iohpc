@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:15:26 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:41: 2 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -80,6 +80,8 @@
      Sum         241     241     85                 2445     2445     537
  
 
+     Restart in Phonon calculation
+
                                                                                 
 
      bravais-lattice index     =            2
@@ -152,7 +154,7 @@
 
      Representation     1      1 modes -A_1  L_1  Not done in this run
 
-     Representation     2      1 modes -A_1  L_1  Done
+     Representation     2      1 modes -A_1  L_1  To be done
 
      Representation     3      2 modes -E    L_3  Not done in this run
 
@@ -161,16 +163,27 @@
      Compute atoms:     1,
 
 
-     PHONON       :     0.69s CPU         0.71s WALL
+     PHONON       :     0.71s CPU         0.78s WALL
 
+
+
+     Representation #  2 mode #   2
+
+     Self-consistent Calculation
+
+     End of self-consistent calculation
+
+     Convergence has been achieved 
 
      Not diagonalizing because representation    0 is not done
  
-     PHONON       :     0.70s CPU         0.71s WALL
+     PHONON       :     0.71s CPU         0.78s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.01s CPU      0.01s WALL (       1 calls)
+     phq_init     :      0.01s CPU      0.01s WALL (       1 calls)
  
+     phq_init     :      0.01s CPU      0.01s WALL (       1 calls)
      init_vloc    :      0.00s CPU      0.00s WALL (       2 calls)
      init_us_1    :      0.02s CPU      0.02s WALL (       2 calls)
  
@@ -179,11 +192,15 @@
      dynmatrix    :      0.00s CPU      0.00s WALL (       1 calls)
  
      phqscf       :      0.00s CPU      0.00s WALL (       1 calls)
+     solve_linter :      0.00s CPU      0.00s WALL (       1 calls)
+     drhodv       :      0.00s CPU      0.00s WALL (       1 calls)
  
  
  
      phqscf       :      0.00s CPU      0.00s WALL (       1 calls)
+     solve_linter :      0.00s CPU      0.00s WALL (       1 calls)
  
+     solve_linter :      0.00s CPU      0.00s WALL (       1 calls)
  
  
  
@@ -192,13 +209,17 @@
  
  
       General routines
+     calbec       :      0.00s CPU      0.00s WALL (      40 calls)
      fft          :      0.00s CPU      0.00s WALL (       6 calls)
+     ffts         :      0.00s CPU      0.00s WALL (       6 calls)
+     davcio       :      0.00s CPU      0.00s WALL (       5 calls)
+     write_rec    :      0.00s CPU      0.00s WALL (       1 calls)
  
  
-     PHONON       :     0.70s CPU         0.71s WALL
+     PHONON       :     0.71s CPU         0.78s WALL
 
  
-   This run was terminated on:  16:15:27  23Aug2016            
+   This run was terminated on:  11:41: 3  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

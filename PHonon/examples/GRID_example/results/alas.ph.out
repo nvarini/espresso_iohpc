@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:11:57 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:37:33 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -137,7 +137,7 @@
      Representation     2      3 modes -T_2  G_15 P_4  Done
 
 
-     PHONON       :     0.37s CPU         0.37s WALL
+     PHONON       :     0.36s CPU         0.37s WALL
 
 
           Dielectric constant in cartesian axis 
@@ -594,7 +594,7 @@
      Representation     4      2 modes -E    L_3  Done
 
 
-     PHONON       :     0.44s CPU         0.45s WALL
+     PHONON       :     0.43s CPU         0.45s WALL
 
  
      Number of q in the star =    4
@@ -1310,7 +1310,7 @@
      Representation     6      1 modes -A''  Done
 
 
-     PHONON       :     0.55s CPU         0.56s WALL
+     PHONON       :     0.54s CPU         0.57s WALL
 
  
      Number of q in the star =   12
@@ -1517,7 +1517,7 @@
      Representation     4      2 modes -E    X_5  W_3  Done
 
 
-     PHONON       :     0.59s CPU         0.60s WALL
+     PHONON       :     0.58s CPU         0.60s WALL
 
  
      Number of q in the star =    3
@@ -1727,7 +1727,7 @@
      Representation     6      1 modes -E*   W_2  Done
 
 
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.62s CPU         0.64s WALL
 
  
      Number of q in the star =    6
@@ -1784,7 +1784,7 @@
      Parallel routines
      fft_scatter  :      0.00s CPU      0.00s WALL (      24 calls)
  
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.62s CPU         0.64s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.04s CPU      0.04s WALL (       8 calls)
@@ -1813,10 +1813,10 @@
      fft          :      0.00s CPU      0.00s WALL (      24 calls)
  
  
-     PHONON       :     0.63s CPU         0.64s WALL
+     PHONON       :     0.62s CPU         0.64s WALL
 
  
-   This run was terminated on:  16:11:58  23Aug2016            
+   This run was terminated on:  11:37:34  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,5 +1,5 @@
 
-     Program PHONON v.5.4.0 (svn rev. 12828M) starts on 23Aug2016 at 16:13:35 
+     Program PHONON v.6.beta (svn rev. 12834M) starts on 25Aug2016 at 11:39:11 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -156,13 +156,13 @@
       iter #   4 total cpu time :     0.9 secs   av.it.:  19.5
       thresh= 5.808E-05 alpha_mix =  0.700 |ddv_scf|^2 =  4.888E-09
 
-      iter #   5 total cpu time :     1.1 secs   av.it.:  22.0
+      iter #   5 total cpu time :     1.0 secs   av.it.:  22.0
       thresh= 6.992E-06 alpha_mix =  0.700 |ddv_scf|^2 =  1.727E-10
 
-      iter #   6 total cpu time :     1.2 secs   av.it.:  18.8
+      iter #   6 total cpu time :     1.1 secs   av.it.:  18.8
       thresh= 1.314E-06 alpha_mix =  0.700 |ddv_scf|^2 =  4.399E-12
 
-      iter #   7 total cpu time :     1.3 secs   av.it.:  22.0
+      iter #   7 total cpu time :     1.2 secs   av.it.:  22.0
       thresh= 2.097E-07 alpha_mix =  0.700 |ddv_scf|^2 =  1.796E-13
 
      End of electric fields calculation
@@ -290,7 +290,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     1.57s CPU         1.69s WALL
+     PHONON       :     1.54s CPU         1.59s WALL
 
 
      Calculation of q =    0.5000000  -0.5000000   0.5000000
@@ -399,7 +399,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     1.91s CPU         2.04s WALL
+     PHONON       :     1.89s CPU         1.93s WALL
 
 
      Calculation of q =    0.0000000   0.5000000   0.0000000
@@ -512,7 +512,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     2.34s CPU         2.47s WALL
+     PHONON       :     2.31s CPU         2.36s WALL
 
 
      Calculation of q =    0.7500000  -0.2500000   0.7500000
@@ -625,7 +625,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     2.87s CPU         3.00s WALL
+     PHONON       :     2.84s CPU         2.89s WALL
 
 
      Calculation of q =    0.5000000   0.0000000   0.5000000
@@ -738,7 +738,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     3.40s CPU         3.53s WALL
+     PHONON       :     3.36s CPU         3.42s WALL
 
 
      Calculation of q =    0.0000000  -1.0000000   0.0000000
@@ -847,7 +847,7 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     3.73s CPU         3.86s WALL
+     PHONON       :     3.69s CPU         3.74s WALL
 
 
      Calculation of q =   -0.5000000  -1.0000000   0.0000000
@@ -960,16 +960,16 @@
 
 
      Alpha used in Ewald sum =   0.7000
-     PHONON       :     4.11s CPU         4.24s WALL
+     PHONON       :     4.07s CPU         4.13s WALL
 
  
-     PHONON       :     4.11s CPU         4.25s WALL
+     PHONON       :     4.07s CPU         4.13s WALL
 
      INITIALIZATION: 
      phq_setup    :      0.04s CPU      0.04s WALL (       8 calls)
-     phq_init     :      0.17s CPU      0.18s WALL (       8 calls)
+     phq_init     :      0.18s CPU      0.18s WALL (       8 calls)
  
-     phq_init     :      0.17s CPU      0.18s WALL (       8 calls)
+     phq_init     :      0.18s CPU      0.18s WALL (       8 calls)
      init_vloc    :      0.00s CPU      0.00s WALL (       8 calls)
      init_us_1    :      0.07s CPU      0.07s WALL (       8 calls)
  
@@ -986,7 +986,7 @@
  
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      12 calls)
      ortho        :      0.00s CPU      0.00s WALL (      48 calls)
-     cgsolve      :      0.61s CPU      0.61s WALL (      48 calls)
+     cgsolve      :      0.59s CPU      0.61s WALL (      48 calls)
      incdrhoscf   :      0.02s CPU      0.02s WALL (      42 calls)
      dv_of_drho   :      0.00s CPU      0.00s WALL (      21 calls)
      mix_pot      :      0.01s CPU      0.01s WALL (       7 calls)
@@ -994,10 +994,10 @@
      dvqpsi_us    :      0.01s CPU      0.01s WALL (      12 calls)
      dvqpsi_us_on :      0.00s CPU      0.00s WALL (      12 calls)
  
-     cgsolve      :      0.61s CPU      0.61s WALL (      48 calls)
-     ch_psi       :      0.56s CPU      0.58s WALL (    2156 calls)
+     cgsolve      :      0.59s CPU      0.61s WALL (      48 calls)
+     ch_psi       :      0.55s CPU      0.58s WALL (    2156 calls)
  
-     ch_psi       :      0.56s CPU      0.58s WALL (    2156 calls)
+     ch_psi       :      0.55s CPU      0.58s WALL (    2156 calls)
      last         :      0.05s CPU      0.05s WALL (    2156 calls)
  
      add_vuspsi   :      0.01s CPU      0.01s WALL (    2156 calls)
@@ -1006,18 +1006,18 @@
  
  
       General routines
-     calbec       :      0.10s CPU      0.11s WALL (    5118 calls)
+     calbec       :      0.11s CPU      0.12s WALL (    5118 calls)
      fft          :      0.01s CPU      0.01s WALL (      95 calls)
      ffts         :      0.00s CPU      0.00s WALL (      12 calls)
-     fftw         :      0.45s CPU      0.43s WALL (    9392 calls)
-     davcio       :      0.01s CPU      0.11s WALL (     230 calls)
+     fftw         :      0.42s CPU      0.43s WALL (    9392 calls)
+     davcio       :      0.01s CPU      0.01s WALL (     230 calls)
      write_rec    :      0.01s CPU      0.01s WALL (       7 calls)
  
  
-     PHONON       :     4.11s CPU         4.25s WALL
+     PHONON       :     4.07s CPU         4.13s WALL
 
  
-   This run was terminated on:  16:13:39  23Aug2016            
+   This run was terminated on:  11:39:15  25Aug2016            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
