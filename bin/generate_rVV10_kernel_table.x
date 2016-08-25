@@ -1,1 +1,0 @@
-../PW/src/generate_rVV10_kernel_table.x
